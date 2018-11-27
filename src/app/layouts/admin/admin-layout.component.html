@@ -1,0 +1,217 @@
+<app-header></app-header>
+<!--<div class="sidebar-holder" [ngClass]="{'active': isClassVisible }">-->
+  <!--<div class="sidebar-admin">-->
+    <!--<ul class="list-sidebar" id="myNavbar">-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLinkActive="active">-->
+          <!--<i class="material-icons" >dashboard</i>-->
+          <!--Dashboard-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLink="/admin" routerLinkActive="active">-->
+          <!--<i class="material-icons">description</i>-->
+          <!--All Courses-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle"  routerLink="/admin/instructor" routerLinkActive="active">-->
+          <!--<i class="material-icons">account_circle</i>-->
+          <!--All Instructors-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLink="/admin/contacts" routerLinkActive="active">-->
+          <!--<i class="material-icons">contact_mail</i>-->
+          <!--Contact Requests-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLink="/admin/partners" routerLinkActive="active">-->
+          <!--<i class="material-icons">business</i>-->
+          <!--Partnership Requests-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLink="/admin/add_subadmin" routerLinkActive="active">-->
+          <!--<i class="material-icons">person_add</i>-->
+          <!--Add Sub-Admins-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLink="/admin/add_categories" routerLinkActive="active">-->
+          <!--<i class="material-icons">mode_edit</i>-->
+          <!--Edit Categories-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLink="/admin/add_faqs" routerLinkActive="active">-->
+          <!--<i class="material-icons">mode_edit</i>-->
+          <!--Add or Edit FAQs-->
+        <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a class="dropdown-toggle" routerLinkActive="active">-->
+          <!--<i class="material-icons">lock</i>-->
+          <!--Change Password-->
+        <!--</a>-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<div class="side-content">-->
+  <!--<div class="container-fluid inst-cont">-->
+    <!--<router-outlet></router-outlet>-->
+
+  <!--</div>-->
+  <!--<footer id="footer" class="footer-admin">-->
+    <!--<div class="container-fluid">-->
+      <!--<div class="row">-->
+        <!--<div class="col-sm-4 col-md-4 col-lg-4">-->
+          <!--<p class="copy-info">Copyright © 2018 CourseFrenzy, All Rights Reserved</p>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-md-4 col-lg-4 text-center">-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-md-4 col-lg-4">-->
+          <!--<div class="footer-info">-->
+            <!--<a class="footer-info__01" routerLink="/terms">Terms Of use</a>-->
+            <!--<a class="footer-info__02" routerLink="/privacy-policy">Privacy Policy</a>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</footer>-->
+<!--</div>-->
+<!--<div class="dropup-holder chat-outer" [ngClass]="{'active': chatVar === 1 || GlobalChatVar === 1}" [ngStyle]="{'display':Logedin === '1' ? 'block' : 'none' }">-->
+  <!--<button class="btn chatbutton" type="button" name="btnChat" (click)="openChat()">-->
+    <!--<span class="glyphicon glyphicon-comment"></span> Start Chat-->
+    <!--<span class="caret"></span>-->
+  <!--</button>-->
+  <!--<div class="chat-holder">-->
+    <!--<app-chat></app-chat>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!-- ADMIN PANNEL UPDATE START-->
+<!--<mat-drawer-container class="example-container" autosize>-->
+  <!--<mat-drawer #drawer class="example-sidenav" mode="side">-->
+    <!--<p>Auto-resizing sidenav</p>-->
+    <!--<p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>-->
+    <!--<button (click)="showFiller = !showFiller" mat-raised-button>-->
+      <!--Toggle extra text-->
+    <!--</button>-->
+  <!--</mat-drawer>-->
+
+    <!--<button type="button" mat-button (click)="drawer.toggle()">-->
+      <!--<i class="fa fa-bars" aria-hidden="true"></i>-->
+    <!--</button>-->
+
+<!--</mat-drawer-container>-->
+
+
+
+<ng-container>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
+                 [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
+                 [fixedBottomGap]="options.value.bottom">
+
+      <div class="sidebar-holder" [ngClass]="{'active': isClassVisible }">
+        <div class="sidebar-admin">
+          <ul class="list-sidebar" id="myNavbar">
+            <li>
+              <a class="dropdown-toggle" routerLinkActive="active">
+                <i class="material-icons" >dashboard</i>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-toggle" routerLink="/admin" routerLinkActive="active">
+                <i class="material-icons">description</i>
+                All Courses
+              </a>
+            </li>
+            <li>
+            <a class="dropdown-toggle"  routerLink="/admin/instructor" routerLinkActive="active">
+              <i class="material-icons">account_circle</i>
+              All Instructors
+            </a>
+          </li>
+            <li>
+              <a class="dropdown-toggle"  routerLink="/admin/winbid" routerLinkActive="active">
+                <i class="material-icons">account_circle</i>
+                Winning Bidders
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-toggle" routerLink="/admin/contacts" routerLinkActive="active">
+                <i class="material-icons">contact_mail</i>
+                Contact Requests
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-toggle" routerLink="/admin/partners" routerLinkActive="active">
+                <i class="material-icons">business</i>
+                Partnership Requests
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-toggle" routerLink="/admin/add_subadmin" routerLinkActive="active">
+                <i class="material-icons">person_add</i>
+                Add Sub-Admins
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-toggle" routerLink="/admin/add_categories" routerLinkActive="active">
+                <i class="material-icons">mode_edit</i>
+                Edit Categories
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-toggle" routerLink="/admin/add_faqs" routerLinkActive="active">
+                <i class="material-icons">mode_edit</i>
+                Add or Edit FAQs
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-toggle" routerLinkActive="active">
+                <i class="material-icons">lock</i>
+                Change Password
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content [formGroup]="options">
+      <p class="dp-inline"><button mat-button (click)="sidenav.toggle()"><i class="fa fa-arrows-h" aria-hidden="true"></i>
+      </button></p>
+      <router-outlet ></router-outlet>
+      <div class="clearfix"></div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</ng-container>
+
+<div id="footer" class="footer-admin">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <p class="copy-info">Copyright © 2018 CourseFrenzy, All Rights Reserved</p>
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="footer-info">
+          <a class="footer-info__01" routerLink="/terms">Terms Of use</a>
+          <a class="footer-info__02" routerLink="/privacy-policy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ADMIN PANNEL UPDATE START-->
+

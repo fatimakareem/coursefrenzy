@@ -1,0 +1,120 @@
+<app-loader></app-loader>
+<section class="section bgw">
+  <div class="container">
+    <div class="row">
+      <div id="post-content" class="col-md-8 col-sm-12 bid-history">
+
+        <div class="course-table clearfix">
+          <div class="big-title">
+            <h2 class="related-title">
+              <span>Bid History</span>
+            </h2>
+          </div><!-- end big-title -->
+          <div class="row text-center">
+            <div class="col-md-offset-1 col-md-3 col-sm-4 col-xs-12 font-size-22">Bidders: {{bids?.bidders}}</div>
+            <div class="col-md-3 col-sm-4 col-xs-12 font-size-22">Bids: {{bids?.Total_bids}}</div>
+            <div class="col-md-4 col-sm-4 col-xs-12 font-size-22">Duration: {{bids?.Duration}} Days</div>
+            <!--<div class="col-md-5 col-sm-6">Time left: {{bids?.Days_left}} d {{bids?.Hours_left}} hh{{bids?.minutes_left}} mm{{bids?.seconds_left}}ss</div>-->
+            <!--<div class="col-md-5 col-sm-6">Time left: {{bids?.Hours_left}} Hours</div>-->
+            <!--<div class="col-md-5 col-sm-6">Time left: {{bids?.minutes_left}} Minutes</div>-->
+            <!--<div class="col-md-5 col-sm-6">Time left: {{bids?.seconds_left}} Seconds</div>-->
+            <countdown class="col-lg-12" units="Year | Month | Days | Hours | Minutes | Seconds"  end="{{bids?.endtime |amUtc}}"></countdown>
+          </div>
+          <label>Only actual bids (not automatic bids generated up to a bidder's maximum) are shown.
+            Automatic bids may be placed days or hours before a listing ends.
+            <a href=""> Learn more about bidding.</a>
+          </label> <br>
+
+          <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+              <th>Bidder</th>
+              <th> Bid Amount </th>
+              <th> Bid Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bid of bids?.bidhistory">
+              <td><a routerLink="/user-profile/{{bid?.user_id}}">{{ bid?.user.username.slice(0, 3)}} ********* </a> </td>
+              <td> ${{ bid.BidAmount }}</td>
+              <td>{{ bid.CreatedTime | date }} {{ bid.CreatedTime | date :'shortTime' }}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <label>Note: If two people bid the same amount, the first bid has priority.
+            Also, you can only retract your bid under certain circumstances.<a href=""> Learn more. </a> </label>
+        </div>  <!-- end course-table -->
+
+        <hr class="invis1">
+
+      </div><!-- end col -->
+
+      <div id="sidebar"  class="col-md-4 col-sm-12">
+        <div class="post-media clearfix">
+          <!--<img src="../../assets/upload/small_course_08.jpg" alt="" class="img-responsive">-->
+          <div class="post-media clearfix">
+
+            <video *ngIf="bids?.courseDetail?.course_image" class="videoplayer" poster="{{StaticImageUrl}}{{bids?.courseDetail?.course_image}}" controls preload="none">
+              <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+              <source type="video/mp4" src="https://0.s3.envato.com/h264-video-previews/ec34ad1d-cba5-43a6-a1d0-a537b10e5879/759078.mp4" />
+              <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+              <source type="video/webm" src="https://0.s3.envato.com/h264-video-previews/ec34ad1d-cba5-43a6-a1d0-a537b10e5879/759078.webm" />
+              <!-- Ogg/Vorbis for older Firefox and Opera versions -->
+              <source type="video/ogg" src="https://0.s3.envato.com/h264-video-previews/ec34ad1d-cba5-43a6-a1d0-a537b10e5879/759078.ogv" />
+              <!-- Optional: Add subtitles for each language -->
+            </video>
+          </div>
+        </div><!-- end post-media -->
+        <div class="widget custom-widget course-pricing clearfix">
+          <div class="customwidget text-left w40">
+            <h3 class=" text-center linethrough">${{bids?.courseDetail?.actual_price}}.00</h3>
+            <h3 class="widget-title text-center">${{bids?.courseDetail?.discounted_price}}.00</h3>
+            <h4 class="text-center">30-Day Money-Back Guarantee</h4>
+            <div class="sidebar-btn">
+              <button routerLink="/checkout" (click)="noPromo()" class="button pull-left"> Buy Now </button>
+              <!--<ng-container *ngIf="bids?.courseDetail?.BidPrice >0">-->
+              <ng-container>
+                <button (click)="openDialog()" class="button"> Bid Now </button>
+                <!--<button *ngIf="SingleCourse?.BidPrice != 0.0" (click)="openBidDialog()" class="cartbutton"> Bid Now </button>-->
+                <!--<button *ngIf="SingleCourse?.BidPrice === 0.0"  class="cartbutton"> Add to Cart </button>-->
+              </ng-container>
+            </div>
+            <br/>
+            <h3><strong>Includes:</strong></h3>
+            <br>
+            <p><i class="fa fa-file-video-o"></i> &nbsp; 27.5 hours on-demand video</p><br>
+            <p><i class="fa fa-book"></i> &nbsp; 7 Articles</p><br>
+            <p><i class="fa fa-universal-access"></i> &nbsp; Full lifetime access</p><br>
+            <!--<p class="fa fa-mobile-phone"> &nbsp; Access on mobile and TV</p>-->
+            <p><i  class="fa fa-bolt"></i> &nbsp;&nbsp; Assignments <br></p> <br>
+            <p><i class="fa fa-certificate"></i> &nbsp; Certificate of Completion</p><br>
+
+            <hr>
+            <div class="course-meta clearfix">
+              <p class="course-category">Category: <a >{{bids?.courseDetail?.Categories[0].name}}</a></p>
+              <hr>
+              <div class="rating">
+                <p>Reviews: &nbsp;
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+              </div><!-- end rating -->
+              <hr>
+              <p class="course-time">Period: 12 Month </p>
+              <hr>
+              <p class="course-instructors">Instructor: <a href="" title=""><img src="" class="img-circle" alt=""> {{bids?.courseDetail.user_id.first_name}} {{bids?.courseDetail.user_id.last_name}}</a></p>
+              <hr>
+              <p class="course-forum">Course Forum: <a href="" title="">{{bids?.courseDetail?.SubCategory[0].name}}</a></p>
+
+            </div><!-- end meta -->
+          </div><!-- end newsletter -->
+        </div><!-- end widget -->
+      </div><!-- end col -->
+    </div><!-- end row -->
+  </div><!-- end container -->
+</section><!-- end section -->
+
+

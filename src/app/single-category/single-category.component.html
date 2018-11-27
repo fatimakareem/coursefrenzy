@@ -1,0 +1,138 @@
+<!--<div class="wrapp-content">-->
+  <!--<main class="content-row">-->
+    <!--<div class="page-title-wrapp background1">-->
+      <!--<div class="container">-->
+        <!--<div class="row ">-->
+          <!--<div class="col-lg-12">-->
+            <!--<h1 class="page-title-01">Development</h1>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+          <!--<div class="col-lg-12">-->
+            <!--<ul class="breadcrumbs">-->
+              <!--<li class="active">-->
+                <!--<a [routerLink]="['/home']">-->
+                  <!--Featured</a>-->
+              <!--</li>-->
+              <!--<li>All Courses</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="content-box background2 padding-top-20 padding-bottom-10">-->
+      <!--<div class="container">-->
+        <!--<h2> Popular Topics</h2>-->
+        <!--<div class="row sort-group filter-button-group">-->
+          <!--<div class="col-lg-12">-->
+            <!--<a class="sort-item" href="" data-filter="*">Web </a>-->
+            <!--<a class="sort-item" href="" data-filter=".economy">Python</a>-->
+            <!--<a class="sort-item" href="" data-filter=".languages">Unity</a>-->
+            <!--<a class="sort-item" href="" data-filter=".design">PHP</a>-->
+            <!--<a class="sort-item" href="" data-filter=".biology">Angular 4</a>-->
+            <!--<a class="sort-item" href="" data-filter=".history">Android </a>-->
+            <!--<a class="sort-item" href="" data-filter=".mathematics">IOS </a>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="content-box padding-top-10 padding-bottom-10">-->
+      <!--<div class="container">-->
+        <!--<h2> Top Courses in "Category"</h2>-->
+        <!--<div class="row sort-group filter-button-group">-->
+          <!--<div class="col-lg-12">-->
+            <!--<div class="product-list__item">-->
+
+              <!--<a routerLink="/courses/single/{{data.id}}">-->
+                <!--<figure class="imghvr-zoom-out-down">-->
+                  <!--&lt;!&ndash;<img src="../../assets/img/product_list/product_img-01.jpg" alt="">&ndash;&gt;-->
+                  <!--<img *ngIf="course_thumbnail" src= "{{ ImageUrl }}{{course_thumbnail.slice(1, course_thumbnail.length)}}" alt="" class="img-responsive">-->
+                  <!--<figcaption>-->
+                    <!--<p class="bgfont">Includes:</p>-->
+                    <!--<p class="fa fa-file-video-o hoverfont"> &nbsp; 27.5 hours on-demand video</p>-->
+                    <!--<p class="fa fa-book hoverfont"> &nbsp; 7 Articles</p>-->
+                    <!--<p class="fa fa-universal-access hoverfont"> &nbsp; Full lifetime access</p>-->
+                    <!--&lt;!&ndash;<p class="fa fa-mobile-phone"> &nbsp; Access on mobile and TV</p>&ndash;&gt;-->
+                    <!--<p class="fa fa-bolt hoverfont"> &nbsp;&nbsp; Assignments</p>-->
+                    <!--<p class="fa fa-certificate hoverfont"> &nbsp; Certificate of Completion</p>-->
+                  <!--</figcaption>-->
+                <!--</figure>-->
+              <!--</a>-->
+
+
+              <!--<div class="product-list__content">-->
+                <!--<a class="product-list__category" routerLink="/courses/single/{{data.id}}">{{data.name.slice(0, 50)}} <a *ngIf ="data.name.length>50"> ... </a> </a>-->
+                <!--<div class="row">-->
+                  <!--<div class="col-md-9 col-sm-9 col-lg-9 col-xs-9">-->
+                    <!--<ul class="product-list__star-list">-->
+                      <!--<li>-->
+                        <!--<a href="">-->
+                          <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                      <!--</li>-->
+                      <!--<li>-->
+                        <!--<a href="">-->
+                          <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                      <!--</li>-->
+                      <!--<li>-->
+                        <!--<a href="">-->
+                          <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                      <!--</li>-->
+                      <!--<li>-->
+                        <!--<a href="">-->
+                          <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                      <!--</li>-->
+                      <!--<li>-->
+                        <!--<a href="">-->
+                          <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                      <!--</li>-->
+                    <!--</ul>-->
+                  <!--</div>-->
+                  <!--<div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough">  ${{data.actual_price}} </div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                  <!--<div *ngIf="data.user_id.first_name && data.user_id.last_name" class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{ data.user_id.first_name + data.user_id.last_name }} </div>-->
+
+                  <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 ">${{data.actual_price - data.discount}}</div>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div>-->
+                <!--&lt;!&ndash;<a md-raised-button color="primary" routerLink=".">Add to Cart</a>&ndash;&gt;-->
+                <!--<button type="button" class="btn btn1">Bid Now</button>-->
+              <!--</div>-->
+              <!--<div class="product-list__item-info">-->
+                <!--<p class="item-info__text-01">14 Lessons</p>-->
+                <!--<p class="item-info__text-02">25 Seats</p>-->
+                <!--&lt;!&ndash;<p class="item-info__text-02">Post Date: ${{data.postDate}} </p>&ndash;&gt;-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="content-box background2 padding-top-10 padding-bottom-10">-->
+      <!--<div class="container">-->
+        <!--<h2> Related Categories</h2>-->
+        <!--<div class="row sort-group filter-button-group">-->
+          <!--<div class="col-lg-12">-->
+            <!--<div class="fa fa-scissors iconsize" href="">  </div><br>-->
+            <!--<a class="" href="" data-filter="*"> Design </a>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+  <!--</main>-->
+
+  <!--&lt;!&ndash;<app-footer></app-footer>&ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash;<app-footer></app-footer>&ndash;&gt;-->

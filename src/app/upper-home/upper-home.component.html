@@ -1,0 +1,51 @@
+<!--<app-loader></app-loader>-->
+<div class="content-box-02" *ngIf="loaded">
+  <div class="table-01">
+    <!--<div class="table-01__row">-->
+      <!--<div class="table-01__box-01">-->
+        <!--<div class="table-01__content">-->
+          <!--<button *ngIf="UserRole" class="btn btn-primary" (click)="openDialog()">Edit</button>-->
+
+          <!--<h3 class="title-01">-->
+            <!--&lt;!&ndash;<span>Welcome</span> to Smart Education</h3>&ndash;&gt;-->
+           <!--{{ contentBelowSlider?.headin }}</h3>-->
+          <!--<div class="content-box-01__text">-->
+            <!--<p>{{ contentBelowSlider?.description }}</p>-->
+          <!--</div>-->
+          <!--<p class="author-info">-->
+          <!--{{ contentBelowSlider?.writer }}-->
+            <!--<span>{{ contentBelowSlider?.designation }}</span>-->
+          <!--</p>-->
+          <!--<div class="author-img">-->
+            <!--&lt;!&ndash;<img src="../../assets/img/author_img.png" height="75" width="191"/>&ndash;&gt;-->
+            <!--<img src="{{ImageUrl+'media/'}}{{contentBelowSlider?.signature}}" height="75" width="191"/>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="table-01__box-02">-->
+        <!--<img class="table-01__img" src="../../assets/img/img_01.jpg" alt="">-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+</div>
+
+<!--<app-benefits> </app-benefits>-->
+
+<div class="parallax parallax_01" data-type="background" data-speed="10">
+  <div class="container">
+    <div class="row" *ngIf="loaded">
+      <div class="col-lg-12" *ngFor="let content of upperhome">
+        <div class="parallax-content-01" >
+
+          <h3 class="parallax-title">{{ content?.heading }}</h3>
+          <div class="parallax-text">
+            <p>{{ content?.description }}</p>
+          </div>
+          <a [ngStyle]="{'display':Logedin === '0' ? 'inline-block' : 'none' }" [routerLink]="['/login']"  class="parallax-btn">Get Started</a>
+          <button *ngIf="userRole === 'Admin'" class="btn btn-primary" style="float: right;" (click)="openDialog2()">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

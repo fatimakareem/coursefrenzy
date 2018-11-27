@@ -1,0 +1,37 @@
+<app-loader></app-loader>
+
+<div class="container">
+  <div class="row">
+    <button mat-raised-button color="primary" (click)="openAddFaqDialog()"> Add New FAQ</button>
+  </div>
+  <div *ngIf="loaded" class="fancy-collapse-panel">
+    <br>
+    <div *ngFor="let faq of faqsList; let i=index;">
+
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="heading{{faq.id}}">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" href="#collapse{{faq.id}}">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6"> {{ faq.question }}</div>
+                </div>
+              </a>
+              <div class="text-right">
+                <button mat-raised-button color="primary" (click)="openEditFaqDialog(i)"> Edit FAQ</button>
+                <button mat-raised-button color="warn" (click)="deleteFaq(i, faq.id)"> Delete FAQ</button>
+              </div>
+            </h4>
+          </div>
+          <div id="collapse{{faq.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12"> {{ faq.answer }}</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

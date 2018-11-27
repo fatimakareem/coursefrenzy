@@ -1,0 +1,40 @@
+<app-loader></app-loader>
+<div class="card">
+  <button type="button" class="close" aria-label="Close" (click)="onNoClick()" tabindex="-1">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="card-header text-center" data-background-color="rose">
+    <h4 class="card-title"> Add to Cart </h4>
+  </div>
+
+  <div class="card-content"> <label>Don't have any promo code?</label>
+    <div class="text-center">
+  <button (click)="noPromo()" class="button btn-primary custom" type="submit" tabindex="2"> Proceed Anyway</button>
+    </div>
+  </div>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm" id="cartform" name="cartform" method="post">
+    <div class="card-content">
+      <div>
+        <label>Place issued promo code:</label>
+      </div>
+      <mat-form-field class="example-full-width mat-size">
+        <input type="text" matInput placeholder=" Enter promo code" [formControl]="promo_code" name="video_title" [(ngModel)]="model.promo_code">
+        <!--<mat-error *ngIf="promo_code.hasError('pattern')">-->
+          <!--Digits are allowed only-->
+        <!--</mat-error>-->
+        <!--<mat-error *ngIf="promo_code.hasError('required')">-->
+          <!--Promo code is <strong>required</strong>-->
+        <!--</mat-error>-->
+      </mat-form-field>
+    </div>
+    <div class="footer text-right col-sm-12">
+      <button class="button btn-primary custom" type="submit" tabindex="2"> Add Promo Code </button>
+    </div>
+    <div class="col-sm-12">
+      <p class="smalltext">By entering a promo code you can get a special discount.</p>
+    </div>
+  </form>
+</div>
+
+
+

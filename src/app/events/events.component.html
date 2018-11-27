@@ -1,0 +1,273 @@
+<app-loader></app-loader>
+<div class="wrapp-content" [ngClass]="{'search-active': search === '1'}" >
+  <div class="search-outer search2" [ngClass]="{'active': searchCourses === '1' || searchSlider === '1' }">
+    <div class="container container-fluid" >
+      <div class="search-holder">
+
+        <input autofocus type="search" name=querysearch [(ngModel)]="query" #querysearch="ngModel" (keyup)=filterss(query)
+               placeholder="Search to Learn with a ROAR!" id="textsearch2">
+        <i class="fa fa-close" id="iconClose" (click)="closeSearch()"></i>
+      </div>
+      <div class="search-results" *ngIf="Events">
+        <div class="head" *ngIf="Events?.events" >
+          <p *ngIf="Events.events.length==0" class="results-found"> No results found. Please use keywords.</p>
+          <p *ngIf="Events.events.length==1" class="results-found"> {{ Events.events.length }} result found.</p>
+          <p *ngIf="Events.events.length>1" class="results-found"> {{ Events.events.length }} results found.</p>
+        </div>
+        <!--<div *ngFor="let item of Events?.events">-->
+        <!--<div *ngIf="Events.events">-->
+        <!--<a (click)="select(item.id)" routerLink="/event/{{item.id}}"> {{item?.Name}}</a>-->
+        <!--</div>-->
+        <!--</div>-->
+
+
+
+        <div class="col-lg-12" >
+          <div class="events-list" *ngFor="let event of Events?.events" >
+            <figure class="events-list__img">
+              <a routerLink="/event/{{event.id}}">
+                <img *ngIf="event && event.EventImage.length >0 " src= "{{ ImageUrl+'media/' }}{{event.EventImage}}" alt="User Profile Photo">
+                <!--<img  src="../../assets/img/event/event_img_01.jpg" alt="">-->
+              </a>
+            </figure>
+            <div class="events-list__info">
+              <p class="events-list__info-date">{{ event.EventDate | date:'dd' }}</p>
+              <p class="events-list__info-month">{{ event.EventDate | date:'MMM' }} {{ event.EventDate | date:'y' }}</p>
+              <p class="events-list__info-time">{{ event.StartTime | date :'shortTime' }} - {{ event.EndTime | date :'shortTime' }}</p>
+              <p class="events-list__info-location" *ngIf="event.Address">{{ event.Address }}</p>
+            </div>
+            <div class="events-list__content">
+              <h4 class="events-list__content-title">
+                <a routerLink="/event/{{event.id}}" >{{ event.Name }}</a>
+              </h4>
+              <p class="events-list__status" *ngIf="event.Price<=0">Free</p>
+              <p class="events-list__status" *ngIf="event.Price>0">${{ event.Price }}</p>
+              <div class="events-list__content-text">
+                <p>{{ event.Details.slice(0, 250) }} <a *ngIf ="event.Details.length>250"> ... </a></p>
+                <!--<p>{{event.Details}} <a *ngIf ="event.Details.length>200"> ... </a></p>-->
+                <!--<p>Before cats conquered the internet, they conquered the world—with a little help from their human serfs. Domesticated cats live pretty much everywhere except Antarctica, and a new study in Nature Ecology and Evolution helps to uncover how they...</p>-->
+              </div>
+              <a class="events-list__btn" routerLink="/event/{{event.id}}">View Event</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 economy languages history" *ngFor="let item of Events?.events">-->
+
+      <!--<div class="product-list__item">-->
+      <!--<a (click)="select(item.id)" routerLink="/courses/single/{{item.id}}">-->
+      <!--<figure class="imghvr-zoom-out-down product-list__img">-->
+      <!--&lt;!&ndash;<img *ngIf="item?.course_thumbnail" src= "{{'h'+item?.course_thumbnail.slice(1, item?.course_thumbnail.length)}}" alt="" class="img-responsive">&ndash;&gt;-->
+      <!--<img *ngIf="item?.course_thumbnail" src= "{{ ImageUrl+'media/' }}{{item?.course_thumbnail}}" alt="" class="img-responsive">-->
+      <!--<figcaption>-->
+      <!--<p>Includes:</p>-->
+      <!--<p><i class="fa fa-file-video-o"></i> &nbsp; 27.5 hours on-demand video</p>-->
+      <!--<p><i class="fa fa-book"></i> &nbsp; 7 Articles</p>-->
+      <!--<p><i class="fa fa-universal-access"></i> &nbsp; Full lifetime access</p>-->
+      <!--&lt;!&ndash;<p class="fa fa-mobile-phone"> &nbsp; Access on mobile and TV</p>&ndash;&gt;-->
+      <!--<p><i  class="fa fa-bolt"></i> &nbsp;&nbsp; Assignments</p>-->
+      <!--<p><i class="fa fa-certificate"></i> &nbsp; Certificate of Completion</p>-->
+      <!--</figcaption>-->
+      <!--</figure>-->
+      <!--</a>-->
+
+      <!--<div class="product-list__content">-->
+      <!--<a class="product-list__category" (click)="select(item.id)" routerLink="/courses/single/{{item.id}}">{{item.name.slice(0, 50)}} <a *ngIf ="item.name.length>50"> ... </a> <div *ngIf ="item.name.length<40"> <br> </div> </a>-->
+      <!--<div class="row">-->
+      <!--<div class="col-md-9 col-sm-9 col-lg-9 col-xs-9">-->
+      <!--<ul class="product-list__star-list">-->
+      <!--<li>-->
+      <!--<a href="">-->
+      <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a href="">-->
+      <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a href="">-->
+      <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a href="">-->
+      <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a href="">-->
+      <!--<i class="fa fa-star" aria-hidden="true"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--<div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough" *ngIf="item.actual_price>0">  ${{item.actual_price}} </div>-->
+      <!--<div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough" *ngIf="item.actual_price<=0">  Free </div>-->
+      <!--</div>-->
+      <!--<div class="row">-->
+      <!--<div *ngIf="item?.user_id?.first_name && item?.user_id?.last_name" class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{ item?.user_id?.first_name}} {{item?.user_id?.last_name }} </div>-->
+      <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 ">${{item.actual_price - item.discount}}</div>-->
+      <!--<a class="{{ heartClass}} wishlist" (click)="onclick()" data-toggle="tooltip" title="Add to wishlist" aria-hidden="true"> </a>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash;<div class="product-list__item-info">&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--</div>-->
+      <!--</div>-->
+
+    </div>
+  </div>
+
+
+  <!-- Content -->
+  <main class="content-row">
+    <div class="page-title-wrapp">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-title-01">Events</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="breadcrumbs">
+              <li class="active">
+                <a [routerLink]="['/event']">Home</a>
+              </li>
+              <li>Events</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pull-right hidden-xs">
+          <div class="bread">
+            <ol class="breadcrumb">
+
+            </ol>
+            <button *ngIf="userRole === 'Teacher' || userRole === 'Admin'" class="btn btn-primary add-event-button" (click)="openDialog()">Add New Event</button>
+          </div><!-- end bread -->
+        </div><!-- /.pull-right -->
+      </div>
+    </div>
+    <div class="content-box-01 events">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <form action="./" class="events-form">
+              <input class="events-form__text-01" (click)="openSearchEvent()" type="text" name="text-01" placeholder="Event Name">
+              <!--<input (click)="openSearchEvent()" class="events-form__text-02" type="text" name="text-02" placeholder="Keyword">-->
+              <button class="btn-01" type="submit">search</button>
+            </form>
+          </div>
+        </div>
+        <div class="row" *ngIf="loaded">
+          <div class="col-lg-12" >
+            <div class="events-list" *ngFor="let event of AllEvents?.events" >
+              <figure class="events-list__img">
+                <a routerLink="/event/{{event.id}}">
+                  <img *ngIf="event && event.EventImage.length >0 " src= "{{ ImageUrl+'media/' }}{{event.EventImage}}" alt="User Profile Photo">
+                  <!--<img  src="../../assets/img/event/event_img_01.jpg" alt="">-->
+                </a>
+              </figure>
+              <div class="events-list__info">
+                <p class="events-list__info-date">{{ event.EventDate | date:'dd' }}</p>
+                <p class="events-list__info-month">{{ event.EventDate | date:'MMM' }} {{ event.EventDate | date:'y' }}</p>
+                <p class="events-list__info-time">{{ event.StartTime | date :'shortTime' }} - {{ event.EndTime | date :'shortTime' }}</p>
+                <p class="events-list__info-location" *ngIf="event.Address">{{ event.Address }}</p>
+              </div>
+              <div class="events-list__content">
+                <h4 class="events-list__content-title">
+                  <a routerLink="/event/{{event.id}}" >{{ event.Name }}</a>
+                </h4>
+                <p class="events-list__status" *ngIf="event.Price<=0">Free</p>
+                <p class="events-list__status" *ngIf="event.Price>0">${{ event.Price }}</p>
+                <div class="events-list__content-text">
+                  <p>{{ event.Details.slice(0, 250) }} <a *ngIf ="event.Details.length>250"> ... </a></p>
+                  <!--<p>{{event.Details}} <a *ngIf ="event.Details.length>200"> ... </a></p>-->
+                  <!--<p>Before cats conquered the internet, they conquered the world—with a little help from their human serfs. Domesticated cats live pretty much everywhere except Antarctica, and a new study in Nature Ecology and Evolution helps to uncover how they...</p>-->
+                </div>
+                <a class="events-list__btn" routerLink="/event/{{event.id}}">View Event</a>
+              </div>
+            </div>
+            <br> <br>
+            <!--<div class="text-center">-->
+            <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+            <!--</div>-->
+          </div>
+        </div>
+
+        <nav class="text-center">
+          <ul class=" pagination pagination-lg">
+            <!--<ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-lg">-->
+            <!--<li [ngClass]="{disabled:pager.currentPage === 1}">-->
+            <!--<a (click)="setPage(pager.currentPage - 1)" class="page-link" aria-label="Previous"></a>-->
+            <!--</li>-->
+            <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+              <a class="page-link" onclick="topFunction()" (click)="setPage(1)" aria-label="Previous">
+                First
+              </a>
+            </li>
+            <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+              <a class="page-link" onclick="topFunction()" (click)="setPage(pager.currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+
+            <li class="page-item" *ngFor="let page of pager.pages"
+                [ngClass]="{active:pager.currentPage === page}"
+                onclick="topFunction()" (click)="setPage(page)"><a class="page-link">{{page}}</a></li>
+            <!--<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">-->
+            <!--<a (click)="setPage(pager.currentPage + 1)">Next</a>-->
+            <!--</li>-->
+            <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+              <a class="page-link" onclick="topFunction()" (click)="setPage(pager.currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+            <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+              <a class="page-link" onclick="topFunction()" (click)="setPage(pager.totalPages)" aria-label="Next">
+                Last
+              </a>
+            </li>
+            <!--<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">-->
+            <!--<a (click)="setPage(pager.totalPages)">Last</a>-->
+            <!--</li>-->
+          </ul>
+        </nav>
+
+
+
+        <!--<ul>-->
+        <!--<li *ngFor="let item of collection | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total }"> ... </li>-->
+        <!--</ul>-->
+
+        <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+        <!--<div class="row">-->
+        <!--<div class="col-lg-12">-->
+        <!--<div class="events-pagination">-->
+        <!--<ul class="pagination-list">-->
+        <!--<li class="active">-->
+        <!--<a href="#">1</a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a href="#">2</a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a href="#">3</a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a href="#">next</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </main>
+
+</div>

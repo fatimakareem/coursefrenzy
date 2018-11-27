@@ -1,0 +1,58 @@
+.sort-item {
+  font-size: 20px;
+  line-height: 18px;
+  font-weight: 700;
+  color: #f5f5f5;
+  margin: 5px 10px;
+  padding: 9px;
+  border-radius: 15px;
+  border: 2px solid #f80000;
+  background: #f80000;
+}
+.linethrough {
+  text-decoration: line-through;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.right {
+  float: right;
+
+}
+
+/*.btn1 {*/
+  /*background-color: #f80000;*/
+  /*color: white;*/
+  /*float: right;*/
+  /*margin-right: 10px;*/
+  /*margin-top: 10px;*/
+/*}*/
+
+.hoverfont {
+  font-weight: 700;
+  font-size: 14px;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+}
+
+/*.btn1:hover {*/
+  /*background-color: #E0E0E0;*/
+  /*color: #f80000;*/
+  /*float: right;*/
+  /*margin-right: 10px;*/
+  /*margin-top: 10px;*/
+/*}*/
+
+.sort-item:hover{
+  color: #f80000;
+  border: 2px solid #f80000;
+  background: white;
+}
+
+.pagination-list li.active a {
+  background-color: #f80000;
+  color: #f8f8f8;
+}
+.pagination-list li a:hover {
+  background-color: #f80000;
+  color: #f8f8f8;
+}

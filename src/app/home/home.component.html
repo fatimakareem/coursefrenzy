@@ -1,0 +1,33 @@
+<!--<app-header></app-header>-->
+<!--<app-loader></app-loader>-->
+<app-home-slider></app-home-slider>
+
+<main class="content-row">
+  <!--Popular Courses-->
+
+  <!--<app-courses-on-bid> </app-courses-on-bid>-->
+  <!--<app-trending-now-courses></app-trending-now-courses>-->
+  <!--<app-top-rated-courses></app-top-rated-courses>-->
+
+  <div *ngIf="checkLogin != '1'">
+    <app-courses-on-bid> </app-courses-on-bid>
+    <app-trending-now-courses></app-trending-now-courses>
+    <app-top-rated-courses></app-top-rated-courses>
+    <app-recommended-courses></app-recommended-courses>
+  </div>
+  <!--<app-popular-courses></app-popular-courses>-->
+  <div *ngIf="checkLogin === '1'">
+    <app-courses-on-bid> </app-courses-on-bid>
+    <app-trending-now-courses></app-trending-now-courses>
+    <app-top-rated-courses></app-top-rated-courses>
+    <app-recommended-courses></app-recommended-courses>    <!--<app-recommended-courses></app-recommended-courses>-->
+    <app-recently-viewed-courses></app-recently-viewed-courses>
+
+  </div>
+  <!--<router-outlet></router-outlet-->
+  <app-upper-home></app-upper-home>
+
+  <app-lower-home></app-lower-home>
+
+</main>
+<!--<app-footer></app-footer>-->

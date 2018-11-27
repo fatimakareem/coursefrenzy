@@ -1,0 +1,45 @@
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+agm-map {
+  height: 514px;
+}
+
+
+.md-size {
+  font-size: larger;
+  font-weight: 700;
+}
+
+input,
+input::-webkit-input-placeholder {
+  font-size: 25px;
+}
+
+input,
+input:-moz-placeholder { /* Firefox 18- */
+  font-size: 25px;
+}
+
+input,
+input::-moz-placeholder {  /* Firefox 19+ */
+  font-size: 25px;
+}
+
+input,
+input:-ms-input-placeholder {
+  font-size: 25px;
+}
+.md-input-placeholder {
+  font-size: 3em;
+}
+
+.example-full-width {
+  width: 100%;
+}
+

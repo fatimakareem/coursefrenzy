@@ -1,0 +1,68 @@
+.example-form {
+  min-width: 150px;
+  max-width: 1000px;
+  /*width: 100%;*/
+  /*margin-bottom: 2cm;*/
+  margin: 2cm auto 3cm;
+  width:80%;
+  padding: 48px 40px 36px;
+}
+
+.font {
+  font-size: 25px;
+}
+
+.avatar_center {
+  text-align: center;
+}
+.avatar {
+  width: 175px;
+  height: 155px;
+  border-radius: 50%;
+}
+
+.md-size {
+  font-size: larger;
+  font-weight: 700;
+}
+
+.card {
+  background-color: #f80000;
+  color: white;
+  text-align: center;
+}
+
+.card-4 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.button {
+  background-color: #A9A9A9;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100%;
+  float: right;
+}
+
+.img-input {
+  width: 263px;
+  padding: 0 5px;
+}
+.img-input-div{
+  display: flex;
+  margin: 0 auto;
+  width: 353px;
+  padding: 10px 0;
+  float: none;
+}

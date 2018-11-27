@@ -1,0 +1,53 @@
+<app-loader></app-loader>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" method="post">
+  <mat-card class="card card-4">
+    <label class="font"> Update Your Account Information</label></mat-card> <br>
+
+  <!--<label class="font"> Your email address is:</label> <br>-->
+  <!--<mat-form-field class="example-full-width mat-size">-->
+    <!--<input matInput placeholder="Your email address" name="email"  [(ngModel)]="model.email"-->
+           <!--#email="ngModel" required pattern="[a-zA-Z]+?">-->
+    <!--<mat-error *ngIf="email.hasError('required')">-->
+     <!--Email is <strong>required</strong>-->
+    <!--</mat-error>-->
+    <!--<mat-error *ngIf="email.hasError('pattern')">-->
+      <!--Please enter a <strong> valid </strong> email address-->
+    <!--</mat-error>-->
+  <!--</mat-form-field>-->
+
+  <mat-form-field class="example-full-width mat-size">
+    <input matInput placeholder="Enter your current password" name="password"  [(ngModel)]="model.password"
+           #password="ngModel" required pattern="[a-zA-Z]+?">
+    <mat-error *ngIf="password.hasError('required')">
+      Current password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="password.hasError('pattern')">
+      Please enter a <strong> valid </strong> password
+    </mat-error>
+  </mat-form-field> <br>
+
+  <mat-form-field class="example-full-width mat-size">
+    <input matInput placeholder="Enter new password" name="newpassword1"  [(ngModel)]="model.newpassword1"
+           #newpassword1="ngModel" required pattern="[a-zA-Z]+?">
+    <mat-error *ngIf="newpassword1.hasError('required')">
+      Current password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="newpassword1.hasError('pattern')">
+      Please enter a <strong> valid </strong> password
+    </mat-error>
+  </mat-form-field> <br>
+
+  <mat-form-field class="example-full-width mat-size">
+    <input matInput placeholder="Re-type new password" name="newpassword2"  [(ngModel)]="model.newpassword2"
+           #newpassword2="ngModel" required pattern="[a-zA-Z]+?">
+    <mat-error *ngIf="newpassword2.hasError('required')">
+      Current password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="newpassword2.hasError('pattern')">
+      Please enter a <strong> valid </strong> password
+    </mat-error>
+  </mat-form-field> <br>
+
+  <button  mat-button class="button"> Save </button>
+
+</form>
