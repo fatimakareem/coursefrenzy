@@ -94,7 +94,7 @@
 
  </div>
 
- <div class="panel panel-primary" id="user-chat-box" style="display: none;">
+ <div class="panel panel-primary" id="user-chat-box display-no">
    <div class="user-chat-box-wrapper">
     <div class="chat-body clearfix user-chat-box-header">
       <button type="button" class="close pull-right" aria-label="Close" onclick="closeBox()">
@@ -113,11 +113,11 @@
 
      <div class="user-chat-box" >
        <div class="panel-footer text-area-wrapper clearfix">
-         <form (ngSubmit)="click(f)"  (keydown.enter)="click(f)" #f="ngForm" style="position: relative;">
+         <form (ngSubmit)="click(f)"  (keydown.enter)="click(f)" #f="ngForm" class="position-r">
            <textarea class="form-control" rows="2" name="messagez2" [(ngModel)]="model.messagez" required>
            </textarea>
            <span class="glyphicon glyphicon-upload"></span>
-           <!--<span class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12" style="margin-top: 10px">-->
+           <!--<span class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12 margin-top>-->
                   <!--<button type="submit" class="btn btn-warning btn-lg btn-block" id="btn-chat">Send</button>-->
                 <!--</span>-->
          </form>

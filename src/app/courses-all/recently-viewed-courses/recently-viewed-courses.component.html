@@ -5,7 +5,7 @@
       <!--<button *ngIf="userRole==='Admin'" class="btn btn-primary" style="float: right;" (click)="openDialog()">Edit</button>-->
       <div class="row" >
         <div class="col-lg-12 text-center">
-          <h3 class="page-title-01 img-bg img-bg-3" style="color: white;">Your Recently Viewed Courses</h3>
+          <h3 class="page-title-01 img-bg img-bg-3 color-white">Your Recently Viewed Courses</h3>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@
               </div>
               <div class="product-list__item-info">
               <a class="material-icons wishlist" title="Add to wishlist" *ngIf="Logedin != '1'">
-                <div  *ngIf="data?.course?.inWishList == false"(click)="onclick(i, data?.course?.id)" style="color: red"><i class="fa fa-heart-o" ></i></div></a>
+                <div  *ngIf="data?.course?.inWishList == false"(click)="onclick(i, data?.course?.id)" class="color-red"><i class="fa fa-heart-o" ></i></div></a>
               <a class="material-icons wishlist" title="Add to wishlist" *ngIf=" Logedin === '1'">
                 <div *ngIf="data?.course.inWishList == true" (click)="onclick(i, data?.course?.id)" ><i class="fa fa-heart" ></i></div>
                 <div *ngIf="data?.course.inWishList == false" (click)="onclick(i, data?.course?.id)"><i class="fa fa-heart-o" ></i></div>

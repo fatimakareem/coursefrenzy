@@ -1,7 +1,7 @@
 <app-loader></app-loader>
 <div class="profile-main">
   <div class="container" *ngIf="loaded">
-    <div class="p-banner" style="background-image: url(../../assets/img/bg_header_02.jpg);">
+    <div class="p-banner profile-banner">
       <div class="detail">
         <div class="img-holder">
           <img *ngIf="ProfileData?.profilePhoto.length >0 " src= "{{ImageUrl}}{{ProfileData?.profilePhoto}}" alt="User Profile Photo">
@@ -75,7 +75,7 @@
                   <li class="skill_li skill_li-in">
                     <h6 class="skill-title">Exact Sciences</h6>
                     <div class="progress">
-                      <div class="progress-bar" style="width:90%; background:#f80000;">
+                      <div class="progress-bar custom-style-90">
                         <div class="progress-value">90%</div>
                       </div>
                     </div>
@@ -84,7 +84,7 @@
                   <li class="skill_li skill_li-in">
                     <h6 class="skill-title">Technologies</h6>
                     <div class="progress">
-                      <div class="progress-bar" style="width:95%; background:#f80000;">
+                      <div class="progress-bar custom-style-95">
                         <div class="progress-value">95%</div>
                       </div>
                     </div>
@@ -92,7 +92,7 @@
                   <li class="skill_li skill_li-in">
                     <h6 class="skill-title">Languages</h6>
                     <div class="progress">
-                      <div class="progress-bar" style="width:85%; background:#f80000;">
+                      <div class="progress-bar custom-style-85">
                         <div class="progress-value">85%</div>
                       </div>
                     </div>
@@ -100,7 +100,7 @@
                   <li class="skill_li skill_li-in">
                     <h6 class="skill-title">Humanities</h6>
                     <div class="progress">
-                      <div class="progress-bar" style="width:80%; background:#f80000;">
+                      <div class="progress-bar custom-style-80">
                         <div class="progress-value">80%</div>
                       </div>
                     </div>
@@ -130,7 +130,7 @@
                 <div class="statistics">
                   <h3 class="heading-xs">Statistics in Progress Bar <span class="pull-right">67%</span></h3>
                   <div class="progress progress-u progress-xxs">
-                    <div style="width: 67%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
+                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light width-67per">
                     </div>
                   </div>
                   <small>11% less <strong>than last month</strong></small>
@@ -151,7 +151,7 @@
           </div>
 
           <section class="admin-panel single-course profile" *ngIf="loaded">
-            <h2 class="page-title-01 jumbotron cstm gradient13" style="color: white;">Courses taught by {{ ProfileData?.user?.first_name }} {{ ProfileData?.user?.last_name }}</h2>
+            <h2 class="page-title-01 jumbotron cstm gradient13 color-white" >Courses taught by {{ ProfileData?.user?.first_name }} {{ ProfileData?.user?.last_name }}</h2>
             <hr/>
             <div *ngFor="let list of coursesList?.courses; let i=index;">
               <div class="row wow fadeIn">
@@ -178,7 +178,7 @@
                     <span *ngIf="list.skill === 'I'" class="label label-success">IDEAL FOR MEDIOCRES</span>
                     <span *ngIf="list.skill === 'A'" class="label label-success">IDEAL FOR EXPERTS</span>
                     <a routerLink="/courses/single/{{list.id}}">
-                      <h3 style="line-height: 35px">{{ list.name }}</h3>
+                      <h3 class="line-h-35">{{ list.name }}</h3>
                     </a>
                     <p> {{ list.overview }} </p>
                     <div class="large-post-meta">
@@ -199,11 +199,11 @@
 
                     <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough"> ${{ list?.actual_price }}</div>
                     <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{ list.discounted_price }}</div>
-                      <div style="float: right;margin-right: 60px">
+                      <div class="pull-right margin-r-60" >
                       <a class="material-icons wishlist" title="Add to wishlist"
                          (click)="onclick(i, list.id)">favorite_border</a>
                       <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog2(i, list?.id)">add_shopping_cart</a>
-                      <a routerLink="/checkout" type="button" style="text-align: center;width: 65%;background-color: black" class="btn btn1 product-list__content">Buy Now</a>
+                      <a routerLink="/checkout" type="button" class="shoping-icon" class="btn btn1 product-list__content">Buy Now</a>
                       </div>
                     </div>
 

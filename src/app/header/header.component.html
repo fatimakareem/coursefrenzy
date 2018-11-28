@@ -14,7 +14,7 @@
           <p *ngIf="Courses.courses.length>1" class="results-found"> {{ Courses.courses.length }} results found.</p>
         </div>
         <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3 economy languages history"  *ngFor="let item of Courses?.courses">
-          <div class="product-list__item" style="width: 100%;">
+          <div class="product-list__item width-100">
             <a (click)="select(item.id); closeSearch();" routerLink="/courses/single/{{item.id}}">
               <figure class="imghvr-zoom-out-down product-list__img">
                 <img *ngIf="item?.course_image" src= "{{ ImageUrl}}{{item?.course_image}}" alt="" class="img-responsive" onError="this.src='../../assets/img/default_thumbnail.png'">
@@ -106,7 +106,7 @@
                     <li class="dropdown" *ngFor="let cat of Categories">
                       <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <div class="row">
-                          <div class="col-xs-2 off-set-1"><img src="../../assets/img/caticons/{{ cat.icon }}.png"></div>
+                          <div class="col-xs-2 off-set-1"><img class="category-img" src="../../assets/img/caticons/{{ cat.icon }}.png"></div>
                           <div class="col-xs-8"> <a routerLink='/cat_courses/{{cat.id}}'> {{ cat.name }} </a> </div>
                           <div class="col-xs-1"><span class="fa fa-angle-right"></span></div>
                         </div></a>
@@ -114,11 +114,11 @@
                         <li class="pull-left width-full" *ngFor=" let caty of cat.category ">
                           <a class="display-inline-b width-full" routerLink='/courses/subcat_courses/{{caty.id}}'>
                             <div id="sub" class="pull-left col-xs-8">{{ caty.name }}</div>
-                            <i class="fa fa-angle-right pull-right col-xs-2" style="margin-right: 10px;"></i>
+                            <i class="fa fa-angle-right pull-right col-xs-2 margin-r-10"></i>
                           </a>
                           <ul *ngIf="cat.category" class="dropdown-menu show-left" role="menu">
                             <li *ngFor=" let caty of cat.category ">
-                              <a routerLink='/courses/subcat_courses/{{caty.id}}' style="line-height: 15px;">
+                              <a routerLink='/courses/subcat_courses/{{caty.id}}' class="line-h-15">
                                 <div id="sub">{{ caty.name }}</div>
                               </a>
                             </li>
@@ -140,7 +140,7 @@
                       <i class="fas fa-shopping-cart"></i><sup *ngIf="GlobalCartCourses" >{{GlobalCartCourses.length}}</sup>
                     </a>
                     <div class="chat dropdown-menu dropdown-menu-right">
-                      <ul *ngIf="!emptyCart && GlobalCartCourses.length > 0" class="chat notifications shopping-cart" style="box-shadow:none">
+                      <ul *ngIf="!emptyCart && GlobalCartCourses.length > 0" class="chat notifications shopping-cart box-shadow-no">
                         <li *ngFor="let data of GlobalCartCourses; let i=index;">
                           <i class="fa fa-close" data-toggle="tooltip" title="Remove from Cart" (click)="removeFromCart(i, data.course.id)">
                           </i>
@@ -159,14 +159,14 @@
                         </li>
                       </ul>
                       <div class="submenu-btn-holder">
-                        <a *ngIf="!emptyCart && GlobalCartCourses.length > 0" style="width:100%;text-align: center" routerLink="/checkout" class="btn btn-primary btn-lg text-right">Go to Cart</a>
+                        <a *ngIf="!emptyCart && GlobalCartCourses.length > 0" class="text-center width-100" routerLink="/checkout" class="btn btn-primary btn-lg text-right">Go to Cart</a>
                       </div>
                     </div>
   
-                    <ul *ngIf="GlobalCartCourses.length === 0" class="dropdown-menu dropdown-menu-right chat notifications shopping-cart" style="overflow:hidden">
-                      <li class="text-center" style="border-bottom:none!important;">
+                    <ul *ngIf="GlobalCartCourses.length === 0" class="dropdown-menu dropdown-menu-right chat notifications shopping-cart overflow-h" >
+                      <li class="text-center border-b-no">
                         <i class="fas fa-shopping-cart"></i>
-                        <p style="margin:0 0 7px!important;">No items in Cart</p>
+                        <p class="margin-b-7">No items in Cart</p>
                         <button routerLink="/courses" type="button" class="btn btn-primary btn-sm add-items-btn">Add Items</button>
                       </li>
                     </ul>
@@ -178,7 +178,7 @@
   
                   <li class="cartmenu" [ngStyle]="{'display':Logedin === '1' ? 'inline-block' : 'none' }">
                     <a data-toggle="dropdown">
-                      <i class="fas fa-bell" style="color: #616161;" ></i> <sup *ngIf="notify">{{notify.length}}</sup>
+                      <i class="fas fa-bell color-custom" ></i> <sup *ngIf="notify">{{notify.length}}</sup>
                     </a>
                     <ul id="notifications"  class="dropdown-menu dropdown-menu-right notifications chat" >
                       <li class="left clearfix" *ngFor="let item of notify">
@@ -199,17 +199,17 @@
                     </ul>
                   </li>
                   <li class="dropdown cartmenu searchmenu hasmenu" [ngStyle]="{'display':Logedin === '1' ? 'none' : 'inline-block' }">
-                    <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&hl=en" target="_blank" class="dropdown-toggle pointer" data-toggle="tooltip" title="CourseFrenzy Android Application"><i class="fa fa-android" style=""></i></a>
+                    <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&hl=en" target="_blank" class="dropdown-toggle pointer" data-toggle="tooltip" title="CourseFrenzy Android Application"><i class="fa fa-android"></i></a>
                   </li>
                   <li class="dropdown cartmenu searchmenu hasmenu" [ngStyle]="{'display':Logedin === '1' ? 'none' : 'inline-block' }">
-                    <a class="dropdown-toggle pointer" data-toggle="tooltip" title="CourseFrenzy IOS Application"><i class="fa fa-apple" style=""></i></a>
+                    <a class="dropdown-toggle pointer" data-toggle="tooltip" title="CourseFrenzy IOS Application"><i class="fa fa-apple" ></i></a>
                   </li>
                   <li class="dropdown cartmenu searchmenu hasmenu" [ngStyle]="{'display':Logedin === '1' ? 'inline-block' : 'none' }">
                     <a [routerLink]="['/wishlist']" class="dropdown-toggle pointer" data-toggle="tooltip" title="Courses in wishlist">
-                      <i class="fas fa-heart" style="font-size:18px; color: #616161"></i>  <sup *ngIf="wishlistCourses" >{{wishlistCourses.length}}</sup>
+                      <i class="fas fa-heart color-custom font-18"></i>  <sup *ngIf="wishlistCourses" >{{wishlistCourses.length}}</sup>
                     </a>
                     <div class="chat dropdown-menu dropdown-menu-right">
-                      <ul *ngIf="wishlistCourses.length>0" class="chat notifications shopping-cart" style="box-shadow:none">
+                      <ul *ngIf="wishlistCourses.length>0" class="chat notifications shopping-cart box-shadow-no">
                         <li *ngFor="let data of wishlistCourses; let i=index;">
                         <i class="fa fa-close" data-toggle="tooltip" title="Remove from Wishlist" (click)="removeFromWishlist(i, data.course.id)">
                         </i>
@@ -219,7 +219,7 @@
                         <div class="desc">
                         <!--<h4>{{ list.course.name }}</h4>-->
                           <a class="product-list__category" routerLink="/courses/single/{{data.course.id}}">{{ data.course.name}} </a>
-                          <div class="price-holder" style="float: left;">
+                          <div class="price-holder pull-left">
                             <span class="price-cut">$300</span>
                             <span class="price">${{ data.course.actual_price }}</span>
                           </div>
@@ -230,13 +230,13 @@
                         </li>
                       </ul>
                       <div class="submenu-btn-holder">
-                        <a *ngIf="wishlistCourses.length>0" routerLink="/wishlist" style="width: 100%; text-align: center" class="btn btn-primary btn-lg text-right">Go to Wishlist</a>
+                        <a *ngIf="wishlistCourses.length>0" routerLink="/wishlist" class="btn btn-primary btn-lg text-center width-100 ">Go to Wishlist</a>
                       </div>
                     </div>
-                    <ul *ngIf="wishlistCourses.length === 0" class="dropdown-menu dropdown-menu-right chat notifications sh opping-cart" style="overflow:hidden">
-                      <li class="text-center" style="border-bottom:none!important;">
-                        <i class="material-icons" style="font-size:90px">shopping_basket</i>
-                        <p style="margin:0 0 7px!important;">No items in Wishlist</p>
+                    <ul *ngIf="wishlistCourses.length === 0" class="dropdown-menu dropdown-menu-right chat notifications sh opping-cart overflow-h">
+                      <li class="text-center border-b-no">
+                        <i class="material-icons font-90">shopping_basket</i>
+                        <p class="margin-b-7">No items in Wishlist</p>
                         <button routerLink="/courses" type="button" class="btn btn-primary btn-sm add-items-btn">Add Items</button>
                       </li>
                     </ul>

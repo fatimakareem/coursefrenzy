@@ -1,7 +1,7 @@
 <app-loader></app-loader>
 <div id="wrapper">
   <section class="partner-holder">
-    <div class="" style="background: none;">
+    <div class="bg-no">
       <div class="container">
         <div class="text-right">
         </div>
@@ -51,7 +51,7 @@
                 </mat-form-field> <br />
 
                 <mat-form-field class="example-full-width mat-size">
-                    <textarea matInput #message1 maxlength="256" style="height: 200px;" placeholder="How can we partner?" [required]="message"  name="message" [(ngModel)]="model.message"
+                    <textarea matInput #message1 maxlength="256" class="height-200" placeholder="How can we partner?" [required]="message"  name="message" [(ngModel)]="model.message"
                               #message="ngModel" required pattern="[a-zA-Z0-9 _.!-]+?" rows="3"> </textarea>
                   <mat-hint align="start"><strong>Write your questions and suggestions</strong> </mat-hint>
                   <mat-hint align="end">{{message1.value.length}} / 256</mat-hint>

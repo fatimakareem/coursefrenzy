@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row" *ngIf="loaded">
       <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let Special of Specialities; let i=index;">
-        <button *ngIf="userRole==='Admin'" class="btn btn-primary" style="float: right;" (click)="openDialog(i)">Edit</button>
+        <button *ngIf="userRole==='Admin'" class="btn btn-primary pull-right" (click)="openDialog(i)">Edit</button>
 
           <div class="img-holder">
             <img src="{{ImageUrl+'media/'}}{{Special.icon}}"/>
