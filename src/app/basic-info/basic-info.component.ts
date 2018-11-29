@@ -85,7 +85,7 @@ export class BasicInfoComponent implements OnInit {
   static ProfileFailure() {
     swal({
       type: 'error',
-      title: 'Oops! <br>Failed to Update Profile. Inccorrect Information!',
+      title: 'Oops! <br>Failed to Update Profile.Incorrect Information!',
       showConfirmButton: false,
       width: '512px',
       timer: 2500

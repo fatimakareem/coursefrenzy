@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Http} from '@angular/http';
-import {FormControl, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {AccountService} from "./account.service";
+import { NgForm } from '@angular/forms';
+import { Http } from '@angular/http';
+import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { AccountService } from "./account.service";
 import swal from 'sweetalert2';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -32,13 +32,29 @@ export class AccountComponent implements OnInit {
   }
 
   onSubmit(f) {
-    if(this.model.newpassword1 != this.model.newpassword2) {
-     this.passwordMatch();
+    if (this.model.newpassword1 != this.model.newpassword2) {
+      this.passwordMatch();
     }
     else {
-      this.obj.change_password(this.model.password, this.model.newpassword1, this.model.newpassword2).subscribe();
+      this.obj.change_password(this.model.password, this.model.newpassword1, this.model.newpassword2).subscribe(
+        data => {
+          swal({
+            type: 'success',
+            title: 'Your password has been successfully changed',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        },
+        error => {
+          swal({
+            type: 'error',
+            title: 'Your old password has been incorrect!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+        );
     }
-
   }
 
   passwordMatch() {

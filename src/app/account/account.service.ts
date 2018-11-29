@@ -54,7 +54,7 @@ export class AccountService {
         return Observable.throw(new Error(error.status));
       } else if (error.status === 400) {
         //    this._nav.navigate(['/pages/accident']);
-        // console.log('ok not submited submit 400');
+        console.log('ok not submited submit 400');
         // localStorage.setItem('error', '1');
         return Observable.throw(new Error(error.status));
       } else {

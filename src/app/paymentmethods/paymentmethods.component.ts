@@ -17,7 +17,23 @@ import * as moment from 'moment';
   styleUrls: ['./paymentmethods.component.scss']
 })
 export class PaymentmethodsComponent implements OnInit {
-
+  var_type_atm=new FormControl();
+  cardtype;
+  public show: boolean = false;
+  check_value: boolean = false;
+  ccv1: boolean = false;
+  ccv4;
+  ccv;
+  ccv2;
+  cardnumber4;
+  cardnumber;
+  var_box_check: boolean = false;
+  destroy_value;
+  card_opeation = [
+    { value: 'Visa', viewValue: 'Visa' },
+    { value: 'Master', viewValue: 'Master' },
+    { value: 'American Express', viewValue: 'American Express' }
+  ];
   form = new FormGroup({
     cardnumber: new FormControl('', [
       Validators.minLength(16),
@@ -25,10 +41,22 @@ export class PaymentmethodsComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[0-9]*$')
     ]),
+    cardnumber4: new FormControl('', [
+      Validators.minLength(15),
+      Validators.maxLength(15),
+      Validators.required,
+      Validators.pattern('^[0-9]*$')
+    ]),
     ccv: new FormControl('', [
+      Validators.minLength(3),
+      Validators.maxLength(3),
+      Validators.required,
+      Validators.pattern('^[0-9]*$')
+    ]),
+    ccv4: new FormControl('', [
+      Validators.required,
       Validators.minLength(4),
       Validators.maxLength(4),
-      Validators.required,
       Validators.pattern('^[0-9]*$')
     ]),
     expirydate: new FormControl('', [
@@ -37,9 +65,13 @@ export class PaymentmethodsComponent implements OnInit {
     ]),
     cardnickname: new FormControl('', [
       Validators.minLength(3),
-      Validators.maxLength(50),
+      Validators.maxLength(14),
+      Validators.pattern('^[a-zA-Z _.]+$'),
       Validators.required
     ]),
+    // var_type_atm: new FormControl('', [
+    //   Validators.required,
+    // ]),
     check: new FormControl(),
   });
 
@@ -51,7 +83,7 @@ export class PaymentmethodsComponent implements OnInit {
     //   Validators.pattern('^[0-9]*$')
     // ]),
     ccv2: new FormControl('', [
-      Validators.minLength(4),
+      Validators.minLength(3),
       Validators.maxLength(4),
       Validators.required,
       Validators.pattern('^[0-9]*$')
@@ -62,7 +94,7 @@ export class PaymentmethodsComponent implements OnInit {
     ]),
     cardnickname2: new FormControl('', [
       Validators.minLength(3),
-      Validators.maxLength(50),
+      Validators.maxLength(14),
       Validators.required
     ]),
     check2: new FormControl(),
@@ -73,34 +105,55 @@ export class PaymentmethodsComponent implements OnInit {
   private sub: Subscription;
   flipclass = 'credit-card-box';
   constructor(private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private sg: SimpleGlobal, private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
-
+    this.cardnumber = true;
+    this.cardnumber4 = false;
+    this.ccv = true;
+    this.ccv4 = false;
   }
 
   ngOnInit() {
     this.form.controls['check'].setValue(false);
     this.getCards();
   }
-
+  ShowButton(var_type_atm) {
+   
+    if (var_type_atm == "American Express") {
+      this.cardtype = var_type_atm;
+      this.cardnumber = false;
+      this.form.controls.cardnumber.reset();
+      this.cardnumber4 = true;
+      this.ccv = false;
+      this.form.controls.ccv.reset();
+      this.ccv4 = true;
+    }
+    else {
+      this.cardtype = var_type_atm;
+      this.cardnumber4 = false;
+      this.form.controls.cardnumber4.reset();
+      this.cardnumber = true;
+      this.ccv4 = false;
+      this.form.controls.ccv4.reset();
+      this.ccv = true;
+    }
+  }
   cardid;
   card;
   getSingleCard(id) {
     this.serv.singleCard(id).subscribe(Data => {
       this.card = Data;
       let expDate = this.card.expiryDate;
-      expDate = expDate.substring(0, expDate.length - 3);
+      // expDate = expDate.substring(0, expDate.length - 3);
       expDate = moment(expDate).format('MM/YYYY');
-
       this.cardid = this.card.id;
       this.updateForm.controls['cardnickname2'].setValue(this.card.nickname);
       this.updateForm.controls['expirydate2'].setValue(expDate);
       this.updateForm.controls['check2'].setValue(this.card.default);
       this.updateForm.controls['ccv2'].setValue(this.card.ccv);
-      this.updateForm.controls['cardnumber2'].setValue(this.card.cardNumber);
     })
   }
 
   updateSingleCard(id) {
-    console.log('dasd',this.cardid);
+    console.log('dasd', this.cardid);
     // this.date = this.updateForm.value['expirydate2'];
     this.date = moment(this.date).format('YYYY-MM') + '-01';
 
@@ -189,65 +242,130 @@ export class PaymentmethodsComponent implements OnInit {
 
   date;
   add() {
-    if (this.form.valid) {
-      this.date = moment(this.date).format('YYYY-MM') + '-01';
-      // this.date = this.form.value['expirydate'];
-
-
-      this.serv.addCard(this.form.value['cardnumber'], this.form.value['ccv'], this.date, this.form.value['cardnickname'], this.form.value['check']).subscribe(Data => {
-
-        console.log('Date Exp', this.date);
+  // this.date = moment(this.date).format('YYYY-MM') + '-01';
+  alert(this.cardtype);
+    if(this.cardtype == "American Express")
+    { 
+      if (this.form.controls.cardnumber4.valid && this.form.controls.ccv4.valid &&
+        this.form.controls.cardnickname.valid && this.form.controls.expirydate.valid) {
+        // this.date = moment(this.date).format('YYYY-MM') + '-01';
+        this.date = this.form.value['expirydate'];
+        this.serv.addCard(this.form.value['cardnumber4'], this.form.value['ccv4'], this.date, this.form.value['cardnickname'],this.cardtype, this.form.value['check']).subscribe(Data => {
+  
+          console.log('Date Exp', this.date);
+          swal({
+            type: 'success',
+            title: 'Payment method is listed!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.getCards();
+        },
+          error => {
+            if (error.status == 404) {
+              swal({
+                type: 'error',
+                title: 'This card already exist!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else if (error.status == 400) {
+              swal({
+                type: 'error',
+                title: 'Please enter correct details!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else if (error.status == 500) {
+              swal(
+                'Sorry',
+                'Server is under maintenance!',
+                'error'
+              )
+            }
+            else {
+              swal(
+                'Sorry',
+                'Some thing went worrng!',
+                'error'
+              )
+            }
+          })
+      }
+      else {
         swal({
-          type: 'success',
-          title: 'Payment method is listed!',
+          type: 'error',
+          title: 'Please enter correct details!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         })
-        this.getCards();
-      },
-        error => {
-          if (error.status == 404) {
-            swal({
-              type: 'error',
-              title: 'This card already exist!',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          }
-          else if (error.status == 400) {
-            swal({
-              type: 'error',
-              title: 'Please enter correct details!',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          }
-          else if (error.status == 500) {
-            swal(
-              'Sorry',
-              'Server is under maintenance!',
-              'error'
-            )
-          }
-          else {
-            swal(
-              'Sorry',
-              'Some thing went worrng!',
-              'error'
-            )
-          }
+      }
+    }
+    else
+    {
+   
+      if (this.form.controls.cardnumber.valid && this.form.controls.ccv.valid &&
+        this.form.controls.cardnickname.valid && this.form.controls.expirydate.valid) {
+      
+          this.date = this.form.value['expirydate'];
+        // this.date = moment(this.date).format('YYYY-MM') + '-01';
+  
+        this.serv.addCard(this.form.value['cardnumber'], this.form.value['ccv'], this.date, this.form.value['cardnickname'],this.cardtype, this.form.value['check']).subscribe(Data => {
+  
+          console.log('Date Exp', this.date);
+          swal({
+            type: 'success',
+            title: 'Payment method is listed!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.getCards();
+        },
+          error => {
+            if (error.status == 404) {
+              swal({
+                type: 'error',
+                title: 'This card already exist!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else if (error.status == 400) {
+              swal({
+                type: 'error',
+                title: 'Please enter correct details!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else if (error.status == 500) {
+              swal(
+                'Sorry',
+                'Server is under maintenance!',
+                'error'
+              )
+            }
+            else {
+              swal(
+                'Sorry',
+                'Some thing went worrng!',
+                'error'
+              )
+            }
+          })
+      }
+      else {
+        swal({
+          type: 'error',
+          title: 'Please enter correct details!',
+          showConfirmButton: false,
+          timer: 1500,
         })
-    }
-    else {
-      swal({
-        type: 'error',
-        title: 'Please enter correct details!',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
+      }
+    } 
   }
-
   res;
   getCards() {
     this.serv.showCards().subscribe(Data => {
