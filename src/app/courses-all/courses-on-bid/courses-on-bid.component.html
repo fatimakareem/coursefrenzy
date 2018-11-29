@@ -3,7 +3,7 @@
   <div class="container-fluid1">
     <div class="row" *ngIf="loaded">
       <div class="col-lg-12 text-center">
-        <h3 class="page-title-01 img-bg img-bg-5" style="color: white;">Buy & Bid On Courses</h3>
+        <h3 class="page-title-01 img-bg img-bg-5 color-white">Buy & Bid On Courses</h3>
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@
             <div class="product-list__item-info">
               <!--<a href="" class="wishlist"><i class="fa fa-heart"></i></a>-->
               <a class="wishlist" title="Add to wishlist" *ngIf="Logedin != '1'">
-                <div  *ngIf="bid_data?.course?.course?.inWishList == false" (click)="onclick(i, bid_data?.course?.course?.id)" style="color: red"><i class="fa fa-heart-o" ></i></div></a>
+                <div  *ngIf="bid_data?.course?.course?.inWishList == false" (click)="onclick(i, bid_data?.course?.course?.id)" class="color-red"><i class="fa fa-heart-o" ></i></div></a>
               <a class="wishlist" title="Add to wishlist" *ngIf=" Logedin === '1'">
                 <div *ngIf="bid_data?.course?.course.inWishList == true" ><i class="fa fa-heart" ></i></div>
                 <div *ngIf="bid_data?.course?.course.inWishList == false" (click)="onclick(i, bid_data?.course?.course?.id)"><i class="fa fa-heart-o" ></i></div>

@@ -42,7 +42,7 @@
             <p>{{ content?.description }}</p>
           </div>
           <a [ngStyle]="{'display':Logedin === '0' ? 'inline-block' : 'none' }" [routerLink]="['/login']"  class="parallax-btn">Get Started</a>
-          <button *ngIf="userRole === 'Admin'" class="btn btn-primary" style="float: right;" (click)="openDialog2()">Edit</button>
+          <button *ngIf="userRole === 'Admin'" class="btn btn-primary pull-right" (click)="openDialog2()">Edit</button>
         </div>
       </div>
     </div>

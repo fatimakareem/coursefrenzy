@@ -17,7 +17,7 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width mat-size">
-          <textarea matInput #message1 maxlength="300" style="height: 200px;" placeholder="Edit description" [required]="message"  name="message" [(ngModel)]="model.description"
+          <textarea matInput #message1 maxlength="300" class="height-200" placeholder="Edit description" [required]="message"  name="message" [(ngModel)]="model.description"
                     #message="ngModel" required pattern="[a-zA-Z0-9_.]+?"> </textarea>
           <mat-hint align="start"><strong>Write you questions and suggestions</strong> </mat-hint>
           <mat-hint align="end">{{ message1.value.length }} / 300</mat-hint>

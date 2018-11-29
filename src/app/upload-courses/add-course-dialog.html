@@ -11,7 +11,7 @@
       <h4 *ngIf="!isEditForm" class="card-title"> Add New Course</h4>
     </div>
 
-    <div class="card-content" style="height: 500px; overflow-x: hidden;">
+    <div class="card-content custom-class" >
       <label> Upload Course Thumbnail </label>
       <!--<mat-form-field>-->
 
@@ -21,7 +21,7 @@
       <div>
         <span class="btn-file">Upload Image<input class="img-input"  (change)="onChange($event)"  #image type="file" accept="image/gif, image/jpeg, image/png" ></span>
       </div>
-      <img *ngIf="isEditForm && model.course_image " src="{{ImageUrl}}{{model.course_image}}" style="height: 20%; width: 20%">
+      <img *ngIf="isEditForm && model.course_image " src="{{ImageUrl}}{{model.course_image}}" class="w-h-20-per">
 
       <mat-form-field class="example-full-width mat-size">
         <input matInput placeholder="Enter Course Name" [(ngModel)]="model.Name" [required]="Name" name="Name" id="Name" #Name="ngModel" required>
