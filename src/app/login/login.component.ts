@@ -1,20 +1,20 @@
-import {Component, Inject, OnInit, PLATFORM_ID, ViewContainerRef} from '@angular/core';
-import {FormControl, NgForm, Validators} from '@angular/forms';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 // import {  App_service } from  './../app.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LoginService} from './login.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {SignUpservice} from '../signup/signup.service';
-import {GlobalService} from '../global.service';
-import {isPlatformBrowser} from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { SignUpservice } from '../signup/signup.service';
+import { GlobalService } from '../global.service';
+import { isPlatformBrowser } from '@angular/common';
 import swal from 'sweetalert2';
 import { AuthService } from 'angular4-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angular4-social-login';
-import {HttpClient} from '@angular/common/http';
-import {Config} from '../Config';
-import {JwtHelper} from 'angular2-jwt';
-import {CoursesService} from '../course/courses.service';
-import {CourseCheckoutService} from '../course-checkout/course-checkout.service';
+import { HttpClient } from '@angular/common/http';
+import { Config } from '../Config';
+import { JwtHelper } from 'angular2-jwt';
+import { CoursesService } from '../course/courses.service';
+import { CourseCheckoutService } from '../course-checkout/course-checkout.service';
 import { RecaptchaComponent } from 'recaptcha-blackgeeks';
 import { ViewChild } from '@angular/core';
 
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   username;
   password;
   captcharesponse;
-  public cap: boolean= false;
+  public cap: boolean = false;
   jwtHelper: JwtHelper = new JwtHelper();
   user: any;
   // public captcha: boolean =false;
@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit {
     Validators.required]);
 
   constructor(private obj: LoginService, public dialog: MatDialog, private vcr: ViewContainerRef,
-              private route: ActivatedRoute, private global: GlobalService, private course: CoursesService, private obj2: CourseCheckoutService,
-              @Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService, private _http: HttpClient,
-              private _nav: Router) {
+    private route: ActivatedRoute, private global: GlobalService, private course: CoursesService, private obj2: CourseCheckoutService,
+    @Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService, private _http: HttpClient,
+    private _nav: Router) {
     // this.global.caseNumber$.subscribe(
     //   data => {
     //     this.searchCaseNumber = data;
@@ -66,18 +66,18 @@ export class LoginComponent implements OnInit {
 
     this.global.GlobalWishListCourses$.subscribe(
       data => {
-        if (data.length===0){
+        if (data.length === 0) {
           this.wishlistCourses = data;
-        }else {
+        } else {
           this.wishlistCourses = [];
         }
       });
 
     this.global.GlobalCartCourses$.subscribe(
       data => {
-        if(data.length===0){
+        if (data.length === 0) {
           this.GlobalCartCourses = [];
-        }else{
+        } else {
           this.GlobalCartCourses = data;
         }
       });
@@ -86,11 +86,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // this.captcha.reset();
     if (isPlatformBrowser(this.platformId)) {
-     this.logedin = localStorage.getItem('loged_in');
-     // alert(this.logedin)
+      this.logedin = localStorage.getItem('loged_in');
+      // alert(this.logedin)
     }
-    if (this.logedin === 1)
-    {
+    if (this.logedin === 1) {
 
       this._nav.navigate(['/']);
     }
@@ -144,56 +143,80 @@ export class LoginComponent implements OnInit {
     this.firstnameLower = this.model.firstname;
     this.firstnameLower = this.firstnameLower.toLowerCase();
     // this.model.firstname = (this.model.firstname).toLowerCase();
-    if(this.captcha.getResponse() == true) {
-      this.obj.loged_in(this.firstnameLower, this.model.password, this.returnUrl).subscribe(
+    if (this.captcha.getResponse() == true) {
+      this.obj.login_authenticate(this.firstnameLower).subscribe(
         data => {
+          this.obj.loged_in(this.firstnameLower, this.model.password, this.returnUrl).subscribe(
+            data => {
 
-          LoginComponent.showSuccess();
-          if (isPlatformBrowser(this.platformId)) {
-            localStorage.setItem("loged_in", '1');
-            this.global.publishData("1");
+              LoginComponent.showSuccess();
+              if (isPlatformBrowser(this.platformId)) {
+                localStorage.setItem("loged_in", '1');
+                this.global.publishData("1");
+              }
+              if (isPlatformBrowser(this.platformId)) {
+                localStorage.setItem('login', 'false');
+              }
+
+              this.course.get_wishlist_courses(this.wishPage).subscribe(response => {
+                if (response.hasOwnProperty("status")) {
+                  this.emptyWishlist = true;
+                  this.global.getemptyWishlistGlobal(this.emptyWishlist);
+                }
+                else {
+                  this.wishlistCourses = response;
+                  console.log(this.wishlistCourses);
+                  this.global.getGolbalWishListCourses(this.wishlistCourses);
+                  this.emptyWishlist = false;
+                  this.global.getemptyWishlistGlobal(this.emptyWishlist);
+                }
+              });
+
+              this.obj2.get_checkout_courses().subscribe(response => {
+                if (response.hasOwnProperty("status")) {
+                  this.emptyCart = true;
+                  this.global.getemptyCartGlobal(this.emptyCart);
+                }
+                else {
+                  this.GlobalCartCourses = response;
+                  // if (this.GlobalCartCourses.hasOwnProperty("status")){
+                  //   console.log('status found')
+                  // }
+                  console.log('Checkout' + this.GlobalCartCourses);
+                  this.global.getGolbalCartCourses(this.GlobalCartCourses);
+                  this.emptyCart = false;
+                  this.global.getemptyCartGlobal(this.emptyCart);
+                }
+              });
+
+            },
+            error => {
+
+              this.islogin = false;
+              LoginComponent.LoginError();
+            });
+        },error => {
+          console.log(error.status, 'masssssagaggggg')
+          if (error.status == 404) {
+            swal({
+              type: 'error',
+              title: 'First, Verify your email address to Sign In.',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 2000
+            });
           }
-          if (isPlatformBrowser(this.platformId)) {
-            localStorage.setItem('login', 'false');
+          else if (error.status == 500) {
+            swal({
+              type: 'error',
+              title: 'User Doesnot Exist!',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 2000
+            });
           }
-
-          this.course.get_wishlist_courses(this.wishPage).subscribe(response => {
-            if (response.hasOwnProperty("status")) {
-              this.emptyWishlist = true;
-              this.global.getemptyWishlistGlobal(this.emptyWishlist);
-            }
-            else {
-              this.wishlistCourses = response;
-              console.log(this.wishlistCourses);
-              this.global.getGolbalWishListCourses(this.wishlistCourses);
-              this.emptyWishlist = false;
-              this.global.getemptyWishlistGlobal(this.emptyWishlist);
-            }
-          });
-
-          this.obj2.get_checkout_courses().subscribe(response => {
-            if (response.hasOwnProperty("status")) {
-              this.emptyCart = true;
-              this.global.getemptyCartGlobal(this.emptyCart);
-            }
-            else {
-              this.GlobalCartCourses = response;
-              // if (this.GlobalCartCourses.hasOwnProperty("status")){
-              //   console.log('status found')
-              // }
-              console.log('Checkout' + this.GlobalCartCourses);
-              this.global.getGolbalCartCourses(this.GlobalCartCourses);
-              this.emptyCart = false;
-              this.global.getemptyCartGlobal(this.emptyCart);
-            }
-          });
-
-        },
-        error => {
-
-          this.islogin = false;
-          LoginComponent.LoginError();
-        });
+      }
+        )
     }
     // else if(this.captcha.getResponse()== false){
     //
@@ -206,15 +229,15 @@ export class LoginComponent implements OnInit {
     //   })
     //
     // }
-    else{
+    else {
       this.captcha.reset();
-          swal({
-          type: 'error',
-          title: 'Please confirm you are not a robot!',
-          showConfirmButton: false,
-          width: '512px',
-          timer: 2000
-        });
+      swal({
+        type: 'error',
+        title: 'Please confirm you are not a robot!',
+        showConfirmButton: false,
+        width: '512px',
+        timer: 2000
+      });
 
     }
   }
@@ -225,11 +248,11 @@ export class LoginComponent implements OnInit {
 
   socialCallBack = (user) => {
     this.user = user;
-    const headers = {'Content-Type':'application/json'};
+    const headers = { 'Content-Type': 'application/json' };
     if (user) {
       const createUser = this._http.post(Config.api + 'users/social_login/', {
         user
-      }, {headers: headers});
+      }, { headers: headers });
 
       createUser.subscribe(data => {
         // localStorage.setItem('json_token', data['token']);
@@ -245,7 +268,7 @@ export class LoginComponent implements OnInit {
           LoginComponent.showSuccess();
 
           this.course.get_wishlist_courses(this.wishPage).subscribe(response => {
-            if(response.hasOwnProperty("status")) {
+            if (response.hasOwnProperty("status")) {
               this.emptyWishlist = true;
               this.global.getemptyWishlistGlobal(this.emptyWishlist);
             }
@@ -259,13 +282,13 @@ export class LoginComponent implements OnInit {
           });
 
           this.obj2.get_checkout_courses().subscribe(response => {
-            if(response.hasOwnProperty("status")) {
+            if (response.hasOwnProperty("status")) {
               this.emptyCart = true;
               this.global.getemptyCartGlobal(this.emptyCart);
             }
             else {
               this.GlobalCartCourses = response;
-              console.log('Checkout'+this.GlobalCartCourses);
+              console.log('Checkout' + this.GlobalCartCourses);
               this.global.getGolbalCartCourses(this.GlobalCartCourses);
               this.emptyCart = false;
               this.global.getemptyCartGlobal(this.emptyCart);
@@ -297,7 +320,7 @@ export class LoginComponent implements OnInit {
   styleUrls: ['../events/add-event.component.css']
 })
 
-export class  ResetPasswordComponent {
+export class ResetPasswordComponent {
   public model: any = {};
   public emailResponse = false;
   emailFormControl = new FormControl('', [
@@ -306,8 +329,8 @@ export class  ResetPasswordComponent {
   ]);
 
   constructor(private obj: LoginService, private obj2: SignUpservice,
-              public dialogRef: MatDialogRef<ResetPasswordComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    public dialogRef: MatDialogRef<ResetPasswordComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   onNoClick(): void {
