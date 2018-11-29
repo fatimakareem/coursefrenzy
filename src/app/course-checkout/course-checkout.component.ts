@@ -46,7 +46,8 @@ export class CourseCheckoutComponent implements OnInit {
   TotalAmountForm = new FormControl('', [
     Validators.required
   ]);
-  endRequest: import("c:/Users/Brain Plow/Documents/GitHub/coursefrenzy/node_modules/rxjs/Subscription").Subscription;
+  endRequest ;
+  // import("c:/Users/Brain Plow/Documents/GitHub/coursefrenzy/node_modules/rxjs/Subscription").Subscription;
 
   constructor(private obj: UploadCoursesService,private obj_payment_service:PaymentmethodsService, private obj2: CourseCheckoutService, private global: GlobalService, private formBuilder: FormBuilder ) {
 
