@@ -22,6 +22,11 @@ export class LoginService {
   users_id;
   id;
   jwtHelper: JwtHelper = new JwtHelper();
+  login_authenticate(username) {
+    return this._http2.post(Config.api +'users/isactivate/', {
+        'username': username
+    }).map((res: Response) => res.json())
+}
 
   loged_in(username: any, pass: any, returnUrl: any) {
     return this._http2.post(Config.api + 'login', {'username': username, 'password': pass})
