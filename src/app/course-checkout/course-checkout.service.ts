@@ -41,60 +41,101 @@ export class CourseCheckoutService {
   }
 
 
-  add_payment(cardNumber, expirationdate, cardcod, amount) {
+  add_payment(cardNumber, expirationdate, cardcod, amount,id,status) {
    console.log('Chapter Name is ' + amount);
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization').toString());
     }
     headers.append('Content-Type', 'application/json');
-
-    return this._http2.post(Config.api + 'courses/payamount/',
+    if(status==true)
+    {
+      return this._http2.post(Config.api + 'courses/payamount/', 
       {
-        'creditno': cardNumber,
-        'exp': expirationdate,
-        'ccv': cardcod,
-        'amount': amount
-      }, {headers: headers}).map((res: Response) => {
-      if (res) {
-        // console.log('1');
-        if (res.status === 201 || res.status === 200) {
-          const responce_data = res.json();
-          // localStorage.setItem('user_id', responce_data.id);
-          // this.users_id = localStorage.getItem('user_id');
-          return [{status: res.status, json: res}];
-        } else if (res.status === 5300) {
-          // this._nav.navigate(['/login']);
-
-          // localStorage.setItem('conformation', '1');
-          // console.log('ok submited 200');
-          return [{status: res.status, json: res}];
-        } else {
-          // console.log('ok');
+          'id': id,
+        }, {headers: headers}).map((res: Response) => {
+        if (res) {
+          // console.log('1');
+          if (res.status === 201 || res.status === 200) {
+            const responce_data = res.json();
+            // localStorage.setItem('user_id', responce_data.id);
+            // this.users_id = localStorage.getItem('user_id');
+            return [{status: res.status, json: res}];
+          } else if (res.status === 5300) {
+            // this._nav.navigate(['/login']);
+  
+            // localStorage.setItem('conformation', '1');
+            // console.log('ok submited 200');
+            return [{status: res.status, json: res}];
+          } else {
+            // console.log('ok');
+          }
         }
-      }
-    }).catch((error: any) => {
-      // alert(error);
-      if (error.status === 404) {
-        // console.log('ok not submited submit 404');
-        // localStorage.setItem('error', '1');
-        return Observable.throw(new Error(error.status));
-      } else if (error.status === 400) {
-        //    this._nav.navigate(['/pages/accident']);
-        // console.log('ok not submited submit 400');
-        // localStorage.setItem('error', '1');
-        return Observable.throw(new Error(error.status));
-      } else {
-        //  this._nav.navigate(['/pages/accident']);
-        // console.log('ok not submited submit error');
-
-        return Observable.throw(new Error(error.status));
-      }
-    });
+      }).catch((error: any) => {
+        // alert(error);
+        if (error.status === 404) {
+          // console.log('ok not submited submit 404');
+          // localStorage.setItem('error', '1');
+          return Observable.throw(new Error(error.status));
+        } else if (error.status === 400) {
+          //    this._nav.navigate(['/pages/accident']);
+          // console.log('ok not submited submit 400');
+          // localStorage.setItem('error', '1');
+          return Observable.throw(new Error(error.status));
+        } else {
+          //  this._nav.navigate(['/pages/accident']);
+          // console.log('ok not submited submit error');
+  
+          return Observable.throw(new Error(error.status));
+        }
+      });
+    }
+    else{
+      return this._http2.post(Config.api + 'courses/payamount/', 
+      {
+          'ccv': cardcod,
+           'exp': expirationdate,
+          'creditno': cardNumber,
+          'amount': amount
+        }, {headers: headers}).map((res: Response) => {
+        if (res) {
+          // console.log('1');
+          if (res.status === 201 || res.status === 200) {
+            const responce_data = res.json();
+            // localStorage.setItem('user_id', responce_data.id);
+            // this.users_id = localStorage.getItem('user_id');
+            return [{status: res.status, json: res}];
+          } else if (res.status === 5300) {
+            // this._nav.navigate(['/login']);
+  
+            // localStorage.setItem('conformation', '1');
+            // console.log('ok submited 200');
+            return [{status: res.status, json: res}];
+          } else {
+            // console.log('ok');
+          }
+        }
+      }).catch((error: any) => {
+        // alert(error);
+        if (error.status === 404) {
+          // console.log('ok not submited submit 404');
+          // localStorage.setItem('error', '1');
+          return Observable.throw(new Error(error.status));
+        } else if (error.status === 400) {
+          //    this._nav.navigate(['/pages/accident']);
+          // console.log('ok not submited submit 400');
+          // localStorage.setItem('error', '1');
+          return Observable.throw(new Error(error.status));
+        } else {
+          //  this._nav.navigate(['/pages/accident']);
+          // console.log('ok not submited submit error');
+  
+          return Observable.throw(new Error(error.status));
+        }
+      });
+    }
+   
   }
-
-
-
 }
 
 

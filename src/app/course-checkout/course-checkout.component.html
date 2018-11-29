@@ -152,6 +152,37 @@
                   </div>
                 </div>
               </div>
+              <div class="table-responsive margin-top-20">
+                <table class="table payment-table">
+                  <thead>
+                  <tr>
+                    <th>Nick name</th>
+                    <th>Card Number</th>
+                    <th>Expiry Date</th>
+                    <th>Default Credit Card</th>
+                    <th>Set as Defalt</th>
+                  </tr>
+                  </thead>
+                  <tbody *ngFor="let card of res">
+                  <tr>
+                    <td>{{card.nickname}}</td>
+                    <td>{{card.cardNumber}}</td>
+                    <td>{{card.expiryDate}}</td>
+                    <div *ngIf="!card.default; then uncheck else check"></div>
+                    <ng-template #check>
+                      <td><i class="fa fa-check"></i></td>
+                    </ng-template>
+                    <ng-template #uncheck>
+                      <td><i class="fas fa-times"></i></td>
+                    </ng-template>
+                    <td>
+                      <mat-slide-toggle name="atm_details" (click)="setcard(card.ccv,card.expiryDate,card.nickname,card.default,card.id)"
+                          class="py-toggle"></mat-slide-toggle>
+                  </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <!--CREDIT CART PAYMENT END-->
 

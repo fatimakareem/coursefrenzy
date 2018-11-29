@@ -377,7 +377,7 @@ export class HeaderComponent implements OnInit {
       title: 'You have been successfully signed out from CourseFrenzy.',
       width: '512px',
       showConfirmButton: false,
-      timer: 2500
+      timer: 2000
     })
   }
 onClick() {
