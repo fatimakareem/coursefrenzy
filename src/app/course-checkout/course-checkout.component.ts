@@ -46,8 +46,8 @@ export class CourseCheckoutComponent implements OnInit {
   TotalAmountForm = new FormControl('', [
     Validators.required
   ]);
-  endRequest: import("c:/Users/Brain Plow/Documents/GitHub/coursefrenzy/node_modules/rxjs/Subscription").Subscription;
-
+  // endRequest: import("c:/Users/Brain Plow/Documents/GitHub/coursefrenzy/node_modules/rxjs/Subscription").Subscription;
+  endRequest;
   constructor(private obj: UploadCoursesService,private obj_payment_service:PaymentmethodsService, private obj2: CourseCheckoutService, private global: GlobalService, private formBuilder: FormBuilder ) {
 
     this.global.GlobalCartCourses$.subscribe(
@@ -176,7 +176,7 @@ return this.obj_payment_service.showCards().subscribe(Response =>{
   })
 }
 updefault;
-  setcard(ccv,expDate,name,status, var_get_card_id) {
+  setcard(cardno,ccv,expDate,name,status,card_type, var_get_card_id) {
     if (status == false) {
       this.updefault = true;
     }
@@ -184,7 +184,7 @@ updefault;
      {
       this.updefault = false;
     }
-    this.endRequest = this.obj_payment_service.updateCard(ccv,expDate,name,this.updefault,var_get_card_id).subscribe(Data => {
+    this.endRequest = this.obj_payment_service.updateCard(cardno,ccv,expDate,name,this.updefault,card_type,var_get_card_id).subscribe(Data => {
       swal({
         type: 'success',
         title: 'Credit Card Details Are Updated!',

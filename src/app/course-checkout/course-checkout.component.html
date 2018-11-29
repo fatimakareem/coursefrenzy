@@ -35,7 +35,7 @@
                   </a>
                 </div>
                 <div class="col-sm-6 col-xs-8 pd-0">
-                  <div class="col-xs-12 pd-0"><p class="text-left">{{ list.course.name  }}</p></div>
+                  <div class="col-xs-12 pd-0"><p style="text-align: left">{{ list.course.name  }}</p></div>
                   <!--<div class="col-xs-12"><small>Posted Date: {{list.course.postDate | date }}</small></div>-->
                 </div>
                 <!--<div class="col-sm-2 col-xs-3 text-right linethrough">-->
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="col-sm-1 col-xs-1 text-right">
-                  <a><i class="fa fa-trash-o trash-icon" (click)="removeFromCart(i, list.course.id)" data-toggle="tooltip" title="Remove from Cart" ></i></a>
+                  <a><i class="fa fa-trash-o" (click)="removeFromCart(i, list.course.id)" style="font-size:36px; cursor: pointer" data-toggle="tooltip" title="Remove from Cart" ></i></a>
                 </div>
               </div>
               <hr>
@@ -63,10 +63,10 @@
         </div>
 
         <div class="text-center no-items-holder" *ngIf="GlobalCartCourses.length===0">
-          <ul class="list-style-no">
+          <ul style="list-style-type:none">
             <li>
-              <i class="material-icons font-size-100px">shopping_cart</i>
-              <p class="font-size-32">No items in Cart</p>
+              <i class="material-icons" style="font-size:100px!important">shopping_cart</i>
+              <p style="font-size: 32px">No items in Cart</p>
               <button routerLink="/courses" type="button" class="btn btn-primary btn-lg">Add Items</button>
             </li>
           </ul>
@@ -159,7 +159,6 @@
                     <th>Nick name</th>
                     <th>Card Number</th>
                     <th>Expiry Date</th>
-                    <th>Default Credit Card</th>
                     <th>Set as Defalt</th>
                   </tr>
                   </thead>
@@ -168,16 +167,19 @@
                     <td>{{card.nickname}}</td>
                     <td>{{card.cardNumber}}</td>
                     <td>{{card.expiryDate}}</td>
-                    <div *ngIf="!card.default; then uncheck else check"></div>
-                    <ng-template #check>
-                      <td><i class="fa fa-check"></i></td>
-                    </ng-template>
-                    <ng-template #uncheck>
-                      <td><i class="fas fa-times"></i></td>
-                    </ng-template>
                     <td>
-                      <mat-slide-toggle name="atm_details" (click)="setcard(card.ccv,card.expiryDate,card.nickname,card.default,card.id)"
+                      <div *ngIf="card.default == true" >
+   
+                          <mat-slide-toggle  [checked]="true" name="atm_details" (click)="setcard(card.cardNumber,card.ccv,card.expiryDate,card.nickname,card.default,card.card_type,card.id)"
                           class="py-toggle"></mat-slide-toggle>
+                      </div>
+                      <div *ngIf="card.default != true" >
+   
+                          <mat-slide-toggle [checked]="false" name="atm_details" (click)="setcard(card.cardNumber,card.ccv,card.expiryDate,card.nickname,card.default,card.card_type,card.id)"
+                          class="py-toggle"></mat-slide-toggle>
+                      </div>
+                    
+                   
                   </td>
                   </tr>
                   </tbody>
