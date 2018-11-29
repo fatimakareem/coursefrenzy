@@ -43,7 +43,7 @@ export class ChangeForgetPasswordComponent implements OnInit {
       .params
       .subscribe(params => {
         this.link = params.link || '';
-        alert(this.link);
+        // alert(this.link);
       });
   }
   ngOnDestroy() {
@@ -57,9 +57,9 @@ export class ChangeForgetPasswordComponent implements OnInit {
     if(this.model.password!=this.model.password2){
       ChangeForgetPasswordComponent.PasswordMissMatch();
     }
-    alert("this.model.password "+this.model.password);
-    alert("this.model.password2 "+this.model.password2);
-    alert("this.link "+this.link);
+    // alert("this.model.password "+this.model.password);
+    // alert("this.model.password2 "+this.model.password2);
+    // alert("this.link "+this.link);
     if(this.link!=''){
       this.obj.change_password(this.model.password, this.model.password2, this.link).subscribe(
         data => {
@@ -78,7 +78,8 @@ export class ChangeForgetPasswordComponent implements OnInit {
     swal({
       type: 'success',
       title: 'Congratulations! <br> Your CourseFrenzy Account Password Changed Successfully! ',
-      width: '512px'
+      width: '512px',
+      timer: 2000
     })
   }
 

@@ -3,10 +3,11 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {CourseCheckoutComponent} from "./course-checkout.component";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
-import {MatInputModule} from '@angular/material';
+import {MatInputModule, MatSlideToggleModule} from '@angular/material';
 import {LoaderModule} from "../loader/loader.module";
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { PaymentmethodsService } from '../paymentmethods/paymentmethods.service';
 const checkoutRoutes: Routes = [
   { path: '', component: CourseCheckoutComponent }
 ];
@@ -23,13 +24,14 @@ const checkoutRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatSlideToggleModule,
     MatSelectModule,
     RouterModule.forChild(checkoutRoutes),
     LoaderModule,
     MatDatepickerModule,
   ],
 
-  providers: [],
+  providers: [PaymentmethodsService],
   exports: [],
   entryComponents: []
 

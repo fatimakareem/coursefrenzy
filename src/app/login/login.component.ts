@@ -315,10 +315,8 @@ export class  ResetPasswordComponent {
   }
 
   onSubmit(f: NgForm) {
-
     this.obj2.check_email_unique(this.model.email).subscribe(Response => this.emailResponse = Response);
-
-    if (this.emailResponse !== false) {
+    if (this.emailResponse == false) {
       this.obj.reset_password(this.model.email).subscribe(
         data => {
           // console.log(data);
@@ -339,6 +337,7 @@ export class  ResetPasswordComponent {
         type: 'success',
         title: 'Check Email! <br> Link sent on Email!',
         width: '512px',
+        timer:2000
       })
   }
 
@@ -347,6 +346,7 @@ export class  ResetPasswordComponent {
       type: 'error',
       title: 'Oops <br> No account registered with this email',
       width: '512px',
+      timer:2000
     })
   }
 }
