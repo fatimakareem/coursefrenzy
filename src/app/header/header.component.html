@@ -178,10 +178,10 @@
   
                   <li class="cartmenu" [ngStyle]="{'display':Logedin === '1' ? 'inline-block' : 'none' }">
                     <a data-toggle="dropdown">
-                      <i class="fas fa-bell color-custom" ></i> <sup *ngIf="notify">{{notify.length}}</sup>
+                      <i class="fas fa-bell color-custom" ></i> <sup *ngIf="notify">{{notify.unread}}</sup>
                     </a>
                     <ul id="notifications"  class="dropdown-menu dropdown-menu-right notifications chat" >
-                      <li class="left clearfix" *ngFor="let item of notify">
+                      <li class="left clearfix" *ngFor="let item of notify?.notifications">
                         <span class="fa fa-times time"><!--<small class="pull-right text-muted">12 mins ago</small>--></span>
                         <span class="chat-img pull-left">
                           <!--<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />-->
