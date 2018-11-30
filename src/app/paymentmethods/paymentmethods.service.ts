@@ -47,7 +47,14 @@ export class PaymentmethodsService {
     return this.http.get(Config.api + 'courses/editdeletecard/' + id, { headers: headers }).map((response: Response) => response.json());
   }
 
-  updateCard(ccv, expiryDate, cardnickname, defaultCheck, id) {
+  updateCard(cardno,ccv, expiryDate, cardnickname, defaultCheck,card_type, id) {
+    alert(cardno);
+    alert(ccv);
+    alert(expiryDate);
+    alert(cardnickname);
+    alert(defaultCheck);
+    alert(card_type);
+    alert(id);
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
@@ -55,11 +62,13 @@ export class PaymentmethodsService {
     headers.append('Content-Type', 'application/json');
     return this.http.put(Config.api + 'courses/editdeletecard/' + id,
       JSON.stringify({
-        // "cardNumber": cardno,
+        
+        "cardNumber": cardno,
         "ccv": ccv,
         "expiryDate": expiryDate,
         "nickname": cardnickname,
-        "default": defaultCheck
+        "default": defaultCheck,
+        "card_type":card_type
       }),
       { headers: headers }).map((response: Response) => response.json());
   }

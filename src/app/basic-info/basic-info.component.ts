@@ -22,6 +22,10 @@ export class BasicInfoComponent implements OnInit {
   public ProfileData: any;
   private loaded = false;
   ngOnInit() {
+    this.user_info();
+  }
+  user_info()
+  {
     this.obj.get_profile().subscribe(response => {
       this.ProfileData = response;
       this.loaded = true;
@@ -98,6 +102,7 @@ export class BasicInfoComponent implements OnInit {
       , this.model.facebook, this.model.linkedIn, this.model.youtube).subscribe(
       data => {
         BasicInfoComponent.ProfileSuccess();
+        this.user_info();
       },
       error => {
         BasicInfoComponent.ProfileFailure();

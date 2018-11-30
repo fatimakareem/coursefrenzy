@@ -18,13 +18,15 @@ import * as moment from 'moment';
 })
 export class PaymentmethodsComponent implements OnInit {
   var_type_atm=new FormControl();
+  edit_var_type_atm= new FormControl();
   cardtype;
+  var_get_edit_card_type;
   public show: boolean = false;
   check_value: boolean = false;
   ccv1: boolean = false;
   ccv4;
   ccv;
-  ccv2;
+  edit_ccv2;
   cardnumber4;
   cardnumber;
   var_box_check: boolean = false;
@@ -76,14 +78,26 @@ export class PaymentmethodsComponent implements OnInit {
   });
 
   updateForm = new FormGroup({
-    // cardnumber2: new FormControl('', [
-    //   Validators.minLength(16),
-    //   Validators.maxLength(16),
-    //   Validators.required,
-    //   Validators.pattern('^[0-9]*$')
-    // ]),
-    ccv2: new FormControl('', [
+    edit_cardnumber: new FormControl('', [
+      Validators.minLength(16),
+      Validators.maxLength(16),
+      Validators.required,
+      Validators.pattern('^[0-9]*$')
+    ]),
+    edit_cardnumber2: new FormControl('', [
+      Validators.minLength(15),
+      Validators.maxLength(15),
+      Validators.required,
+      Validators.pattern('^[0-9]*$')
+    ]),
+    edit_ccv3:new FormControl('',[
       Validators.minLength(3),
+      Validators.maxLength(3),
+      Validators.required,
+      Validators.pattern('^[0-9]*$')
+    ]),
+    edit_ccv2: new FormControl('', [
+      Validators.minLength(4),
       Validators.maxLength(4),
       Validators.required,
       Validators.pattern('^[0-9]*$')
@@ -104,11 +118,18 @@ export class PaymentmethodsComponent implements OnInit {
   currentProducts;
   private sub: Subscription;
   flipclass = 'credit-card-box';
+  edit_cardnumber;
+  edit_cardnumber2;
+  edit_ccv3;
   constructor(private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private sg: SimpleGlobal, private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     this.cardnumber = true;
     this.cardnumber4 = false;
     this.ccv = true;
     this.ccv4 = false;
+    // this.edit_cardnumber = false;
+    // this.edit_cardnumber2 = false;
+    // this.edit_ccv2 = false;
+    // this.edit_ccv3 = false;
   }
 
   ngOnInit() {
@@ -122,7 +143,7 @@ export class PaymentmethodsComponent implements OnInit {
       this.cardnumber = false;
       this.form.controls.cardnumber.reset();
       this.cardnumber4 = true;
-      this.ccv = false;
+      this.ccv  = false;
       this.form.controls.ccv.reset();
       this.ccv4 = true;
     }
@@ -138,6 +159,7 @@ export class PaymentmethodsComponent implements OnInit {
   }
   cardid;
   card;
+  var_get_type;
   getSingleCard(id) {
     this.serv.singleCard(id).subscribe(Data => {
       this.card = Data;
@@ -145,63 +167,158 @@ export class PaymentmethodsComponent implements OnInit {
       // expDate = expDate.substring(0, expDate.length - 3);
       expDate = moment(expDate).format('MM/YYYY');
       this.cardid = this.card.id;
+      if(this.card.card_type =="American Express")
+      {
+        this.var_get_type=this.card.card_type;
+        this.edit_cardnumber = true;
+        this.edit_cardnumber2 = false;
+        this.edit_ccv2 = true;
+        this.edit_ccv3 = false;
+        this.updateForm.controls['var_edit_type_atm'].setValue(this.card.card_type);
+        this.updateForm.controls['edit_ccv2'].setValue(this.card.ccv);
+        this.updateForm.controls['edit_cardnumber'].setValue(this.card.cardNumber);
+      }
+      else
+      {
+        this.var_get_type=this.card.card_type;
+        this.edit_cardnumber = false;
+        this.edit_cardnumber2 = true;
+        this.edit_ccv2 = false;
+        this.edit_ccv3 = true;
+        this.updateForm.controls['var_edit_type_atm'].setValue(this.card.card_type);
+        this.updateForm.controls['edit_ccv3'].setValue(this.card.ccv);
+        this.updateForm.controls['edit_cardnumber2'].setValue(this.card.cardNumber);
+      }
+
       this.updateForm.controls['cardnickname2'].setValue(this.card.nickname);
       this.updateForm.controls['expirydate2'].setValue(expDate);
       this.updateForm.controls['check2'].setValue(this.card.default);
-      this.updateForm.controls['ccv2'].setValue(this.card.ccv);
-    })
+  
+    }) 
   }
-
+  Edit_Show_inputs(edit_var_type_atm)
+  {
+      
+    if (edit_var_type_atm == "American Express") {
+      this.var_get_edit_card_type = this.edit_var_type_atm;
+      this.edit_cardnumber2 = true;
+      // this.updateForm.controls.edit_cardnumber2.reset();
+      this.edit_cardnumber  = false;
+      this.edit_ccv3  = false;
+      // this.updateForm.controls.edit_ccv3.reset();
+      this.edit_ccv2  = true;
+    }
+    else {
+      this.var_get_edit_card_type = this.edit_var_type_atm; 
+      this.edit_cardnumber = true;
+      // this.updateForm.controls.edit_cardnumber.reset();
+      this.edit_cardnumber2  = false;
+      this.edit_ccv2   = false;
+      // this.updateForm.controls.edit_ccv2.reset();
+      this.edit_ccv3 = true;
+    }
+  }
   updateSingleCard(id) {
-    console.log('dasd', this.cardid);
     // this.date = this.updateForm.value['expirydate2'];
-    this.date = moment(this.date).format('YYYY-MM') + '-01';
-
-    if (this.updateForm.valid) {
-      this.serv.updateCard(this.updateForm.value['ccv2'], this.date, this.updateForm.value['cardnickname2'], this.updateForm.value['check2'], id).subscribe(Data => {
+    // this.date = moment(this.date).format('YYYY-MM') + '-01';
+    alert(this.var_get_type);
+    alert(this.var_get_edit_card_type);
+    if(this.var_get_type=="American Express" ||this.var_get_edit_card_type=="American Express" )
+    {
+      if (this.updateForm.controls.edit_cardnumber2.valid && this.updateForm.controls.edit_ccv2.valid && 
+        this.updateForm.controls.check2.valid && this.updateForm.controls.cardnickname2.valid) {
+        this.serv.updateCard(this.updateForm.value['edit_cardnumber2'],this.updateForm.value['edit_ccv2'],this.updateForm.value['expirydate2'],this.updateForm.value['check2'], this.updateForm.value['cardnickname2'],this.var_get_type, id).subscribe(Data => {
+          swal({
+            type: 'success',
+            title: 'Credit card details are updated!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.getCards();
+  
+        },
+          error => {
+            if (error.status == 400) {
+              swal({
+                type: 'error',
+                title: 'Credit card details are not correct!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else if (error.status == 500) {
+              swal(
+                'Sorry',
+                'Server is under maintenance!',
+                'error'
+              )
+            }
+            else {
+              swal(
+                'Sorry',
+                'Some thing went worrng!',
+                'error'
+              )
+            }
+          })
+      }
+      else {
         swal({
-          type: 'success',
-          title: 'Credit card details are updated!',
+          type: 'error',
+          title: 'Credit card details are not correct!',
           showConfirmButton: false,
           timer: 1500
         })
-        this.getCards();
-
-      },
-        error => {
-          if (error.status == 400) {
-            swal({
-              type: 'error',
-              title: 'Credit card details are not correct!',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          }
-          else if (error.status == 500) {
-            swal(
-              'Sorry',
-              'Server is under maintenance!',
-              'error'
-            )
-          }
-          else {
-            swal(
-              'Sorry',
-              'Some thing went worrng!',
-              'error'
-            )
-          }
+      }
+    }
+    else
+    {
+      if (this.updateForm.controls.edit_cardnumber.valid && this.updateForm.controls.edit_ccv3.valid && 
+        this.updateForm.controls.check2.valid && this.updateForm.controls.cardnickname2.valid) {
+        this.serv.updateCard(this.updateForm.value['edit_cardnumber'],this.updateForm.value['edit_ccv3'], this.updateForm.value['expirydate2'],this.updateForm.value['check2'], this.updateForm.value['cardnickname2'],this.var_get_type, id).subscribe(Data => {
+          swal({
+            type: 'success',
+            title: 'Credit card details are updated!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.getCards();
+  
+        },
+          error => {
+            if (error.status == 400) {
+              swal({
+                type: 'error',
+                title: 'Credit card details are not correct!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else if (error.status == 500) {
+              swal(
+                'Sorry',
+                'Server is under maintenance!',
+                'error'
+              )
+            }
+            else {
+              swal(
+                'Sorry',
+                'Some thing went worrng!',
+                'error'
+              )
+            }
+          })
+      }
+      else {
+        swal({
+          type: 'error',
+          title: 'Credit card details are not correct!',
+          showConfirmButton: false,
+          timer: 1500
         })
+      }
     }
-    else {
-      swal({
-        type: 'error',
-        title: 'Credit card details are not correct!',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
-
   }
 
   deleteSingleCard(id) {
@@ -242,8 +359,6 @@ export class PaymentmethodsComponent implements OnInit {
 
   date;
   add() {
-  // this.date = moment(this.date).format('YYYY-MM') + '-01';
-  alert(this.cardtype);
     if(this.cardtype == "American Express")
     { 
       if (this.form.controls.cardnumber4.valid && this.form.controls.ccv4.valid &&
