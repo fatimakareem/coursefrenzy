@@ -42,11 +42,19 @@
             </mat-option>
           </mat-select>
         </div>
-        <div class="col-sm-5 offset-2">
+        <div class="col-sm-5 offset-2" *ngIf="SubCategories">
           <label>Select Sub Category:</label>
           <mat-select class="form-control" [(ngModel)]="model.sub_category" name="sub_category" #sub_category="ngModel" required>
-            <mat-option *ngFor=" let caty of SubCategories" [value]="caty.id">
+            <mat-option *ngFor=" let caty of SubCategories" [value]="caty.id" (click)="nestedsubcat(caty.id)">
               {{ caty.name }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col-sm-5 offset-2" *ngIf="nestedSubCategories">
+          <label>Select Nested Sub Category:</label>
+          <mat-select class="form-control" [(ngModel)]="model.nestedsub_category" name="nestedsub_category" #nestedsub_category="ngModel" required>
+            <mat-option *ngFor=" let nested of nestedSubCategories" [value]="nested.id">
+              {{ nested.name }}
             </mat-option>
           </mat-select>
         </div>
