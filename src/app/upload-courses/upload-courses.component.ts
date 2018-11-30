@@ -276,8 +276,9 @@ export class AddCourseDialogComponent implements OnInit {
   skill: string;
   public Categories;
   public SubCategories;
+  nestedSubCategories;
   public loaded = false;
-
+  nestedsub_category;
   Auction = true;
   file: any;
   file1: any;
@@ -426,7 +427,11 @@ export class AddCourseDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close(1);
   }
-
+  nestedsubcat(id){
+    this.obj2.get_nestedcategories(id).subscribe(response => {
+      this.nestedSubCategories = response;
+    });
+  }
   onSubmit(f: NgForm) {
     // alert(this.model.EditedForm);
     // if(Number(this.model.Discount) > Number(this.model.Price)) {
@@ -474,10 +479,10 @@ export class AddCourseDialogComponent implements OnInit {
     }
     // var bid_date = moment(date).add(this.end_time,'days');
 
-    console.log( this.model.Name, this.model.Price, this.Dic,  this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, curent_date , new_date , this.Check , this.model.ReservedPrice,this.Days);
+    console.log( this.model.Name, this.model.Price, this.Dic,  this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, curent_date , new_date , this.Check , this.model.ReservedPrice,this.Days,this.model.nestedsub_category);
 
 
-    this.obj.upload_course(this.model.Name, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, this.Date, new_date, this.Check, this.model.ReservedPrice, this.Days).subscribe(
+    this.obj.upload_course(this.model.Name, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, this.Date, new_date, this.Check, this.model.ReservedPrice, this.Days,this.model.nestedsub_category).subscribe(
       data => {
         // console.log(data[0]['json'].json());
         // this.dialogRef.close(data[0]['json'].json());
@@ -621,7 +626,9 @@ export class AddCourseDialogComponent implements OnInit {
     this.input = new FormData();
     const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
     const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-    this.input.append('fileToUpload', target.files[0]);
+    this.input.append('fileToUpload', target.files[0], 205, 114);
+    // alert(this.input)
+    
   }
 }
 

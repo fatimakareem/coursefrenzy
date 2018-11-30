@@ -17,8 +17,9 @@ import * as moment from 'moment';
   styleUrls: ['./paymentmethods.component.scss']
 })
 export class PaymentmethodsComponent implements OnInit {
-  var_type_atm=new FormControl();
-  edit_var_type_atm= new FormControl();
+  public mask = [/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  var_type_atm = new FormControl();
+  edit_var_type_atm = new FormControl();
   cardtype;
   var_get_edit_card_type;
   public show: boolean = false;
@@ -90,7 +91,7 @@ export class PaymentmethodsComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[0-9]*$')
     ]),
-    edit_ccv3:new FormControl('',[
+    edit_ccv3: new FormControl('', [
       Validators.minLength(3),
       Validators.maxLength(3),
       Validators.required,
@@ -137,13 +138,13 @@ export class PaymentmethodsComponent implements OnInit {
     this.getCards();
   }
   ShowButton(var_type_atm) {
-   
+
     if (var_type_atm == "American Express") {
       this.cardtype = var_type_atm;
       this.cardnumber = false;
       this.form.controls.cardnumber.reset();
       this.cardnumber4 = true;
-      this.ccv  = false;
+      this.ccv = false;
       this.form.controls.ccv.reset();
       this.ccv4 = true;
     }
@@ -165,11 +166,12 @@ export class PaymentmethodsComponent implements OnInit {
       this.card = Data;
       let expDate = this.card.expiryDate;
       // expDate = expDate.substring(0, expDate.length - 3);
-      expDate = moment(expDate).format('MM/YYYY');
+      // expDate = moment(expDate).format('MM/YYYY');
+  
       this.cardid = this.card.id;
-      if(this.card.card_type =="American Express")
-      {
-        this.var_get_type=this.card.card_type;
+      alert(this.cardid);
+      if (this.card.card_type == "American Express") {
+        this.var_get_type = this.card.card_type;
         this.edit_cardnumber = true;
         this.edit_cardnumber2 = false;
         this.edit_ccv2 = true;
@@ -178,9 +180,8 @@ export class PaymentmethodsComponent implements OnInit {
         this.updateForm.controls['edit_ccv2'].setValue(this.card.ccv);
         this.updateForm.controls['edit_cardnumber'].setValue(this.card.cardNumber);
       }
-      else
-      {
-        this.var_get_type=this.card.card_type;
+      else {
+        this.var_get_type = this.card.card_type;
         this.edit_cardnumber = false;
         this.edit_cardnumber2 = true;
         this.edit_ccv2 = false;
@@ -193,41 +194,40 @@ export class PaymentmethodsComponent implements OnInit {
       this.updateForm.controls['cardnickname2'].setValue(this.card.nickname);
       this.updateForm.controls['expirydate2'].setValue(expDate);
       this.updateForm.controls['check2'].setValue(this.card.default);
-  
-    }) 
+
+    })
   }
-  Edit_Show_inputs(edit_var_type_atm)
-  {
-      
+  Edit_Show_inputs(edit_var_type_atm) {
     if (edit_var_type_atm == "American Express") {
-      this.var_get_edit_card_type = this.edit_var_type_atm;
+      alert(edit_var_type_atm);
+      this.var_get_type = edit_var_type_atm;
       this.edit_cardnumber2 = true;
       // this.updateForm.controls.edit_cardnumber2.reset();
-      this.edit_cardnumber  = false;
-      this.edit_ccv3  = false;
+      this.edit_cardnumber = false;
+      this.edit_ccv3 = false;
       // this.updateForm.controls.edit_ccv3.reset();
-      this.edit_ccv2  = true;
+      this.edit_ccv2 = true;
     }
     else {
-      this.var_get_edit_card_type = this.edit_var_type_atm; 
+      alert(edit_var_type_atm);
+      this.var_get_type = edit_var_type_atm;
       this.edit_cardnumber = true;
       // this.updateForm.controls.edit_cardnumber.reset();
-      this.edit_cardnumber2  = false;
-      this.edit_ccv2   = false;
+      this.edit_cardnumber2 = false;
+      this.edit_ccv2 = false;
       // this.updateForm.controls.edit_ccv2.reset();
       this.edit_ccv3 = true;
     }
   }
   updateSingleCard(id) {
+
     // this.date = this.updateForm.value['expirydate2'];
     // this.date = moment(this.date).format('YYYY-MM') + '-01';
-    alert(this.var_get_type);
-    alert(this.var_get_edit_card_type);
-    if(this.var_get_type=="American Express" ||this.var_get_edit_card_type=="American Express" )
-    {
-      if (this.updateForm.controls.edit_cardnumber2.valid && this.updateForm.controls.edit_ccv2.valid && 
+
+    if (this.var_get_type == "American Express") {
+      if (this.updateForm.controls.edit_cardnumber2.valid && this.updateForm.controls.edit_ccv2.valid &&
         this.updateForm.controls.check2.valid && this.updateForm.controls.cardnickname2.valid) {
-        this.serv.updateCard(this.updateForm.value['edit_cardnumber2'],this.updateForm.value['edit_ccv2'],this.updateForm.value['expirydate2'],this.updateForm.value['check2'], this.updateForm.value['cardnickname2'],this.var_get_type, id).subscribe(Data => {
+        this.serv.updateCard(this.updateForm.value['edit_cardnumber2'], this.updateForm.value['edit_ccv2'], this.updateForm.value['expirydate2'], this.updateForm.value['check2'], this.updateForm.value['cardnickname2'], this.var_get_type, this.cardid).subscribe(Data => {
           swal({
             type: 'success',
             title: 'Credit card details are updated!',
@@ -235,7 +235,7 @@ export class PaymentmethodsComponent implements OnInit {
             timer: 1500
           })
           this.getCards();
-  
+
         },
           error => {
             if (error.status == 400) {
@@ -271,11 +271,10 @@ export class PaymentmethodsComponent implements OnInit {
         })
       }
     }
-    else
-    {
-      if (this.updateForm.controls.edit_cardnumber.valid && this.updateForm.controls.edit_ccv3.valid && 
+    else {
+      if (this.updateForm.controls.edit_cardnumber.valid && this.updateForm.controls.edit_ccv3.valid &&
         this.updateForm.controls.check2.valid && this.updateForm.controls.cardnickname2.valid) {
-        this.serv.updateCard(this.updateForm.value['edit_cardnumber'],this.updateForm.value['edit_ccv3'], this.updateForm.value['expirydate2'],this.updateForm.value['check2'], this.updateForm.value['cardnickname2'],this.var_get_type, id).subscribe(Data => {
+        this.serv.updateCard(this.updateForm.value['edit_cardnumber'], this.updateForm.value['edit_ccv3'], this.updateForm.value['expirydate2'], this.updateForm.value['check2'], this.updateForm.value['cardnickname2'], this.var_get_type, id).subscribe(Data => {
           swal({
             type: 'success',
             title: 'Credit card details are updated!',
@@ -283,7 +282,7 @@ export class PaymentmethodsComponent implements OnInit {
             timer: 1500
           })
           this.getCards();
-  
+
         },
           error => {
             if (error.status == 400) {
@@ -359,14 +358,13 @@ export class PaymentmethodsComponent implements OnInit {
 
   date;
   add() {
-    if(this.cardtype == "American Express")
-    { 
+    if (this.cardtype == "American Express") {
       if (this.form.controls.cardnumber4.valid && this.form.controls.ccv4.valid &&
         this.form.controls.cardnickname.valid && this.form.controls.expirydate.valid) {
         // this.date = moment(this.date).format('YYYY-MM') + '-01';
         this.date = this.form.value['expirydate'];
-        this.serv.addCard(this.form.value['cardnumber4'], this.form.value['ccv4'], this.date, this.form.value['cardnickname'],this.cardtype, this.form.value['check']).subscribe(Data => {
-  
+        this.serv.addCard(this.form.value['cardnumber4'], this.form.value['ccv4'], this.date, this.form.value['cardnickname'], this.cardtype, this.form.value['check']).subscribe(Data => {
+
           console.log('Date Exp', this.date);
           swal({
             type: 'success',
@@ -418,17 +416,16 @@ export class PaymentmethodsComponent implements OnInit {
         })
       }
     }
-    else
-    {
-   
+    else {
+
       if (this.form.controls.cardnumber.valid && this.form.controls.ccv.valid &&
         this.form.controls.cardnickname.valid && this.form.controls.expirydate.valid) {
-      
-          this.date = this.form.value['expirydate'];
+
+        this.date = this.form.value['expirydate'];
         // this.date = moment(this.date).format('YYYY-MM') + '-01';
-  
-        this.serv.addCard(this.form.value['cardnumber'], this.form.value['ccv'], this.date, this.form.value['cardnickname'],this.cardtype, this.form.value['check']).subscribe(Data => {
-  
+
+        this.serv.addCard(this.form.value['cardnumber'], this.form.value['ccv'], this.date, this.form.value['cardnickname'], this.cardtype, this.form.value['check']).subscribe(Data => {
+
           console.log('Date Exp', this.date);
           swal({
             type: 'success',
@@ -479,7 +476,7 @@ export class PaymentmethodsComponent implements OnInit {
           timer: 1500,
         })
       }
-    } 
+    }
   }
   res;
   getCards() {

@@ -41,6 +41,7 @@
     "angular2-moment": "^1.9.0",
     "angular2-recaptcha": "^0.6.0",
     "angular2-simple-countdown": "0.0.6",
+    "angular2-text-mask": "^9.0.0",
     "angular2-websocket-service": "^0.5.3",
     "angular4-social-login": "^1.1.1",
     "angularcli-star-rating": "^0.2.5",

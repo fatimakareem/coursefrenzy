@@ -82,7 +82,8 @@ export class BasicInfoComponent implements OnInit {
     swal({
       type: 'success',
       title: 'Profile Updated Successfully! <br> You can Re-edit Your Profile any Time.',
-      width: '512px'
+      width: '512px',
+      timer: 2500
     })
   }
 

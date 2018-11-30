@@ -154,7 +154,7 @@
           </mat-form-field>
 
           <mat-form-field class="margin-top-30">
-            <input matInput placeholder="Expiry Date (MM/YYYY)" type="text" formControlName="expirydate">
+            <input matInput placeholder="Expiry Date (MM/YYYY)" [textMask]="{mask: mask}" type="text" formControlName="expirydate">
             <mat-error *ngIf="form.controls.expirydate.touched && form.controls.expirydate.invalid">
               <mat-error *ngIf="form.controls.expirydate.errors.required">
                 Expiry date cannot be empty
@@ -334,7 +334,7 @@
           </mat-form-field>
 
           <mat-form-field class="margin-top-30">
-            <input matInput placeholder="Expiry Date (MM/YYYY)" type="text" formControlName="expirydate2">
+            <input matInput placeholder="Expiry Date (MM/YYYY)" [textMask]="{mask: mask}" type="text" formControlName="expirydate2">
             <mat-error *ngIf="updateForm.controls.expirydate2.touched && updateForm.controls.expirydate2.invalid">
               <mat-error *ngIf="updateForm.controls.expirydate2.errors.required">
                 Expiry date cannot be empty

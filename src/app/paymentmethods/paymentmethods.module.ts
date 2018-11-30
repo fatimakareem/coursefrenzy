@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material';
 import {MatRadioModule} from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 import { MomentModule } from 'ngx-moment';
-
+import { TextMaskModule } from 'angular2-text-mask';
 const route: Routes = [
   { path: '', component: PaymentmethodsComponent }
 ]
@@ -27,7 +27,8 @@ const route: Routes = [
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
-    MomentModule
+    MomentModule,
+    TextMaskModule
 
   ],
   declarations: [PaymentmethodsComponent],

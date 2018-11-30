@@ -18,6 +18,9 @@ export class HeaderService {
   get_categories() {
     return this._http2.get( Config.api + 'courses/allcat/').map((response: Response) => response.json());
   }
+  get_nestedcategories(subcat_id) {
+    return this._http2.get( Config.api + 'courses/nestedsubcat/'+ subcat_id + '/').map((response: Response) => response.json());
+  }
   get_single_category(cat_id) {
     return this._http2.get( Config.api + 'courses/get_single_cat/'+cat_id+'').map((response: Response) => response.json());
   }

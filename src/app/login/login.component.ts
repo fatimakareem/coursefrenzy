@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
       // text: 'Welcome to CourseFrenzy!',
       showConfirmButton: false,
       width: '512px',
-      timer: 1000
+      timer: 2000
     });
   }
 
@@ -125,7 +125,7 @@ export class LoginComponent implements OnInit {
       type: 'error',
       title: 'Failed to Login <br> Incorrect Credentials!',
       width: '512px',
-      timer: 5000
+      timer: 2000
     })
   }
 
