@@ -61,12 +61,12 @@
 
 
       <mat-form-field class="example-full-width mat-size">
-        <input type="text" matInput placeholder=" Enter Price ($)" [(ngModel)]="model.Price" name="Price" id="Price" #Price="ngModel" required>
+        <input type="text" matInput placeholder=" Enter Price ($)" [(ngModel)]="model.Price" name="Price" id="Price" pattern="[0-9]" #Price="ngModel" required>
         <mat-error *ngIf="Price.hasError('required')">
           Price is <strong>required</strong>
         </mat-error>
         <mat-error *ngIf="Price.hasError('pattern')">
-          Digits (or dots) are allowed only
+          Digits are allowed only
         </mat-error>
       </mat-form-field>
 
@@ -115,7 +115,7 @@
 
       <mat-form-field *ngIf="!isBids" class="example-full-width mat-size">
         <input matInput type="text"
-               placeholder="Starting Bid Price" name="SalePrice" id="SalePrice" #SalePrice="ngModel" [(ngModel)]="model.SalePrice" required>
+               placeholder="Starting Bid Price" name="SalePrice" pattern="[0-9]"  id="SalePrice" #SalePrice="ngModel" [(ngModel)]="model.SalePrice" required>
         <mat-error *ngIf="SalePrice.hasError('required')">
           SalePrice is <strong>required</strong>
         </mat-error>

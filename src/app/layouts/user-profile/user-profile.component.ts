@@ -87,13 +87,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.obj2.get_profile().subscribe(response => {
-      this.ProfileData = response;
-      this.loaded = true;
-      this.model.profilePhoto = this.ProfileData.profilePhoto;
-
-    });
+    this.fun_get_user_profile_pic();
+   
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
@@ -113,7 +108,14 @@ export class UserProfileComponent implements OnInit {
       });
   }
 
-
+fun_get_user_profile_pic()
+{
+  this.obj2.get_profile().subscribe(response => {
+    this.ProfileData = response;
+    this.loaded = true;
+    this.model.profilePhoto = this.ProfileData.profilePhoto;
+  });
+}
   openChat() {
     if (this.chatVar === 1) {
       this.chatVar = 0;
