@@ -48,12 +48,13 @@
 
                   </ul>
                 </div>
-                <div  class=" col-md-5 col-sm-5 col-lg-5 col-xs-5 ">  {{ data?.course?.actual_price | currency:'USD' }} </div>
+                <div  class=" col-md-5 col-sm-5 col-lg-5 col-xs-5 " *ngIf="data?.course?.actual_price!=0">  {{ data?.course?.actual_price | currency:'USD' }} </div>
+                <div  class=" col-md-5 col-sm-5 col-lg-5 col-xs-5 " *ngIf="data?.course?.actual_price<=0">  Free</div>
               </div>
               <div class="row">
                 <a routerLink="/user-profile/{{data?.course?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name" class="col-md-9 col-sm-7 col-lg-9 col-xs-7 product-list__category">{{ data?.course?.user_id.first_name }} {{ data?.course?.user_id.last_name }} </a>
                 <!--<div *ngIf="data?.course?.discounted_price>0" class="col-md-3 col-sm-5 col-lg-3 col-xs-5 hoverfont ">${{ data?.course?.discounted_price }}</div>-->
-                <div *ngIf="data?.course?.actual_price<=0" class="col-md-3 col-sm-5 col-lg-3 col-xs-5 hoverfont ">Free</div>
+                <!-- <div *ngIf="data?.course?.actual_price<=0" class="col-md-3 col-sm-5 col-lg-3 col-xs-5 hoverfont ">Free</div> -->
               </div>
             </div>
             <div class="product-list__item-info">

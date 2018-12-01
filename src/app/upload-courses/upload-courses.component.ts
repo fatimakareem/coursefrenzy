@@ -627,7 +627,7 @@ export class AddCourseDialogComponent implements OnInit {
     const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
     const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
     this.input.append('fileToUpload', target.files[0], 205, 114);
-    // alert(this.input)
+    console.log(this.input)
     
   }
 }
