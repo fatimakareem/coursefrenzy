@@ -19,11 +19,7 @@ export class UploadCoursesService {
   constructor(private http: Http, private _http2: HttpService, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object) {
   }
   users_id;
-  upload_course( Name, Price, course_image, skill, category, sub_category, Sales, SaleStatus, accept, BidStatus1, initial_amount, start_time , end_time , IsReserved , ReservedPrice,Auction,nestedsub_category) {
-    // console.log(Name);
-    // console.log(Price);
-    // console.log(Discount);
-
+  upload_course( Name, Price, course_image, skill, category, sub_category, Minimum,Maximum,Sales, SaleStatus, accept, BidStatus1, initial_amount, start_time , end_time , IsReserved , ReservedPrice,Auction,nestedsub_category) {
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
@@ -31,7 +27,7 @@ export class UploadCoursesService {
     headers.append('Content-Type', 'application/json');
     return this._http2.post(  Config.api + 'courses/postcourse/',
       {
-
+          
         'name': Name,
         'actual_price': Price,
         'course_image': course_image,
@@ -39,6 +35,8 @@ export class UploadCoursesService {
         'Categories': category,
         'SubCategory': sub_category,
         'nestedSubCategory':nestedsub_category,
+        'min_amount':Minimum,
+        'max_amount':Maximum,
         'date_durationforsale': Sales,
         'sale_status': SaleStatus,
         'accept_offer': accept,
@@ -95,7 +93,7 @@ export class UploadCoursesService {
     });
   }
 
-  edit_course( id,Name, Price, course_image, skill, category, sub_category, Sales, SaleStatus, accept, BidStatus1, initial_amount, start_time , end_time , IsReserved , ReservedPrice,Auction,ids) {
+  edit_course( id,Name, Price, course_image, skill, category, sub_category, nested,Sales,edit_Minimum,edit_Maximum, SaleStatus, accept, BidStatus1, initial_amount ,start_time,end_time, IsReserved , ReservedPrice,Auction,ids) {
     // console.log(Name);
     // console.log(Price);
     // console.log(Discount);
@@ -105,22 +103,28 @@ export class UploadCoursesService {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
     }
     headers.append('Content-Type', 'application/json');
-    return this._http2.put(  Config.api+ 'courses/edit_delete/'+ id,
+    if(BidStatus1==true)
+
+    {
+      return this._http2.put(  Config.api+ 'courses/edit_delete/'+ id,
       {
 
+      
         'name': Name,
         'actual_price': Price,
         'course_image': course_image,
         'skill': skill,
         'Categories': category,
         'SubCategory': sub_category,
+        'nestedSubCategory':nested,
         'date_durationforsale': Sales,
         'sale_status': SaleStatus,
+        'min_amount':edit_Minimum,
+        'max_amount':edit_Maximum,
         'accept_offer': accept,
         'bidstatus': BidStatus1,
         'bidcourse':
           {
-
             'InitAmount': initial_amount,
             'StartTime': start_time,
             'EndTime': end_time ,
@@ -160,6 +164,61 @@ export class UploadCoursesService {
         return Observable.throw(new Error(error.status));
       }
     });
+    }
+    else
+    {
+      return this._http2.put(  Config.api+ 'courses/edit_delete/'+ id,
+      {
+
+        'name': Name,
+        'actual_price': Price,
+        'course_image': course_image,
+        'skill': skill,
+        'Categories': category,
+        'SubCategory': sub_category,
+        'nestedSubCategory':nested,
+        'date_durationforsale': Sales,
+        'sale_status': SaleStatus,
+        'min_amount':edit_Minimum,
+        'max_amount':edit_Maximum,
+        'accept_offer': accept,
+        'bidstatus': BidStatus1,
+        'bidcourse':
+          {
+            'id': ids
+          }
+      }, {headers : headers}).map((res: Response) => {
+      if (res) {
+        if (res.status === 201 || res.status === 200 || res.status ===202) {
+          const responce_data = res.json();
+          if(responce_data.status===false){
+            return responce_data.message;
+          }else {
+          }
+          return [{status: res.status, json: res}];
+        } else if (res.status === 5300) {
+          return [{status: res.status, json: res}];
+        } else {
+        }
+      }
+    }).catch((error: any) => {
+      // alert(error);
+      if (error.status === 404) {
+        // console.log('ok not submited submit 404');
+        // localStorage.setItem('error', '1');
+        return Observable.throw(new Error(error.status));
+      } else if (error.status === 400) {
+        //    this._nav.navigate(['/pages/accident']);
+        // console.log('ok not submited submit 400');
+        // localStorage.setItem('error', '1');
+        return Observable.throw(new Error(error.status));
+      } else {
+        //  this._nav.navigate(['/pages/accident']);
+        // console.log('ok not submited submit error');
+        return Observable.throw(new Error(error.status));
+      }
+    });
+    }
   }
 
   add_bid_on_course(bidamount, startTime, endTime, reserved, reservedbid, BidCourse_id) {

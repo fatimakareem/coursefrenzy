@@ -169,7 +169,7 @@ export class PaymentmethodsComponent implements OnInit {
       // expDate = moment(expDate).format('MM/YYYY');
   
       this.cardid = this.card.id;
-      alert(this.cardid);
+   
       if (this.card.card_type == "American Express") {
         this.var_get_type = this.card.card_type;
         this.edit_cardnumber = true;
@@ -199,7 +199,7 @@ export class PaymentmethodsComponent implements OnInit {
   }
   Edit_Show_inputs(edit_var_type_atm) {
     if (edit_var_type_atm == "American Express") {
-      alert(edit_var_type_atm);
+
       this.var_get_type = edit_var_type_atm;
       this.edit_cardnumber2 = true;
       // this.updateForm.controls.edit_cardnumber2.reset();
@@ -209,7 +209,7 @@ export class PaymentmethodsComponent implements OnInit {
       this.edit_ccv2 = true;
     }
     else {
-      alert(edit_var_type_atm);
+  
       this.var_get_type = edit_var_type_atm;
       this.edit_cardnumber = true;
       // this.updateForm.controls.edit_cardnumber.reset();

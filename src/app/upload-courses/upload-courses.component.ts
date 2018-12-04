@@ -1,25 +1,25 @@
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {FormControl, NgForm, Validators} from '@angular/forms';
-import {UploadCoursesService} from './upload-courses.service';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { FormControl, NgForm, Validators } from '@angular/forms';
+import { UploadCoursesService } from './upload-courses.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
-import {Config} from '../Config';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { Config } from '../Config';
 import swal from 'sweetalert2';
-import {HeaderService} from '../header/header.service';
-import {GlobalService} from '../global.service';
-import {PagerService} from '../paginator.service';
-import {HttpClient} from '@angular/common/http';
-import {HomeService} from "../home/home.service";
+import { HeaderService } from '../header/header.service';
+import { GlobalService } from '../global.service';
+import { PagerService } from '../paginator.service';
+import { HttpClient } from '@angular/common/http';
+import { HomeService } from "../home/home.service";
 import * as moment from 'moment';
-import {Observable} from 'rxjs/Observable';
-import {isPlatformBrowser} from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import { isPlatformBrowser } from '@angular/common';
 const NAME_REGEX = '[a-zA-Z0-9_.]+?';
-const NUMBER_REGEX = '[0-9]';
+// const ^[0-9]*$ = '[0-9]+';
 
 @Component({
   selector: 'app-upload-courses',
@@ -40,13 +40,13 @@ export class UploadCoursesComponent implements OnInit {
   public query: any;
   response;
   public searchResult: any;
-  public NoMyCoursesErrorFalse: boolean= false;
+  public NoMyCoursesErrorFalse: boolean = false;
   public NoMyCoursesErrorMessage: string;
-  public  GlobalUploadCourses:any = [];
+  public GlobalUploadCourses: any = [];
   public Logedin: string;
-  public UploadCourses: any=[];
+  public UploadCourses: any = [];
   constructor(private obj: UploadCoursesService, public dialog: MatDialog, private global: GlobalService,
-              private pagerService: PagerService, private _home: HomeService, private global2: GlobalService, @Inject(PLATFORM_ID) private platformId: Object) {
+    private pagerService: PagerService, private _home: HomeService, private global2: GlobalService, @Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.Logedin = localStorage.getItem("loged_in");
     }
@@ -71,16 +71,15 @@ export class UploadCoursesComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // this.global.GlobalUploadCourse$.subscribe(response  => this.response  = response);
     this.obj.get_my_enrolled_courses().subscribe(response => {
-      if(response.hasOwnProperty("status")) {
+      if (response.hasOwnProperty("status")) {
         // console.log("No Course Founddddd in My Enrolled Courses");
         console.log(response.status);
         this.NoMyCoursesErrorFalse = false;
         this.NoMyCoursesErrorMessage = response.message;
 
-      }else {
+      } else {
         this.coursesList = response.courses;
         this.NoMyCoursesErrorFalse = true;
         console.log('printing My Courses List');
@@ -99,6 +98,7 @@ export class UploadCoursesComponent implements OnInit {
     });
 
     this.setPage(1);
+
   }
 
   animal: string;
@@ -115,9 +115,9 @@ export class UploadCoursesComponent implements OnInit {
       // console.log('The dialog was closed');
       // console.log(result);
       window.location.reload();
-      if(result !== 1) {
+      if (result !== 1) {
         this.postedCoursesList['courses'].push(result);
-        console.log('hello worlds',this.postedCoursesList['courses']);
+        console.log('hello worlds', this.postedCoursesList['courses']);
       }
     });
   }
@@ -142,7 +142,7 @@ export class UploadCoursesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
       console.log(result);
-      if(result !== 1) {
+      if (result !== 1) {
         // alert('updating all courses');
         this.postedCoursesList['courses'][index] = result;
         // console.log(this.postedCoursesList['courses']);
@@ -168,7 +168,7 @@ export class UploadCoursesComponent implements OnInit {
           data => {
             // console.log(data);
             // console.log('index' + index);
-            this.postedCoursesList['courses'].splice(this.postedCoursesList['courses'].indexOf(this.postedCoursesList['courses'][index]),1);
+            this.postedCoursesList['courses'].splice(this.postedCoursesList['courses'].indexOf(this.postedCoursesList['courses'][index]), 1);
             // console.log(this.postedCoursesList['courses']);
             UploadCoursesComponent.deleteSuccess();
           },
@@ -221,7 +221,7 @@ export class UploadCoursesComponent implements OnInit {
   openDialog2(BidCourse_id): void {
     const dialogRef = this.dialog.open(CourseBidComponent, {
       width: '500px',
-      data: {BidCourse_id: BidCourse_id}
+      data: { BidCourse_id: BidCourse_id }
     });
 
   }
@@ -234,7 +234,7 @@ export class UploadCoursesComponent implements OnInit {
     this.obj.get_my_posted_courses(page).subscribe(response => {
       this.postedCoursesList = response;
       console.log('PostedCourse', this.postedCoursesList);
-      if(response.hasOwnProperty("status")) {
+      if (response.hasOwnProperty("status")) {
         this.NoPostedCourseErrorMessage = response.message;
       }
       // console.log(this.postedCoursesList['courses']);
@@ -276,7 +276,7 @@ export class AddCourseDialogComponent implements OnInit {
   skill: string;
   public Categories;
   public SubCategories;
-  nestedSubCategories;
+  public nestedSubCategories;
   public loaded = false;
   nestedsub_category;
   Auction = true;
@@ -284,7 +284,7 @@ export class AddCourseDialogComponent implements OnInit {
   file1: any;
   files: File;
   input;
-  Checks= true;
+  Checks = true;
   clicked = false;
   public model: any = {};
   color = 'accent';
@@ -292,34 +292,36 @@ export class AddCourseDialogComponent implements OnInit {
   disabled = false;
   hide;
   isActive = true;
-  isActives = true;
+  isActives = false;
   isBidPrice = true;
+
   Check = false;
-  Day= false;
+  Day = false;
   hides;
   isBids;
+
   duration = 0;
   Dic = 0;
   Sale = 0;
-  Days= false;
+  Days = false;
   starttime;
-  Date= new Date();
-  Dates= new Date();
+  Date = new Date();
+  Dates = new Date();
   Auct;
   Logedin: string;
   public GlobalUploadCourses: any = [];
   ranges = [
-    {value: '10', viewValue: '10'},
-    {value: '15', viewValue: '15'},
-    {value: '21', viewValue: '21'},
-    {value: '30', viewValue: '30'},
-    {value: '60', viewValue: '60'}
+    { value: '10', viewValue: '10' },
+    { value: '15', viewValue: '15' },
+    { value: '21', viewValue: '21' },
+    { value: '30', viewValue: '30' },
+    { value: '60', viewValue: '60' }
   ];
   range = [
-    {value: '3', viewValue: '3'},
-    {value: '5', viewValue: '5'},
-    {value: '7', viewValue: '7'},
-    {value: '15', viewValue: '15'},
+    { value: '3', viewValue: '3' },
+    { value: '5', viewValue: '5' },
+    { value: '7', viewValue: '7' },
+    { value: '15', viewValue: '15' },
   ];
   end_time;
   Sales;
@@ -330,11 +332,12 @@ export class AddCourseDialogComponent implements OnInit {
 
   Price = new FormControl('', [
     Validators.required,
-    Validators.pattern('NUMBER_REGEX')]);
+    Validators.pattern('^[0-9]*$')
+  ]);
 
 
   Discount = new FormControl('', [
-    Validators.required, Validators.pattern('NUMBER_REGEX')]);
+    Validators.required, Validators.pattern('^[0-9]*$')]);
 
   DaysDuration = new FormControl('', [
     Validators.required]);
@@ -344,22 +347,27 @@ export class AddCourseDialogComponent implements OnInit {
   ]);
   ReservedPrice = new FormControl('', [
     Validators.required,
-    Validators.pattern('NUMBER_REGEX')]);
+    Validators.pattern('^[0-9]*$')]);
 
   SalePrice = new FormControl('', [
     Validators.required,
-    Validators.pattern('NUMBER_REGEX')]);
+    Validators.pattern('^[0-9]*$')]);
+  Maximum = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[0-9]*$')]);
 
-
+  Minimum = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[0-9]*$')]);
   dateFormControl = new FormControl('', [
     Validators.required,
   ]);
   constructor(private obj: UploadCoursesService, private obj2: HeaderService, public dialogRef: MatDialogRef<AddCourseDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, private global: GlobalService,@Inject(PLATFORM_ID) private platformId: Object) {
-    if(data.course_data){
+    @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, private global: GlobalService, @Inject(PLATFORM_ID) private platformId: Object) {
+    if (data.course_data) {
       this.EditCourseData = data.course_data;
       this.isEditForm = data.isEditForm;
-      console.log('Edit Course Data',this.EditCourseData);
+      console.log('Edit Course Data', this.EditCourseData);
       console.log(this.isEditForm);
       // this.model = data.course_data;
       this.model.course_image = this.EditCourseData.course.course_image;
@@ -368,21 +376,21 @@ export class AddCourseDialogComponent implements OnInit {
       this.model.Price = this.EditCourseData.course.actual_price;
       // this.model.Discount = this.EditCourseData.discounted_price;
       this.Sales = this.EditCourseData.course.date_durationforsale;
-      console.log('Sale_Duration',this.Sales);
+      console.log('Sale_Duration', this.Sales);
       this.isActive = this.EditCourseData.course.sale_status;
       console.log('isActive', this.isActive);
       this.isActives = this.EditCourseData.course.accept_offer;
       console.log('isActives', this.isActives);
       this.isBidPrice = this.EditCourseData.course.bidstatus;
-      console.log('isBidPrice',this.isBidPrice);
+      console.log('isBidPrice', this.isBidPrice);
       this.model.SalePrice = this.EditCourseData.InitAmount;
       console.log('SalePrice', this.model.SalePrice);
       this.Date = this.EditCourseData.StartTime;
       console.log('Current Date', this.Date);
       this.end_time = this.EditCourseData.EndTime;
-      console.log('end_time',this.end_time);
+      console.log('end_time', this.end_time);
       this.Check = this.EditCourseData.isReserved;
-      console.log('CHeck',this.Check);
+      console.log('CHeck', this.Check);
       this.model.ReservedPrice = this.EditCourseData.reservedPrice;
       console.log('ReservedPrice', this.model.ReservedPrice);
       this.model.category = this.EditCourseData.course.Categories[0].id;
@@ -415,7 +423,7 @@ export class AddCourseDialogComponent implements OnInit {
 
   }
 
-  ngOnInit () {
+  ngOnInit() {
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
       // console.log(this.Categories);
@@ -427,7 +435,7 @@ export class AddCourseDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close(1);
   }
-  nestedsubcat(id){
+  nestedsubcat(id) {
     this.obj2.get_nestedcategories(id).subscribe(response => {
       this.nestedSubCategories = response;
     });
@@ -441,24 +449,23 @@ export class AddCourseDialogComponent implements OnInit {
 
     this.http.post(
       Config.ImageUploadUrl,
-      this.input, {responseType: 'text'}).subscribe(data => {
-      if (data === "Sorry, not a valid Image.Sorry, only JPG, JPEG, PNG & GIF files are allowed.Sorry, your file was not uploaded.") {
-        EditCourseDialogComponent.ImageUploadFailer();
-      } else {
-        this.course_image = data;
-        console.log(this.course_image);
-        this.ifImageUpload();
-        // alert(this.course_image);
-      }
-    });
+      this.input, { responseType: 'text' }).subscribe(data => {
+        if (data === "Sorry, not a valid Image.Sorry, only JPG, JPEG, PNG & GIF files are allowed.Sorry, your file was not uploaded.") {
+          EditCourseDialogComponent.ImageUploadFailer();
+        } else {
+          this.course_image = data;
+          console.log(this.course_image);
+          this.ifImageUpload();
+          // alert(this.course_image);
+        }
+      });
 
     // }
   }
   private ifImageUpload() {
     // var curent_date= moment(this.model.date, "DD-MM-YYYY").add(1,'days');
     // var new_date = moment(curent_date, "DD-MM-YYYY").add(this.Date,'days');
-    if(this.Days== false)
-    {
+    if (this.Days == false) {
       var curent_date = moment(this.Date, "DD-MM-YYYY");
 
       console.log("current date", new Date);
@@ -468,28 +475,17 @@ export class AddCourseDialogComponent implements OnInit {
 
 
     }
-    else if(this.Days == true)
-    {
+    else if (this.Days == true) {
       var curent_date = moment(this.Dates, "DD-MM-YYYY");
       var date = moment(this.Dates, ' DD-MM-YYYY ');
-      var new_date = moment(date).add(this.end_time , 'days');
+      var new_date = moment(date).add(this.end_time, 'days');
       console.log('Auction', date);
       console.log('Auction Later', this.model.date);
 
     }
-    // var bid_date = moment(date).add(this.end_time,'days');
-
-    console.log( this.model.Name, this.model.Price, this.Dic,  this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, curent_date , new_date , this.Check , this.model.ReservedPrice,this.Days,this.model.nestedsub_category);
-
-
-    this.obj.upload_course(this.model.Name, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, this.Date, new_date, this.Check, this.model.ReservedPrice, this.Days,this.model.nestedsub_category).subscribe(
+    this.obj.upload_course(this.model.Name, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, this.model.nestedsub_category,new_dateBuy,this.model.Minimum, this.model.Maximum, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, this.Date, new_date, this.Check, this.model.ReservedPrice, this.Days).subscribe(
       data => {
-        // console.log(data[0]['json'].json());
-        // this.dialogRef.close(data[0]['json'].json());
         this.dialogRef.close(data[0]['json'].json());
-        // this.global.getGlobalUploadCourses(this.response);
-        // console.log('upload Courses', this.response);
-        // this.dialogRef.close(data[0]['json'].json());
         AddCourseDialogComponent.CourseSuccess();
       },
       error => {
@@ -543,6 +539,7 @@ export class AddCourseDialogComponent implements OnInit {
       this.isBids = true;
     }
   }
+
   CheckReserved() {
     if (this.Checks) {
       this.Checks = false;
@@ -578,7 +575,8 @@ export class AddCourseDialogComponent implements OnInit {
     swal({
       type: 'success',
       title: 'Course Added Successfully! <br> Request is sent to admin you will be notified after approval.',
-      width: '512px'
+      width: '512px',
+      timer: 2500
     })
   }
 
@@ -598,7 +596,7 @@ export class AddCourseDialogComponent implements OnInit {
       title: 'Please review form! <br>Discount amount can not be greater than course price!',
       // showConfirmButton: false,
       width: '512px',
-      // timer: 2500
+      timer: 2500
     })
   }
 
@@ -624,8 +622,8 @@ export class AddCourseDialogComponent implements OnInit {
 
   onChange(event: EventTarget) {
     this.input = new FormData();
-    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     this.input.append('fileToUpload', target.files[0], 205, 114);
     console.log(this.input)
     
@@ -654,7 +652,7 @@ export class EditCourseDialogComponent implements OnInit {
   file1: any;
   files: File;
   input;
-  Checks= true;
+  Checks = true;
   clicked = false;
   public model: any = {};
   color = 'accent';
@@ -662,31 +660,35 @@ export class EditCourseDialogComponent implements OnInit {
   disabled = false;
   hide;
   isActive = true;
-  isActives = true;
+  isActives = false;
   isBidPrice = true;
   Check = false;
-  Day= false;
+  Day = false;
   ReservedPrice;
   hides;
   isBids;
+  edit_isBidPrice = false;
+  edit_isBids;
   duration = 0;
   Dic = 0;
   Sale;
-  SalePrice=0;
-  Days= false;
+  SalePrice = 0;
+  Minimum;
+  Maximum;
+  Days = false;
   starttime;
   ranges = [
-    {value: '10', viewValue: '10'},
-    {value: '15', viewValue: '15'},
-    {value: '21', viewValue: '21'},
-    {value: '30', viewValue: '30'},
-    {value: '60', viewValue: '60'}
+    { value: '10', viewValue: '10' },
+    { value: '15', viewValue: '15' },
+    { value: '21', viewValue: '21' },
+    { value: '30', viewValue: '30' },
+    { value: '60', viewValue: '60' }
   ];
   range = [
-    {value: '3', viewValue: '3'},
-    {value: '5', viewValue: '5'},
-    {value: '7', viewValue: '7'},
-    {value: '15', viewValue: '15'},
+    { value: '3', viewValue: '3' },
+    { value: '5', viewValue: '5' },
+    { value: '7', viewValue: '7' },
+    { value: '15', viewValue: '15' },
   ];
   end_time;
   Sales;
@@ -698,11 +700,11 @@ export class EditCourseDialogComponent implements OnInit {
 
   Price = new FormControl('', [
     Validators.required,
-    Validators.pattern('NUMBER_REGEX')]);
+    Validators.pattern('^[0-9]*$')]);
 
 
   Discount = new FormControl('', [
-    Validators.required, Validators.pattern('NUMBER_REGEX')]);
+    Validators.required, Validators.pattern('^[0-9]*$')]);
 
   DaysDuration = new FormControl('', [
     Validators.required]);
@@ -712,7 +714,7 @@ export class EditCourseDialogComponent implements OnInit {
   ]);
   reservedbidamountFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('NUMBER_REGEX')]);
+    Validators.pattern('^[0-9]*$')]);
 
   StartingBidPrice = new FormControl('', [
     Validators.required
@@ -724,70 +726,146 @@ export class EditCourseDialogComponent implements OnInit {
   private course_discounted_price: any = 0;
   private course_actual_price: any = 0;
 
-
+  bidstatus;
+  var_start_date_string;
+  var_end_date_string;
+  edit_start_auction;
+  new_dateBuy;
+  var_end_date;
+  var_start_Date;
+  var_get_start_date;
+  var_get_end_date;
+  var_final_get_date;
+  var_get_auctionlater;
+  var_get_status;
+  var_get_post_end_date;
+  var_list_for_sale_start;
+  var_list_for_sale_end;
+  var_get_post_date;
+  var_final_date_durationforsale;
   constructor(private obj: UploadCoursesService, private obj2: HeaderService, public dialogRef: MatDialogRef<AddCourseDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {
-    if(data.course_data){
+    @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {
+    if (data.course_data) {
+    
       this.EditCourseData = data.course_data;
+
       this.isEditForm = data.isEditForm;
-      console.log('Edit Course Data',this.EditCourseData);
-      console.log(this.isEditForm);
-      // this.model = data.course_data;
       this.course_id = this.EditCourseData.course.id;
-      console.log('course_id',this.course_id);
       this.model.ids = this.EditCourseData.id;
-      console.log('ids', this.model.ids);
       this.model.FirstName = this.EditCourseData.course.name;
-      console.log(this.model.FirstName);
       this.model.course_image = this.EditCourseData.course.course_image;
-      console.log(this.model.course_image);
       this.model.Price = this.EditCourseData.course.actual_price;
-      console.log(this.model.Price);
-      // this.model.Discount = this.EditCourseData.discounted_price;
-      this.Sales = this.EditCourseData.course.date_durationforsale;
-      console.log('Sale_Duration',this.Sales);
+    
+      // var new_dateBuy = moment(this.Sales).subtract(this.end_time, 'days').days();
       this.isActive = this.EditCourseData.course.sale_status;
-      console.log('isActive', this.isActive);
+      if(this.isActive==true)
+      {    
+        this.isActive==true
+        this.hide = true;
+        
+      }
+    else
+    {
+      this.isActive==false;
+      this.hide = false;
+      this.var_get_post_date=this.EditCourseData.course.postDate;
+      this.var_get_post_end_date = this.EditCourseData.course.date_durationforsale;
+      
+      this.var_list_for_sale_start=this.var_get_post_date.toString().slice(8, 10);
+      this.var_list_for_sale_end=this.var_get_post_end_date.toString().slice(8, 10);
+      this.var_final_date_durationforsale=this.var_list_for_sale_end-this.var_list_for_sale_start;
+      alert( this.var_final_date_durationforsale);
+      this.model.Sale=   this.var_final_date_durationforsale;
+      
+      // alert(this.var_get_post_date);
+    }
       this.isActives = this.EditCourseData.course.accept_offer;
-      console.log('isActives', this.isActives);
+
       this.isBidPrice = this.EditCourseData.course.bidstatus;
-      console.log('isBidPrice',this.isBidPrice);
-      this.model.SalePrice = this.EditCourseData.InitAmount;
-      console.log('SalePrice', this.model.SalePrice);
-      this.Date = this.EditCourseData.StartTime;
-      console.log('Current Date', this.Date);
-      this.end_time = this.EditCourseData.EndTime;
-      console.log('end_time',this.end_time);
-      this.Check = this.EditCourseData.isReserved;
-      console.log('CHeck',this.Check);
-      this.model.ReservedPrice = this.EditCourseData.reservedPrice;
-      console.log('ReservedPrice', this.model.ReservedPrice);
+      if (this.isBidPrice == true) {
+        this.edit_isBidPrice = true;
+        this.edit_isBids = true;
+        this.model.SalePrice = this.EditCourseData.InitAmount;
+        this.var_start_Date = this.EditCourseData.StartTime;
+        this.var_end_date = this.EditCourseData.EndTime;
+        this.var_get_start_date=this.var_start_Date.toString().slice(8, 10);
+        this.var_get_end_date=this.var_end_date.toString().slice(8, 10);
+        this.var_final_get_date=this.var_get_end_date-this.var_get_start_date;
+        // alert( this.var_final_get_date);
+        // this.end_time.setValue['end_time']= this.var_final_get_date;
+        // this.end_time = this.var_final_get_date;       
+        this.Check = this.EditCourseData.isReserved;
+        if (this.Check == true) {
+          this.Checks = true;
+          this.model.ReservedPrice = this.EditCourseData.reservedPrice;
+        }
+        else {
+          this.Check=false;
+          this.Checks = false;
+        }
+        this.var_get_auctionlater=this.EditCourseData.auctionlater;
+        if(this.var_get_auctionlater==true)
+        {
+          this.Day=true;
+          this.Days=true;
+        }
+        else
+        {
+          this.Day=false;
+          this.var_get_auctionlater=false;
+          this.Days=false;
+        }
+      }
+      else {
+        this.edit_isBids = false;
+        this.edit_isBidPrice = false;
+      }
+      if (this.isActives == true) {
+        this.hides = true;
+        this.model.edit_Minimum = this.EditCourseData.course.min_amount;
+        this.model.edit_Maximum = this.EditCourseData.course.max_amount;
+      }
+      else {
+        this.isActives = false;
+      }
+      if (this.Days == true) {
+        this.Days = true;
+      }
+      else {
+        this.Days = false;
+      }
       this.model.category = this.EditCourseData.course.Categories[0].id;
-      console.log(this.model.category);
-      this.model.Name = this.EditCourseData.name;
       this.obj2.get_sub_categories(this.model.category).subscribe(response => {
         this.SubCategories = response;
         // console.log(this.SubCategories);
         this.loaded = true;
       });
       this.model.sub_category = this.EditCourseData.course.SubCategory[0].id;
-
+      this.obj2.get_nestedcategories(this.model.sub_category).subscribe(response => {
+        this.nestedSubCategories = response;
+        // console.log(this.SubCategories);
+        this.loaded = true;
+      });
+      this.model.nestedsub_category = this.EditCourseData.course.nestedSubCategory[0].id;
       console.log(this.model.sub_category);
-
       this.model.skill = this.EditCourseData.course.skill;
-
     }
 
   }
-
-  ngOnInit () {
+  nestedSubCategories;
+  ngOnInit() {
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
       // console.log(this.Categories);
       this.loaded = true;
     });
   }
+  nestedsubcat(id) {
+    this.obj2.get_nestedcategories(id).subscribe(response => {
+      this.nestedSubCategories = response;
+    });
 
+  }
   onNoClick(): void {
     this.dialogRef.close(1);
   }
@@ -801,16 +879,16 @@ export class EditCourseDialogComponent implements OnInit {
     if (this.input) {
       this.http.post(
         Config.ImageUploadUrl,
-        this.input, {responseType: 'text'}).subscribe(data => {
-        if (data === "Sorry, not a valid Image.Sorry, only JPG, JPEG, PNG & GIF files are allowed.Sorry, your file was not uploaded.") {
-          EditCourseDialogComponent.ImageUploadFailer();
-        } else {
-          this.course_image = data;
-          console.log(this.course_image);
-          // alert(this.course_image);
+        this.input, { responseType: 'text' }).subscribe(data => {
+          if (data === "Sorry, not a valid Image.Sorry, only JPG, JPEG, PNG & GIF files are allowed.Sorry, your file was not uploaded.") {
+            EditCourseDialogComponent.ImageUploadFailer();
+          } else {
+            this.course_image = data;
+            console.log(this.course_image);
+            // alert(this.course_image);
 
-        }
-      });
+          }
+        });
     }
     else {
       this.course_image = this.model.course_image;
@@ -820,10 +898,6 @@ export class EditCourseDialogComponent implements OnInit {
   }
 
   private ifImageUpload() {
-    // var curent_date= moment(this.model.date, "DD-MM-YYYY").add(1,'days');
-    // var new_date = moment(curent_date, "DD-MM-YYYY").add(this.Date,'days');
-
-
     var curent_date = moment(this.Date, "DD-MM-YYYY");
 
     console.log("current date", this.Date);
@@ -831,16 +905,7 @@ export class EditCourseDialogComponent implements OnInit {
     var new_date = moment(curent_date).add(this.end_time, 'days');
     var new_dateBuy = moment(curent_date).add(this.Sales, 'days');
 
-
-    // var curent_date = moment(this.Date, "DD-MM-YYYY");
-    // var date = moment(this.Date, ' DD-MM-YYYY ');
-    // var new_date = moment(date).add(this.end_time , 'days');
-    // console.log('Auction', date);
-    // console.log('Auction Later', this.model.date);
-
-
-    console.log( this.model.FirstName, this.model.Price, this.Dic,  this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.SalePrice, curent_date , new_date , this.Check , this.model.ReservedPrice);
-    this.obj.edit_course( this.course_id, this.model.FirstName, this.model.Price,  this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, curent_date , new_date , this.Check , this.model.ReservedPrice, this.Days,this.model.ids).subscribe(
+    this.obj.edit_course(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids).subscribe(
       data => {
         // console.log(data[0]['json'].json());
         this.dialogRef.close(data[0]['json'].json());
@@ -872,6 +937,13 @@ export class EditCourseDialogComponent implements OnInit {
       this.isBids = false;
     } else {
       this.isBids = true;
+    }
+  }
+  edit_Auctions() {
+    if (this.edit_isBidPrice) {
+      this.edit_isBids = false;
+    } else {
+      this.edit_isBids = true;
     }
   }
   CheckReserved() {
@@ -957,8 +1029,8 @@ export class EditCourseDialogComponent implements OnInit {
 
   onChange(event: EventTarget) {
     this.input = new FormData();
-    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     this.input.append('fileToUpload', target.files[0]);
   }
 }
@@ -980,11 +1052,11 @@ export class CourseBidComponent implements OnInit {
 
   bidamount = new FormControl('', [
     Validators.required,
-    Validators.pattern('NUMBER_REGEX')]);
+    Validators.pattern('^[0-9]*$')]);
 
   reservedbidamountFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('NUMBER_REGEX')]);
+    Validators.pattern('^[0-9]*$')]);
 
   dateFormControl = new FormControl('', [
     Validators.required,
@@ -1001,8 +1073,8 @@ export class CourseBidComponent implements OnInit {
 
 
   constructor(private obj: UploadCoursesService,
-              public dialogRef: MatDialogRef<CourseBidComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    public dialogRef: MatDialogRef<CourseBidComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   ngOnInit() {
@@ -1010,8 +1082,8 @@ export class CourseBidComponent implements OnInit {
   }
   Date;
   onSubmit(f: NgForm) {
-    var curent_date= moment(this.model.date, "DD-MM-YYYY").add(1,'days');
-    var new_date = moment(curent_date, "DD-MM-YYYY").add(this.Date,'days');
+    var curent_date = moment(this.model.date, "DD-MM-YYYY").add(1, 'days');
+    var new_date = moment(curent_date, "DD-MM-YYYY").add(this.Date, 'days');
     // console.log(new_date,'sssssssssssss')
     // alert(this.isActive);
     this.obj.add_bid_on_course(this.model.bidamount, curent_date, new_date, this.Actives, this.model.reservedbid, this.data.BidCourse_id).subscribe(
@@ -1039,7 +1111,7 @@ export class CourseBidComponent implements OnInit {
   }
 
   reserved() {
-    if(this.hid) {
+    if (this.hid) {
       this.hid = false;
     }
     else {
