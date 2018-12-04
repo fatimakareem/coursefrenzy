@@ -23,13 +23,13 @@
       <img *ngIf="isEditForm && model.course_image " src="{{ImageUrl}}{{model.course_image}}" style="height: 20%; width: 20%">
 
       <mat-form-field class="example-full-width mat-size">
-        <input matInput placeholder="Enter Course Name"  name="Name" [formControl]="Name" [(ngModel)]="model.FirstName" >
-        <!--<mat-error *ngIf="Name.hasError('required')">-->
-        <!--Course name is <strong>required</strong>-->
-        <!--</mat-error>-->
-        <!--<mat-error *ngIf="Name.hasError('pattern')">-->
-        <!--Please enter a valid course name-->
-        <!--</mat-error>-->
+        <input matInput placeholder="Enter Course Name" name="Name" [formControl]="Name" [(ngModel)]="model.FirstName" >
+        <mat-error *ngIf="Name.hasError('required')">
+        Course name is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="Name.hasError('pattern')">
+        Please enter a valid course name
+        </mat-error>
       </mat-form-field>
 
       <div class="row catselect">
@@ -44,8 +44,16 @@
         <div class="col-sm-5 offset-2">
           <label>Select Sub Category:</label>
           <mat-select class="form-control" [(ngModel)]="model.sub_category" name="sub_category" #sub_category="ngModel" required>
-            <mat-option *ngFor=" let caty of SubCategories" [value]="caty.id">
+            <mat-option *ngFor=" let caty of SubCategories" [value]="caty.id" (click)="nestedsubcat(caty.id)">
               {{ caty.name }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col-sm-5 offset-2" >
+          <label>Select Nested Sub Category:</label>
+          <mat-select class="form-control" [(ngModel)]="model.nestedsub_category" name="nestedsub_category" #nestedsub_category="ngModel" required>
+            <mat-option *ngFor=" let nested of nestedSubCategories" [value]="nested.id">
+              {{ nested.name }}
             </mat-option>
           </mat-select>
         </div>
@@ -57,16 +65,14 @@
         <mat-radio-button class="example-radio-button" value="I">Intermediate</mat-radio-button>
         <mat-radio-button class="example-radio-button" value="A">Advanced</mat-radio-button>
       </mat-radio-group>
-
-
       <mat-form-field class="example-full-width mat-size">
-        <input type="text" matInput placeholder=" Enter Price ($)" name="Price" [formControl]="Price" [(ngModel)]="model.Price">
-        <!--<mat-error *ngIf="Price.hasError('required')">-->
-        <!--Price is <strong>required</strong>-->
-        <!--</mat-error>-->
-        <!--<mat-error *ngIf="Price.hasError('pattern')">-->
-        <!--Digits (or dots) are allowed only-->
-        <!--</mat-error>-->
+        <input type="text" matInput placeholder=" Enter Price ($)"  pattern='^[0-9]*$' name="Price" [formControl]="Price" [(ngModel)]="model.Price">
+        <mat-error *ngIf="Price.hasError('required')">
+        Price is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="Price.hasError('pattern')">
+          Digits are allowed only
+        </mat-error>
       </mat-form-field>
 
       <mat-slide-toggle
@@ -77,17 +83,6 @@
         name="isActive" [(ngModel)]="isActive" value="hide" (click)="reserved()">
         List for Sale!
       </mat-slide-toggle>
-
-
-      <!--<mat-form-field *ngIf="hide == true" class="width50 mat-size">-->
-      <!--<input  type="number" matInput placeholder=" Buy It Now Price ($)" name="Discount" [formControl]="Discount" [(ngModel)]="Dic">-->
-      <!--<mat-error *ngIf="Discount.hasError('required')">-->
-      <!--BuyIt Now Price is <strong>required</strong>-->
-      <!--</mat-error>-->
-      <!--<mat-error *ngIf="Discount.hasError('pattern')">-->
-      <!--Digits (or dots) are allowed only-->
-      <!--</mat-error>-->
-      <!--</mat-form-field>-->
       <mat-form-field *ngIf="hide ==false" class="width50 mat-size">
         <mat-select placeholder="Buy It Now Listing Duration"   [formControl]="DaysDuration"  [(ngModel)]="Sales"  name="Sales">
 
@@ -96,76 +91,83 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
+<br>
       <mat-slide-toggle
         class="example-margin"[color]="color"
-        [checked]="checked"
         [disabled]="disabled"
+        value="hides"
         name="isActives" [(ngModel)]="isActives"  (click)="reserveds()">
         Accept Offer
       </mat-slide-toggle><br>
+      <mat-form-field *ngIf="hides ==true" class="example-full-width mat-size">
+        <input matInput type="text"
+               placeholder="Minimum Amount" pattern='^[0-9]*$' name="edit_Minimum" id="edit_Minimum" #edit_Minimum="ngModel" [(ngModel)]="model.edit_Minimum" required>
+        <mat-error *ngIf="edit_Minimum.hasError('required')">
+          Minimum is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="edit_Minimum.hasError('pattern')">
+          Digits are allowed only
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="hides ==true" class="example-full-width mat-size">
+        <input matInput type="text"
+               placeholder="Maximum Amount" pattern='^[0-9]*$' name="edit_Maximum " id="edit_Maximum " #edit_Maximum ="ngModel" [(ngModel)]="model.edit_Maximum " required>
+        <mat-error *ngIf="edit_Maximum .hasError('required')">
+          Maximum is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="edit_Maximum.hasError('pattern')">
+          Digits are allowed only
+        </mat-error>
+      </mat-form-field>
+     
       <mat-slide-toggle
         class="example-margin"[color]="color"
+        value="edit_isBids"
         [checked]="checked"
-        [disabled]="disabled"
-        name="isBidPrice" [(ngModel)]="isBidPrice"  (click)="Auctions()">
+        name="edit_isBidPrice"  [(ngModel)]="edit_isBidPrice"  (click)="edit_Auctions()">
         List for Auction
       </mat-slide-toggle>
 
-      <mat-form-field *ngIf="!isBids" class="example-full-width mat-size">
-        <input matInput type="text"
-               placeholder="Starting Bid Price" [formControl]="StartingBidPrice" name="SalePrice" [(ngModel)]="model.SalePrice">
-        <!--<mat-error *ngIf="SaleDuration.hasError('required')">-->
-        <!--Days is <strong>required</strong>-->
-        <!--</mat-error>-->
+      <mat-form-field *ngIf="edit_isBids ==true" class="example-full-width mat-size">
+        <input matInput type="text" pattern='^[0-9]*$'
+               placeholder="Starting Bid Price" [formControl]="StartingBidPrice" name="SalePrice" [(ngModel)]="model.SalePrice" required>
+        <mat-error *ngIf="SaleDuration.hasError('required')">
+        Days is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="SaleDuration .hasError('pattern')">
+          Digits are allowed only
+        </mat-error>
       </mat-form-field>
-      <!--<mat-form-field *ngIf="StartBid == false" class="example-full-width mat-size">-->
-      <!--<input matInput type="number"-->
-      <!--placeholder="Listing Duration" min="0" [formControl]="StartingBidPrice" name="SalePrice" [(ngModel)]="SalePrice">-->
-      <!--<mat-error *ngIf="SaleDuration.hasError('required')">-->
-      <!--Days is <strong>required</strong>-->
-      <!--</mat-error>-->
-      <!--</mat-form-field>-->
-
-      <mat-form-field *ngIf="!isBids" class="example-full-width mat-size">
+      <mat-form-field *ngIf="edit_isBids ==true" class="example-full-width mat-size">
         <!--{{Date | amDifference: end_time :'days' : true}}-->
-        <mat-select placeholder="Listing Duration"  [formControl]="SaleDuration" name="end_time"  [(ngModel)]="end_time" >
+        <mat-select placeholder="Listing Duration"  name="end_time" value="end_time"  [(ngModel)]="end_time" >
           <mat-option *ngFor="let range of range"  [value]="range.viewValue">
             {{ range.viewValue }}
           </mat-option>
 
         </mat-select>
-
       </mat-form-field>
       <div class="text-left">
-        <mat-checkbox  *ngIf="!isBids" name="Check" [(ngModel)]="Check" (click)="CheckReserved()">Reserved</mat-checkbox>
+        <mat-checkbox  *ngIf="edit_isBids ==true" name="Check" [(ngModel)]="Check" (click)="CheckReserved()">Reserved</mat-checkbox>
       </div>
-
-      <mat-form-field *ngIf="!Checks" class="example-full-width mat-size">
-        <input matInput placeholder="Enter reserved bid amount" [formControl]="reservedbidamountFormControl" [(ngModel)]="model.ReservedPrice">
-        <!--<mat-error *ngIf="reservedbidamountFormControl.hasError('pattern')">-->
-        <!--Please enter a valid reserved bid amount-->
-        <!--</mat-error>-->
+      <mat-form-field *ngIf="Checks && edit_isBids==true " class="example-full-width mat-size">
+        <input matInput placeholder="Enter reserved bid amount" [formControl]="reservedbidamountFormControl"  pattern='^[0-9]*$' [(ngModel)]="model.ReservedPrice">   
+        <mat-error *ngIf="reservedbidamountFormControl.hasError('pattern')">      Digits are allowed only
+        </mat-error>
       </mat-form-field>
-      <mat-slide-toggle  *ngIf="!isBids"
+      <mat-form-field *ngIf="!Checks && edit_isBids==true " class="example-full-width mat-size">
+      </mat-form-field>
+      <mat-slide-toggle  *ngIf="edit_isBids==true"
                          class="example-margin"[color]="color"
-                         [checked]="checked"
-                         [disabled]="disabled"
                          name="Days" [(ngModel)]="Day"  (click)="Auc()">
         Start Auction Later
       </mat-slide-toggle>
-
-      <mat-form-field *ngIf="Days" class="example-full-width mat-size">
+      <mat-form-field *ngIf="Days && edit_isBids==true" class="example-full-width mat-size">
         <input matInput (click)="picker2.open()" (focus)="picker2.open()" [matDatepicker]="picker2"
-               placeholder="Choose Bid Start Date" [formControl]="dateFormControl" name= "Date" [(ngModel)]="model.date" required>
+               placeholder="Choose Bid Start Date" [formControl]="dateFormControl" name= "Date" [(ngModel)]="model.date">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
-        <!--<mat-error *ngIf="dateFormControl.hasError('required')">-->
-        <!--Date is <strong>required</strong>-->
-        <!--</mat-error>-->
       </mat-form-field>
-
-
       <div class="footer text-right col-sm-12">
         <button class="button btn-primary custom" type="submit" id="submit"  (click)="EditCourse()" tabindex="2"> Update Course</button>
       </div>
@@ -187,3 +189,4 @@
 
 
 
+ 	
