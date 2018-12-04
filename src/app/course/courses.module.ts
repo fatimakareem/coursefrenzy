@@ -20,6 +20,7 @@ import {TopRatedCoursesModule} from "../courses-all/top-rated-courses/top-rated-
 import {TrendingNowCoursesModule} from "../courses-all/trending-now-courses/trending-now-courses.module";
 import {WatchedCoursesComponent} from "../watched-courses/watched-courses.component";
 import {WatchedCoursesModule} from "../watched-courses/watched-courses.module";
+import { SlickModule } from 'ngx-slick';
 
 const coursesRoutes: Routes = [
   { path: '', component: CourseComponent },
@@ -53,13 +54,12 @@ const coursesRoutes: Routes = [
     CoursesOnBidModule,
     LoaderModule,
     TrendingNowCoursesModule,
-    TopRatedCoursesModule
+    TopRatedCoursesModule,SlickModule.forRoot()
   ],
 
   providers: [CurrencyPipe],
   exports: []
 })
-
 export class CoursesModule {
 
 }

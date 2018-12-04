@@ -92,7 +92,7 @@ export class HomeSliderComponent implements OnInit {
          this.slideConfig =  {
               infinite: true,
               slidesToShow: 5,
-              slidesToScroll: 1,
+              slidesToScroll: 5,
               autoplay: false,
               dots: false,
               prevArrow: '<button class="leftRs">&lt;</button>',
