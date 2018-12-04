@@ -19,7 +19,7 @@ export class UploadCoursesService {
   constructor(private http: Http, private _http2: HttpService, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object) {
   }
   users_id;
-  upload_course( Name, Price, course_image, skill, category, sub_category, nestedsub_category,Sales,Minimum,Maximum, SaleStatus, accept, BidStatus1, initial_amount, start_time , end_time , IsReserved , ReservedPrice,Auction,) {
+  upload_course( Name, Price, course_image, skill, category, sub_category, Minimum,Maximum,Sales, SaleStatus, accept, BidStatus1, initial_amount, start_time , end_time , IsReserved , ReservedPrice,Auction,nestedsub_category) {
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
@@ -35,10 +35,9 @@ export class UploadCoursesService {
         'Categories': category,
         'SubCategory': sub_category,
         'nestedSubCategory':nestedsub_category,
-        'date_durationforsale': Sales,
         'min_amount':Minimum,
         'max_amount':Maximum,
-      
+        'date_durationforsale': Sales,
         'sale_status': SaleStatus,
         'accept_offer': accept,
         'bidstatus': BidStatus1,

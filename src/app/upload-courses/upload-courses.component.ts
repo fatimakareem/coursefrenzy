@@ -905,7 +905,7 @@ export class EditCourseDialogComponent implements OnInit {
     var new_date = moment(curent_date).add(this.end_time, 'days');
     var new_dateBuy = moment(curent_date).add(this.Sales, 'days');
 
-    this.obj.edit_course(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, new_dateBuy,this.model.nestedsub_category,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids).subscribe(
+    this.obj.edit_course(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids).subscribe(
       data => {
         // console.log(data[0]['json'].json());
         this.dialogRef.close(data[0]['json'].json());
