@@ -2,19 +2,30 @@
 
 <div class="wrapp-content slider">
 
-  <main class="content-row">
+  <main class="">
 
     <div class="content-box padding-top-20 padding-bottom-10">
-      <div class="container-fluid container-wide">
+      <div class="container-fluid container-wide homeslider-hide">
 
         <!--Filters-->
-        <div class="courseSlider course-sl">
-
-          <div class="homeSlider">
-            <div class="item" *ngFor="let category of Categories">
+        <div class="container-fluid container-wide homeslider-hide bidSlider" *ngIf="Categories">
+          <ngx-slick class="homeSlider" #slickModal="slick-modal" [config]="slideConfig">
+            <!--<div class="item" *ngFor="let category of Categories">-->
+            <!--<a routerLink='/courses/{{category.id}}' class="owl-option-02__box-01">-->
+            <!--<div class="owl-option-02__img-wrapp ">-->
+            <!--<img src="{{ImageUrl}}{{category?.image_icon_ios}}"/>-->
+            <!--</div>-->
+            <!--<h3 class="owl-option-02__title">-->
+            <!--{{ category?.name }}-->
+            <!--</h3>-->
+            <!--</a>-->
+            <!--</div>-->
+    
+            <div class="item" ngxSlickItem *ngFor="let category of Categories">
               <div class="image">
-                <a routerLink='/cat_courses/{{category.id}}'>
-                  <img class="img" src="{{catImageUrl}}{{category?.icon_Web_Home}}" onError="this.src='../../assets/img/default_thumbnail.png'">
+                <a routerLink='/courses/{{category.id}}'>
+                  <!--<img class="img" src="{{ImageUrl}}{{category?.image_icon_ios}}">-->
+                  <img class="img" src="{{ImageUrl}}{{category?.icon_Web_Home}}" onError="this.src='../../assets/img/default_thumbnail.png'">
                 </a>
               </div>
               <div class="slide-overlay">
@@ -23,7 +34,7 @@
                 </h4>
               </div>
             </div>
-          </div>
+          </ngx-slick>
         </div>
         <div class="filter-holder">
           <header>
@@ -325,7 +336,7 @@
 
           <!--Start Visited Courses-->
           <!--<div *ngIf="loaded2" class="col-lg-12 text-center">-->
-            <!--<h1 class="page-title-01 img-bg img-bg-2 color-white" >Recently Visited Courses</h1>-->
+            <!--<h1 class="page-title-01 img-bg img-bg-2" style="color: white;">Recently Visited Courses</h1>-->
             <!--<p class="subtitle-01">CourseFrenzy has a variety of diverse courses from health and fitness to programming-->
               <!--and coding. However, our most popular courses are based on technology.</p>-->
 

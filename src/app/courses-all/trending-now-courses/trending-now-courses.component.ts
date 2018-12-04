@@ -9,7 +9,6 @@ import {MatDialog} from "@angular/material";
 import {CoursesService} from "../../course/courses.service";
 import {BuyNowService} from "../../BuyNow.service";
 // import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
-
 declare const $: any;
 
 @Component({

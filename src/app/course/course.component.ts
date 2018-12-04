@@ -1,24 +1,24 @@
-import {Component, Inject, OnInit, AfterContentInit, PLATFORM_ID} from '@angular/core';
-import {CoursesService} from './courses.service';
-import {Config} from '../Config';
-import {FormControl, NgForm, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {MatPaginatorModule} from '@angular/material';
-import {BiddingDialogComponent} from '../bidding-dialog/bidding-dialog.component';
+import { Component, Inject, OnInit, AfterContentInit, PLATFORM_ID } from '@angular/core';
+import { CoursesService } from './courses.service';
+import { Config } from '../Config';
+import { FormControl, NgForm, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material';
+import { BiddingDialogComponent } from '../bidding-dialog/bidding-dialog.component';
 
-import {Subscription} from 'rxjs/Subscription';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HomeService} from '../home/home.service';
-import {isPlatformBrowser} from '@angular/common';
-import {GlobalService} from '../global.service';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HomeService } from '../home/home.service';
+import { isPlatformBrowser } from '@angular/common';
+import { GlobalService } from '../global.service';
 import swal from 'sweetalert2';
-import {HeaderService} from '../header/header.service';
-import {SimpleGlobal} from 'ng2-simple-global';
-import {AddCartDialogComponent} from '../cart-dialog/add-cart-dialog.component';
+import { HeaderService } from '../header/header.service';
+import { SimpleGlobal } from 'ng2-simple-global';
+import { AddCartDialogComponent } from '../cart-dialog/add-cart-dialog.component';
 
-import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
-import {map} from 'rxjs/operators/map';
+import { Observable } from 'rxjs/Observable';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
 
 declare const $: any;
 @Component({
@@ -44,8 +44,8 @@ export class CourseComponent implements OnInit {
   public ImageUrl = Config.api2;
   public catImageUrl = Config.staticStorageImages;
   public StaticImageUrl = Config.ImageUrl;
-  public heart= false;
-  public heartClass= 'fa fa-heart-o';
+  public heart = false;
+  public heartClass = 'fa fa-heart-o';
   public model: any = {};
   public page = 1;
   range;
@@ -70,12 +70,12 @@ export class CourseComponent implements OnInit {
   dateVal: any = 'Ahmad';
   teacher: any;
   ranges = [
-    {value: '10$-20$', viewValue: '10$-20$'},
-    {value: '20$-50$', viewValue: '20$-50$'},
-    {value: '50$-100$', viewValue: '50$-100$'},
-    {value: '100$-150', viewValue: '100$-150'},
-    {value: '150$-200$', viewValue: '150$-200$'},
-    {value: '200$-300$', viewValue: '200$-300$'}
+    { value: '10$-20$', viewValue: '10$-20$' },
+    { value: '20$-50$', viewValue: '20$-50$' },
+    { value: '50$-100$', viewValue: '50$-100$' },
+    { value: '100$-150', viewValue: '100$-150' },
+    { value: '150$-200$', viewValue: '150$-200$' },
+    { value: '200$-300$', viewValue: '200$-300$' }
   ];
   minDate = new Date(2017, 0, 1);
   maxDate = new Date(2020, 0, 1);
@@ -96,7 +96,38 @@ export class CourseComponent implements OnInit {
   public onSale = false;
   public endofCatList: boolean = false;
   public endofSubCatList: boolean = false;
-
+  slideConfig = {
+    infinite: false,
+    speed: 900,
+    autoplay: true,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    prevArrow: '<button class="leftRs">&lt;</button>',
+    nextArrow: '<button class="rightRs">&lt;</button>',
+    responsive: [
+      {
+        breakpoint: 1025,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true
+        }
+      },
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+]};
   filter(val: string): string[] {
     return this.options.filter(option =>
       option.toLowerCase().indexOf(val.toLowerCase()) === 0);
@@ -137,18 +168,18 @@ export class CourseComponent implements OnInit {
 
     this.global.GlobalWishListCourses$.subscribe(
       data => {
-        if (data.length===0){
+        if (data.length === 0) {
           this.GlobalWishListCourses = [];
-        }else {
+        } else {
           this.GlobalWishListCourses = data;
         }
       });
 
     this.global.GlobalCartCourses$.subscribe(
       data => {
-        if(data.length===0){
+        if (data.length === 0) {
           this.GlobalCartCourses = [];
-        }else{
+        } else {
           this.GlobalCartCourses = data;
         }
       });
@@ -173,8 +204,19 @@ export class CourseComponent implements OnInit {
   pageno(page) {
     this.page = page;
   }
-
+  public SlideConfig;
   ngOnInit() {
+    this.obj2.get_categories().subscribe(response => {
+      this.Categories = response;
+      this.loaded = true;
+      this.loaded = true;
+      // $('.homeSlider').fadeOut(0);
+      // if (this.Categories) {
+      //   // this.slideConfig = 
+
+      // }
+      // $('.homeSlider').fadeIn(500).delay(200);
+    });
 
     this.obj.get_top_rated_courses(1).subscribe(response => {
       this.topRatedCourses = response;
@@ -202,10 +244,10 @@ export class CourseComponent implements OnInit {
 
       this.obj.get_courses_subcategory(this.subcat_Id, this.page).subscribe(response => {
         this.SubCat_Courses = response;
-      //  console.log(this.SubCat_Courses);
+        //  console.log(this.SubCat_Courses);
         this.loaded5 = true;
       });
-      if (this.subcat_Id>0) {
+      if (this.subcat_Id > 0) {
         this.obj.get_courses_category(this.cat_Id, this.page).subscribe(response => {
           this.Cat_Courses = response;
           console.log(this.Cat_Courses);
@@ -213,61 +255,17 @@ export class CourseComponent implements OnInit {
         });
       }
       if (this.cat_Id < 1 && this.subcat_Id < 1) {
-          this.loaded2 = true;
-          this.loaded = true;
-          this.obj.get_bid_courses(this.page).subscribe(response => {
+        this.loaded2 = true;
+        this.loaded = true;
+        this.obj.get_bid_courses(this.page).subscribe(response => {
           this.BidCourses = response;
-      //    console.log(this.BidCourses);
+          //    console.log(this.BidCourses);
           this.loaded4 = true;
-      });
+        });
       }
     });
 
-    this.obj2.get_categories().subscribe(response => {
-      this.Categories = response;
-      this.loaded = true;
-      this.loaded = true;
-      $('.homeSlider').fadeOut(0);
-      if (this.Categories) {
-        setTimeout(function () {
-          $('.homeSlider').not('.slick-initialized').slick({
-            infinite: true,
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            autoplay: false,
-            prevArrow: '<button class="leftRs">&lt;</button>',
-            nextArrow: '<button class="rightRs">&lt;</button>',
-            responsive: [
-              {
-                breakpoint: 1024,
-                settings: {
-                  slidesToShow: 3,
-                  slidesToScroll: 3,
-                  infinite: true
 
-                }
-              },
-              {
-                breakpoint: 600,
-                settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 2
-                }
-              },
-              {
-                breakpoint: 480,
-                settings: {
-                  slidesToShow: 1,
-                  slidesToScroll: 1
-                }
-              }
-
-            ]
-          });
-        }, 250);
-      }
-      $('.homeSlider').fadeIn(700).delay(500);
-    });
 
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -294,7 +292,7 @@ export class CourseComponent implements OnInit {
       this.obj.add_to_cart_no_promo(course_id).subscribe(
         data => {
           // console.log(data[0]['json'].json());
-          if(data[0]['json'].json().hasOwnProperty("status")) {
+          if (data[0]['json'].json().hasOwnProperty("status")) {
             this.alreadyInCartStatus = true;
             CourseComponent.AlreadyInCartError();
             this.nav.navigate(['/checkout']);
@@ -357,7 +355,8 @@ export class CourseComponent implements OnInit {
     if (this.Logedin === '1') {
       const dialogRef = this.dialog.open(AddCartDialogComponent, {
         width: '500px',
-        data: { course_id: course_id,
+        data: {
+          course_id: course_id,
           // CourseDetail: this.Courses
         }
       });
@@ -384,8 +383,8 @@ export class CourseComponent implements OnInit {
       this.obj.add_wishlist(course_id).subscribe(
         data => {
           // console.log(data[0]['json'].json());
-          if(data[0]['json'].json().hasOwnProperty("status")) {
-                CourseComponent.AlreadyInWishlistError();
+          if (data[0]['json'].json().hasOwnProperty("status")) {
+            CourseComponent.AlreadyInWishlistError();
           }
           else {
             this.GlobalWishListCourses.push(data[0]['json'].json());
@@ -509,12 +508,12 @@ export class CourseComponent implements OnInit {
   //   this.SearchingFilter();
   // }
 
-  selectrange1(range1){
-    this.startprice= range1;
+  selectrange1(range1) {
+    this.startprice = range1;
     this.SearchingFilter();
   }
-  selectrange2(range2){
-    this.endprice= range2;
+  selectrange2(range2) {
+    this.endprice = range2;
     this.SearchingFilter();
   }
 
@@ -536,19 +535,19 @@ export class CourseComponent implements OnInit {
     this.SearchingFilter();
   }
 
-//   getingInstructors() {
-//     // console.log('Calling Teacher API' + teacher);
-//     this.obj.saerchTeacher(this.teacher).subscribe(response => {
-//
-//       // this.options = response;
-//       this.instructorId = response[0].id;
-//       console.log( this.instructorId);
-//       alert(this.instructorId);
-//       this.SearchingFilter();
-//
-//     });
-//
-// }
+  //   getingInstructors() {
+  //     // console.log('Calling Teacher API' + teacher);
+  //     this.obj.saerchTeacher(this.teacher).subscribe(response => {
+  //
+  //       // this.options = response;
+  //       this.instructorId = response[0].id;
+  //       console.log( this.instructorId);
+  //       alert(this.instructorId);
+  //       this.SearchingFilter();
+  //
+  //     });
+  //
+  // }
   loadCourses() {
     this.global.CurrentPage = this.global.CurrentPage + 1;
     this.global.get_cources(this.global.CurrentPage).subscribe(
@@ -557,11 +556,11 @@ export class CourseComponent implements OnInit {
           this.Courses.courses = this.Courses.courses.concat(data.courses);
           console.log(this.Courses.courses);
           this.glb_ser['Courses'] = this.Courses;
-          if (this.Courses.courses.length === this.Courses.totalItems){
+          if (this.Courses.courses.length === this.Courses.totalItems) {
             this.endofList = true;
           }
         }
-        else{
+        else {
           console.log("there are no More Courses in List");
           CourseComponent.noMoreCoursesError();
         }
@@ -576,11 +575,11 @@ export class CourseComponent implements OnInit {
           this.Cat_Courses.courses = this.Courses.courses.concat(data.courses);
           console.log(this.Cat_Courses.courses);
           // this.Cat_Courses = this.Cat_Courses;
-          if (this.Cat_Courses.courses.length === this.Cat_Courses.totalItems){
+          if (this.Cat_Courses.courses.length === this.Cat_Courses.totalItems) {
             this.endofCatList = true;
           }
         }
-        else{
+        else {
           console.log("there are no More Courses in List");
           CourseComponent.noMoreCoursesError();
         }
@@ -595,11 +594,11 @@ export class CourseComponent implements OnInit {
           this.SubCat_Courses.courses = this.Courses.courses.concat(data.courses);
           console.log(this.SubCat_Courses.courses);
           // this.Cat_Courses = this.Cat_Courses;
-          if (this.SubCat_Courses.courses.length === this.SubCat_Courses.totalItems){
+          if (this.SubCat_Courses.courses.length === this.SubCat_Courses.totalItems) {
             this.endofSubCatList = true;
           }
         }
-        else{
+        else {
           console.log("there are no More Courses in List");
           CourseComponent.noMoreCoursesError();
         }

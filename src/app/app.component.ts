@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import { Router, NavigationEnd } from '@angular/router';
 import {GlobalService} from './global.service';
 import {SimpleGlobal} from 'ng2-simple-global';
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -45,6 +46,9 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+    window.onbeforeunload = function () {
+      $(this).scrollTop(0);
+    }
   }
 
   // openChat(): void {
