@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, NgForm, Validators} from '@angular/forms';
 import {PartnershipService} from './partnership.service';
 import swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 const NAME_REGEX = /^[a-zA-Z _.]+$/;
 const PHONE_REGEX = /^[0-9]+$/;
@@ -44,7 +45,7 @@ export class PartnershipComponent implements OnInit {
   public captcha: boolean = false;
 
 
-  constructor(private obj: PartnershipService) { }
+  constructor(private obj: PartnershipService,private _nav: Router) { }
 
   ngOnInit() {
 
@@ -55,6 +56,7 @@ export class PartnershipComponent implements OnInit {
       data => {
         // console.log(data);
         this.partnershipSuccess();
+        this._nav.navigate(['/']);
         f.reset();
       },
       error => {

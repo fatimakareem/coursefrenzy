@@ -1,24 +1,24 @@
-import {Component, OnInit, OnDestroy, Inject, PLATFORM_ID} from '@angular/core';
-import {SingleCourseService} from './single-course.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
-import {NgForm} from '@angular/forms';
-import {FormControl, NgModel, Validators, ReactiveFormsModule} from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent} from '@angular/material';
-import {NgControl} from '@angular/forms';
-import {GlobalService} from '../global.service';
-import {Config} from '../Config';
-import {BiddingDialogComponent} from "../bidding-dialog/bidding-dialog.component";
-import {isPlatformBrowser} from "@angular/common";
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { SingleCourseService } from './single-course.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { NgForm } from '@angular/forms';
+import { FormControl, NgModel, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
+import { NgControl } from '@angular/forms';
+import { GlobalService } from '../global.service';
+import { Config } from '../Config';
+import { BiddingDialogComponent } from "../bidding-dialog/bidding-dialog.component";
+import { isPlatformBrowser } from "@angular/common";
 import swal from 'sweetalert2';
-import {AddCartDialogComponent} from "../cart-dialog/add-cart-dialog.component";
-import {SingleCourseGlobalService} from "../singleCourse.global.service";
-import {HttpClient} from "@angular/common/http";
-import {VideoShowDialogComponent} from "./video-show-dialog/video-show-dialog.component";
-import {AddReviewDialogComponent} from "./add-review-dialog/add-review-dialog.component";
-import {CoursesService} from "../course/courses.service";
-import {MessagesService} from "../Messages.service";
-import {FollowUnfollowService} from "../Follow-Unfollow.service";
+import { AddCartDialogComponent } from "../cart-dialog/add-cart-dialog.component";
+import { SingleCourseGlobalService } from "../singleCourse.global.service";
+import { HttpClient } from "@angular/common/http";
+import { VideoShowDialogComponent } from "./video-show-dialog/video-show-dialog.component";
+import { AddReviewDialogComponent } from "./add-review-dialog/add-review-dialog.component";
+import { CoursesService } from "../course/courses.service";
+import { MessagesService } from "../Messages.service";
+import { FollowUnfollowService } from "../Follow-Unfollow.service";
 // import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 declare const $: any;
@@ -77,7 +77,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   public InWatchList: boolean;
   public firstname;
   public lastname;
-  public rev:any;
+  public rev: any;
   public model: any = {};
   selected = 0;
   hovered = 0;
@@ -86,16 +86,16 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     Validators.required,
   ]);
   constructor(private obj: SingleCourseService,
-              private follow_unfollow: FollowUnfollowService,
-              private obj2: GlobalService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private obj3: CoursesService,
-              private nav: Router,
-              private global: GlobalService,
-              public dialog: MatDialog,@Inject(PLATFORM_ID) private platformId: Object) {
-          //  config.max = 5;
-          // config.readonly = true;
+    private follow_unfollow: FollowUnfollowService,
+    private obj2: GlobalService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private obj3: CoursesService,
+    private nav: Router,
+    private global: GlobalService,
+    public dialog: MatDialog, @Inject(PLATFORM_ID) private platformId: Object) {
+    //  config.max = 5;
+    // config.readonly = true;
     if (isPlatformBrowser(this.platformId)) {
       this.Logedin = localStorage.getItem("loged_in");
     }
@@ -162,37 +162,37 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       this.route_instructor = +params['instructor'] || 0;
       this.obj.get_Single_Course(this.CourseId).subscribe(response => {
 
-          this.SingleCourse = response;
-          this.rev = response.rating;
-          if (response.hasOwnProperty("status")) {
-            // this.AlreadyInWishlistError();
-          }
-          console.log(this.SingleCourse);
-          this.global.SetingteacherID(this.SingleCourse.user_id.id);
+        this.SingleCourse = response;
+        this.rev = response.rating;
+        if (response.hasOwnProperty("status")) {
+          // this.AlreadyInWishlistError();
+        }
+        console.log(this.SingleCourse);
+        this.global.SetingteacherID(this.SingleCourse.user_id.id);
 
-          // this.ProfileImage = this.SingleCourse.user_id[0].profile[0].profilePhoto;
-          this.ProfileImage = this.SingleCourse.user_id;
-          // alert(this.ProfileImage);
-          // console.log(this.ProfileImage);
-          // console.log(this.ProfileImage.id);
-          // console.log(this.ProfileImage.profile);
-          this.ProfileImage = this.ProfileImage.profile;
-          this.ProfileImage = this.ProfileImage.profilePhoto;
-          console.log(this.ProfileImage);
-          this.instructor_id = this.SingleCourse.user_id.id;
-          this.rev = this.SingleCourse.rating;
-          this.firstname = this.SingleCourse.user_id.first_name;
-          this.lastname = this.SingleCourse.user_id.last_name;
-          this.SingleCourseloaded = true;
-          // console.log(this.SingleCourse);
-          this.course_category = this.SingleCourse.Categories[0].name;
-          this.course_category_id = this.SingleCourse.Categories[0].id;
-          this.course_Subcategory = this.SingleCourse.SubCategory[0].name;
-          this.course_Subcategory_id = this.SingleCourse.SubCategory[0].id;
-          this.InWatchList = this.SingleCourse.inWatchList;
-          this.global.setWatchlist(this.SingleCourse.inWatchList);
-          this.global.SetFollowing(this.SingleCourse.isFollowedInstructor);
-        },
+        // this.ProfileImage = this.SingleCourse.user_id[0].profile[0].profilePhoto;
+        this.ProfileImage = this.SingleCourse.user_id;
+        // alert(this.ProfileImage);
+        // console.log(this.ProfileImage);
+        // console.log(this.ProfileImage.id);
+        // console.log(this.ProfileImage.profile);
+        this.ProfileImage = this.ProfileImage.profile;
+        this.ProfileImage = this.ProfileImage.profilePhoto;
+        console.log(this.ProfileImage);
+        this.instructor_id = this.SingleCourse.user_id.id;
+        this.rev = this.SingleCourse.rating;
+        this.firstname = this.SingleCourse.user_id.first_name;
+        this.lastname = this.SingleCourse.user_id.last_name;
+        this.SingleCourseloaded = true;
+        // console.log(this.SingleCourse);
+        this.course_category = this.SingleCourse.Categories[0].name;
+        this.course_category_id = this.SingleCourse.Categories[0].id;
+        this.course_Subcategory = this.SingleCourse.SubCategory[0].name;
+        this.course_Subcategory_id = this.SingleCourse.SubCategory[0].id;
+        this.InWatchList = this.SingleCourse.inWatchList;
+        this.global.setWatchlist(this.SingleCourse.inWatchList);
+        this.global.SetFollowing(this.SingleCourse.isFollowedInstructor);
+      },
         (error) => {
           this.statusMessage = 'Something Wrong! Please Try Again!'
         });
@@ -264,20 +264,20 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   }
 
   Follow_Instructor(user_id) {
-    this.follow_unfollow.Follow_Unfollow(user_id,this.Logedin);
+    this.follow_unfollow.Follow_Unfollow(user_id, this.Logedin);
   }
 
   AddToWatchList() {
     if (this.Logedin == '1') {
       this.obj.AddtoWatchedCourses(this.CourseId).subscribe(response => {
-        if (response.status===false) {
+        if (response.status === false) {
           this.message = response.message;
           MessagesService.ErrorMessage(this.message);
         }
         else {
           // this.GlobalWishListCourses.push(data[0]['json'].json());
           // this.global.getGolbalWishListCourses(this.GlobalWishListCourses);
-          this.SingleCourse.inWatchList=true;
+          this.SingleCourse.inWatchList = true;
           this.InWatchList = true;
           this.global.setWatchlist(true);
           MessagesService.SuccessMessage("Course Added to WatchList Successfully!");
@@ -292,13 +292,13 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   RemoveFromWatchList() {
     if (this.Logedin == '1') {
       this.obj.WatchListDelete(this.CourseId).subscribe(response => {
-        if (response.status===true) {
+        if (response.status === true) {
           this.InWatchList = false;
           this.global.setWatchlist(false);
           MessagesService.SuccessMessage(response.message);
         }
         else {
-          this.SingleCourse.inWatchList=false;
+          this.SingleCourse.inWatchList = false;
           MessagesService.ErrorMessage(response.message);
         }
       });
@@ -421,7 +421,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     this.obj.add_to_cart_no_promo(this.CourseId).subscribe(
       data => {
         // console.log(data[0]['json'].json());
-        if(data[0]['json'].json().hasOwnProperty("status")) {
+        if (data[0]['json'].json().hasOwnProperty("status")) {
           this.alreadyInCartStatus = true;
           // AddCartDialogComponent.AlreadyInCartError();
           // this.dialogRef.close();
@@ -564,7 +564,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     if (this.Logedin == '1') {
       const dialogRef = this.dialog.open(PublishCourseComponent, {
         width: '500px',
-        data: {CourseId: this.CourseId}
+        data: { CourseId: this.CourseId }
       });
     }
     else {
@@ -578,7 +578,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     if (this.Logedin == '1') {
       const dialogRef = this.dialog.open(BiddingDialogComponent, {
         width: '500px',
-        data: {bid_id: this.CourseId}
+        data: { bid_id: this.CourseId }
       });
     }
     else {
@@ -591,7 +591,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     if (this.Logedin === '1') {
       const dialogRef = this.dialog.open(AddCartDialogComponent, {
         width: '500px',
-        data: {course_id: this.CourseId}
+        data: { course_id: this.CourseId }
       });
     } else {
       SingleCourseComponent.Authenticat();
@@ -697,7 +697,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     });
   }
 
-  reviews_post(){
+  reviews_post() {
     this.obj.post_reviews(this.model.comment, this.model.rating, this.CourseId).subscribe(data => {
     });
   }
@@ -713,7 +713,7 @@ export class AddChapterComponent {
   public model: any = {};
 
   constructor(private obj: SingleCourseService, public dialogRef: MatDialogRef<AddChapterComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   chaptername = new FormControl('', [
@@ -773,7 +773,7 @@ export class EditChapterComponent implements OnInit {
   public model: any = {};
 
   constructor(private obj: SingleCourseService, public dialogRef: MatDialogRef<EditChapterComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   chaptername = new FormControl('', [
@@ -874,9 +874,9 @@ export class AddVideoComponent {
   private video_size: string;
 
   constructor(private obj: SingleCourseService,
-              public dialogRef: MatDialogRef<AddVideoComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private http: HttpClient) {
+    public dialogRef: MatDialogRef<AddVideoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private http: HttpClient) {
   }
 
   // ngOnInit() {
@@ -900,8 +900,8 @@ export class AddVideoComponent {
 
   onChange(event: EventTarget) {
     this.input = new FormData();
-    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     this.input.append('fileToUpload', target.files[0]);
     // alert(target.files[0].name.toString());
     this.model.video_title = target.files[0].name.toString();
@@ -912,12 +912,12 @@ export class AddVideoComponent {
     // console.log('form Submit call');
     this.http.post(
       'https://storage.coursefrenzy.com/upload_video.php',
-      this.input, {responseType: 'json'}).subscribe(data => {
-      // this.course_video = data;
-      // alert(data);
-      // console.log(data);
-      this.ifImageUpload(data);
-    });
+      this.input, { responseType: 'json' }).subscribe(data => {
+        // this.course_video = data;
+        // alert(data);
+        // console.log(data);
+        this.ifImageUpload(data);
+      });
   }
 
   private ifImageUpload(data) {
@@ -992,16 +992,16 @@ export class PublishCourseComponent {
   public model: any = {};
   selectedValue: string;
   languages = [
-    {value: 'English', viewValue: 'English'},
-    {value: 'Urdu', viewValue: 'Urdu'},
-    {value: 'Spanish', viewValue: 'Spanish'},
-    {value: 'French', viewValue: 'French'},
-    {value: 'Turkish', viewValue: 'Turkish'},
-    {value: 'Arabic', viewValue: 'Arabic'}
+    { value: 'English', viewValue: 'English' },
+    { value: 'Urdu', viewValue: 'Urdu' },
+    { value: 'Spanish', viewValue: 'Spanish' },
+    { value: 'French', viewValue: 'French' },
+    { value: 'Turkish', viewValue: 'Turkish' },
+    { value: 'Arabic', viewValue: 'Arabic' }
   ];
 
   constructor(private obj: SingleCourseService, public dialogRef: MatDialogRef<PublishCourseComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   headline = new FormControl('', [

@@ -69,10 +69,11 @@
                   </ul>
                 </div>
                 <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough">  ${{ data?.course?.actual_price }} </div>
+                <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont " *ngIf="data?.course?.discounted_price !=null">${{ data?.course?.discounted_price }}</div>
+
               </div>
               <div class="row">
                 <a routerLink="/user-profile/{{data?.course?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name" class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{ data?.course?.user_id.first_name }} {{ data?.course?.user_id.last_name }} </a>
-                <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{ data?.course?.discounted_price }}</div>
               </div>
             </div>
             <div class="product-list__item-info">

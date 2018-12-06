@@ -83,7 +83,7 @@
               <div class="panel-body">
 
                 <mat-form-field class="example-full-width mat-size">
-                  <input matInput placeholder="Credit Card Number" [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
+                  <input matInput placeholder="Credit Card Number" minlength="14" maxlength="16" [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
                          required>
                   <mat-error *ngIf="CardNumberForm.hasError('pattern')">
                     Please enter a valid card number. Only Numerics are Allowed.
@@ -170,12 +170,12 @@
                     <td>
                       <div *ngIf="card.default == true" >
    
-                          <mat-slide-toggle  [checked]="true" name="atm_details" (click)="setcard(card.cardNumber,card.ccv,card.expiryDate,card.nickname,card.default,card.card_type,card.id)"
+                          <mat-slide-toggle  [checked]="true" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
                           class="py-toggle"></mat-slide-toggle>
                       </div>
                       <div *ngIf="card.default != true" >
    
-                          <mat-slide-toggle [checked]="false" name="atm_details" (click)="setcard(card.cardNumber,card.ccv,card.expiryDate,card.nickname,card.default,card.card_type,card.id)"
+                          <mat-slide-toggle [checked]="false" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
                           class="py-toggle"></mat-slide-toggle>
                       </div>
                     
