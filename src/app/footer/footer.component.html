@@ -44,10 +44,21 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 widget-link">
-          <h2 class="widget-title cat-head">Categories</h2>
+        <div class="col-md-2 col-sm-2 col-xs-6 widget-link">
+            <h2 class="widget-title">Categories</h2>
+          <ul class="widget-list">
+            <li *ngFor="let cat of Categories; let i=index">
+              <ng-container>
+                <a routerLink='/cat_courses/{{cat.id}}'>{{ cat.name }}</a>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 widget-link">
+          <h2 class="widget-title">Sub Categories</h2>
           <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- <div class="col-md-3 col-sm-3 col-xs-6">
+                <h2 class="widget-title cat-head">Categories</h2>
               <ul class="widget-list">
                 <li *ngFor="let cat of Categories; let i=index">
                   <ng-container>
@@ -55,10 +66,10 @@
                   </ng-container>
                 </li>
               </ul>
-            </div>
+            </div> -->
 
 
-            <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="col-md-4 col-sm-4 col-xs-6">
               <ul class="widget-list">
                 <ng-container *ngFor="let cat of Categories;  let i=index">
                   <ng-container *ngIf="i==2 || i==1">
@@ -71,7 +82,7 @@
                 </ng-container>
               </ul>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-6 mrgn-mob-fix">
+            <div class="col-md-4 col-sm-4 col-xs-6 mrgn-mob-fix">
               <!-- <h2 class="widget-title cat-head">SunbCategories</h2> -->
               <ul class="widget-list">
                 <ng-container *ngFor="let cat of Categories;  let i=index">
@@ -85,7 +96,7 @@
                 </ng-container>
               </ul>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="col-md-4 col-sm-4 col-xs-6">
               <ul class="widget-list">
                 <ng-container *ngFor="let cat of Categories;  let i=index">
                   <ng-container *ngIf="i==4">
