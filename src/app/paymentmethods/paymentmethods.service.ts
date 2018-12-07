@@ -10,12 +10,6 @@ export class PaymentmethodsService {
   }
 
   addCard(cardno, ccv, expiryDate, cardnickname, card_type, defaultCheck) {
-    alert(cardno);
-    alert(ccv);
-    alert(expiryDate);
-    alert(cardnickname);
-    alert(card_type);
-    alert(defaultCheck);
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));

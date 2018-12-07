@@ -20,8 +20,8 @@
     <div class="row" *ngIf="GlobalWishListCourses">
       <div class="col-lg-12 text-center">
         <!--<h3 class="title-02 title-02&#45;&#45;mr-01" *ngIf="GlobalWishListCourses.length == 0"> Your wish list is empty </h3>-->
-        <h3 class="title-02 title-02--mr-01" *ngIf="GlobalWishListCourses.length == 1"> You Have Added {{ GlobalWishListCourses.length }} Course in Wish List </h3>
-        <h3 class="title-02 title-02--mr-01" *ngIf="GlobalWishListCourses.length > 1"> You Have Added {{ GlobalWishListCourses.length }} Courses in Wish List </h3>
+        <h3 class="title-02 title-02--mr-01" *ngIf="GlobalWishListCourses.length == 1"> You have added {{ GlobalWishListCourses.length }} Course in Wish List </h3>
+        <h3 class="title-02 title-02--mr-01" *ngIf="GlobalWishListCourses.length > 1"> You have added {{ GlobalWishListCourses.length }} Courses in Wish List </h3>
         <!--<p class="subtitle-01">{{ Courses_content?.description }}</p>-->
       </div>
     </div>
@@ -54,8 +54,7 @@
               <!--<h6 class="linethrough">${{list.course.actual_price}}</h6>-->
               <!--</div>-->
               <div class="col-sm-1 col-xs-3 text-right" >
-                  <h6 *ngIf="list.course.actual_price !=null">${{list.course.actual_price}}</h6>
-                <h6 *ngIf="list.course.discounted_price !=null">${{list.course.discounted_price}}</h6>
+                <h6>${{list.course.discounted_price}}</h6>
               </div>
               <div class="col-sm-1 col-xs-2 text-right">
                 <a><i class="fa fa-trash-o font-size-36" (click)="removeFromWishlist(i, list.course.id)" data-toggle="tooltip" title="Remove from Wishlist" ></i></a>
