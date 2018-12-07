@@ -153,7 +153,7 @@
           <section class="admin-panel single-course profile" *ngIf="loaded">
             <h2 class="page-title-01 jumbotron cstm gradient13 color-white" >Courses taught by {{ ProfileData?.user?.first_name }} {{ ProfileData?.user?.last_name }}</h2>
             <hr/>
-            <div *ngFor="let list of coursesList?.courses; let i=index;">
+            <div class="padding-t-b-10" *ngFor="let list of coursesList?.courses; let i=index;">
               <div class="row wow fadeIn">
                 <div class="col-md-4 col-sm-12">
                   <div class="popular-courses">
@@ -199,10 +199,10 @@
 
                     <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough"> ${{ list?.actual_price }}</div>
                     <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{ list.discounted_price }}</div>
-                      <div class="pull-right margin-r-60" >
-                      <a class="material-icons wishlist" title="Add to wishlist"
+                      <div class="pull-right" >
+                      <a class="material-icons wishlist margin-top-10" title="Add to wishlist"
                          (click)="onclick(i, list.id)">favorite_border</a>
-                      <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog2(i, list?.id)">add_shopping_cart</a>
+                      <a class="wishlist material-icons margin-top-10" title="Add to Cart" (click)="openDialog2(i, list?.id)">add_shopping_cart</a>
                       <a routerLink="/checkout" type="button" class="shoping-icon" class="btn btn1 product-list__content">Buy Now</a>
                       </div>
                     </div>
