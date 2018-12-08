@@ -250,7 +250,16 @@ export class PaymentmethodsComponent implements OnInit {
           this.getCards();
         },
           error => {
-            if (error.status == 404) {
+           if (error.status == 302) {
+              swal(
+                'Sorry',
+                'Crad Number Already Exist',
+                'error'
+                
+              )
+            }
+         
+            else if (error.status == 404) {
               swal({
                 type: 'error',
                 title: 'This card already exist!',
@@ -270,9 +279,11 @@ export class PaymentmethodsComponent implements OnInit {
               swal(
                 'Sorry',
                 'Server is under maintenance!',
-                'error'
+                'error',
+                
               )
             }
+         
             else {
               swal(
                 'Sorry',
@@ -311,7 +322,15 @@ export class PaymentmethodsComponent implements OnInit {
           this.getCards();
         },
           error => {
-            if (error.status == 404) {
+            if (error.status == 302) {
+              swal(
+                'Sorry',
+                'Crad Number Already Exist',
+                'error'
+                
+              )
+            }
+            else if (error.status == 404) {
               swal({
                 type: 'error',
                 title: 'This card already exist!',
