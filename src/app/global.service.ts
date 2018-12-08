@@ -90,7 +90,8 @@ export class GlobalService {
 
   private GlobalCartCourses = new BehaviorSubject<any>('');
   GlobalCartCourses$ = this.GlobalCartCourses.asObservable();
-
+  watchSubject=new BehaviorSubject<any>('');
+  currentMessage = this.watchSubject.asObservable();
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private _http2: Http,
               private glb_ser: SimpleGlobal,
@@ -214,6 +215,10 @@ export class GlobalService {
 
   SetFollowing(data: boolean){
     this.FollowOrNot.next(data);
+  }
+  watchInfo(message) {
+    this.watchSubject.next(message)
+    console.log( message)
   }
 
 }

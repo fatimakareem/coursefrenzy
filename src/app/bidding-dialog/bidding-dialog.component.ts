@@ -37,7 +37,7 @@ export class BiddingDialogComponent implements OnInit {
   onSubmit(f: NgForm) {
     this.add_bid_confirmation();
   }
-
+  err;
   add_bid_confirmation() {
     swal({
       title: 'Are you sure you want to add bid on this course? <br> You will not be able to revert this!',
@@ -54,9 +54,22 @@ export class BiddingDialogComponent implements OnInit {
             this.BidSuccess();
             this.dialogRef.close();
           },
-          (error: any) => {
-
+          (error) => {
+            this.err=error.json()
+            console.log(this.err.bidamount ,this.err,'kkkkkk')
+if(error.status == 403){
+  
+  swal({
+    type: 'error',
+    title: 'Bid Higher than ' + '$'+ this.err.bidamount,
+    showConfirmButton: true,
+    width: '512px',
+   
+  });
+}
+else if(error.status==404){
               this.bidclosed();
+}
           }
           );
       }
