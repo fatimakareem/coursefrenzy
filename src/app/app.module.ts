@@ -87,11 +87,6 @@ import {VgControlsModule} from 'videogular2/controls';
 import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
 
-// import { FilePickerModule } from 'angular-file-picker';
-// Imporing For Rating Module
-
-// import {
-//   SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedinLoginProvider} from 'ng4-social-login';
 
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
@@ -108,7 +103,6 @@ import {HomeService} from './home/home.service';
 import {SingleEventService} from './event/single-event.service';
 import { WebSocketService } from 'angular2-websocket-service';
 import {ServerSocket} from './single-course/server-socket.service';
-import {ChatboxComponent} from './chatbox/chatbox.component';
 import {HeaderService} from './header/header.service';
 import {InstructorService} from "./become-instructor-questions/instructor.service";
 import {PagerService} from "./paginator.service";
@@ -116,17 +110,6 @@ import {AccountService} from "./account/account.service";
 import {AdminPanelService} from "./admin-panel/admin-panel.service";
 import {CourseCheckoutService} from "./course-checkout/course-checkout.service";
 
-// import {NgxPaginationModule} from 'ngx-pagination';
-// const config = new AuthServiceConfig([
-//   {
-//     id: GoogleLoginProvider.PROVIDER_ID,
-//     provider: new GoogleLoginProvider('coursefrenzy-183511')
-//   },
-//   {
-//     id: FacebookLoginProvider.PROVIDER_ID,
-//     provider: new FacebookLoginProvider('219249381809488')
-//   }
-// ]);
 
 import { SimpleGlobal } from 'ng2-simple-global';
 import {AdminLayoutComponent} from "./layouts/admin/admin-layout.component";
@@ -136,8 +119,6 @@ import {ProfileService} from "./profile/profile.service";
 import {AdminCategoriesService} from "./admin-categories/admin-categories.service";
 import {AdminFaqsService} from "./admin-faqs/admin-faqs.service";
 import {LoaderModule} from "./loader/loader.module";
-import {BusinessComponent} from "./business/business.component";
-import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 import {HeadersService} from "./headers.service";
 import {EmailActivationService} from "./email-activation/email-activation.service";
 import {ChangeForgetPasswordService} from "./change-forget-password/change-forget-password.service";
@@ -146,10 +127,7 @@ import {SubscriptionConfirmationService} from "./subscription-confirmation/subsc
 import {BuyNowService} from "./BuyNow.service";
 import {FollowUnfollowService} from "./Follow-Unfollow.service";
 import {ChatboxService} from "./chatbox/chatbox.service";
-import { WinbidComponent } from './winbid/winbid.component';
-import { WinbidUserComponent } from './winbid-user/winbid-user.component';
-// import {EmailActivationComponent} from "./email-activation/email-activation.component";
-// import {BecomeInstructorComponent} from "./become-instructor/become-instructor.component";
+
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -179,9 +157,6 @@ export function provideConfig() {
     SingleCategoryComponent,
     ChatComponent,
 
-
-    // EmailActivationComponent,
-    // BecomeInstructorComponent
   ],
 
   imports: [
