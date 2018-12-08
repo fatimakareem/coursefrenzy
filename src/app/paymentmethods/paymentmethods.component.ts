@@ -109,7 +109,27 @@ export class PaymentmethodsComponent implements OnInit {
     this.form.controls['check'].setValue(false);
     this.getCards();
   }
-  
+  ShowButton(var_type_atm) {
+
+    if (var_type_atm == "American Express") {
+      this.cardtype = var_type_atm;
+      this.cardnumber = false;
+      this.form.controls.cardnumber.reset();
+      this.cardnumber4 = true;
+      this.ccv = false;
+      this.form.controls.ccv.reset();
+      this.ccv4 = true;
+    }
+    else {
+      this.cardtype = var_type_atm;
+      this.cardnumber4 = false;
+      this.form.controls.cardnumber4.reset();
+      this.cardnumber = true;
+      this.ccv4 = false;
+      this.form.controls.ccv4.reset();
+      this.ccv = true;
+    }
+  }
   cardid;
   card;
   var_get_type;
