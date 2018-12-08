@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
       // text: 'Welcome to CourseFrenzy!',
       showConfirmButton: false,
       width: '512px',
-      timer: 2000
+      timer: 1500
     });
   }
 

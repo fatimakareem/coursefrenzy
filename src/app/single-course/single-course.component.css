@@ -910,7 +910,12 @@ input[type="file"]{
 }
 
 .single-course-wishlist {
-  margin-left: 45%;
+  text-align: center;
+}
+.single-course-wishlist a{
+  color: #cc0000;
+  cursor: pointer;
+  font-size: 25px !important;
 }
 @media (max-width: 768px){
 

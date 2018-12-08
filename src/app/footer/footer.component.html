@@ -6,41 +6,59 @@
         <div class="col-sm-12 col-xs-12 col-md-3 col-lg-3">
           <div class="row">
             <div class="col-sm-6 col-xs-12 col-md-12">
-          <a [routerLink]="['/']" class="footer-logo">
-            <img src="../../assets/img/logo4.png"/>
-          </a>
-          <p class="footer-txt">
-            CourseFrenzy is a next generation Artificially Intelligent Auction Marketplace to connect Instructors and
-            Students together for a Super-Fast Ultra-Cool worldwide learning experience. Courses can be Sold, Bought,
-            Rented or Bid on through an auction experience.
-          </p>
+              <a [routerLink]="['/']" class="footer-logo">
+                <img src="../../assets/img/logo4.png" />
+              </a>
+              <p class="footer-txt">
+                CourseFrenzy is a next generation Artificially Intelligent Auction Marketplace to connect Instructors
+                and
+                Students together for a Super-Fast Ultra-Cool worldwide learning experience. Courses can be Sold,
+                Bought,
+                Rented or Bid on through an auction experience.
+              </p>
             </div>
 
             <div class="col-sm-6 col-xs-12 col-md-12 footer-sm-padding">
-            <!--<h2 class="widget-title">Who are we?</h2>-->
-            <ul class="widget-list footer-fixed frenzy-link">
-              <li><a onclick="topFunction()" [routerLink]="['/what-is-coursefrenzy']"><h2 class="widget-title"><i
-                class="fa fa-chevron-right"></i> What is CourseFrenzy?</h2></a></li>
-              <li><a onclick="topFunction()" [routerLink]="['/who-are-we']"><h2 class="widget-title"><i
-                class="fa fa-chevron-right"></i> Who Are We? </h2></a></li>
-              <li><a onclick="topFunction()" [routerLink]="['/how-it-works']"><h2 class="widget-title"><i
-                class="fa fa-chevron-right"></i> How it Works </h2></a></li>
-              <li><a onclick="topFunction()" [routerLink]="['/partnership']"><h2 class="widget-title"><i
-                class="fa fa-chevron-right"></i> Partnership </h2></a></li>
-              <li><a onclick="topFunction()" [routerLink]="['/faqs']"><h2 class="widget-title"><i
-                class="fa fa-chevron-right"></i> FAQs </h2></a></li>
-              <li><a onclick="topFunction()" [routerLink]="['/contact']"><h2 class="widget-title"><i
-                class="fa fa-chevron-right"></i> Establish Contact</h2></a></li>
+              <!--<h2 class="widget-title">Who are we?</h2>-->
+              <ul class="widget-list footer-fixed frenzy-link">
+                <li><a onclick="topFunction()" [routerLink]="['/what-is-coursefrenzy']">
+                    <h2 class="widget-title"><i class="fa fa-chevron-right"></i> What is CourseFrenzy?</h2>
+                  </a></li>
+                <li><a onclick="topFunction()" [routerLink]="['/who-are-we']">
+                    <h2 class="widget-title"><i class="fa fa-chevron-right"></i> Who Are We? </h2>
+                  </a></li>
+                <li><a onclick="topFunction()" [routerLink]="['/how-it-works']">
+                    <h2 class="widget-title"><i class="fa fa-chevron-right"></i> How it Works </h2>
+                  </a></li>
+                <li><a onclick="topFunction()" [routerLink]="['/partnership']">
+                    <h2 class="widget-title"><i class="fa fa-chevron-right"></i> Partnership </h2>
+                  </a></li>
+                <li><a onclick="topFunction()" [routerLink]="['/faqs']">
+                    <h2 class="widget-title"><i class="fa fa-chevron-right"></i> FAQs </h2>
+                  </a></li>
+                <li><a onclick="topFunction()" [routerLink]="['/contact']">
+                    <h2 class="widget-title"><i class="fa fa-chevron-right"></i> Establish Contact</h2>
+                  </a></li>
 
-            </ul>
-          </div>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 widget-link">
-          <h2 class="widget-title cat-head">Categories</h2>
+        <div class="col-md-2 col-sm-2 col-xs-6 widget-link">
+            <h2 class="widget-title">Categories</h2>
+          <ul class="widget-list">
+            <li *ngFor="let cat of Categories; let i=index">
+              <ng-container>
+                <a routerLink='/cat_courses/{{cat.id}}'>{{ cat.name }}</a>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 widget-link">
+          <h2 class="widget-title">Sub Categories</h2>
           <div class="row">
-
-            <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- <div class="col-md-3 col-sm-3 col-xs-6">
+                <h2 class="widget-title cat-head">Categories</h2>
               <ul class="widget-list">
                 <li *ngFor="let cat of Categories; let i=index">
                   <ng-container>
@@ -48,26 +66,13 @@
                   </ng-container>
                 </li>
               </ul>
-            </div>
+            </div> -->
 
-            <div class="col-md-3 col-sm-3 col-xs-6 mrgn-mob-fix">
+
+            <div class="col-md-4 col-sm-4 col-xs-6">
               <ul class="widget-list">
                 <ng-container *ngFor="let cat of Categories;  let i=index">
-                  <ng-container *ngIf="i==2">
-                    <li *ngFor="let subcat of cat.category; let j=index">
-                      <ng-container *ngIf="j<20">
-                        <a routerLink='/courses/sub/{{subcat.id}}'>{{ subcat.name }}</a>
-                      </ng-container>
-                    </li>
-                  </ng-container>
-                </ng-container>
-              </ul>
-            </div>
-
-            <div class="col-md-3 col-sm-3 col-xs-6">
-              <ul class="widget-list">
-                <ng-container *ngFor="let cat of Categories;  let i=index">
-                  <ng-container *ngIf="i==3 || i==1">
+                  <ng-container *ngIf="i==2 || i==1">
                     <li *ngFor="let subcat of cat.category; let j=index">
                       <ng-container *ngIf="j<12">
                         <a routerLink='/courses/sub/{{subcat.id}}'>{{ subcat.name }}</a>
@@ -77,10 +82,21 @@
                 </ng-container>
               </ul>
             </div>
-
-
-
-            <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="col-md-4 col-sm-4 col-xs-6 mrgn-mob-fix">
+              <!-- <h2 class="widget-title cat-head">SunbCategories</h2> -->
+              <ul class="widget-list">
+                <ng-container *ngFor="let cat of Categories;  let i=index">
+                  <ng-container *ngIf="i==0">
+                    <li *ngFor="let subcat of cat.category; let j=index">
+                      <ng-container *ngIf="j<20">
+                        <a routerLink='/courses/sub/{{subcat.id}}'>{{ subcat.name }}</a>
+                      </ng-container>
+                    </li>
+                  </ng-container>
+                </ng-container>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
               <ul class="widget-list">
                 <ng-container *ngFor="let cat of Categories;  let i=index">
                   <ng-container *ngIf="i==4">
@@ -97,27 +113,26 @@
         <div class="col-sm-12 col-xs-12 col-md-2 col-lg-2">
           <div class="widget-link">
             <h2 class="widget-title">Subscribe Now:</h2>
-            <p class="color-white">Join our mailing list to receive the latest news on how CourseFrenzy leverages the disruptive power of AI to dive deeper into your customers' opinion.</p>
-              <div class="input-group">
+            <p class="color-white">Join our mailing list to receive the latest news on how CourseFrenzy leverages the
+              disruptive power of AI to dive deeper into your customers' opinion.</p>
+            <div class="input-group">
 
-                <input class="form-control" name="email" placeholder="Enter your email"
-                       type="email"  id="email" #email required>
+              <input class="form-control" name="email" placeholder="Enter your email" type="email" id="email" #email
+                required>
 
 
-                <!--type="text"  [(ngModel)]="model.subscribe" id="subscribe" #subscribe="ngModel" required>-->
+              <!--type="text"  [(ngModel)]="model.subscribe" id="subscribe" #subscribe="ngModel" required>-->
 
-                <span class="input-group-btn">
-                 <button type="submit" class="btn btn-primary" (click)="onSubmit(email.value)" type="button">Go</button>
-               </span>
-              </div>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary" (click)="onSubmit(email.value)" type="button">Go</button>
+              </span>
+            </div>
 
-            <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&hl=en"
-               target="_blank">
-              <img src="../../assets/img/footer/Adroid-Badge.png" class="apple-icon"/>
+            <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&hl=en" target="_blank">
+              <img src="../../assets/img/footer/Adroid-Badge.png" class="apple-icon" />
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&hl=en"
-               target="_blank">
-              <img src="../../assets/img/footer/IOS-Badge.png" class="apple-icon"/>
+            <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&hl=en" target="_blank">
+              <img src="../../assets/img/footer/IOS-Badge.png" class="apple-icon" />
             </a>
           </div>
           <h2 class="widget-title"><i class="fa fa-chevron-right"></i> Stalk Us</h2>
@@ -141,16 +156,16 @@
               </a>
             </li>
             <!--<li class="linked-in">-->
-              <!--<a href="https://www.linkedin.com/company/brainplow/" target="_blank">-->
-                <!--<i class="fa fa-linkedin"></i>-->
-                <!--&lt;!&ndash;<span>LinkedIn</span>&ndash;&gt;-->
-              <!--</a>-->
+            <!--<a href="https://www.linkedin.com/company/brainplow/" target="_blank">-->
+            <!--<i class="fa fa-linkedin"></i>-->
+            <!--&lt;!&ndash;<span>LinkedIn</span>&ndash;&gt;-->
+            <!--</a>-->
             <!--</li>-->
             <!--<li class="google">-->
-              <!--<a href="https://www.linkedin.com/company/brainplow/" target="_blank">-->
-                <!--<i class="fa fa-google-plus"></i>-->
-                <!--&lt;!&ndash;<span> Google+ </span>&ndash;&gt;-->
-              <!--</a>-->
+            <!--<a href="https://www.linkedin.com/company/brainplow/" target="_blank">-->
+            <!--<i class="fa fa-google-plus"></i>-->
+            <!--&lt;!&ndash;<span> Google+ </span>&ndash;&gt;-->
+            <!--</a>-->
             <!--</li>-->
           </ul>
         </div>
@@ -178,4 +193,3 @@
 
   <!--<a class="back2top" title="Back to Top">Back to Top</a>-->
 </footer>
-

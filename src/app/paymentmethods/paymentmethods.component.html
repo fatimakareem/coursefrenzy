@@ -201,7 +201,7 @@
           </ng-template>
           <!--<td><i class="fa fa-check"></i></td>-->
           <td>
-            <a (click)="getSingleCard(card.id)" data-target="#edit-card-modal" data-toggle="modal">
+            <a (click)="getSingleCard(card.id,card.nickname,card.default)" data-target="#edit-card-modal" data-toggle="modal">
               <i class="fa fa-edit"></i>
             </a>
           </td>
@@ -217,7 +217,7 @@
 
 </div>
 <div class="modal fade modal-form" id="edit-card-modal" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog margin-top-115">
     <div class="modal-content">
       <div class="modal-header">
         <div class="form-1-header">
@@ -227,14 +227,6 @@
       <div class="modal-body">
 
         <form class="user-add-ingo-form" [formGroup]="updateForm">
-          <select placeholder="Type Card" class="model-select" [formControl]="edit_var_type_atm" (change)="Edit_Show_inputs(edit_var_type_atm.value)">
-            <option *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</option>
-          </select>
-          <!-- <mat-form-field>
-            <mat-select placeholder="Type Card" [formControl]="edit_var_type_atm" (change)="Edit_Show_inputs(edit_var_type_atm.value)">
-          <mat-option *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
           <mat-form-field>
             <input matInput type="text" minlength="3" maxlength="14" placeholder="Card Nick Name" formControlName="cardnickname2">
             <mat-error *ngIf="updateForm.controls.cardnickname2.touched && updateForm.controls.cardnickname2.invalid">
@@ -254,98 +246,7 @@
               </mat-error>
             </mat-error>
           </mat-form-field>
-
-
-          <mat-form-field class="margin-top-30" *ngIf="edit_cardnumber">
-            <input matInput type="text" minlength="16" maxlength="16" placeholder="16 digit card number"
-              formControlName="edit_cardnumber">
-            <mat-error *ngIf="updateForm.controls.edit_cardnumber.touched && updateForm.controls.edit_cardnumber.invalid">
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber.errors.required">
-                Card number cannot be empty
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber.errors.minlength">
-                Card number must be atleast {{updateForm.controls.edit_cardnumber.errors.minlength.requiredLength}}
-                digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber.errors.maxlength">
-                Card Number must be at atmost {{updateForm.controls.edit_cardnumber.errors.maxlength.requiredLength}}
-                digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber.hasError('pattern')">
-                Card number must be only in digits.
-              </mat-error>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="margin-top-30" *ngIf="edit_cardnumber2">
-            <input matInput type="text" minlength="15" maxlength="15" placeholder="15 digit card number"
-              formControlName="edit_cardnumber2">
-            <mat-error *ngIf="updateForm.controls.edit_cardnumber2.touched && updateForm.controls.edit_cardnumber2.invalid">
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber2.errors.required">
-                Card number cannot be empty
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber2.errors.minlength">
-                Card number must be atleast {{updateForm.controls.edit_cardnumber2.errors.minlength.requiredLength}}
-                digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber2.errors.maxlength">
-                Card Number must be at atmost {{updateForm.controls.edit_cardnumber2.errors.maxlength.requiredLength}}
-                digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_cardnumber2.hasError('pattern')">
-                Card number must be only in digits.
-              </mat-error>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="margin-top-30" *ngIf="edit_ccv2">
-            <input matInput type="password" maxlength="4" minlength="4" placeholder="CCV No." formControlName="edit_ccv2">
-            <mat-error *ngIf="updateForm.controls.edit_ccv2.touched && updateForm.controls.edit_ccv2.invalid">
-              <mat-error *ngIf="updateForm.controls.edit_ccv2.errors.required">
-                CCV cannot be empty
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_ccv2.errors.minlength">
-                CCV must be atleast {{updateForm.controls.edit_ccv2.errors.minlength.requiredLength}} digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_ccv2.errors.maxlength">
-                CCV must be at atmost {{updateForm.controls.edit_ccv2.errors.maxlength.requiredLength}} digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_ccv2.hasError('pattern')">
-                CCV must be only in digits.
-              </mat-error>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="margin-top-30" *ngIf="edit_ccv3">
-            <input matInput type="password" maxlength="3" minlength="3" placeholder="CCV No." formControlName="edit_ccv3">
-            <mat-error *ngIf="updateForm.controls.edit_ccv3.touched && updateForm.controls.edit_ccv3.invalid">
-              <mat-error *ngIf="updateForm.controls.edit_ccv3.errors.required">
-                CCV cannot be empty
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_ccv3.errors.minlength">
-                CCV must be atleast {{updateForm.controls.edit_ccv3.errors.minlength.requiredLength}} digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_ccv3.errors.maxlength">
-                CCV must be at atmost {{updateForm.controls.edit_ccv3.errors.maxlength.requiredLength}} digits long.
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.edit_ccv3.hasError('pattern')">
-                CCV must be only in digits.
-              </mat-error>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="margin-top-30">
-            <input matInput placeholder="Expiry Date (MM/YYYY)" [textMask]="{mask: mask}" type="text" formControlName="expirydate2">
-            <mat-error *ngIf="updateForm.controls.expirydate2.touched && updateForm.controls.expirydate2.invalid">
-              <mat-error *ngIf="updateForm.controls.expirydate2.errors.required">
-                Expiry date cannot be empty
-              </mat-error>
-              <mat-error *ngIf="updateForm.controls.expirydate2.hasError('pattern')">
-                Expiry date must be in MM/YYYY format.
-              </mat-error>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-slide-toggle class="margin-top-30" formControlName="check2">Set as default payment method</mat-slide-toggle>
+          <mat-slide-toggle class="margin-top-30" [(ngModel)]="check_defalut" formControlName="check2">Set as default payment method</mat-slide-toggle>
           <a class="user-add-ingo-form-btn margin-top-10" (click)="updateSingleCard(cardid)">Update</a>
         </form>
       </div>
