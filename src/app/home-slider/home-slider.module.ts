@@ -1,7 +1,7 @@
 import {Routes, RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {HomeSliderComponent} from "./home-slider.component";
+// import {HomeSliderComponent} from "./home-slider.component";
 import { MatDialogModule } from '@angular/material';
 import { HomeSliderEidtDialogComponent } from './home-slider.component';
 import {MatInputModule} from '@angular/material';
@@ -16,7 +16,7 @@ const homeSliderRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    HomeSliderComponent,
+    // HomeSliderComponent,
     HomeSliderEidtDialogComponent,
   ],
 
@@ -32,7 +32,7 @@ const homeSliderRoutes: Routes = [
   ],
 
   providers: [],
-  exports: [HomeSliderComponent, HomeSliderEidtDialogComponent],
+  exports: [HomeSliderEidtDialogComponent],
   entryComponents: [
     HomeSliderEidtDialogComponent,
   ],

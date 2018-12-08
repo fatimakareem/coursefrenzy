@@ -27,7 +27,7 @@ export class UploadCoursesService {
     }
     headers.append('Content-Type', 'application/json');
     if(BidStatus1 == true){
-      alert('with bidding')
+      // alert('with bidding')
     return this._http2.post(  Config.api + 'courses/postcourse/',
       {
           
@@ -98,7 +98,7 @@ export class UploadCoursesService {
     });
   }
   else if (BidStatus1 == false) {
-    alert('without bid')
+    // alert('without bid')
     return this._http2.post(  Config.api + 'courses/postcourse/',
     {
         
