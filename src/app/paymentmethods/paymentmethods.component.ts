@@ -35,6 +35,7 @@ export class PaymentmethodsComponent implements OnInit {
   card_opeation = [
     { value: 'Visa', viewValue: 'Visa' },
     { value: 'Master', viewValue: 'Master' },
+    { value: 'Divcover', viewValue: 'Divcover' },
     { value: 'American Express', viewValue: 'American Express' }
   ];
   form = new FormGroup({

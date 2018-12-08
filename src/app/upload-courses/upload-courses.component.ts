@@ -898,11 +898,11 @@ this.model.date= this.EditCourseData.StartTime
       // var fielddate= moment(curent_date,"DD-MM-YYYY");
       var new_date = moment(curent_date).add(this.model.end_time, 'days');
    
-    }else if(this.Day == true){
+    }
+    else if(this.Day == true){
 var curent_date =moment(this.model.ReservedPrice, "DD-MM-YYYY");
 var new_date = moment(curent_date).add(this.model.end_time, 'days');
     }
-   
     var new_dateBuy = moment(curent_date).add(this.Sales, 'days');
 console.log(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids,'kkkk')
     this.obj.edit_course(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids,this.model.Sales,this.model.end_time).subscribe(
