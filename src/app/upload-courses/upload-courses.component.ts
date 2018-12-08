@@ -772,7 +772,7 @@ export class EditCourseDialogComponent implements OnInit {
        this.model.end_time=this.EditCourseData.daysforauction.toString();
 this.model.date= this.EditCourseData.StartTime
       this.model.Sale=   this.var_final_date_durationforsale;
-        //  this.Day=this.EditCourseData.auctionlater
+         this.Day=this.EditCourseData.auctionlater
       this.isActives = this.EditCourseData.course.accept_offer;
 
       this.isBidPrice = this.EditCourseData.course.bidstatus;
@@ -899,10 +899,12 @@ this.model.date= this.EditCourseData.StartTime
       var new_date = moment(curent_date).add(this.model.end_time, 'days');
    
     }else if(this.Day == true){
-var curent_date =moment(this.model.ReservedPrice, "DD-MM-YYYY");
+var curent_date =moment(this.model.date, "DD-MM-YYYY");
 var new_date = moment(curent_date).add(this.model.end_time, 'days');
     }
-   
+    // if(this.isActive == false){
+    //   var sale_date = moment(this.Dates).add(this.Sales, 'days'); 
+    // }
     var new_dateBuy = moment(curent_date).add(this.Sales, 'days');
 console.log(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids,'kkkk')
     this.obj.edit_course(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids,this.model.Sales,this.model.end_time).subscribe(

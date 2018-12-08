@@ -160,7 +160,7 @@
       </mat-form-field> -->
       <mat-slide-toggle  *ngIf="edit_isBids==true"
                          class="example-margin"[color]="color"
-                         name="Days" [(ngModel)]="Day"  (click)="Auc()">
+                         name="Day" [(ngModel)]="Day"  (click)="Auc()">
         Start Auction Later
       </mat-slide-toggle>
       <mat-form-field *ngIf="Days && edit_isBids==true" class="example-full-width mat-size">

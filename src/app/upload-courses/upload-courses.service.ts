@@ -165,10 +165,8 @@ export class UploadCoursesService {
 }
 
   edit_course( id,Name, Price, course_image, skill, category, sub_category, nested,Sales,edit_Minimum,edit_Maximum, SaleStatus, accept, BidStatus1, initial_amount ,start_time,end_time, IsReserved , ReservedPrice,Auction,ids,auction,sale) {
-    // console.log(Name);
-    // console.log(Price);
-    // console.log(Discount);
-alert(nested)
+   alert(start_time);alert(end_time)
+
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
