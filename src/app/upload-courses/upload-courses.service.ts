@@ -19,12 +19,15 @@ export class UploadCoursesService {
   constructor(private http: Http, private _http2: HttpService, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object) {
   }
   users_id;
-  upload_course( Name, Price, course_image, skill, category, sub_category, Minimum,Maximum,Sales, SaleStatus, accept, BidStatus1, initial_amount, start_time , end_time , IsReserved , ReservedPrice,Auction,nestedsub_category) {
+  // this.model.Name, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, this.model.nestedsub_category,sale_date,this.model.Minimum, this.model.Maximum, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, this.Date, new_date, this.Check, this.model.ReservedPrice, this.Days,this.Sales,this.end_time
+  upload_course( Name, Price, course_image, skill, category, sub_category,nestedsub_category,sale_date, Minimum,Maximum, SaleStatus, accept, BidStatus1, initial_amount, start_time , end_time , IsReserved , ReservedPrice,Auction,auction,sale) {
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
     }
     headers.append('Content-Type', 'application/json');
+    if(BidStatus1 == true){
+      alert('with bidding')
     return this._http2.post(  Config.api + 'courses/postcourse/',
       {
           
@@ -37,10 +40,11 @@ export class UploadCoursesService {
         'nestedSubCategory':nestedsub_category,
         'min_amount':Minimum,
         'max_amount':Maximum,
-        'date_durationforsale': Sales,
+        'date_durationforsale': sale_date,
         'sale_status': SaleStatus,
         'accept_offer': accept,
         'bidstatus': BidStatus1,
+        'daysforsale':auction,
         'bidcourse':
           {
             'InitAmount': initial_amount,
@@ -48,7 +52,8 @@ export class UploadCoursesService {
             'EndTime': end_time ,
             'isReserved': IsReserved,
             'reservedPrice': ReservedPrice,
-            'auctionlater' : Auction
+            'auctionlater' : Auction,
+            'daysforauction':sale
           }
       }, {headers : headers}).map((res: Response) => {
       if (res) {
@@ -92,12 +97,78 @@ export class UploadCoursesService {
       }
     });
   }
+  else if (BidStatus1 == false) {
+    alert('without bid')
+    return this._http2.post(  Config.api + 'courses/postcourse/',
+    {
+        
+      'name': Name,
+      'actual_price': Price,
+      'course_image': course_image,
+      'skill': skill,
+      'Categories': category,
+      'SubCategory': sub_category,
+      'nestedSubCategory':nestedsub_category,
+      'min_amount':Minimum,
+      'max_amount':Maximum,
+      'date_durationforsale': sale_date,
+      'sale_status': SaleStatus,
+      'accept_offer': accept,
+      'bidstatus': BidStatus1,
+      'daysforsale':auction,
+      'bidcourse':
+        {
+          
+        }
+    }, {headers : headers}).map((res: Response) => {
+    if (res) {
+      // console.log('1');
+      if (res.status === 201 || res.status === 200 || res.status ===202) {
+        const responce_data = res.json();
+        if(responce_data.status===false){
+          // alert('Response Message' + responce_data.message);
+          return responce_data.message;
 
-  edit_course( id,Name, Price, course_image, skill, category, sub_category, nested,Sales,edit_Minimum,edit_Maximum, SaleStatus, accept, BidStatus1, initial_amount ,start_time,end_time, IsReserved , ReservedPrice,Auction,ids) {
+        }else {
+        }
+        // localStorage.setItem('user_id', responce_data.id);
+        // this.users_id = localStorage.getItem('user_id');
+        return [{status: res.status, json: res}];
+      } else if (res.status === 5300) {
+        // this._nav.navigate(['/login']);
+
+        // localStorage.setItem('conformation', '1');
+        // console.log('ok submited 200');
+        return [{status: res.status, json: res}];
+      } else {
+        // console.log('ok');
+      }
+    }
+  }).catch((error: any) => {
+    // alert(error);
+    if (error.status === 404) {
+      // console.log('ok not submited submit 404');
+      // localStorage.setItem('error', '1');
+      return Observable.throw(new Error(error.status));
+    } else if (error.status === 400) {
+      //    this._nav.navigate(['/pages/accident']);
+      // console.log('ok not submited submit 400');
+      // localStorage.setItem('error', '1');
+      return Observable.throw(new Error(error.status));
+    } else {
+      //  this._nav.navigate(['/pages/accident']);
+      // console.log('ok not submited submit error');
+      return Observable.throw(new Error(error.status));
+    }
+  });
+  }
+}
+
+  edit_course( id,Name, Price, course_image, skill, category, sub_category, nested,Sales,edit_Minimum,edit_Maximum, SaleStatus, accept, BidStatus1, initial_amount ,start_time,end_time, IsReserved , ReservedPrice,Auction,ids,auction,sale) {
     // console.log(Name);
     // console.log(Price);
     // console.log(Discount);
-
+alert(nested)
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
@@ -123,6 +194,7 @@ export class UploadCoursesService {
         'max_amount':edit_Maximum,
         'accept_offer': accept,
         'bidstatus': BidStatus1,
+        'daysforsale':auction,
         'bidcourse':
           {
             'InitAmount': initial_amount,
@@ -131,7 +203,8 @@ export class UploadCoursesService {
             'isReserved': IsReserved,
             'reservedPrice': ReservedPrice,
             'auctionlater' : Auction,
-            'id': ids
+            'id': ids,
+            'daysforauction':sale
           }
       }, {headers : headers}).map((res: Response) => {
       if (res) {
@@ -183,6 +256,7 @@ export class UploadCoursesService {
         'max_amount':edit_Maximum,
         'accept_offer': accept,
         'bidstatus': BidStatus1,
+        'daysforsale':auction,
         'bidcourse':
           {
             'id': ids

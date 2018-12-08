@@ -3,7 +3,6 @@ import {GlobalService} from "../../global.service";
 import {HeaderService} from "../../header/header.service";
 import {Config} from "../../Config";
 declare const $: any;
-
 @Component({
   selector: 'app-sub-categories',
   templateUrl: './sub-categories.component.html',
@@ -14,8 +13,7 @@ export class SubCategoriesComponent implements OnInit {
   public sub_categories: any=[];
   public catImageUrl = Config.staticStorageImages;
   public loaded_subcategory: boolean  = false;
-  public category: any;
-
+  public category: any; 
   constructor(private global: GlobalService,private obj2: HeaderService,) { }
 
   ngOnInit() {

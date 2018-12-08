@@ -46,10 +46,10 @@ export class BiddingService {
       }
     }).catch((error: any) => {
       // alert(error);
-      if (error.status === 404) {
+      if (error.status === 403) {
         // console.log('ok not submited submit 404');
         // localStorage.setItem('error', '1');
-        return Observable.throw(new Error(error.status));
+        return Observable.throw(error);
       } else if (error.status === 400) {
         //    this._nav.navigate(['/pages/accident']);
         // console.log('ok not submited submit 400');

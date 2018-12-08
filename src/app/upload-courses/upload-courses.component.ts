@@ -18,6 +18,7 @@ import { HomeService } from "../home/home.service";
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import { isPlatformBrowser } from '@angular/common';
+import { Alert } from 'selenium-webdriver';
 const NAME_REGEX = '[a-zA-Z0-9_.]+?';
 // const ^[0-9]*$ = '[0-9]+';
 
@@ -71,6 +72,7 @@ export class UploadCoursesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.global.currentMessage.subscribe(message =>this.postedCoursesList = message)
     // this.global.GlobalUploadCourse$.subscribe(response  => this.response  = response);
     this.obj.get_my_enrolled_courses().subscribe(response => {
       if (response.hasOwnProperty("status")) {
@@ -92,7 +94,6 @@ export class UploadCoursesComponent implements OnInit {
     this._home.get_role().subscribe(response => {
       this.getingRoleData = response;
       this.userRole = this.getingRoleData.Role;
-      // alert('Home Role' + this.UserRole);
       this.global.checkUserRole(this.userRole);
       this.loaded = true;
     });
@@ -111,15 +112,15 @@ export class UploadCoursesComponent implements OnInit {
       data: this.postedCoursesList
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      // console.log(result);
-      window.location.reload();
-      if (result !== 1) {
-        this.postedCoursesList['courses'].push(result);
-        console.log('hello worlds', this.postedCoursesList['courses']);
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   // console.log('The dialog was closed');
+    //   // console.log(result);
+    //   // window.location.reload();
+    //   if (result !== 1) {
+    //     this.postedCoursesList['courses'].push(result);
+    //     console.log('hello worlds', this.postedCoursesList['courses']);
+    //   }
+    // });
   }
 
   EditCourseDialog(index, course_id): void {
@@ -134,20 +135,7 @@ export class UploadCoursesComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(EditCourseDialogComponent, dialogConfig);
 
-    // const dialogRef = this.dialog.open(AddCourseDialogComponent, {
-    //   width: '500px',
-    //   data: this.postedCoursesList
-    // });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      console.log(result);
-      if (result !== 1) {
-        // alert('updating all courses');
-        this.postedCoursesList['courses'][index] = result;
-        // console.log(this.postedCoursesList['courses']);
-      }
-    });
+    
   }
 
 
@@ -233,6 +221,7 @@ export class UploadCoursesComponent implements OnInit {
     }
     this.obj.get_my_posted_courses(page).subscribe(response => {
       this.postedCoursesList = response;
+      this.global.watchInfo( this.postedCoursesList);
       console.log('PostedCourse', this.postedCoursesList);
       if (response.hasOwnProperty("status")) {
         this.NoPostedCourseErrorMessage = response.message;
@@ -362,6 +351,8 @@ export class AddCourseDialogComponent implements OnInit {
   dateFormControl = new FormControl('', [
     Validators.required,
   ]);
+  public postedCoursesList: any = [];
+
   constructor(private obj: UploadCoursesService, private obj2: HeaderService, public dialogRef: MatDialogRef<AddCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, private global: GlobalService, @Inject(PLATFORM_ID) private platformId: Object) {
     if (data.course_data) {
@@ -424,6 +415,7 @@ export class AddCourseDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.global.currentMessage.subscribe(message =>this.postedCoursesList = message)
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
       // console.log(this.Categories);
@@ -441,12 +433,6 @@ export class AddCourseDialogComponent implements OnInit {
     });
   }
   onSubmit(f: NgForm) {
-    // alert(this.model.EditedForm);
-    // if(Number(this.model.Discount) > Number(this.model.Price)) {
-    //   AddCourseDialogComponent.greaterDiscout();
-    //     }
-    //     else {
-
     this.http.post(
       Config.ImageUploadUrl,
       this.input, { responseType: 'text' }).subscribe(data => {
@@ -456,37 +442,41 @@ export class AddCourseDialogComponent implements OnInit {
           this.course_image = data;
           console.log(this.course_image);
           this.ifImageUpload();
-          // alert(this.course_image);
+        
         }
+       
       });
 
     // }
   }
   private ifImageUpload() {
-    // var curent_date= moment(this.model.date, "DD-MM-YYYY").add(1,'days');
-    // var new_date = moment(curent_date, "DD-MM-YYYY").add(this.Date,'days');
+  
     if (this.Days == false) {
       var curent_date = moment(this.Date, "DD-MM-YYYY");
 
-      console.log("current date", new Date);
-      // var fielddate= moment(curent_date,"DD-MM-YYYY");
       var new_date = moment(curent_date).add(this.end_time, 'days');
-      var new_dateBuy = moment(curent_date).add(this.Sales, 'days');
-
-
+     
     }
     else if (this.Days == true) {
+   
       var curent_date = moment(this.Dates, "DD-MM-YYYY");
-      var date = moment(this.Dates, ' DD-MM-YYYY ');
-      var new_date = moment(date).add(this.end_time, 'days');
-      console.log('Auction', date);
+      var new_date = moment(this.Dates).add(this.end_time, 'days');
       console.log('Auction Later', this.model.date);
 
     }
-    this.obj.upload_course(this.model.Name, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, this.model.nestedsub_category,new_dateBuy,this.model.Minimum, this.model.Maximum, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, this.Date, new_date, this.Check, this.model.ReservedPrice, this.Days).subscribe(
+    if(this.isActive == false){
+      var sale_date = moment(this.Dates).add(this.Sales, 'days'); 
+    }
+    this.obj.upload_course(this.model.Name, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category, this.model.nestedsub_category,sale_date,this.model.Minimum, this.model.Maximum, this.isActive, this.isActives, this.isBidPrice, this.model.SalePrice, curent_date, new_date, this.Check, this.model.ReservedPrice, this.Days,this.Sales,this.end_time).subscribe(
       data => {
         this.dialogRef.close(data[0]['json'].json());
         AddCourseDialogComponent.CourseSuccess();
+        this.obj.get_my_posted_courses(1).subscribe(response => {
+          this.postedCoursesList = response;
+          this.global.watchInfo( this.postedCoursesList);
+          console.log('PostedCourse', this.postedCoursesList);
+         
+        });
       },
       error => {
         AddCourseDialogComponent.CourseFailure();
@@ -624,7 +614,7 @@ export class AddCourseDialogComponent implements OnInit {
     this.input = new FormData();
     const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
     const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
-    this.input.append('fileToUpload', target.files[0], 205, 114);
+    this.input.append('fileToUpload', target.files[0]);
     console.log(this.input)
     
   }
@@ -690,7 +680,7 @@ export class EditCourseDialogComponent implements OnInit {
     { value: '7', viewValue: '7' },
     { value: '15', viewValue: '15' },
   ];
-  end_time;
+  end_time: any=[];
   Sales;
   Date = new Date();
   Dates = new Date();
@@ -743,7 +733,10 @@ export class EditCourseDialogComponent implements OnInit {
   var_list_for_sale_end;
   var_get_post_date;
   var_final_date_durationforsale;
-  constructor(private obj: UploadCoursesService, private obj2: HeaderService, public dialogRef: MatDialogRef<AddCourseDialogComponent>,
+  date_durationforsale;
+  postdate;
+  final_date_durationforsale;
+  constructor(private obj: UploadCoursesService,private global: GlobalService, private obj2: HeaderService, public dialogRef: MatDialogRef<AddCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {
     if (data.course_data) {
     
@@ -768,17 +761,18 @@ export class EditCourseDialogComponent implements OnInit {
     {
       this.isActive==false;
       this.hide = false;
-      this.var_get_post_date=this.EditCourseData.course.postDate;
-      this.var_get_post_end_date = this.EditCourseData.course.date_durationforsale;
       
-      this.var_list_for_sale_start=this.var_get_post_date.toString().slice(8, 10);
-      this.var_list_for_sale_end=this.var_get_post_end_date.toString().slice(8, 10);
-      this.var_final_date_durationforsale=this.var_list_for_sale_end-this.var_list_for_sale_start;
-      alert( this.var_final_date_durationforsale);
+     
+   
+     
+      
+    
+     }
+     this.model.Sales=this.EditCourseData.course.daysforsale.toString();
+       this.model.end_time=this.EditCourseData.daysforauction.toString();
+this.model.date= this.EditCourseData.StartTime
       this.model.Sale=   this.var_final_date_durationforsale;
-      
-      // alert(this.var_get_post_date);
-    }
+        //  this.Day=this.EditCourseData.auctionlater
       this.isActives = this.EditCourseData.course.accept_offer;
 
       this.isBidPrice = this.EditCourseData.course.bidstatus;
@@ -791,9 +785,7 @@ export class EditCourseDialogComponent implements OnInit {
         this.var_get_start_date=this.var_start_Date.toString().slice(8, 10);
         this.var_get_end_date=this.var_end_date.toString().slice(8, 10);
         this.var_final_get_date=this.var_get_end_date-this.var_get_start_date;
-        // alert( this.var_final_get_date);
-        // this.end_time.setValue['end_time']= this.var_final_get_date;
-        // this.end_time = this.var_final_get_date;       
+         
         this.Check = this.EditCourseData.isReserved;
         if (this.Check == true) {
           this.Checks = true;
@@ -815,6 +807,7 @@ export class EditCourseDialogComponent implements OnInit {
           this.var_get_auctionlater=false;
           this.Days=false;
         }
+
       }
       else {
         this.edit_isBids = false;
@@ -853,7 +846,10 @@ export class EditCourseDialogComponent implements OnInit {
 
   }
   nestedSubCategories;
+  public postedCoursesList: any = [];
+
   ngOnInit() {
+    this.global.currentMessage.subscribe(message =>this.postedCoursesList = message)
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
       // console.log(this.Categories);
@@ -871,11 +867,7 @@ export class EditCourseDialogComponent implements OnInit {
   }
 
   EditCourse() {
-    // alert(this.model.EditedForm);
-    // if(Number(this.model.Discount) > Number(this.model.Price)) {
-    //   AddCourseDialogComponent.greaterDiscout();
-    //     }
-    //     else {
+   
     if (this.input) {
       this.http.post(
         Config.ImageUploadUrl,
@@ -885,7 +877,7 @@ export class EditCourseDialogComponent implements OnInit {
           } else {
             this.course_image = data;
             console.log(this.course_image);
-            // alert(this.course_image);
+          
 
           }
         });
@@ -898,18 +890,31 @@ export class EditCourseDialogComponent implements OnInit {
   }
 
   private ifImageUpload() {
-    var curent_date = moment(this.Date, "DD-MM-YYYY");
+    if(this.Day == false){
+    
+      var curent_date = moment(this.Date, "DD-MM-YYYY");
 
-    console.log("current date", this.Date);
-    // var fielddate= moment(curent_date,"DD-MM-YYYY");
-    var new_date = moment(curent_date).add(this.end_time, 'days');
+      console.log("current date", this.Date);
+      // var fielddate= moment(curent_date,"DD-MM-YYYY");
+      var new_date = moment(curent_date).add(this.model.end_time, 'days');
+   
+    }else if(this.Day == true){
+var curent_date =moment(this.model.ReservedPrice, "DD-MM-YYYY");
+var new_date = moment(curent_date).add(this.model.end_time, 'days');
+    }
+   
     var new_dateBuy = moment(curent_date).add(this.Sales, 'days');
-
-    this.obj.edit_course(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids).subscribe(
+console.log(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids,'kkkk')
+    this.obj.edit_course(this.course_id, this.model.FirstName, this.model.Price, this.course_image, this.model.skill, this.model.category, this.model.sub_category,this.model.nestedsub_category, new_dateBuy,this.model.edit_Minimum, this.model.edit_Maximum, this.isActive, this.isActives, this.edit_isBids, this.model.SalePrice,curent_date,new_date,this.Checks, this.model.ReservedPrice, this.Days,this.model.ids,this.model.Sales,this.model.end_time).subscribe(
       data => {
-        // console.log(data[0]['json'].json());
-        this.dialogRef.close(data[0]['json'].json());
+        this.dialogRef.close();
         EditCourseDialogComponent.CourseSuccess();
+        this.obj.get_my_posted_courses(1).subscribe(response => {
+          this.postedCoursesList = response;
+          this.global.watchInfo( this.postedCoursesList);
+          console.log('PostedCourse', this.postedCoursesList);
+         
+        });
       },
       error => {
         EditCourseDialogComponent.CourseFailure();
@@ -1084,28 +1089,12 @@ export class CourseBidComponent implements OnInit {
   onSubmit(f: NgForm) {
     var curent_date = moment(this.model.date, "DD-MM-YYYY").add(1, 'days');
     var new_date = moment(curent_date, "DD-MM-YYYY").add(this.Date, 'days');
-    // console.log(new_date,'sssssssssssss')
-    // alert(this.isActive);
+   
     this.obj.add_bid_on_course(this.model.bidamount, curent_date, new_date, this.Actives, this.model.reservedbid, this.data.BidCourse_id).subscribe(
       data => {
-        // console.log(data);
-        this.dialogRef.close();
+       
         CourseBidComponent.BidCourseSuccess();
-        // if (data){
-        //
-        //   if (data.message == "Course is not Approved by admin") {
-        //     console.log(data.message);
-        //     // console.log(error);
-        //     CourseBidComponent.BidCourseFailure();
-        //     return Observable.throw(new Error(data.message));
-        //   }
-        //   else if (data.message == "Course is already posted for Bid") {
-        //     console.log(data.message);
-        //     CourseBidComponent.BidCourseFailure2();
-        //
-        //     return Observable.throw(new Error(data.message));
-        //   }
-        // }
+        
       }
     );
   }

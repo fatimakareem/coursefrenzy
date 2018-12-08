@@ -31,7 +31,6 @@ const categoryCoursesRoutes: Routes = [
     TrendingNowCoursesModule,
     TopRatedCoursesModule
   ],
-
   providers: [],
   exports: [],
   entryComponents: [

@@ -97,7 +97,7 @@ export class CoursesOnBidComponent implements OnInit {
     ]};
 
     });
-  }
+  } 
 
 
    onclick(index, course_id) {

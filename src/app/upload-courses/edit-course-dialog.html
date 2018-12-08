@@ -85,7 +85,7 @@
         List for Sale!
       </mat-slide-toggle>
       <mat-form-field *ngIf="hide ==false" class="width50 mat-size">
-        <mat-select placeholder="Buy It Now Listing Duration"   [formControl]="DaysDuration"  [(ngModel)]="Sales"  name="Sales">
+        <mat-select placeholder="Buy It Now Listing Duration"   [formControl]="DaysDuration"  [(ngModel)]="model.Sales"  name="Sales">
 
           <mat-option *ngFor="let range of ranges" [value]="range.viewValue">
             {{ range.viewValue }}
@@ -139,25 +139,25 @@
           Digits are allowed only
         </mat-error>
       </mat-form-field>
-      <mat-form-field *ngIf="edit_isBids ==true" class="example-full-width mat-size">
+      <mat-form-field *ngIf="edit_isBids ==true " class="example-full-width mat-size">
         <!--{{Date | amDifference: end_time :'days' : true}}-->
-        <mat-select placeholder="Listing Duration"  name="end_time" value="end_time"  [(ngModel)]="end_time" >
+        <mat-select placeholder="Listing Duration"  name="end_time" [(ngModel)]="model.end_time" >
           <mat-option *ngFor="let range of range"  [value]="range.viewValue">
             {{ range.viewValue }}
           </mat-option>
-
+         
         </mat-select>
       </mat-form-field>
       <div class="text-left">
         <mat-checkbox  *ngIf="edit_isBids ==true" name="Check" [(ngModel)]="Check" (click)="CheckReserved()">Reserved</mat-checkbox>
       </div>
-      <mat-form-field *ngIf="Checks && edit_isBids==true " class="example-full-width mat-size">
+      <mat-form-field *ngIf="Check==true " class="example-full-width mat-size">
         <input matInput placeholder="Enter reserved bid amount" [formControl]="reservedbidamountFormControl"  pattern='^[0-9]*$' [(ngModel)]="model.ReservedPrice">   
         <mat-error *ngIf="reservedbidamountFormControl.hasError('pattern')">      Digits are allowed only
         </mat-error>
       </mat-form-field>
-      <mat-form-field *ngIf="!Checks && edit_isBids==true " class="example-full-width mat-size">
-      </mat-form-field>
+      <!-- <mat-form-field *ngIf="!Checks && edit_isBids==true " class="example-full-width mat-size">
+      </mat-form-field> -->
       <mat-slide-toggle  *ngIf="edit_isBids==true"
                          class="example-margin"[color]="color"
                          name="Days" [(ngModel)]="Day"  (click)="Auc()">
