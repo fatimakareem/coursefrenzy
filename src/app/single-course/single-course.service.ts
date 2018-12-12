@@ -10,6 +10,7 @@ import {HttpService} from "../serv/http-service";
 import {HttpClient} from "@angular/common/http";
 import {GlobalService} from "../global.service";
 import {HeadersService} from "../headers.service";
+import swal from 'sweetalert2';
 
 @Injectable()
 
@@ -104,8 +105,18 @@ export class SingleCourseService {
       }, {headers : headers}).map((res: Response) => {
       if (res) {
         // console.log('1');
-        if (res.status === 201 || res.status === 200) {
+        if (res.status === 201 || res.status === 202 ) {
           const responce_data = res.json();
+          if(res.status === 202){
+            swal({
+              type: 'error',
+              title: 'You Already Reviewed this Course.',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 2000,
+             
+            });
+          }
           // localStorage.setItem('user_id', responce_data.id);
           // this.users_id = localStorage.getItem('user_id');
           return [{status: res.status, json: res}];

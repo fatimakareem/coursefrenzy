@@ -56,95 +56,57 @@ export class HomeComponent implements OnInit, OnDestroy {
   HomeService,private obj_CoursesService: CoursesService,private nav: Router,
   private route: ActivatedRoute,private obj2: HeaderService, private buyNowService: BuyNowService,private dialog: MatDialog, private router: Router, 
   private global: GlobalService,private glb_ser: SimpleGlobal) {
- 
- 
- 
-    this.global.caseNumber$.subscribe(
-      data => {
-        this.checkLogin = data;
-      });
-    this.global.checkingUserRole$.subscribe(
-      data => {
-        this.UserRole = data;
-        // alert('Geting DAta From Shared Service' + this.UserRole);
-      });
-      this.global.caseNumber$.subscribe(
-        data => {
-          this.Logedin = data;
-        });
-  
-      this.global.GlobalWishListCourses$.subscribe(
-        data => {
-          if (data.length===0){
-            this.GlobalWishListCourses = [];
-          }else {
-            this.GlobalWishListCourses = data;
-          }
-        });
-  }
-
-  ngOnInit() {
-    // Start Slider
     
-    this.obj.get_slider_content().subscribe(response => {
-      this.SliderContent = response;
-      this.loaded = true;
-    });
-
-
 
 this.obj2.get_categories().subscribe(response => {
-this.Categories = response;
-this.loaded = true;
-      this.loaded = true;
-      $('.homeSlider').fadeOut(0);
-      if (this.Categories) {
-       this.slideConfig =  {
-            infinite: true,
-            slidesToShow: 5,
-            slidesToScroll: 5,
-            autoplay: false,
-            dots: false,
-            prevArrow: '<button class="leftRs">&lt;</button>',
-            nextArrow: '<button class="rightRs">&lt;</button>',
-            responsive: [
-              {
-                breakpoint: 1024,
-                settings: {
-                  slidesToShow: 3,
-                  slidesToScroll: 3,
-                  infinite: true
+  this.Categories = response;
+  // this.loaded = true;
+        this.loaded = true;
+        $('.homeSlider').fadeOut(0);
+        if (this.Categories) {
+         this.slideConfig =  {
+              infinite: true,
+              slidesToShow: 5,
+              slidesToScroll: 5,
+              autoplay: false,
+              dots: false,
+              prevArrow: '<button class="leftRs">&lt;</button>',
+              nextArrow: '<button class="rightRs">&lt;</button>',
+              responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true
+                  }
+                },
+                {
+                  breakpoint: 600,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
                 }
-              },
-              {
-                breakpoint: 600,
-                settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 2
-                }
-              },
-              {
-                breakpoint: 480,
-                settings: {
-                  slidesToShow: 1,
-                  slidesToScroll: 1
-                }
-              }
-
-            ]
-        };
-      }
-      $('.homeSlider').fadeIn(500).delay(200);
-    });
-    // End Slider
-
-    // Start bid_courses slider 
-    this.obj_CoursesService.get_bid_courses(this.page).subscribe(response => {
+  
+              ]
+          };
+        }
+        $('.homeSlider').fadeIn(500).delay(200);
+      });
+   this.obj_CoursesService.get_bid_courses(this.page).subscribe(response => {
       this.BidCourses = response;
  console.log(this.BidCourses);
       // console.log(this.BidCourses);
 
-      this.loaded = true;
+      // this.loaded = true;
 
     this.slideConfig = {
           infinite: false,
@@ -180,186 +142,233 @@ this.loaded = true;
     ]};
 
     });
+ 
+ 
+    this.global.caseNumber$.subscribe(
+      data => {
+        this.checkLogin = data;
+      });
+    this.global.checkingUserRole$.subscribe(
+      data => {
+        this.UserRole = data;
+        // alert('Geting DAta From Shared Service' + this.UserRole);
+      });
+      this.global.caseNumber$.subscribe(
+        data => {
+          this.Logedin = data;
+        });
+  
+      this.global.GlobalWishListCourses$.subscribe(
+        data => {
+          if (data.length===0){
+            this.GlobalWishListCourses = [];
+          }else {
+            this.GlobalWishListCourses = data;
+          }
+        });
+
+
+
+        this.obj_CoursesService.get_courses(1).subscribe(response => {
+          this.trendingNowCourses = response;
+          // this.loaded = true;
+          this.slideConfig = {
+            infinite: false,
+            speed: 900,
+            autoplay: true,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            prevArrow: '<button class="leftRs">&lt;</button>',
+            nextArrow: '<button class="rightRs">&lt;</button>',
+            responsive: [
+              {
+                breakpoint: 1025,
+                settings: {
+                  slidesToShow: 4,
+                  slidesToScroll: 4,
+                  infinite: true
+                }
+              },
+              {
+                breakpoint: 769,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 1
+                }
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+            ]};
+        });
+        this.obj_CoursesService.get_top_rated_courses(1).subscribe(response => {
+          this.topRatedCourses = response;
+          // console.log("Top rated"+this.topRatedCourses['courses'].course[0]);
+          // this.loaded = true;
+        
+          this.slideConfig = {
+            infinite: false,
+            speed: 900,
+            autoplay: true,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            prevArrow: '<button class="leftRs">&lt;</button>',
+            nextArrow: '<button class="rightRs">&lt;</button>',
+            responsive: [
+              {
+                breakpoint: 1025,
+                settings: {
+                  slidesToShow: 4,
+                  slidesToScroll: 4,
+                  infinite: true
+                }
+              },
+              {
+                breakpoint: 769,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 1
+                }
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+            ]};
+        });
+        this.obj_CoursesService.get_recommendcourse(this.page).subscribe(
+          data => {
+            this.Courses = data;
+            // this.glb_ser['Courses'] = this.Courses;
+            // this.loaded = true;
+        
+            this.slideConfig = {
+              infinite: false,
+              speed: 900,
+              autoplay: true,
+              slidesToShow: 5,
+              slidesToScroll: 5,
+              prevArrow: '<button class="leftRs">&lt;</button>',
+              nextArrow: '<button class="rightRs">&lt;</button>',
+              responsive: [
+                {
+                  breakpoint: 1025,
+                  settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    infinite: true
+                  }
+                },
+                {
+                  breakpoint: 769,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+                }
+              ]};
+        
+          });
+          this.obj_CoursesService.get_recent_cources(1).subscribe(response => {
+            if(response.hasOwnProperty("status")){
+              this.Courses = [];
+              this.showrecent = false;
+              this.global.setShowRecent(false);
+            }else {
+              this.Courses = response;
+              this.showrecent = true;
+              this.global.setShowRecent(true);
+              //
+              // alert(this.Courses);
+              // alert('Recent Courses Come and Length is' + this.Courses.length)
+            }
+            // if(response.length===)
+            // console.log(this.Courses['courses']);
+            this.slideConfig = {
+              infinite: false,
+              speed: 900,
+              autoplay: true,
+              slidesToShow: 5,
+              slidesToScroll: 5,
+              prevArrow: '<button class="leftRs">&lt;</button>',
+              nextArrow: '<button class="rightRs">&lt;</button>',
+              responsive: [
+                {
+                  breakpoint: 1025,
+                  settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    infinite: true
+                  }
+                },
+                {
+                  breakpoint: 769,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+                }
+              ]};
+          
+          });
+  }
+
+  ngOnInit() {
+    // Start Slider
+    
+    // this.obj.get_slider_content().subscribe(response => {
+    //   this.SliderContent = response;
+    //   this.loaded = true;
+    // });
+
+
+
+    // End Slider
+
+    // Start bid_courses slider 
+  
      // End bid_courses slider 
 // start trending-courses slider
-this.obj_CoursesService.get_courses(1).subscribe(response => {
-  this.trendingNowCourses = response;
-  this.loaded = true;
-  this.slideConfig = {
-    infinite: false,
-    speed: 900,
-    autoplay: true,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    prevArrow: '<button class="leftRs">&lt;</button>',
-    nextArrow: '<button class="rightRs">&lt;</button>',
-    responsive: [
-      {
-        breakpoint: 1025,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true
-        }
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]};
-});
+
 
 
 // End trending-courses slider
 
 // Start app-top-rated-courses
-this.obj_CoursesService.get_top_rated_courses(1).subscribe(response => {
-  this.topRatedCourses = response;
-  // console.log("Top rated"+this.topRatedCourses['courses'].course[0]);
-  this.loaded = true;
 
-  this.slideConfig = {
-    infinite: false,
-    speed: 900,
-    autoplay: true,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    prevArrow: '<button class="leftRs">&lt;</button>',
-    nextArrow: '<button class="rightRs">&lt;</button>',
-    responsive: [
-      {
-        breakpoint: 1025,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true
-        }
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]};
-});
 
 // End app-top-rated-courses
 
 //  start recommended-courses
-this.obj_CoursesService.get_recommendcourse(this.page).subscribe(
-  data => {
-    this.Courses = data;
-    // this.glb_ser['Courses'] = this.Courses;
-    this.loaded = true;
 
-    this.slideConfig = {
-      infinite: false,
-      speed: 900,
-      autoplay: true,
-      slidesToShow: 5,
-      slidesToScroll: 5,
-      prevArrow: '<button class="leftRs">&lt;</button>',
-      nextArrow: '<button class="rightRs">&lt;</button>',
-      responsive: [
-        {
-          breakpoint: 1025,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: true
-          }
-        },
-        {
-          breakpoint: 769,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]};
-
-  });
 
 
 
 // End recommended-courses
 
 // Start recently-viewed-courses
-this.obj_CoursesService.get_recent_cources(1).subscribe(response => {
-  if(response.hasOwnProperty("status")){
-    this.Courses = [];
-    this.showrecent = false;
-    this.global.setShowRecent(false);
-  }else {
-    this.Courses = response;
-    this.showrecent = true;
-    this.global.setShowRecent(true);
-    //
-    // alert(this.Courses);
-    // alert('Recent Courses Come and Length is' + this.Courses.length)
-  }
-  // if(response.length===)
-  // console.log(this.Courses['courses']);
-  this.slideConfig = {
-    infinite: false,
-    speed: 900,
-    autoplay: true,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    prevArrow: '<button class="leftRs">&lt;</button>',
-    nextArrow: '<button class="rightRs">&lt;</button>',
-    responsive: [
-      {
-        breakpoint: 1025,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true
-        }
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]};
 
-});
 // End recently-viewed-courses
 if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('home', 'true');
@@ -597,7 +606,7 @@ export class HomeSliderEidtDialogComponent implements OnInit {
     this.obj.get_slider_content().subscribe(response => {
       this.SliderContent = response;
       // console.log(this.SliderContent);
-      this.loaded = true;
+      // this.loaded = true;
       this.model.heading = this.SliderContent.heading;
       this.model.searchPlaceHolder = this.SliderContent.searchPlaceHolder;
       this.model.SliderImage = this.SliderContent.SliderImage;

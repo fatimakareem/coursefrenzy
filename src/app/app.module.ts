@@ -119,6 +119,7 @@ import {ProfileService} from "./profile/profile.service";
 import {AdminCategoriesService} from "./admin-categories/admin-categories.service";
 import {AdminFaqsService} from "./admin-faqs/admin-faqs.service";
 import {LoaderModule} from "./loader/loader.module";
+
 import {HeadersService} from "./headers.service";
 import {EmailActivationService} from "./email-activation/email-activation.service";
 import {ChangeForgetPasswordService} from "./change-forget-password/change-forget-password.service";
@@ -142,7 +143,6 @@ let config = new AuthServiceConfig([
 export function provideConfig() {
   return config;
 }
-
 @NgModule({
   declarations: [
     NormalLayoutComponent,
@@ -265,9 +265,7 @@ export function provideConfig() {
     ChatboxService,
     // Uploader,
   ],
-  // exports: [
-  //   MaterialModule
-  // ],
+  
 
   bootstrap: [
     AppComponent,

@@ -699,7 +699,9 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
 
   reviews_post() {
     this.obj.post_reviews(this.model.comment, this.model.rating, this.CourseId).subscribe(data => {
-    });
+     
+    }
+    );
   }
 }
 

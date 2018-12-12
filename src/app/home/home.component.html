@@ -1,17 +1,6 @@
-<!--<app-header></app-header>-->
-<!--<app-loader></app-loader>-->
 
-
-<!--Start Slider  -->
-<app-loader></app-loader>
+<!-- <app-loader></app-loader> -->
 <header class="wrapp-header">
-  <!--<div class="info-box-01">-->
-    <!--<div class="container">-->
-      <!--<div class="row">-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
   <div id="main-bg-slider" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
     <div class="download-here">
       <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&amp;hl=en" target="_blank">
@@ -21,7 +10,6 @@
         <img src="../../assets/img/footer/IOS-Badge.png" >
       </a>
     </div>
-    <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
         <label class="search-bg__title animated fadeInDown"> Propel your Learning to a whole new dimension: BUY, SELL, RENT&BID on Online Courses with CourseFrenzy’s bleeding edge AI</label>
@@ -73,18 +61,12 @@
 
   <div class="main-nav">
     <div class="container">
-      <!--<div class="row">-->
-        <!--<div class="col-lg-12">-->
-        <!--</div>-->
-      <!--</div>-->
-       <!--Slider Component Here-->
       <div class="row">
         <div class="col-md-12">
           <button *ngIf="userRole==='Admin'" class="btn btn-primary" (click)="openDialog()">Edit</button>
           <form class="search-bg" action="./">
-            <!--<label class="search-bg__title animated fadeInDown">{{ SliderContent?.heading }}</label>-->
             <input (click)="openSearch()"
-              class="search-bg__text form-control input-lg" type="text" name="search-bg-name" placeholder="{{SliderContent?.searchPlaceHolder}}">
+              class="search-bg__text form-control input-lg" type="text" name="search-bg-name" placeholder="Which course would you like to search?">
             <button class="search-bg__btn" type="button">Search</button>
           </form>
         </div>
@@ -93,16 +75,7 @@
     </div>
     <div class="container-fluid container-wide homeslider-hide">
       <ngx-slick class="homeSlider" #slickModal="slick-modal" [config]="slideConfig">
-        <!--<div class="item" *ngFor="let category of Categories">-->
-        <!--<a routerLink='/courses/{{category.id}}' class="owl-option-02__box-01">-->
-        <!--<div class="owl-option-02__img-wrapp ">-->
-        <!--<img src="{{ImageUrl}}{{category?.image_icon_ios}}"/>-->
-        <!--</div>-->
-        <!--<h3 class="owl-option-02__title">-->
-        <!--{{ category?.name }}-->
-        <!--</h3>-->
-        <!--</a>-->
-        <!--</div>-->
+       
 
         <div class="item" ngxSlickItem *ngFor="let category of Categories">
           <div class="image">
@@ -122,22 +95,12 @@
   </div>
 </header>
 
-
-
-<!-- <app-home-slider></app-home-slider> -->
-<!--End Slider  -->
 <main class="content-row">
-  <!--Popular Courses-->
-
-  <!--<app-courses-on-bid> </app-courses-on-bid>-->
-  <!--<app-trending-now-courses></app-trending-now-courses>-->
-  <!--<app-top-rated-courses></app-top-rated-courses>-->
-
+  
   <div *ngIf="checkLogin != '1'">
-  <!-- Start Bid Slider -->
   <div class="content-box-01">
       <div class="container-fluid1">
-        <div class="row" *ngIf="loaded">
+        <div class="row" >
           <div class="col-lg-12 text-center">
             <h3 class="page-title-01 img-bg img-bg-5 color-white">Buy & Bid On Courses</h3>
           </div>
@@ -147,7 +110,7 @@
     
     <div class="content-box-01">
       <div class="container-fluid1">
-        <div class="row" *ngIf="loaded">
+        <div class="row">
           <div class="col-lg-12 bidSlider">
             <ngx-slick class="product-list slick-bids " #slickModal="slick-modal" [config]="slideConfig">
               <li class="product-list__item item" ngxSlickItem  *ngFor="let bid_data of BidCourses?.bids; let i=index">
@@ -325,7 +288,7 @@
 
 <div class="content-box-01">
   <div class="container-fluid1">
-    <div class="row" *ngIf="loaded">
+    <div class="row">
       <div class="col-lg-12 bidSlider">
         <ngx-slick class="product-list slick-bids1" #slickModal="slick-modal" [config]="slideConfig">
           <li class="product-list__item item" ngxSlickItem *ngFor="let data of topRatedCourses?.courses; let i=index;">
@@ -399,7 +362,7 @@
     <!-- Start Bid Slider -->
     <div class="content-box-01">
         <div class="container-fluid1">
-          <div class="row" *ngIf="loaded">
+          <div class="row">
             <div class="col-lg-12 text-center">
               <h3 class="page-title-01 img-bg img-bg-5 color-white">Buy & Bid On Courses</h3>
             </div>
@@ -409,7 +372,7 @@
       
       <div class="content-box-01">
         <div class="container-fluid1">
-          <div class="row" *ngIf="loaded">
+          <div class="row">
             <div class="col-lg-12 bidSlider">
               <ngx-slick class="product-list slick-bids " #slickModal="slick-modal" [config]="slideConfig">
                 <li class="product-list__item item" ngxSlickItem  *ngFor="let bid_data of BidCourses?.bids; let i=index">
@@ -587,7 +550,7 @@
   
   <div class="content-box-01">
     <div class="container-fluid1">
-      <div class="row" *ngIf="loaded">
+      <div class="row" >
         <div class="col-lg-12 bidSlider">
           <ngx-slick class="product-list slick-bids1" #slickModal="slick-modal" [config]="slideConfig">
             <li class="product-list__item item" ngxSlickItem *ngFor="let data of topRatedCourses?.courses; let i=index;">
@@ -677,7 +640,7 @@
     
     <div class="content-box-01">
       <div class="container-fluid1">
-        <div class="row" *ngIf="loaded">
+        <div class="row">
           <div class="col-lg-12 bidSlider">
             <ngx-slick class="product-list slick-bids4" #slickModal="slick-modal" [config]="slideConfig">
               <li class="product-list__item item" ngxSlickItem *ngFor="let data of Courses?.courses; let i=index;">
