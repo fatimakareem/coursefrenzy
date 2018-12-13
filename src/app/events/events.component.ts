@@ -3,7 +3,7 @@ import {FormControl, NgModel, Validators, ReactiveFormsModule} from '@angular/fo
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent} from '@angular/material';
 import {NgForm} from '@angular/forms';
 // import { AgmCoreModule } from '@agm/core';
-import {} from 'googlemaps';
+// import {} from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import {EventsService} from './events.service';
 import {Config} from '../Config';
@@ -76,7 +76,7 @@ export class EventsComponent implements OnInit {
     }
     this.obj.get_events(page).subscribe(response => {
       this.AllEvents = response;
-      // console.log(this.AllEvents.events);
+      console.log(this.AllEvents.events);
       this.pager = this.pagerService.getPager(this.AllEvents['totalItems'], page,5);
       this.loaded = true;
     });

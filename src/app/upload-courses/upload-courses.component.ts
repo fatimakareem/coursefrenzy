@@ -40,13 +40,14 @@ export class UploadCoursesComponent implements OnInit {
   pager: any = {};
   public query: any;
   response;
+  res;
   public searchResult: any;
   public NoMyCoursesErrorFalse: boolean = false;
   public NoMyCoursesErrorMessage: string;
   public GlobalUploadCourses: any = [];
   public Logedin: string;
   public UploadCourses: any = [];
-  constructor(private obj: UploadCoursesService, public dialog: MatDialog, private global: GlobalService,
+  constructor(private obj1: HeaderService,private obj: UploadCoursesService, public dialog: MatDialog, private global: GlobalService,
     private pagerService: PagerService, private _home: HomeService, private global2: GlobalService, @Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.Logedin = localStorage.getItem("loged_in");
@@ -70,8 +71,18 @@ export class UploadCoursesComponent implements OnInit {
     //   });
 
   }
+  GetBidUser(){
+    this.obj1.Biduser().subscribe(data =>{
 
+      this.response = data['Win List'];
+      this.res = data['Lose List'];
+
+    })
+
+
+  }
   ngOnInit() {
+    this.GetBidUser();
     this.global.currentMessage.subscribe(message =>this.postedCoursesList = message)
     // this.global.GlobalUploadCourse$.subscribe(response  => this.response  = response);
     this.obj.get_my_enrolled_courses().subscribe(response => {
