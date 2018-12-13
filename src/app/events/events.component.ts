@@ -3,7 +3,7 @@ import {FormControl, NgModel, Validators, ReactiveFormsModule} from '@angular/fo
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent} from '@angular/material';
 import {NgForm} from '@angular/forms';
 // import { AgmCoreModule } from '@agm/core';
-// import {} from 'googlemaps';
+import {} from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import {EventsService} from './events.service';
 import {Config} from '../Config';
