@@ -57,6 +57,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 // import { Uploader } from 'angular2-http-file-upload';
 import {AddCartDialogModule} from "./cart-dialog/add-cart-dialog.module";
+import { PaymentmethodsService } from './paymentmethods/paymentmethods.service';
 
 import {UserProfileComponent} from './layouts/user-profile/user-profile.component';
 import {AuthGuard} from './auth-guard/auth-guard.service';
@@ -128,6 +129,7 @@ import {SubscriptionConfirmationService} from "./subscription-confirmation/subsc
 import {BuyNowService} from "./BuyNow.service";
 import {FollowUnfollowService} from "./Follow-Unfollow.service";
 import {ChatboxService} from "./chatbox/chatbox.service";
+import { WinbidDialogComponent } from './winbid-dialog/winbid-dialog.component';
 
 let config = new AuthServiceConfig([
   {
@@ -156,6 +158,7 @@ export function provideConfig() {
     ChangePasswordComponent,
     SingleCategoryComponent,
     ChatComponent,
+    WinbidDialogComponent,
 
   ],
 
@@ -215,7 +218,7 @@ export function provideConfig() {
     MatToolbarModule
   ],
   entryComponents: [
-    ChatComponent,
+    ChatComponent,WinbidDialogComponent
   ],
 
   providers: [
@@ -224,7 +227,7 @@ export function provideConfig() {
       useFactory: provideConfig
     },
     AppRoutingProvider,
-    SignUpservice,
+    SignUpservice,PaymentmethodsService,
     SimpleGlobal,
     AuthGuard,
     LoginService,
@@ -265,7 +268,7 @@ export function provideConfig() {
     ChatboxService,
     // Uploader,
   ],
-  
+ 
 
   bootstrap: [
     AppComponent,
