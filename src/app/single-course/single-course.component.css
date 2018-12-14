@@ -458,12 +458,12 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .ratingq > input:checked ~ label, /* show gold star when clicked */
 .ratingq:not(:checked) > label:hover, /* hover current star */
-.ratingq:not(:checked) > label:hover ~ label { color: red;  } /* hover previous stars in list */
+.ratingq:not(:checked) > label:hover ~ label { color: rgb(253, 216, 53);  } /* hover previous stars in list */
 
 .ratingq > input:checked + label:hover, /* hover current star when changing rating */
 .ratingq > input:checked ~ label:hover,
 .ratingq > label:hover ~ input:checked ~ label, /* lighten current selection */
-.ratingq > input:checked ~ label:hover ~ label { color: red;  }
+.ratingq > input:checked ~ label:hover ~ label { color: rgb(253, 216, 53);  }
 
 .ratingp > input { display: none; }
 .ratingp > label:before {
