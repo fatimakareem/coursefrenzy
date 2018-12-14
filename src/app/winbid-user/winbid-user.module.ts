@@ -15,5 +15,6 @@ const winuser: Routes = [
     MatTabsModule
   ],
   declarations: [WinbidUserComponent]
+
 })
 export class WinbidUserModule { }

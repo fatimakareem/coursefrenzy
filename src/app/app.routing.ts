@@ -9,6 +9,7 @@ import {AdminLayoutComponent} from './layouts/admin/admin-layout.component';
 // import {Page404Module} from './page404/page404.module';
 // import {BecomeInstructorComponent} from "./become-instructor/become-instructor.component";
 //   import {InstructorModule} from './instructor/instructor.module';
+import { WinbidDialogComponent } from './winbid-dialog/winbid-dialog.component';
 
 
 

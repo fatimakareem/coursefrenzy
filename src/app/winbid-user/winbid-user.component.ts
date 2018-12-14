@@ -7,6 +7,7 @@ import {RecentlyViewedCoursesComponent} from '../courses-all/recently-viewed-cou
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GlobalService} from '../global.service';
+import { WinbidDialogComponent } from '../winbid-dialog/winbid-dialog.component';
 
 @Component({
   selector: 'app-winbid-user',
@@ -63,8 +64,10 @@ public check: any = [];
 
   }
   openDialog2(index, course_id): void {
+    alert(course_id);
+   
     if (this.Logedin === '1') {
-      const dialogRef = this.dialog.open(AddCartDialogComponent, {
+      const dialogRef = this.dialog.open(WinbidDialogComponent, {
         width: '500px',
         data: { course_id: course_id,
           // CourseDetail: this.Courses
