@@ -65,20 +65,21 @@
                         <!--bindings={
     "ng-reflect-ng-for-of": "[object Object]"
     }--><tbody  class="ng-star-inserted">
-                            <tr >
-                                <td >ussamaAli</td>
-                                <td >************0015</td>
-                                <td >09/2020</td>
-                                <td >
-                                    <!--bindings={
-    "ng-reflect-ng-if": "true"
-    }--><div  class="ng-star-inserted">
-                                        <mat-slide-toggle  class="py-toggle mat-slide-toggle mat-accent mat-checked" name="atm_details" ng-reflect-name="atm_details" ng-reflect-checked="true" id="mat-slide-toggle-1"><label class="mat-slide-toggle-label"><div class="mat-slide-toggle-bar mat-slide-toggle-bar-no-side-margin"><input class="mat-slide-toggle-input cdk-visually-hidden" type="checkbox" id="mat-slide-toggle-1-input" tabindex="0" name="atm_details"><div class="mat-slide-toggle-thumb-container"><div class="mat-slide-toggle-thumb"></div><div class="mat-slide-toggle-ripple mat-ripple" mat-ripple="" ng-reflect-centered="true" ng-reflect-radius="23" ng-reflect-animation="[object Object]" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLLabelElement]"></div></div></div><span class="mat-slide-toggle-content"></span></label></mat-slide-toggle>
-                                    </div>
-                                    <!--bindings={
-    "ng-reflect-ng-if": "false"
-    }-->
-                                </td>
+        <tbody *ngFor="let card of res">
+            <tr>
+                <td>{{card.nickname}}</td>
+                <td>{{card.cardNumber}}</td>
+                <td>{{card.expiryDate}}</td>
+                <td>
+                    <div *ngIf="card.default==true">
+                        <mat-slide-toggle [checked]="true" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
+                            class="py-toggle"></mat-slide-toggle>
+                    </div>
+                    <div *ngIf="card.default !=true">
+                        <mat-slide-toggle [checked]="false" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
+                            class="py-toggle"></mat-slide-toggle>
+                    </div>
+                </td>
                             </tr>
                         </tbody>
                     </table>

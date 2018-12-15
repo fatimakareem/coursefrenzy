@@ -5,7 +5,7 @@ import {HeaderService} from '../header/header.service';
 import {FormGroup, FormBuilder, Validators, NgForm, FormControl} from '@angular/forms';
 import { PaymentmethodsService } from '../paymentmethods/paymentmethods.service';
 import {Subscription} from 'rxjs/Subscription';
-
+import swal from 'sweetalert2'
 @Component({
   selector: 'app-winbid-dialog',
   templateUrl: './winbid-dialog.component.html',
@@ -62,11 +62,61 @@ return this.obj_payment_service.showCards().subscribe(Response =>{
         }
   })
 }
+updefault;
+
+setcard(name,status,var_get_card_id) {
+  if (status == false) {
+    this.updefault = true;
+  }
+  else if(status == true)
+   {
+    this.updefault = false;
+  }
+  this.obj_payment_service.updateCard(name,this.updefault,var_get_card_id).subscribe(Data => {
+    swal({
+      type: 'success',
+      title: 'Credit Card Details Are Updated!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    this.show_Card_info();
+  },
+    error => {
+      if (error.status == 400) {
+        swal({
+          type: 'error',
+          title: 'Credit Card Details Are Not Correct!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+      else if (error.status == 500) {
+        swal(
+          'Sorry',
+          'Server Is Under Maintenance!',
+          'error'
+        )
+      }
+      else {
+        swal(
+          'Sorry',
+          'Some Thing Went Worrng!',
+          'error'
+        )
+      }
+    })
+}
   onSubmit(f: NgForm) {
+    if(this.var_get_status == false ){
     // this.model.amount = this.total; cardNumber, expirationdate, cardcod,id,bid_id,status
     this.obj.winbidpayment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod,this.var_get_id,this.data.course_id,this.var_get_status).subscribe();
     console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod,this.var_get_id,this.data.course_id,this.var_get_status);
+  }else if(this.var_get_status == true){
+    this.obj.winbidpayment1(this.var_get_id,this.data.course_id,this.var_get_status).subscribe();
+    console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod,this.var_get_id,this.data.course_id,this.var_get_status);
+
   }
+}
   onNoClick(): void {
     this.dialogRef.close();
   }
