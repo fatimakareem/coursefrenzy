@@ -78,7 +78,7 @@ export class BiddingService {
   }
 
   get_bids(BidId) {
-    return this._http2.get('http://192.168.30.132:9000/courses/bidhistory/' + BidId + '/').map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/bidhistory/' + BidId + '/').map((response: Response) => response.json());
   }
 
 }

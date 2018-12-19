@@ -47,8 +47,9 @@
                 </div>
                 <div class="widget custom-widget course-pricing clearfix">
                     <div class="customwidget text-left w40">
-                        <h3 class=" text-center linethrough">${{bids?.courseDetail?.actual_price}}.00</h3>
-                        <h3 class="widget-title text-center">${{bids?.courseDetail?.discounted_price}}.00</h3>
+                        <h3 class=" widget-title text-center" *ngIf="bids?.courseDetail?.actual_price !=0">${{bids?.courseDetail?.actual_price}}</h3>
+                        <h3 class=" widget-title text-center" *ngIf="bids?.courseDetail?.actual_price <=0">Free</h3>
+                        <!-- <h3 class="widget-title text-center">${{bids?.courseDetail?.discounted_price}}.00</h3> -->
                         <h4 class="text-center">30-Day Money-Back Guarantee</h4>
                         <div class="sidebar-btn"> <button routerLink="/checkout" (click)="noPromo()" class="button pull-left">
                                 Buy Now </button>
