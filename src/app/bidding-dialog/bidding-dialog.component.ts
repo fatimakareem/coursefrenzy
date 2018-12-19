@@ -55,10 +55,13 @@ export class BiddingDialogComponent implements OnInit {
             this.dialogRef.close();
           },
           (error) => {
-            this.err=error.json()
-            console.log(this.err.bidamount ,this.err,'kkkkkk')
+           
+//             if(error.status==404){
+//               this.bidclosed();
+// }
 if(error.status == 403){
-  
+  this.err=error.json()
+  console.log(this.err.bidamount ,this.err,'kkkkkk')
   swal({
     type: 'error',
     title: 'Bid Higher than ' + '$'+ this.err.bidamount,
@@ -67,9 +70,7 @@ if(error.status == 403){
    
   });
 }
-else if(error.status==404){
-              this.bidclosed();
-}
+
           }
           );
       }

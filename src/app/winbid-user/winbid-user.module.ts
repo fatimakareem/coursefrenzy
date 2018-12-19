@@ -14,7 +14,8 @@ const winuser: Routes = [
     RouterModule.forChild(winuser),
     MatTabsModule
   ],
-  declarations: [WinbidUserComponent]
+  declarations: [WinbidUserComponent],
+  // exports:[WinbidUserComponent]
 
 })
 export class WinbidUserModule { }

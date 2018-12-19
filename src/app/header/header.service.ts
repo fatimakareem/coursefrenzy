@@ -86,7 +86,59 @@ export class HeaderService {
     headers.append('Content-Type', 'application/json');
     return this._http2.get(  Config.api + 'courses/user_notifications/', {headers : headers}).map((response: Response) => response.json());
   }
- 
+  winbidpayment1(id,bid_id,status) {
+    //  console.log('Chapter Name is ' + amount);
+      const headers = new Headers();
+      if (isPlatformBrowser(this.platformId)) {
+        headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization').toString());
+      }
+      headers.append('Content-Type', 'application/json');
+      if(status==true)
+      {
+        return this._http2.post(Config.api + 'courses/bidpayment/', 
+        {
+        "bid_id":bid_id,
+            'id': id,
+          }, {headers: headers}).map((res: Response) => {
+          if (res) {
+            // console.log('1');
+            if (res.status === 201 || res.status === 200) {
+              const responce_data = res.json();
+              // localStorage.setItem('user_id', responce_data.id);
+              // this.users_id = localStorage.getItem('user_id');
+              return [{status: res.status, json: res}];
+            } else if (res.status === 5300) {
+              // this._nav.navigate(['/login']);
+    
+              // localStorage.setItem('conformation', '1');
+              // console.log('ok submited 200');
+              return [{status: res.status, json: res}];
+            } else {
+              // console.log('ok');
+            }
+          }
+        }).catch((error: any) => {
+          // alert(error);
+          if (error.status === 404) {
+            // console.log('ok not submited submit 404');
+            // localStorage.setItem('error', '1');
+            return Observable.throw(new Error(error.status));
+          } else if (error.status === 400) {
+            //    this._nav.navigate(['/pages/accident']);
+            // console.log('ok not submited submit 400');
+            // localStorage.setItem('error', '1');
+            return Observable.throw(new Error(error.status));
+          } else {
+            //  this._nav.navigate(['/pages/accident']);
+            // console.log('ok not submited submit error');
+    
+            return Observable.throw(new Error(error.status));
+          }
+        });
+      }
+     
+     
+    }
   winbidpayment(cardNumber, expirationdate, cardcod,id,bid_id,status) {
   //  console.log('Chapter Name is ' + amount);
     const headers = new Headers();

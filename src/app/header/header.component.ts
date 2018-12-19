@@ -15,7 +15,7 @@ import {AddCartDialogComponent} from "../cart-dialog/add-cart-dialog.component";
 import {MatDialog} from "@angular/material";
 import {HomeComponent} from '../home/home.component';
 import {CoursesOnBidComponent} from '../courses-all/courses-on-bid/courses-on-bid.component';
-
+import {AddCourseDialogComponent} from '../upload-courses/upload-courses.component'
 
 declare const $: any;
 @Component({
@@ -24,7 +24,8 @@ declare const $: any;
   styleUrls: ['./header.component.css', '../chat/chat.component.css', '../course/course.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+public nestedSubCategories:any;
+public postedCoursesList:any;
   public Categories: any;
   loaded = false;
   Logedin: string = '1';
@@ -234,7 +235,31 @@ export class HeaderComponent implements OnInit {
     }
 
   }
-
+  nested(id){
+    this.obj.get_nestedcategories(id).subscribe(response => {
+      this.nestedSubCategories = response;
+    });
+  }
+  openDialog(): void {
+    if (localStorage.getItem("loged_in")) {
+      this.nav.navigate(['/mycourses']);
+      localStorage.setItem('sell','sell')
+      // const dialogRef = this.dialog.open(AddCourseDialogComponent, {
+      //   // width: '500px',
+      //   data: this.postedCoursesList
+      // });
+    }
+    else {
+      swal({
+        type: 'error',
+        title: 'Authentication Required <br> Please Login or Signup first',
+        showConfirmButton: false,
+        width: '512px',
+        timer: 1500
+      });
+      this.nav.navigate(['/login']);
+    }
+   }
   onclick() {
     if (!this.heart) {
       this.heartClass = 'fa fa-heart';

@@ -5,6 +5,8 @@ import {
   AddCourseDialogComponent, CourseBidComponent, EditCourseDialogComponent,
   UploadCoursesComponent
 } from './upload-courses.component';
+// import {WinbidUserComponent} from '../winbid-user/winbid-user.component';
+// import {WinbidDialogComponent} from '../winbid-dialog/winbid-dialog.component'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
@@ -19,7 +21,7 @@ import {LoaderModule} from "../loader/loader.module";
 import {MatDatepickerModule} from '@angular/material';
 import { MomentModule } from 'ngx-moment';
 // import {matInputModule} from '@angular/material';
-
+import { DateTimePickerModule} from 'ngx-datetime-picker';
 
 const myCoursesRoutes: Routes = [
   { path: '', component: UploadCoursesComponent }
@@ -36,7 +38,7 @@ const myCoursesRoutes: Routes = [
   ],
 
   imports: [
-    CommonModule,
+    CommonModule,DateTimePickerModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
