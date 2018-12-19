@@ -25,7 +25,7 @@ export class WinbidDialogComponent implements OnInit {
 
   CardNumberForm = new FormControl('', [
     Validators.required,
-    Validators.pattern(this.CardNumber),
+    
   ]);
 
   CardCodeForm = new FormControl('', [

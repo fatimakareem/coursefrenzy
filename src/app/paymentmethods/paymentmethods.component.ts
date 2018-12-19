@@ -17,7 +17,7 @@ import * as moment from 'moment';
   styleUrls: ['./paymentmethods.component.scss']
 })
 export class PaymentmethodsComponent implements OnInit {
-  public mask = [/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  // public mask = [/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   var_type_atm = new FormControl();
   edit_var_type_atm = new FormControl();
   cardtype;
@@ -40,14 +40,10 @@ export class PaymentmethodsComponent implements OnInit {
   ];
   form = new FormGroup({
     cardnumber: new FormControl('', [
-      Validators.minLength(16),
-      Validators.maxLength(16),
       Validators.required,
       Validators.pattern('^[0-9]*$')
     ]),
     cardnumber4: new FormControl('', [
-      Validators.minLength(15),
-      Validators.maxLength(15),
       Validators.required,
       Validators.pattern('^[0-9]*$')
     ]),
@@ -95,6 +91,8 @@ export class PaymentmethodsComponent implements OnInit {
   edit_cardnumber;
   edit_cardnumber2;
   edit_ccv3;
+  public cardmask;
+  expirydate;
   constructor(private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private sg: SimpleGlobal, private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     this.cardnumber = true;
     this.cardnumber4 = false;
@@ -105,7 +103,23 @@ export class PaymentmethodsComponent implements OnInit {
     // this.edit_ccv2 = false;
     // this.edit_ccv3 = false;
   }
-
+  chek(val){
+    this.expirydate=val.toString().slice(3,7);
+    console.log(this.expirydate,'jj')
+  }
+  public masks=function(rawValue) {
+   
+    // add logic to generate your mask array  
+    if (rawValue && rawValue.length > 0) {
+        if (rawValue[0] == '0' || rawValue[5] == '1') {
+            return [/[01]/, /[1-9]/, '/', /[2-9]/, /[0-9]/, /[0-9]/, /[0123456789]/];
+        } else {
+            return [/[01]/, /[0-2]/, '/',  /[2-9]/, /[0-9]/, /[0-9]/, /[0123456789]/];
+        }
+    }
+    return [/[01]/, /[0-9]/, '/',  /[2-9]/, /[0-9]/, /[0-9]/, /[0123456789]/];
+    
+}
   ngOnInit() {
     this.form.controls['check'].setValue(false);
     this.getCards();
@@ -114,6 +128,9 @@ export class PaymentmethodsComponent implements OnInit {
 
     if (var_type_atm == "American Express") {
       this.cardtype = var_type_atm;
+      this.cardmask = [/[3]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]
+
+      this.cardtype = var_type_atm;
       this.cardnumber = false;
       this.form.controls.cardnumber.reset();
       this.cardnumber4 = true;
@@ -121,7 +138,26 @@ export class PaymentmethodsComponent implements OnInit {
       this.form.controls.ccv.reset();
       this.ccv4 = true;
     }
-    else {
+    else if (var_type_atm == "Visa") {
+      this.cardmask=[/[4]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+      this.cardtype = var_type_atm;
+      this.cardnumber4 = false;
+      this.form.controls.cardnumber4.reset();
+      this.cardnumber = true;
+      this.ccv4 = false;
+      this.form.controls.ccv4.reset();
+      this.ccv = true;
+    }else if (var_type_atm == "Master") {
+      this.cardmask=[/[5]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+      this.cardtype = var_type_atm;
+      this.cardnumber4 = false;
+      this.form.controls.cardnumber4.reset();
+      this.cardnumber = true;
+      this.ccv4 = false;
+      this.form.controls.ccv4.reset();
+      this.ccv = true;
+    } else{
+      this.cardmask=[/[6]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
       this.cardtype = var_type_atm;
       this.cardnumber4 = false;
       this.form.controls.cardnumber4.reset();

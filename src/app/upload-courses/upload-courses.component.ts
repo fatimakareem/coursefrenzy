@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID,OnDestroy } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import { UploadCoursesService } from './upload-courses.service';
 import 'rxjs/add/operator/startWith';
@@ -19,6 +19,11 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import { isPlatformBrowser } from '@angular/common';
 import { Alert } from 'selenium-webdriver';
+// import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import {RecentlyViewedCoursesComponent} from '../courses-all/recently-viewed-courses/recently-viewed-courses.component';
+import { WinbidDialogComponent } from '../winbid-dialog/winbid-dialog.component';
+
 const NAME_REGEX = '[a-zA-Z0-9_.]+?';
 // const ^[0-9]*$ = '[0-9]+';
 
@@ -27,7 +32,7 @@ const NAME_REGEX = '[a-zA-Z0-9_.]+?';
   templateUrl: './upload-courses.component.html',
   styleUrls: ['./upload-courses.component.css']
 })
-export class UploadCoursesComponent implements OnInit {
+export class UploadCoursesComponent implements OnInit,OnDestroy {
   course_data_passing: any;
   public NoPostedCourseErrorMessage: string;
   public coursesList: any = [];
@@ -47,7 +52,7 @@ export class UploadCoursesComponent implements OnInit {
   public GlobalUploadCourses: any = [];
   public Logedin: string;
   public UploadCourses: any = [];
-  constructor(private obj1: HeaderService,private obj: UploadCoursesService, public dialog: MatDialog, private global: GlobalService,
+  constructor( private nav: Router,private _nav:Router,private route: ActivatedRoute,private obj1: HeaderService,private obj: UploadCoursesService, public dialog: MatDialog, private global: GlobalService,
     private pagerService: PagerService, private _home: HomeService, private global2: GlobalService, @Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.Logedin = localStorage.getItem("loged_in");
@@ -82,6 +87,12 @@ export class UploadCoursesComponent implements OnInit {
 
   }
   ngOnInit() {
+    
+    if(localStorage.getItem("sell")){ const dialogRef = this.dialog.open(AddCourseDialogComponent, {
+      // width: '500px',
+      data: this.postedCoursesList
+      
+    });}
     this.GetBidUser();
     this.global.currentMessage.subscribe(message =>this.postedCoursesList = message)
     // this.global.GlobalUploadCourse$.subscribe(response  => this.response  = response);
@@ -214,7 +225,21 @@ export class UploadCoursesComponent implements OnInit {
       });
     }
   }
-
+  openDialog3(index, course_id): void {
+    alert(course_id);
+   
+    if (this.Logedin === '1') {
+      const dialogRef = this.dialog.open(WinbidDialogComponent, {
+        width: '500px',
+        data: { course_id: course_id,
+          // CourseDetail: this.Courses
+        }
+      });
+    } else {
+      RecentlyViewedCoursesComponent.Authenticat();
+      this.nav.navigate(['login']);
+    }
+  }
 
 
   openDialog2(BidCourse_id): void {
@@ -243,7 +268,9 @@ export class UploadCoursesComponent implements OnInit {
       this.loaded2 = true;
     });
   }
-
+  ngOnDestroy(){
+    localStorage.removeItem("sell");
+  }
   setPage2(page: number) {
     // if (page < 1 || page > this.pager.totalPages) {
     //   return;
@@ -265,7 +292,7 @@ export class UploadCoursesComponent implements OnInit {
   templateUrl: 'add-course-dialog.html',
   styleUrls: ['../events/add-event.component.css']
 })
-export class AddCourseDialogComponent implements OnInit {
+export class AddCourseDialogComponent implements OnInit,OnDestroy {
   time = new Date("00:00:00 GMT-0500 (EST)");
   public course_image: string;
   public ImageUrl = Config.ImageUrl;
@@ -426,6 +453,7 @@ export class AddCourseDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+   console.log(new Date());
     this.global.currentMessage.subscribe(message =>this.postedCoursesList = message)
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
@@ -434,9 +462,12 @@ export class AddCourseDialogComponent implements OnInit {
     });
     // this.global.GlobalUploadCourse$.subscribe(response  => this.response  = response);
   }
-
+  ngOnDestroy(){
+    localStorage.removeItem("sell");
+  }
   onNoClick(): void {
     this.dialogRef.close(1);
+    // localStorage.removeItem("sell");
   }
   nestedsubcat(id) {
     this.obj2.get_nestedcategories(id).subscribe(response => {

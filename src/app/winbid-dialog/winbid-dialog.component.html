@@ -9,7 +9,7 @@
                   Payment</div>
               <div class="panel-body">
                   <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Credit Card Number"
-                          minlength="14" maxlength="16" [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
+                          minlength="14" maxlength="16"  [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
                           required>
                       <mat-error *ngIf="CardNumberForm.hasError('pattern')"> Please enter a valid card
                           number. Only Numerics are Allowed. </mat-error>
@@ -30,8 +30,8 @@
                       <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum Length of <strong>CardCode
                               can be 4 characters</strong> </mat-error>
                   </mat-form-field>
-                  <mat-form-field class="example-full-width mat-size" *ngIf="totalflag"> <input matInput
-                          placeholder="Total Amount" [formControl]="TotalAmountForm" value="{{total}}"
+                  <mat-form-field class="example-full-width mat-size" > <input matInput
+                          placeholder="Total Amount" [formControl]="TotalAmountForm" 
                           [(ngModel)]="model.amount" required readonly> </mat-form-field>
               </div>
               <div class="col-md-6">

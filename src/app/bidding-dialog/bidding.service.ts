@@ -5,6 +5,7 @@ import {Config} from '../Config';
 import {Observable} from 'rxjs/Observable';
 import {isPlatformBrowser} from '@angular/common';
 import {HttpService} from "../serv/http-service";
+import swal from 'sweetalert2';
 
 
 @Injectable()
@@ -55,6 +56,19 @@ export class BiddingService {
         // console.log('ok not submited submit 400');
         // localStorage.setItem('error', '1');
         return Observable.throw(new Error(error.status));
+      } 
+      else if (error.status === 404) {
+        swal({
+          type: 'error',
+          title: 'Bid is Closed',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 2500
+        });
+        //    this._nav.navigate(['/pages/accident']);
+        // console.log('ok not submited submit 400');
+        // localStorage.setItem('error', '1');
+        return Observable.throw(new Error(error.status));
       } else {
         //  this._nav.navigate(['/pages/accident']);
         // console.log('ok not submited submit error');
@@ -64,7 +78,7 @@ export class BiddingService {
   }
 
   get_bids(BidId) {
-    return this._http2.get(Config.api + 'courses/bidhistory/' + BidId + '/').map((response: Response) => response.json());
+    return this._http2.get('http://192.168.30.132:9000/courses/bidhistory/' + BidId + '/').map((response: Response) => response.json());
   }
 
 }

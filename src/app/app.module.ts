@@ -130,7 +130,7 @@ import {BuyNowService} from "./BuyNow.service";
 import {FollowUnfollowService} from "./Follow-Unfollow.service";
 import {ChatboxService} from "./chatbox/chatbox.service";
 import { WinbidDialogComponent } from './winbid-dialog/winbid-dialog.component';
-
+import {AddCourseDialogComponent} from './upload-courses/upload-courses.component'
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -220,7 +220,7 @@ export function provideConfig() {
   entryComponents: [
     ChatComponent,WinbidDialogComponent
   ],
-
+ 
   providers: [
     {
       provide: AuthServiceConfig,
