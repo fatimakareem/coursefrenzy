@@ -85,7 +85,13 @@ export class UserProfileComponent implements OnInit {
       // data: {name: this.name, animal: this.animal}
     });
   }
-
+  openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+  
+  closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
   ngOnInit() {
     this.fun_get_user_profile_pic();
    

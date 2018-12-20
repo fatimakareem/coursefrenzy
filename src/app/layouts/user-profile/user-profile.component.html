@@ -1,5 +1,39 @@
 <app-header></app-header>
-<div mat-dialog-actions>
+<div class="">
+<div class="">
+<div id="mySidenav" class="fltr-wrpr1 col-lg-3">
+        <a href="javascript:void(0)" class="closebtn hide-btn" (click)="closeNav()">&times;</a>
+            <nav>
+                <header class="profile-sidebar text-center">
+                <div class="avatar_center"> 
+                    <img *ngIf="ProfileData && ProfileData.profilePhoto.length >0 " src="{{ImageUrl}}{{ProfileData.profilePhoto}}"
+                        class="img-circle avatar image-responsive" alt="User Profile Photo">           
+                </div>
+                <h3 class="">{{uname}}</h3>
+                </header>
+                    <a routerLink="/profile/basic_info"
+                        routerLinkActive="active">Profile
+                    </a>
+                    <a routerLink="/profile/account" routerLinkActive="active">Account
+                    </a>
+                    <a routerLink="/profile/payout" routerLinkActive="active">Payment Method
+                    </a> 
+                    <a routerLink="/profile/privacy" routerLinkActiv e="active">Privacy
+                    </a>
+            </nav>
+      </div>
+      
+      
+      
+    <div class="col-lg-9 col-lg-offset-3 profile-body">
+            <span class="hide-btn" (click)="openNav()">&#9776;</span>
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+    </div>
+</div>
+</div>
+
+<!-- <div mat-dialog-actions>
     <div class="container">
         <div class="example-form">
             <div class="row">
@@ -21,5 +55,4 @@
             <div mat-dialog-actions> <br><br></div>
         </div>
     </div>
-</div>
-<app-footer></app-footer>
+</div> -->
