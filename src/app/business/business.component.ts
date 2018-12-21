@@ -18,7 +18,7 @@ import {CatTopRatedCoursesComponent} from '../category-courses/cat-top-rated-cou
 export class BusinessComponent implements OnInit {
   public Categories: any;
   public topRatedCoursesviaCategories: any;
-  public ImageUrl = 'https://storage.coursefrenzy.com/images/';
+  public ImageUrl = 'https://storage.coursefrenzy.com/final/';
   public showCourses: boolean = true;
   Logedin: string;
   private route: ActivatedRoute;

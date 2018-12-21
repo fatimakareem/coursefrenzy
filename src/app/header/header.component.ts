@@ -39,7 +39,7 @@ public postedCoursesList:any;
   public query: any;
   public Courses: any;
   public selected: any;
-  // public ImageUrl = 'https://storage.coursefrenzy.com/images/';
+  // public ImageUrl = 'https://storage.coursefrenzy.com/final/';
   ImageUrl = Config.staticStorageImages;
   public heart= false;
   public heartClass= 'fa fa-heart-o';

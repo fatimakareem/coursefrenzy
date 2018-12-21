@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 export class WishlistCoursesComponent implements OnInit {
   public page = 1;
   public wishlistCourses: any;
-  public ImageUrl = 'https://storage.coursefrenzy.com/images/';
+  public ImageUrl = 'https://storage.coursefrenzy.com/final/';
   loaded: boolean;
   public GlobalWishListCourses: any=[];
   public emptyWishlist: boolean = true;

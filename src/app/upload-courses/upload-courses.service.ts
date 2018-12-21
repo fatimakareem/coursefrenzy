@@ -175,7 +175,7 @@ export class UploadCoursesService {
     if(BidStatus1==true)
 
     {
-      return this._http2.put('http://192.168.30.132:9000/courses/edit_delete/'+ id,
+      return this._http2.put(Config.api + 'courses/edit_delete/'+ id,
       {
 
       
@@ -238,7 +238,7 @@ export class UploadCoursesService {
     }
     else
     {
-      return this._http2.put('http://192.168.30.132:9000/courses/edit_delete/'+ id,
+      return this._http2.put(Config.api + 'courses/edit_delete/'+ id,
       {
 
         'name': Name,
