@@ -52,11 +52,9 @@
         border-radius: 50%;
     }
     .basic-box{
-        background: #eceff4;
         padding: 10px;
         border-radius: 10px;
         margin: 15px 0;
-        box-shadow: 0px 0px 9px 0px #b9b2b2;
         /* min-height: 786px; */
     }
     .example-half-width{
@@ -64,7 +62,21 @@
         float: left;
         padding: 0 5px;
     }
-    
+    .example-3half-width{
+        width: 33%;
+        float: left;
+        padding: 0 5px; 
+    }
+    .heading-h1{
+        text-align: center;
+        font-weight: bold;
+        margin: 35px 0 0;
+        color: #000;
+        font-size: 40px;
+    }
+    .margin-t-b20{
+        margin: 20px 0;
+    }
     
     
     
