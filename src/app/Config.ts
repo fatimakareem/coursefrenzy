@@ -16,4 +16,4 @@ export class Config {
 
   // public static api: String = 'http://192.168.29.132:8000/';
 }
-// https://storage.coursefrenzy.com/final_upload.php
+// https://storage.coursefrenzy.com/final_upload.php storage.coursefrenzy.com/videos/
