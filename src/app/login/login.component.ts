@@ -248,8 +248,10 @@ export class LoginComponent implements OnInit {
 
   socialCallBack = (user) => {
     this.user = user;
+
     const headers = { 'Content-Type': 'application/json' };
     if (user) {
+      console.log(user,'pppppppp')
       const createUser = this._http.post(Config.api + 'users/social_login/', {
         user
       }, { headers: headers });
