@@ -11,7 +11,9 @@ import {HeaderService} from "../header/header.service";
 
 @Component({
   selector: 'app-admin-categories',
-  templateUrl: './admin-categories.component.html'
+  templateUrl: './admin-categories.component.html',
+  styleUrls: ['./admin-categories.component.css']
+
 })
 export class AdminCategoriesComponent implements OnInit {
   public Categories: any;

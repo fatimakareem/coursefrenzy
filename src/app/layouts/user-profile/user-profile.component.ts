@@ -86,11 +86,11 @@ export class UserProfileComponent implements OnInit {
     });
   }
   openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.display = "block";
   }
   
   closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.display = "none";
   }
   ngOnInit() {
     this.fun_get_user_profile_pic();

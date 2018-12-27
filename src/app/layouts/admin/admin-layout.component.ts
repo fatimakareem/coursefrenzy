@@ -64,6 +64,13 @@ export class AdminLayoutComponent implements OnInit {
     });
 
   }
+  openNav() {
+    document.getElementById("mySidenav").style.display = "block";
+  }
+  
+  closeNav() {
+    document.getElementById("mySidenav").style.display = "none";
+  }
 
   ngAfterViewInit() {
     // console.log('show page  ',window.location);
