@@ -8,8 +8,8 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-faqs',
-  templateUrl: './admin-faqs.component.html'
-  // styleUrls: ['./admin-faqs.component.css']
+  templateUrl: './admin-faqs.component.html',
+  styleUrls: ['./admin-faqs.component.css']
 })
 
 export class AdminFaqsComponent implements OnInit{
