@@ -130,7 +130,8 @@ import {BuyNowService} from "./BuyNow.service";
 import {FollowUnfollowService} from "./Follow-Unfollow.service";
 import {ChatboxService} from "./chatbox/chatbox.service";
 import { WinbidDialogComponent } from './winbid-dialog/winbid-dialog.component';
-import {AddCourseDialogComponent} from './upload-courses/upload-courses.component'
+import {AddCourseDialogComponent} from './upload-courses/upload-courses.component';
+import { BuynowDialogComponent } from './buynow-dialog/buynow-dialog.component'
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -159,6 +160,7 @@ export function provideConfig() {
     SingleCategoryComponent,
     ChatComponent,
     WinbidDialogComponent,
+    BuynowDialogComponent,
 
   ],
 
@@ -218,7 +220,7 @@ export function provideConfig() {
     MatToolbarModule
   ],
   entryComponents: [
-    ChatComponent,WinbidDialogComponent
+    ChatComponent,WinbidDialogComponent,BuynowDialogComponent
   ],
  
   providers: [

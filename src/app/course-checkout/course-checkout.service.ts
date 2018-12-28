@@ -48,7 +48,7 @@ export class CourseCheckoutService {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization').toString());
     }
     headers.append('Content-Type', 'application/json');
-    if(status==true)
+    if(cardNumber.slice(0,1)=='*')
     {
       return this._http2.post(Config.api + 'courses/payamount/', 
       {

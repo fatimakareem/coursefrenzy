@@ -14,6 +14,8 @@ import {NgForm} from '@angular/forms';
 import {FormControl, NgModel, Validators, ReactiveFormsModule} from '@angular/forms';
 import {HeaderService} from '../header/header.service';
 import {SimpleGlobal} from "ng2-simple-global";
+import { BuynowDialogComponent } from '../buynow-dialog/buynow-dialog.component';
+
 // import { HomeSliderEidtDialogComponent } from './.component';
 declare const $: any;
 @Component({
@@ -428,8 +430,41 @@ if (isPlatformBrowser(this.platformId)) {
     });
   }
 
+  // buyNowClick1(index, course_id): void {
+  //   this.buyNowService.buyNow(index, course_id,this.Logedin)
+  // }
   buyNowClick(index, course_id): void {
-    this.buyNowService.buyNow(index, course_id,this.Logedin)
+    this.obj_CoursesService.buyNowcheck(index, course_id,this.Logedin).subscribe(
+      data => {
+        // alert(data.message)
+       if(this.Logedin === '1' && data.message=="Course is already in your My Courses"){
+        swal({
+          type: 'error',
+          title: 'You Already Bought this course',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 1500
+        });
+       }
+    else if (this.Logedin === '1' && data.message != "Course is already in your My Courses") {
+      const dialogRef = this.dialog.open(BuynowDialogComponent, {
+        width: '500px',
+        data: { course_id: course_id,
+          // CourseDetail: this.Courses
+        }
+      });
+    } else {
+     
+        swal({
+          type: 'error',
+          title: 'Authentication Required <br> Please Login or Signup first',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 1500
+        });
+      
+      this.nav.navigate(['login']);
+    }})
   }
 
   openDialog3(index, course_id): void {
@@ -441,7 +476,15 @@ if (isPlatformBrowser(this.platformId)) {
         }
       });
     } else {
-      HomeComponent.Authenticat();
+     
+        swal({
+          type: 'error',
+          title: 'Authentication Required <br> Please Login or Signup first',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 1500
+        });
+      
       this.nav.navigate(['login']);
     }
   }
@@ -474,7 +517,7 @@ if (isPlatformBrowser(this.platformId)) {
   static EnrollmentError() {
     swal({
       type: 'error',
-      title: 'Oops! <br> Error in Buy Course!',
+      title: 'You Already Enrolled This Course.',
       showConfirmButton: false,
       width: '512px',
       timer: 2000

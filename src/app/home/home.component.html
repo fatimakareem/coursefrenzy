@@ -191,9 +191,9 @@
                                         <div *ngIf="data?.course.inWishList==true"><i class="fa fa-heart"></i></div>
                                         <div *ngIf="data?.course.inWishList==false" (click)="onclick(i, data?.course?.id)"><i
                                                 class="fa fa-heart-o"></i></div>
-                                    </a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
-                                    <a *ngIf="data?.course?.actual_price<=0" (click)="enrollCourse(i, data?.course?.id)"
-                                        type="button" class="btn btn1">Enroll Now</a> <a *ngIf="data?.course?.actual_price>0"
+                                    </a> <a *ngIf="data?.course?.actual_price!= 0" class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
+                                    <a *ngIf="data?.course?.actual_price<=0"   (click)="enrollCourse(i, data?.course?.id)"
+                                        type="button" class="btn btn1">Enroll Now</a> <a *ngIf="data?.course?.actual_price!=0"
                                         (click)="buyNowClick(i, data?.course?.id)" type="button" class="btn btn1">Buy
                                         Now</a> </div>
                             </li>
@@ -266,7 +266,7 @@
                                         <div *ngIf="data?.course.inWishList==true"><i class="fa fa-heart"></i></div>
                                         <div *ngIf="data?.course.inWishList==false" (click)="onclick(i, data?.course?.id)"><i
                                                 class="fa fa-heart-o"></i></div>
-                                    </a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
+                                    </a> <a *ngIf="data?.course?.actual_price!= 0" class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
                                     <a *ngIf="data?.course?.actual_price>0" (click)="buyNowClick(i, data?.course?.id)"
                                         type="button" class="btn btn1">Buy Now</a> <a *ngIf="data?.course?.actual_price<=0"
                                         (click)="enrollCourse(i, data?.course?.id)" type="button" class="btn btn1">Enroll
@@ -416,7 +416,7 @@
                                         <div *ngIf="data?.course.inWishList==true"><i class="fa fa-heart"></i></div>
                                         <div *ngIf="data?.course.inWishList==false" (click)="onclick(i, data?.course?.id)"><i
                                                 class="fa fa-heart-o"></i></div>
-                                    </a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
+                                    </a> <a *ngIf="data?.course?.actual_price!= 0" class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
                                     <a *ngIf="data?.course?.actual_price<=0" (click)="enrollCourse(i, data?.course?.id)"
                                         type="button" class="btn btn1">Enroll Now</a> <a *ngIf="data?.course?.actual_price>0"
                                         (click)="buyNowClick(i, data?.course?.id)" type="button" class="btn btn1">Buy
@@ -491,7 +491,7 @@
                                         <div *ngIf="data?.course.inWishList==true"><i class="fa fa-heart"></i></div>
                                         <div *ngIf="data?.course.inWishList==false" (click)="onclick(i, data?.course?.id)"><i
                                                 class="fa fa-heart-o"></i></div>
-                                    </a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
+                                    </a> <a *ngIf="data?.course?.actual_price!= 0" class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
                                     <a *ngIf="data?.course?.actual_price>0" (click)="buyNowClick(i, data?.course?.id)"
                                         type="button" class="btn btn1">Buy Now</a> <a *ngIf="data?.course?.actual_price<=0"
                                         (click)="enrollCourse(i, data?.course?.id)" type="button" class="btn btn1">Enroll
@@ -566,7 +566,7 @@
                                         <div *ngIf="data?.course.inWishList==true"><i class="fa fa-heart"></i></div>
                                         <div *ngIf="data?.course.inWishList==false" (click)="onclick(i, data?.course?.id)"><i
                                                 class="fa fa-heart-o"></i></div>
-                                    </a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
+                                    </a> <a *ngIf="data?.course?.actual_price!= 0" class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
                                     <a *ngIf="data?.course?.actual_price>0" (click)="buyNowClick(i, data?.course?.id)"
                                         type="button" class="btn btn1">Buy Now</a> <a *ngIf="data?.course?.actual_price<=0"
                                         (click)="enrollCourse(i, data?.course?.id)" type="button" class="btn btn1">Enroll
@@ -645,7 +645,7 @@
                                                     class="fa fa-heart"></i></div>
                                             <div *ngIf="data?.course.inWishList==false" (click)="onclick(i, data?.course?.id)"><i
                                                     class="fa fa-heart-o"></i></div>
-                                        </a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
+                                        </a> <a *ngIf="data?.course?.actual_price!= 0" class="wishlist material-icons" title="Add to Cart" (click)="openDialog3(i, data?.course?.id)">add_shopping_cart</a>
                                         <a *ngIf="data?.course?.actual_price>0" (click)="buyNowClick(i, data?.course?.id)"
                                             type="button" class="btn btn1">Buy Now</a> <a *ngIf="data?.course?.actual_price<=0"
                                             (click)="enrollCourse(i, data?.course?.id)" type="button" class="btn btn1">Enroll

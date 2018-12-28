@@ -3,7 +3,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
   AddChapterComponent, AddVideoComponent, EditChapterComponent, PublishCourseComponent,
-  SingleCourseComponent
+  SingleCourseComponent,
+  IntroVideoComponent
 } from './single-course.component';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {MatInputModule} from '@angular/material';
@@ -40,6 +41,7 @@ const singleCourseRoutes: Routes = [
     SingleCourseComponent,
     AddChapterComponent,
     AddVideoComponent,
+    IntroVideoComponent,
     PublishCourseComponent,
     EditChapterComponent,
     TeachesByTeacherComponent,
@@ -82,6 +84,7 @@ const singleCourseRoutes: Routes = [
     EditChapterComponent,
     VideoShowDialogComponent,
     AddReviewDialogComponent,
+    IntroVideoComponent
   ]
 
 })

@@ -30,7 +30,16 @@ declare const $: any;
 })
 export class SingleCourseComponent implements OnInit, OnDestroy {
   public isFollow: boolean;
-
+  public model: any = {};
+  selectedValue: string;
+  languages = [
+    { value: 'English', viewValue: 'English' },
+    { value: 'Urdu', viewValue: 'Urdu' },
+    { value: 'Spanish', viewValue: 'Spanish' },
+    { value: 'French', viewValue: 'French' },
+    { value: 'Turkish', viewValue: 'Turkish' },
+    { value: 'Arabic', viewValue: 'Arabic' }
+  ];
   public GlobalWishListCourses: any;
   public GlobalCartCourses: any = [];
   public alreadyInCartStatus: any;
@@ -78,7 +87,11 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   public firstname;
   public lastname;
   public rev: any;
-  public model: any = {};
+  // public model: any = {};
+  headline = new FormControl('', [
+    Validators.required,
+    Validators.pattern('[a-zA-Z0-9_. -,]+?')]);
+
   selected = 0;
   hovered = 0;
   readonly = false;
@@ -155,14 +168,16 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
         this.isFollow = data;
       });
   }
-
+  total;
+  minuts;my_vedio;
+  videos;
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.CourseId = +params['query'] || 1;
       this.route_instructor = +params['instructor'] || 0;
       this.obj.get_Single_Course(this.CourseId).subscribe(response => {
-
-        this.SingleCourse = response;
+this.my_vedio=response.mycourses
+        this.SingleCourse = response.data;
         this.rev = response.rating;
         if (response.hasOwnProperty("status")) {
           // this.AlreadyInWishlistError();
@@ -204,7 +219,10 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
         this.AllChapters = [];
         this.Chaptersloaded = false;
       } else {
-        this.AllChapters = response;
+        this.AllChapters = response.data;
+        this.videos=response.vedios
+        this.total=response['Total Chapter'];
+        this.minuts=response['Total Minute'];
         this.Chaptersloaded = true;
       }
 
@@ -266,7 +284,42 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   Follow_Instructor(user_id) {
     this.follow_unfollow.Follow_Unfollow(user_id, this.Logedin);
   }
+  onSubmit(f: NgForm) {
+    this.route.params.subscribe(params => {
+      this.CourseId = +params['query'] || 1;
+    // alert(this.model.selectedValue);
+    this.obj.publish_course(this.CourseId, this.model.headline, this.model.selectedValue, this.model.detail).subscribe(
+      data => {
+        //      console.log(data);
+        // this.dialogRef.close();
+        PublishCourseComponent.publishSuccess();
+      },
+      error => {
+        // console.log(error);
+        PublishCourseComponent.publishError();
+      }
+    );})
+  }
 
+  static publishSuccess() {
+    swal({
+      type: 'success',
+      title: 'Success! <br> Course Publish Request Sent to Admin!',
+      showConfirmButton: false,
+      width: '512px',
+      timer: 2500
+    })
+  }
+
+  static publishError() {
+    swal({
+      type: 'error',
+      title: 'Oops! <br> Failed to send publish course request!',
+      showConfirmButton: false,
+      width: '512px',
+      timer: 2500
+    })
+  }
   AddToWatchList() {
     if (this.Logedin == '1') {
       this.obj.AddtoWatchedCourses(this.CourseId).subscribe(response => {
@@ -407,7 +460,16 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   }
 
   SetVideoURL(video_url) {
-    const dialogRef = this.dialog.open(VideoShowDialogComponent, {
+    // if(this.my_vedio== false){
+    //   swal({
+    //     type: 'error',
+    //     title: 'Please Bought this course first.',
+    //     showConfirmButton: false,
+    //     width: '512px',
+    //     timer: 2000
+    //   })
+    // }else{
+      const dialogRef = this.dialog.open(VideoShowDialogComponent, {
       width: '1366px',
       data: {
         video_url: video_url,
@@ -415,6 +477,8 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(result => {
     });
+  // }
+    
 
   }
   noPromo() {
@@ -609,7 +673,26 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       timer: 1500
     })
   }
-
+  openDialog4(id){
+    this.route.params.subscribe(params => {
+      this.CourseId = +params['query'] || 1
+      
+    const dialogRef = this.dialog.open(IntroVideoComponent, {
+      width: '500px',
+      data: {
+        id:  this.CourseId,
+        
+        // chapter_Videos: chapter_Videos
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result !== 1) {
+        // chapter_Videos.push(result);
+        // console.log(chapter_Videos);
+      }
+    });})
+  }
 
   openDialog2(chapter_id, chapter_Videos): void {
     const dialogRef = this.dialog.open(AddVideoComponent, {
@@ -906,7 +989,7 @@ export class AddVideoComponent {
     const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     this.input.append('fileToUpload', target.files[0]);
     // alert(target.files[0].name.toString());
-    this.model.video_title = target.files[0].name.toString();
+    // this.model.video_title = target.files[0].name.toString();
   }
 
 
@@ -1050,4 +1133,160 @@ export class PublishCourseComponent {
   }
 }
 
+@Component({
+  selector: 'app-intro-video--dialog',
+  templateUrl: 'intro-video-dialog.html',
+  // styleUrls: ['../events/intro-event.component.css']
+})
 
+export class IntroVideoComponent {
+  public model: any = {};
+  clicked = false;
+  public Videos;
+  loaded = false;
+  isActive = false;
+
+  // video_title = new FormControl('', [
+  //   Validators.required,
+  //   Validators.pattern('[a-zA-Z0-9_. -,]+?')]);
+  video_url = new FormControl('', [
+    Validators.required,
+  ]);
+
+  // video_minutes = new FormControl('', [
+  //   Validators.required,
+  //   Validators.pattern('[0-9.: -]+?')]);
+  //
+  // video_size = new FormControl('', [
+  //   Validators.required,
+  //   Validators.pattern('[a-zA-Z0-9.: -,_]+?')]);
+
+  // video_isPrivate = new FormControl('', [
+  //   Validators.required,
+  // ]);
+
+  // chapter = new FormControl('', [
+  //   Validators.required,
+  //   Validators.pattern('[0-9]+?')]);
+  private input: FormData;
+  private course_video: string;
+  private video_minutes: string;
+  private video_size: string;
+
+  constructor(private obj: SingleCourseService,
+    public dialogRef: MatDialogRef<AddVideoComponent>,
+    @Inject(MAT_DIALOG_DATA) public course: any,
+    private http: HttpClient) {
+      // alert(course.id)
+  }
+
+  // ngOnInit() {
+  //   // this.obj.get_videos().subscribe(response => {
+  //   //   this.Videos = response;
+  //   //   console.log(this.Videos);
+  //   //   this.loaded = true;
+  //   // });
+  // }
+  onNoClick(): void {
+    this.dialogRef.close(1);
+  }
+
+  isClick() {
+    if (this.clicked === true) {
+      return this.clicked = false;
+    } else {
+      return this.clicked = true;
+    }
+  }
+
+  onChange(event: EventTarget) {
+    this.input = new FormData();
+    const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    this.input.append('fileToUpload', target.files[0]);
+    // alert(target.files[0].name.toString());
+    // this.model.video_title = target.files[0].name.toString();
+  }
+
+
+  onSubmit(f: NgForm) {
+    // console.log('form Submit call');
+    this.http.post(
+      'https://storage.coursefrenzy.com/upload_video.php',
+      this.input, { responseType: 'json' }).subscribe(data => {
+        // this.course_video = data;
+        // alert(data);
+        // console.log(data);
+        this.ifImageUpload(data);
+      });
+  }
+
+  private ifImageUpload(data) {
+    this.obj.upload_introvideo( data.video_url, data.video_minutes, data.video_size,this.course.id).subscribe(
+      data => {
+        if(data.message=="Video Already Exists."){
+          swal({
+            type: 'error',
+            title: 'Oops! <br> Video Already Exists.',
+            showConfirmButton: false,
+            width: '512px',
+            timer: 2500
+          })
+        }
+        console.log(data[0]['json'].json());
+        this.dialogRef.close(data[0]['json'].json());
+        IntroVideoComponent.videoSuccess();
+      },
+      error => {
+        // console.log(error);
+        AddVideoComponent.videoError();
+      }
+    );
+  }
+
+  // submit() {
+  //   const uploadFile = (<HTMLInputElement>window.document.getElementById('myFileInputField')).files[0];
+  //   console.log('file tarining   ', uploadFile);
+  //   const myUploadItem = new MyUploadItem(uploadFile);
+  //   myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+  //
+  //   this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
+  //     // success callback
+  //   };
+  //   this.uploaderService.onErrorUpload = (item, response, status, headers) => {
+  //     // error callback
+  //   };
+  //   this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
+  //     // complete callback, called regardless of success or failure
+  //   };
+  //
+  //   this.uploaderService.onProgressUpload = (item, percentComplete) => {
+  //     // progress callback
+  //   };
+  //
+  //   this.uploaderService.upload(myUploadItem);
+  //
+  // }
+
+
+  static videoSuccess() {
+    swal({
+      type: 'success',
+      title: 'Success <br> New Video added!',
+      showConfirmButton: false,
+      width: '512px',
+      timer: 2500
+    })
+  }
+
+  static videoError() {
+    swal({
+      type: 'error',
+      title: 'Oops! <br> Failed to add Video!',
+      showConfirmButton: false,
+      width: '512px',
+      timer: 2500
+    })
+  }
+
+}

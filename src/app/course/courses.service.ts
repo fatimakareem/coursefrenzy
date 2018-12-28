@@ -21,6 +21,32 @@ export class CoursesService {
               private headers: HeadersService) {
   }
 
+  buyNowcheck(index, course_id,Logedin) {
+    return this._http2.post(Config.api +'courses/AlreadyBought/',
+      {
+        "course":course_id
+      }, {headers: this.headers.getHeaders()}).map((res: Response) => {
+      if (res) {
+        if (res.status === 201 || res.status === 200 || res.status === 202) {
+          const responce_data = res.json();
+          return responce_data;
+        } else if (res.status === 5300) {
+          return [{status: res.status, json: res}];
+        } else {
+        }
+      }
+    }).catch((error: any) => {
+      if (error.status === 404) {
+        return Observable.throw(new Error(error.status));
+      } else if (error.status === 400) {
+        return Observable.throw(new Error(error.status));
+      } else {
+        return Observable.throw(new Error(error.status));
+      }
+    });
+  }
+
+
   enroll_free_course(course_id) {
     return this._http2.post(Config.api + 'courses/enrollfreecourse/' + course_id +'/',
       {

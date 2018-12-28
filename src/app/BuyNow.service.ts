@@ -23,7 +23,7 @@ export class BuyNowService  {
         }
       });
   }
-
+  
   public buyNow(index, course_id,Logedin): void {
     if (Logedin === '1') {
       this.obj.add_to_cart_no_promo(course_id).subscribe(
