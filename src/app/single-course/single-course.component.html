@@ -79,26 +79,12 @@
                                     *ngIf="route_instructor===instructor_id" (click)="openDialog4()">
                                     Add Video</button>
                                     <hr class="invis">
-                                    <div *ngIf="NoOverviewMessage.length>0" class="text-center"> <img style="width: 550px; height: 400px;"
-                                            src="../../assets/img/single-course-section/Overview.gif"> </div>
-                                    <div *ngIf="NoOverviewFalse" class="course-single-desc clearfix">
-                                        <div class="big-title">
-                                            <h2 class="related-title"> <span>Course Language</span> </h2>
-                                        </div>
-                                        <p>{{overview.language}}</p>
-                                        <div class="big-title">
-                                            <h2 class="related-title"> <span>Course Headline</span> </h2>
-                                        </div>
-                                        <p>{{overview.about_course}}</p>
-                                        <div class="big-title">
-                                            <h2 class="related-title"> <span>Course Description</span> </h2>
-                                        </div>
-                                        <p>{{overview.description}}</p>
-                                        <div class="big-title">
-                                            <h2 class="related-title"> <span>Course Requireements</span> </h2>
-                                        </div>
-                                        <p>{{overview.requirement}}</p>
-                                    </div>
+
+                               
+                                            <button type="button" class="close" aria-label="Close" (click)="onNoClick()" tabindex="-1">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button><a (click)="SetVideoURL(demo_vedio)">{{demo_vedio}}</a>
+                                
                                 </mat-tab>
                         <mat-tab class="" label="CURRICULUM"> <br><button *ngIf="route_instructor===instructor_id"
                                 class="btn btn-primary btn-lg" (click)="openDialog()">Create New Chapter</button>

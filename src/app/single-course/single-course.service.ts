@@ -149,7 +149,63 @@ export class SingleCourseService {
       }
     });
   }
+  req_for_publish(courseId) {
+    // console.log('Chapter Name is ' + Name);
+    const headers = new Headers();
+    if (isPlatformBrowser(this.platformId)) {
+      headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
+    }
+    headers.append('Content-Type', 'application/json');
+    return this._http2.post(Config.api + 'courses/submitcourseforapprovel/',
+      {
+       "course":courseId
+      }, {headers : headers}).map((res: Response) => {
+      if (res) {
+        // console.log('1');
+        if (res.status === 200 || res.status === 202 ) {
+          const responce_data = res.json();
+          if(res.status === 202){
+            swal({
+              type: 'error',
+              title: 'You Already Reviewed this Course.',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 2000,
+             
+            });
+          }
+          // localStorage.setItem('user_id', responce_data.id);
+          // this.users_id = localStorage.getItem('user_id');
+          return responce_data;
+        } else if (res.status === 5300) {
+          // this._nav.navigate(['/login']);
 
+          // localStorage.setItem('conformation', '1');
+          // console.log('ok submited 200');
+          return [{status: res.status, json: res}];
+        } else {
+          // console.log('ok');
+        }
+      }
+    }).catch((error: any) => {
+      // alert(error);
+      if (error.status === 404) {
+        // console.log('ok not submited submit 404');
+        // localStorage.setItem('error', '1');
+        return Observable.throw(new Error(error.status));
+      } else if (error.status === 400) {
+        //    this._nav.navigate(['/pages/accident']);
+        // console.log('ok not submited submit 400');
+        // localStorage.setItem('error', '1');
+        return Observable.throw(new Error(error.status));
+      } else {
+        //  this._nav.navigate(['/pages/accident']);
+        // console.log('ok not submited submit error');
+
+        return Observable.throw(new Error(error.status));
+      }
+    });
+  }
   upload_chapter(chapterName, courses_id) {
     // console.log('Chapter Name is ' + Name);
     const headers = new Headers();
