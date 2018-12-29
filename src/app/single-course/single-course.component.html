@@ -73,8 +73,8 @@
                         <h2 class="related-title"> <span>Course Lessons</span> </h2>
                     </div><button *ngIf="route_instructor===instructor_id" class="btn btn-primary btn-lg" (click)="Publishcourse()">Publish
                         Course </button>
-                    <mat-tab-group>
-                            <mat-tab class="" label="Introduction">
+                    <mat-tab-group class="custom-style-tab">
+                            <mat-tab label="Introduction">
                                     <button mat-raised-button color="primary"
                                     *ngIf="route_instructor===instructor_id" (click)="openDialog4()">
                                     Add Video</button>

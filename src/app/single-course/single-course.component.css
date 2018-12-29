@@ -427,7 +427,26 @@ h1 { font-size: 1.5em; margin: 10px; }
 .ratingv > input:checked ~ label:hover ~ label { color: red;  }
 
 
-
+.mat-tab-group {
+  flex-direction: row;
+}
+.mat-tab-header {
+border-bottom: none;
+}
+.mat-tab-header-pagination {
+  display: none !important;
+}
+.mat-tab-group .mat-tab-labels {
+  display: flex;
+  flex-direction: column !important;
+}
+.mat-ink-bar {
+  height: 100%;
+  left: 98% !important;
+}
+.mat-tab-body-wrapper {
+  flex: 1 1 auto;
+}
 
 .ratingq {
   border: none;
