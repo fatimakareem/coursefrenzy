@@ -23,6 +23,7 @@ export class CatBidCoursesComponent implements OnInit {
   Logedin: string;
   public page = 1 ;
   public heart= false;
+  public slideConfig;
   public heartClass= 'fa fa-heart-o';
   public GlobalWishListCourses: any=[];
 
@@ -51,6 +52,41 @@ export class CatBidCoursesComponent implements OnInit {
           this.GlobalWishListCourses = data;
         }
       });
+
+      this.slideConfig = {
+        infinite: false,
+        speed: 900,
+        autoplay: true,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        prevArrow: '<button class="leftRs">&lt;</button>',
+        nextArrow: '<button class="rightRs">&lt;</button>',
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 4,
+              infinite: true
+            }
+          },
+          {
+            breakpoint: 769,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+  ]};
+
+
   }
   category_id;
   ngOnInit() {

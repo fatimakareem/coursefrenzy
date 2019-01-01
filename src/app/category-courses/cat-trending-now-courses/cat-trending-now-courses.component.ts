@@ -24,6 +24,7 @@ export class CatTrendingNowCoursesComponent implements OnInit {
   public GlobalWishListCourses:any = [];
   public loaded: boolean = false;
   private category: any;
+  public slideConfig;
 
   constructor(private obj_CoursesService: CoursesService,private glb_ser: SimpleGlobal, private global: GlobalService, private nav: Router,
               public dialog: MatDialog, private obj: CoursesService) {
@@ -42,6 +43,41 @@ export class CatTrendingNowCoursesComponent implements OnInit {
           this.GlobalWishListCourses = data;
         }
       });
+
+      this.slideConfig = {
+        infinite: false,
+        speed: 900,
+        autoplay: true,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        prevArrow: '<button class="leftRs">&lt;</button>',
+        nextArrow: '<button class="rightRs">&lt;</button>',
+        responsive: [
+          {
+            breakpoint: 1025,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 4,
+              infinite: true
+            }
+          },
+          {
+            breakpoint: 769,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+  ]};
+
+
   }
 
   ngOnInit() {
