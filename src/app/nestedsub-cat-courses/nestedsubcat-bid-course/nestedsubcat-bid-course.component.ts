@@ -25,6 +25,7 @@ export class NestedsubcatBidCourseComponent implements OnInit {
     public heartClass= 'fa fa-heart-o';
     public GlobalWishListCourses: any=[];
     public sub_category: any;
+    public slideConfig;
   
     constructor(private obj: CoursesService,
                 private global: GlobalService,
@@ -48,6 +49,42 @@ export class NestedsubcatBidCourseComponent implements OnInit {
             this.GlobalWishListCourses = data;
           }
         });
+
+        this.slideConfig = {
+          infinite: false,
+          speed: 900,
+          autoplay: true,
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          prevArrow: '<button class="leftRs">&lt;</button>',
+          nextArrow: '<button class="rightRs">&lt;</button>',
+          responsive: [
+            {
+              breakpoint: 1025,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                infinite: true
+              }
+            },
+            {
+              breakpoint: 769,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+    ]};
+
+
+
     }
   
     ngOnInit() {
