@@ -106,19 +106,23 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">Course Overview</a>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Settings</a>
-    </li> -->
+    <li class="nav-item text-center margin-top-10">
+        <button *ngIf="route_instructor===instructor_id" class="btn btn-primary btn-lg" (click)="Publishcourse()">Publish
+            Course </button>
+    </li>
   </ul>
   
   <div class="tab-content col-md-9">
     <div class="tab-pane active" id="home" role="tabpanel">
-            <button mat-raised-button color="primary"
-            *ngIf="route_instructor===instructor_id" (click)="openDialog4()">
-            Add Video</button>
-            <hr class="invis">
+            
+            
 
-       
+       <img class="width-full" src="../../assets/img/placeholder (1).png">
+
+       <button mat-raised-button color="" style="float: right;margin-top: 10px;background: #f80000;color: #fff;"
+       *ngIf="route_instructor===instructor_id" (click)="openDialog4()">
+       Add Video</button>
+
                     <button type="button" class="close" aria-label="Close" (click)="onNoClick()" tabindex="-1">
                       <span aria-hidden="true">&times;</span>
                     </button><a (click)="SetVideoURL(demo_vedio)">{{demo_vedio}}</a>    
@@ -176,13 +180,12 @@
         </div>
     </div>
     <div class="tab-pane" id="messages" role="tabpanel">
-            <hr class="invis">
             <div class="card" *ngIf="route_instructor===instructor_id"> <button type="button" class="close" aria-label="Close" (click)="closePublishDialog()" tabindex="-1">
                     <span aria-hidden="true">&times;</span> </button>
                 <form (ngSubmit)="!headline.hasError('required') && !headline.hasError('pattern') && onSubmit(f)" #f="ngForm"
                     method="post">
-                    <div class="card-header text-center" data-background-color="rose">
-                        <h4 class="card-title"> Publish Course </h4>
+                    <div class=" text-center">
+                        <h4 class="card-title">Course Overview</h4>
                     </div>
                     <div class="card-content">
                         <mat-form-field class="example-full-width mat-size"> <input type="text" matInput placeholder=" Enter Course Headline"
@@ -216,7 +219,7 @@
                         </mat-form-field> -->
                     </div>
                     <div class="footer text-right col-sm-12"> <button class="button btn-primary custom" type="submit" id="submit"
-                            tabindex="2">Publish Course</button> </div>
+                            tabindex="2">Submit</button> </div>
                 </form>
             </div>
 
@@ -250,172 +253,6 @@
   </div>
 <!--  -->
 
-
-
-
-
-
-
-
-
-
-
-
-                    <mat-tab-group class="custom-style-tab">
-                            <mat-tab label="Introduction">
-                                    <button mat-raised-button color="primary"
-                                    *ngIf="route_instructor===instructor_id" (click)="openDialog4()">
-                                    Add Video</button>
-                                    <hr class="invis">
-
-                               
-                                            <button type="button" class="close" aria-label="Close" (click)="onNoClick()" tabindex="-1">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button><a (click)="SetVideoURL(demo_vedio)">{{demo_vedio}}</a>
-                                
-                                </mat-tab>
-                        <mat-tab class="" label="CURRICULUM"> <br><button *ngIf="route_instructor===instructor_id"
-                                class="btn btn-primary btn-lg" (click)="openDialog()">Create New Chapter</button>
-                            <div *ngIf="!this.Chaptersloaded"> <img style="width:100%" src="../../assets/img/single-course-section/No-Chapter.gif">
-                            </div>
-                            <div *ngIf="this.Chaptersloaded">
-                                <div style="float: right"> Total Chapters {{total}}</div>
-                                <div class="fancy-collapse-panel"> <br><span *ngIf="AllChapters.length>0">
-                                        <div *ngFor="let chapter of AllChapters; let i=index">
-                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading" role="tab" id="heading{{chapter.id}}">
-                                                        <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse"
-                                                                href="#collapse{{chapter.id}}">{{chapter.chapter_name}}<div
-                                                                    *ngIf="videos.length===0"> No video is
-                                                                    uploaded yet</div>
-                                                                <div *ngIf="videos.length===1">{{videos.length}}Video</div>
-                                                                <div *ngIf="videos.length > 1">{{videos.length}}Videos</div><i
-                                                                    *ngIf="route_instructor===instructor_id" class="fa fa-trash-o fa-2x delete-icon"
-                                                                    (click)="deletdeChapter(i, chapter?.id)"
-                                                                    data-toggle="tooltip" title="Delete Chapter"></i>
-                                                                <i *ngIf="route_instructor===instructor_id" class="fa fa-edit fa-2x delete-icon"
-                                                                    (click)="openEditChapterDialog(i, chapter.id)"
-                                                                    title="Edit Chapter"></i>
-                                                            </a> </h4>
-                                                    </div>
-                                                    <div id="collapse{{chapter.id}}" class="panel-collapse collapse"
-                                                        role="tabpanel" aria-labelledby="headingOne">
-                                                        <div class="panel-body"> <button mat-raised-button color="primary"
-                                                                *ngIf="route_instructor===instructor_id" (click)="openDialog2(chapter.id, chapter.video)">
-                                                                Add Video</button>
-                                                            <table class="table table-hover" *ngIf="videos"> <br>
-                                                                <tbody>
-                                                                    <tr *ngFor="let video of videos; let j=index">
-                                                                        <td><i class="fa fa-play-circle"></i></td>
-                                                                        <td><a (click)="SetVideoURL(video.video_url)">{{video.video_title}}</a></td>
-                                                                        <td>{{video.video_minutes}}Min</td>
-                                                                        <td *ngIf="route_instructor===instructor_id"><a><i
-                                                                                    class="fa fa-trash-o fa-2x delete-icon"
-                                                                                    (click)="deletdeVideo(i,j, video?.id)"
-                                                                                    data-toggle="tooltip" title="Delete Video"></i></a></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </span> </div>
-                            </div>
-                        </mat-tab>
-                        <mat-tab class="" label="Course Overview">
-                            <hr class="invis">
-                            <div class="card" *ngIf="route_instructor===instructor_id"> <button type="button" class="close" aria-label="Close" (click)="closePublishDialog()" tabindex="-1">
-                                    <span aria-hidden="true">&times;</span> </button>
-                                <form (ngSubmit)="!headline.hasError('required') && !headline.hasError('pattern') && onSubmit(f)" #f="ngForm"
-                                    method="post">
-                                    <div class="card-header text-center" data-background-color="rose">
-                                        <h4 class="card-title"> Publish Course </h4>
-                                    </div>
-                                    <div class="card-content">
-                                        <mat-form-field class="example-full-width mat-size"> <input type="text" matInput placeholder=" Enter Course Headline"
-                                                [formControl]="headline" name="headline" [(ngModel)]="model.headline" required>
-                                            <mat-error *ngIf="headline.hasError('required')"> Headline is <strong>required</strong> </mat-error>
-                                            <mat-error *ngIf="headline.hasError('pattern')"> Please enter a valid headline </mat-error>
-                                        </mat-form-field>
-                                        <mat-form-field>
-                                            <mat-select placeholder="Select Course Language" [(ngModel)]="selectedValue" name="language">
-                                                <mat-option *ngFor="let language of languages" [value]="language.value">{{language.viewValue}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        <mat-form-field class="example-full-width mat-size"> <textarea rows="3" matInput #detail1 maxlength="5000"
-                                                placeholder="Enter Course details" [required]="detail" name="detail" [(ngModel)]="model.detail"
-                                                #detail="ngModel" required pattern="[a-zA-Z0-9 -_.]+?"> </textarea>
-                                            <mat-hint align="start"><strong>(Minimum Length 1000 characters)</strong> </mat-hint>
-                                            <mat-hint align="end">{{detail1.value.length}}/ 5000</mat-hint>
-                                            <mat-error *ngIf="detail.hasError('required')"> Course detail is <strong>required</strong> </mat-error>
-                                            <mat-error *ngIf="detail.hasError('pattern')"> Please enter <strong> valid </strong> details
-                                            </mat-error>
-                                        </mat-form-field>
-                                        <!-- <mat-form-field class="example-full-width mat-size"> <textarea rows="3" matInput #requirements1 maxlength="500"
-                                                placeholder="Enter Course requirements" [required]="requirements" name="requirements" [(ngModel)]="model.requirements"
-                                                #requirements="ngModel" required pattern="[a-zA-Z0-9 -_.]+?"> </textarea>
-                                            <mat-hint align="start"><strong>(Minimum Length 500 characters)</strong> </mat-hint>
-                                            <mat-hint align="end">{{requirements1.value.length}}/ 2000</mat-hint>
-                                            <mat-error *ngIf="requirements.hasError('required')"> Course requirements are <strong>required</strong>
-                                            </mat-error>
-                                            <mat-error *ngIf="requirements.hasError('pattern')"> Please enter <strong> valid </strong> requirements
-                                            </mat-error>
-                                        </mat-form-field> -->
-                                    </div>
-                                    <div class="footer text-right col-sm-12"> <button class="button btn-primary custom" type="submit" id="submit"
-                                            tabindex="2">Publish Course</button> </div>
-                                </form>
-                            </div>
-
-                            <div *ngIf="NoOverviewMessage.length>0" class="text-center"> <img style="width: 550px; height: 400px;"
-                                    src="../../assets/img/single-course-section/Overview.gif"> </div>
-                            <div *ngIf="NoOverviewFalse" class="course-single-desc clearfix">
-                                <div class="big-title">
-                                    <h2 class="related-title"> <span>Course Language</span> </h2>
-                                </div>
-                                <p>{{overview.language}}</p>
-                                <div class="big-title">
-                                    <h2 class="related-title"> <span>Course Headline</span> </h2>
-                                </div>
-                                <p>{{overview.about_course}}</p>
-                                <div class="big-title">
-                                    <h2 class="related-title"> <span>Course Description</span> </h2>
-                                </div>
-                                <p>{{overview.description}}</p>
-                                <div class="big-title">
-                                    <h2 class="related-title"> <span>Course Requireements</span> </h2>
-                                </div>
-                                <p>{{overview.requirement}}</p>
-                            </div>
-                        </mat-tab>
-                        <!-- <mat-tab class="" label="About The Author" *ngIf="SingleCourseloaded">
-                            <div class="tab-profile">
-                                <div class="img-holder" *ngIf="ProfileImage"> <img *ngIf="ProfileImage.length >0 " src="{{ImageUrl}}{{ProfileImage}}"
-                                        alt="User Profile Photo"> </div>
-                                <div class="details">
-                                    <h5 class="servises-item__title m-0">{{SingleCourse?.user_id?.first_name}}{{SingleCourse?.user_id?.last_name}}</h5>
-                                    <hr />
-                                    <div class="servises-item__text">
-                                        <p>{{SingleCourse?.user_id?.profile?.biography}}</p>
-                                    </div>
-                                </div>
-                                <div class="btns-holder float-right"> <button *ngIf="isFollow===false" class="btn label-success"
-                                        style="color: #fff;" (click)="Follow_Instructor(SingleCourse?.user_id?.id)">Follow</button>
-                                    <button *ngIf="isFollow===true" class="btn label-success" style="color: #fff;"
-                                        (click)="Follow_Instructor(SingleCourse?.user_id?.id)">Following</button>
-                                    <button *ngIf="Logedin==='1'" class="btn btn-primary" type="button" name="btnChat"
-                                        (click)="openChat(SingleCourse?.user_id?.id )"> Send Message </button> <button
-                                        type="button" routerLink="/user-profile/{{SingleCourse?.user_id?.id}}" class="btn label-info"
-                                        style="color: #fff;">Visit Profile </button>
-                                    <hr />
-                                </div>
-                            </div>
-                        </mat-tab>  -->
-                        <br>
-                    </mat-tab-group>
                 </div>
                 <div *ngIf="SingleCourseloaded" class="single-course-title text-center">
                     <h3><a title="">{{SingleCourse?.name}}</a></h3>
