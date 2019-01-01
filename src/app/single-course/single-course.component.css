@@ -1,3 +1,37 @@
+.nav.nav-tabs {
+  float: left;
+  display: flex;
+  flex-flow: column nowrap;
+  margin-right: 0px;
+  padding: 0;
+  border-bottom:0;
+  background: #f2f2f2;
+}
+.nav-tabs .nav-link {
+  background: #f2f2f2;
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff;
+  background-color:#000 !important;
+  border-color: transparent !important;
+}
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: 0rem!important;
+  border-top-right-radius: 0rem!important;
+}
+.tab-content>.active {
+  display: block;
+  background: #fff;
+  min-height: 165px;
+}
+
+
+
+
+
+
 /*@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);*/
 
 /*.example-headers-align .mat-expansion-panel-header-title,*/
@@ -427,7 +461,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 .ratingv > input:checked ~ label:hover ~ label { color: red;  }
 
 
-.mat-tab-group {
+/* .mat-tab-group {
   flex-direction: row;
 }
 .mat-tab-header {
@@ -446,7 +480,7 @@ border-bottom: none;
 }
 .mat-tab-body-wrapper {
   flex: 1 1 auto;
-}
+} */
 
 .ratingq {
   border: none;

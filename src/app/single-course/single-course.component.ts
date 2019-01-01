@@ -168,16 +168,16 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
         this.isFollow = data;
       });
   }
+  
   total;
   minuts;my_vedio;
-  videos;demo_vedio;
+  videos;
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.CourseId = +params['query'] || 1;
       this.route_instructor = +params['instructor'] || 0;
       this.obj.get_Single_Course(this.CourseId).subscribe(response => {
 this.my_vedio=response.mycourses
-this.demo_vedio=response.demovideo.video_url
         this.SingleCourse = response.data;
         this.rev = response.rating;
         if (response.hasOwnProperty("status")) {
@@ -627,14 +627,10 @@ this.demo_vedio=response.demovideo.video_url
 
   Publishcourse(): void {
     if (this.Logedin == '1') {
-      this.obj.req_for_publish(this.CourseId).subscribe(data => {
-     
-      }
-      );
-      // const dialogRef = this.dialog.open(PublishCourseComponent, {
-      //   width: '500px',
-      //   data: { CourseId: this.CourseId }
-      // });
+      const dialogRef = this.dialog.open(PublishCourseComponent, {
+        width: '500px',
+        data: { CourseId: this.CourseId }
+      });
     }
     else {
       SingleCourseComponent.Authenticat();
