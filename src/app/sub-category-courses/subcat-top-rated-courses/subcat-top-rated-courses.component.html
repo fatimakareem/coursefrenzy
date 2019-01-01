@@ -60,8 +60,10 @@
                         </div>
                         <div class="product-list__item-info"> <a class="material-icons wishlist" title="Add to wishlist"
                                 (click)="onclick(i,data?.course?.id)">favorite_border</a> <a class="wishlist material-icons"
-                                title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a> <a
-                                routerLink="/checkout" type="button" class="btn btn1">Buy Now</a> </div>
+                                title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a> <a *ngIf="data?.course?.actual_price>0" (click)="buyNowClick(i, data?.course?.id)"
+                                        type="button" class="btn btn1">Buy Now</a> <a *ngIf="data?.course?.actual_price<=0"
+                                        (click)="enrollCourse(i, data?.course?.id)" type="button" class="btn btn1">Enroll
+                                        Now</a> </div>
                     </li>
                         </ngx-slick>
                 <!-- </ul> -->

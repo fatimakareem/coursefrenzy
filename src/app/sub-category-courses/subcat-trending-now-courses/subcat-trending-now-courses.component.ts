@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from "@angular/material";
 import {CoursesService} from "../../course/courses.service";
 import {isNullOrUndefined} from "util";
+import { BuynowDialogComponent } from '../../buynow-dialog/buynow-dialog.component';
 
 declare const $: any;
 @Component({
@@ -77,7 +78,81 @@ export class SubcatTrendingNowCoursesComponent implements OnInit {
   ]};
 
   }
+  private enrolled: any;
 
+  enrollCourse(index, course_id): void {
+    if (this.Logedin === '1') {
+      this.obj.enroll_free_course(course_id).subscribe(
+        data => {
+          this.enrolled = data[0]['json'].json();
+          if(this.enrolled.status===false) {
+            swal({
+              type: 'error',
+              title: 'You Already Enrolled This Course.',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 2000
+            })
+          }
+          else {
+            swal({
+              type: 'success',
+              title: 'Success! <br> Successfuly Purchased.',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 3000,
+            });
+          }
+        },
+        error => {
+          // console.log(error);
+        }
+      );
+    }
+    else {
+      swal({
+        type: 'error',
+        title: 'Authentication Required <br> Please Login or Signup first',
+        showConfirmButton: false,
+        width: '512px',
+        timer: 1500
+      });
+      this.nav.navigate(['login']);
+    }
+  }
+  buyNowClick(index, course_id): void {
+    this.obj.buyNowcheck(index, course_id,this.Logedin).subscribe(
+      data => {
+        // alert(data.message)
+       if(this.Logedin === '1' && data.message=="Course is already in your My Courses"){
+        swal({
+          type: 'error',
+          title: 'You Already Bought this course',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 1500
+        });
+       }
+    else if (this.Logedin === '1' && data.message != "Course is already in your My Courses") {
+      const dialogRef = this.dialog.open(BuynowDialogComponent, {
+        width: '500px',
+        data: { course_id: course_id,
+          // CourseDetail: this.Courses
+        }
+      });
+    } else {
+     
+        swal({
+          type: 'error',
+          title: 'Authentication Required <br> Please Login or Signup first',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 1500
+        });
+      
+      this.nav.navigate(['login']);
+    }})
+  }
   ngOnInit() {
     this.global.subCatName$.subscribe(
       data => {
