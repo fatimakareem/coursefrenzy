@@ -24,6 +24,9 @@ export class HeaderService {
   get_single_category(cat_id) {
     return this._http2.get( Config.api + 'courses/get_single_cat/'+cat_id+'').map((response: Response) => response.json());
   }
+  get_toprated(cat_id) {
+    return this._http2.get( Config.api + 'courses/topratedcoursesviacat/cat/'+cat_id+'').map((response: Response) => response.json());
+  }
 
   get_single_sub_category(subcat_id) {
     return this._http2.get( Config.api + 'courses/get_single_subcat/' + subcat_id + '').map((response: Response) => response.json());

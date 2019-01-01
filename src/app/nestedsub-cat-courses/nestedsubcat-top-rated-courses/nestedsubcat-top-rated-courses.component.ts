@@ -10,18 +10,18 @@ import {CoursesService} from "../../course/courses.service";
 
 declare const $: any;
 @Component({
-  selector: 'app-cat-top-rated-courses',
-  templateUrl: './cat-top-rated-courses.component.html',
-  styleUrls: ['./cat-top-rated-courses.component.scss']
+  selector: 'app-nestedsubcat-top-rated-courses',
+  templateUrl: './nestedsubcat-top-rated-courses.component.html',
+  styleUrls: ['./nestedsubcat-top-rated-courses.component.scss']
 })
-export class CatTopRatedCoursesComponent implements OnInit {
+export class NestedsubcatTopRatedCoursesComponent implements OnInit {
 
   public topRatedCourses: any;
   public ImageUrl = Config.ImageUrl;
   Logedin: string;
   public GlobalWishListCourses: any=[];
   public loaded: boolean = false;
-  private category: any;
+  public subcategory: any;
 
   constructor(private glb_ser: SimpleGlobal, private global: GlobalService, private nav: Router,
               public dialog: MatDialog, private obj: CoursesService) {
@@ -43,16 +43,18 @@ export class CatTopRatedCoursesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.global.catName$.subscribe(
+    this.global.subCatName$.subscribe(
       data => {
-        this.category = data;
-        this.obj.get_top_rated_courses_via_category(1,this.category.id).subscribe(response => {
+        this.subcategory = data;
+        this.obj.get_top_rated_courses_via_subcategory(1,this.subcategory.id).subscribe(response => {
           this.topRatedCourses = response;
           // console.log("Top rated"+this.topRatedCourses['courses'].course[0]);
           if(this.topRatedCourses['courses'].length>0){
             this.loaded = true;
           }
           // console.log(this.loaded);
+
+         
         });
       });
   }
@@ -70,7 +72,7 @@ export class CatTopRatedCoursesComponent implements OnInit {
         }
       });
     } else {
-      CatTopRatedCoursesComponent.Authenticat();
+      NestedsubcatTopRatedCoursesComponent.Authenticat();
       this.nav.navigate(['login']);
     }
   }
@@ -82,12 +84,12 @@ export class CatTopRatedCoursesComponent implements OnInit {
         data => {
           // console.log(data[0]['json'].json());
           if(data[0]['json'].json().hasOwnProperty("status")) {
-            CatTopRatedCoursesComponent.AlreadyInWishlistError();
+            NestedsubcatTopRatedCoursesComponent.AlreadyInWishlistError();
           }
           else {
             this.GlobalWishListCourses.push(data[0]['json'].json());
             this.global.getGolbalWishListCourses(this.GlobalWishListCourses);
-            CatTopRatedCoursesComponent.wishlistSuccess();
+            NestedsubcatTopRatedCoursesComponent.wishlistSuccess();
           }
         },
         error => {
@@ -96,7 +98,7 @@ export class CatTopRatedCoursesComponent implements OnInit {
       );
     }
     else {
-      CatTopRatedCoursesComponent.Authenticat();
+      NestedsubcatTopRatedCoursesComponent.Authenticat();
       this.nav.navigate(['login']);
     }
   }

@@ -52,52 +52,18 @@ export class CatBidCoursesComponent implements OnInit {
         }
       });
   }
-
+  category_id;
   ngOnInit() {
-
-    this.obj.get_bid_courses_by_category(this.page,2).subscribe(response => {
-      this.BidCourses = response;
-      if(this.BidCourses.bids.length>0){
-        this.loaded = true;
-      }
-
-
-      setTimeout(function () {
-        $('.slick-bids').not('.slick-initialized').slick({
-          infinite: true,
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          autoplay: true,
-          prevArrow: '<button class="leftRs">&lt;</button>',
-          nextArrow: '<button class="rightRs">&lt;</button>',
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-
-          ]
-        });
-      }, 250);
-
-    });
+    this.route.params.subscribe(params => {
+      this.category_id = +params['cat_id'] || 1;
+      this.obj.get_bid_courses_by_category(this.page,this.category_id).subscribe(response => {
+        this.BidCourses = response;
+        if(this.BidCourses.bids.length>0){
+          this.loaded = true;
+        }
+      });
+    })
+  
   }
 
   onclick(index, course_id) {

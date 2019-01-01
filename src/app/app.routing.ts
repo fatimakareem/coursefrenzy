@@ -60,6 +60,7 @@ const appRoutes: Routes = [
       { path: 'cat_courses/:cat_id', loadChildren: './category-courses/category-courses.module#CategoryCoursesModule'},
 
       { path: 'courses/subcat_courses/:subcat_id', loadChildren: './sub-category-courses/sub-category-courses.module#SubCategoryCoursesModule'},
+      { path: 'courses/nestedsubcat_courses/:nestedsubcat_id', loadChildren: './nestedsub-cat-courses/nestedsub-cat-courses.module#NestedSubCategoryCoursesModule'},
 
       { path: 'become_instructor_questions', loadChildren: './become-instructor-questions/become-instructor-questions.module#BecomeInstructorQuestionsModule', canActivate: [AuthGuard] },
 

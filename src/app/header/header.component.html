@@ -93,7 +93,7 @@
                                                             class="fa fa-angle-right pull-right col-xs-2 margin-r-10"></i>
                                                     </a>
                                                     <ul *ngIf="nestedSubCategories !='' && caty.name !='Other' " class="dropdown-menu show-left" role="menu">
-                                                        <li *ngFor=" let nestcaty of nestedSubCategories "> <a routerLink='/courses/subcat_courses/{{nestcaty.id}}'
+                                                        <li *ngFor=" let nestcaty of nestedSubCategories "> <a routerLink='/courses/nestedsubcat_courses/{{nestcaty.id}}'
                                                                 class="line-h-15">
                                                                 <div id="sub">{{nestcaty.name}}</div>
                                                             </a> </li>

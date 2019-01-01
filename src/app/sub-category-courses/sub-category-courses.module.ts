@@ -9,7 +9,9 @@ import {SubcatTrendingNowCoursesComponent} from './subcat-trending-now-courses/s
 import {SubcatTopRatedCoursesComponent} from './subcat-top-rated-courses/subcat-top-rated-courses.component';
 import {SubcatRecommendedCoursesComponent} from './subcat-recommended-courses/subcat-recommended-courses.component';
 import {SubcatBidCoursesComponent} from './subcat-bid-courses/subcat-bid-courses.component';
-
+import { SlickModule } from 'ngx-slick';
+import {RatingModule} from "ng2-rating";
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 const subcategoryCoursesRoutes: Routes = [
   { path: '', component: SubCategoryCoursesComponent }
@@ -27,7 +29,7 @@ const subcategoryCoursesRoutes: Routes = [
   ],
 
   imports: [
-    CommonModule,
+    CommonModule,SlickModule,RatingModule,FormsModule, ReactiveFormsModule,
     RouterModule.forChild(subcategoryCoursesRoutes),
     CoursesOnBidModule,
     TrendingNowCoursesModule,

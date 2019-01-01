@@ -9,6 +9,9 @@ import {TopRatedCoursesModule} from "../courses-all/top-rated-courses/top-rated-
 import {CatBidCoursesComponent} from "./cat-bid-courses/cat-bid-courses.component";
 import {CatTopRatedCoursesComponent} from "./cat-top-rated-courses/cat-top-rated-courses.component";
 import {CatTrendingNowCoursesComponent} from "./cat-trending-now-courses/cat-trending-now-courses.component";
+import { SlickModule } from 'ngx-slick';
+import {RatingModule} from "ng2-rating";
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 const categoryCoursesRoutes: Routes = [
   { path: '', component: CategoryCoursesComponent }
@@ -25,14 +28,14 @@ const categoryCoursesRoutes: Routes = [
   ],
 
   imports: [
-    CommonModule,
+    CommonModule,SlickModule,RatingModule,FormsModule,ReactiveFormsModule,
     RouterModule.forChild(categoryCoursesRoutes),
     CoursesOnBidModule,
     TrendingNowCoursesModule,
     TopRatedCoursesModule
   ],
   providers: [],
-  exports: [],
+  exports: [SlickModule,RatingModule],
   entryComponents: [
   ]
 
