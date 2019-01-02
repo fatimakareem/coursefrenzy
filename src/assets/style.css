@@ -3006,12 +3006,14 @@ hr.invis1 {
 
 .related-title {
   background: url(../assets/img/dots.gif) 0 6px repeat-x;
-  font-size: 18px;
+  font-size: 22px;
   padding: 0;
   text-transform: uppercase;
   margin: 0;
   line-height: 1;
-  font-weight: 700
+  font-weight: 600;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif !important;
+  color: #29303B;
 }
 
 .related-title span {
