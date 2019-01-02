@@ -539,7 +539,9 @@ border-bottom: none;
   color: #ddd;
   float: right;
 }
-
+.star-icon {
+  color: #FFC000 !important;
+}
 /***** CSS Magic to Highlight Stars on Hover *****/
 
 .ratingp > input:checked ~ label, /* show gold star when clicked */
@@ -601,18 +603,24 @@ border-bottom: none;
   display: block;
   width: 100%;
   z-index: 1;
-  padding: 30px;
+  padding: 10px !important;
   color: black !important;
   background-color: #ffffff;
   overflow: hidden;
   border-bottom: 5px solid #fff;
 }
 
-.customwidget label, .customwidget h3, .customwidget p {
+.customwidget label, .customwidget h3 {
   padding: 0;
-  margin: 0;
+  margin: 0 0 15px !important;
   color: black;
   line-height: 15px;
+}
+.customwidget label, .customwidget p {
+  padding: 0;
+  margin: 0 !important;
+  color: black;
+  line-height: 0px;
 }
 /*.course-pricing a {*/
 /*color: black;*/
@@ -625,6 +633,7 @@ border-bottom: none;
   font-weight: 300;
   letter-spacing: 1px;
   padding: 5px 0 20px;
+  margin: 0;
 }
 
 /* FANCY COLLAPSE PANEL STYLES */
@@ -937,7 +946,7 @@ input[type="file"]{
   margin-left: -140px;
 }
 .dt-fix{
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
 
 }
@@ -945,7 +954,8 @@ input[type="file"]{
   margin: 10px 0;
 }
 .course-meta p {
-  line-height: 20px;
+  line-height: 8px;
+    font-size: 15px;
 }
 
 @media (max-width: 1024px){
