@@ -172,15 +172,17 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   total;
   minuts;my_vedio;
   videos;
-  demo_vedio;
+  demo_vedio;duration;
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.CourseId = +params['query'] || 1;
       this.route_instructor = +params['instructor'] || 0;
       this.obj.get_Single_Course(this.CourseId).subscribe(response => {
-this.my_vedio=response.mycourses
+this.my_vedio=response.mycourses;
+
+this.duration=response['Total Hours'];
         this.SingleCourse = response.data;
-        this.demo_vedio=response.demovideo
+        this.demo_vedio=response.demovideo;
         this.rev = response.rating;
         if (response.hasOwnProperty("status")) {
           // this.AlreadyInWishlistError();
@@ -462,16 +464,16 @@ this.my_vedio=response.mycourses
     }
   }
 
-  SetVideoURL(video_url) {
-    // if(this.my_vedio== false){
-    //   swal({
-    //     type: 'error',
-    //     title: 'Please Bought this course first.',
-    //     showConfirmButton: false,
-    //     width: '512px',
-    //     timer: 2000
-    //   })
-    // }else{
+  SetVideoURL(video_url,SetVideoURL) {
+    if(SetVideoURL== false){
+      swal({
+        type: 'error',
+        title: 'Please Bought this course first.',
+        showConfirmButton: false,
+        width: '512px',
+        timer: 2000
+      })
+    }else{
       const dialogRef = this.dialog.open(VideoShowDialogComponent, {
       width: '1366px',
       data: {
@@ -480,7 +482,7 @@ this.my_vedio=response.mycourses
     });
     dialogRef.afterClosed().subscribe(result => {
     });
-  // }
+  }
     
 
   }
