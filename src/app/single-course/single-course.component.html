@@ -121,10 +121,9 @@
                         <td><i class="fa fa-play-circle"></i></td>
                         <td><a (click)="SetVideoURL(demo_vedio.video_url)" >{{demo_vedio.video_url}}</a></td>
                         <td>{{demo_vedio.video_minutes}}Min</td>
-                        <td *ngIf="route_instructor===instructor_id"><a><i
-                                    class="fa fa-trash-o fa-2x delete-icon"
-                                    (click)="deletdeVideo(i,j, video?.id)"
-                                    data-toggle="tooltip" title="Delete Video"></i></a></td>
+                        <td *ngIf="route_instructor===instructor_id"><a> <i *ngIf="route_instructor===instructor_id" class="fa fa-edit fa-2x delete-icon"
+                            (click)="openEditDemoDialog(i, demo_vedio.id)"
+                            title="Edit Chapter"></i></a></td>
                     </tr>
                 </tbody>
             </table>

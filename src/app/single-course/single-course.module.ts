@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
   AddChapterComponent, AddVideoComponent, EditChapterComponent, PublishCourseComponent,
-  SingleCourseComponent,
+  SingleCourseComponent,EditdemoComponent,
   IntroVideoComponent
 } from './single-course.component';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
@@ -38,6 +38,7 @@ const singleCourseRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    EditdemoComponent,
     SingleCourseComponent,
     AddChapterComponent,
     AddVideoComponent,
@@ -78,6 +79,7 @@ const singleCourseRoutes: Routes = [
   providers: [],
   exports: [],
   entryComponents: [
+    EditdemoComponent,
     AddChapterComponent,
     AddVideoComponent,
     PublishCourseComponent,
