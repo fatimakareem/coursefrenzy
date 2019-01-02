@@ -225,13 +225,13 @@ else{
     }
   }
   get_courses_by_category(page,cat_id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/trending_nowviaCat/cat/'+ cat_id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/trending_nowviaCat/cat/'+ cat_id).map((response: Response) => response.json());
   }
   get_courses_by_subcategory(page,subcat_id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/trending_nowviaCat/subcat/'+ subcat_id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/trending_nowviaCat/subcat/'+ subcat_id).map((response: Response) => response.json());
   }
   get_courses_by_nestedsubcategory(page,subcat_id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/trending_nowviaCat/nestsubcat/'+ subcat_id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/trending_nowviaCat/nestsubcat/'+ subcat_id).map((response: Response) => response.json());
   }
   get_recent_cources(page) {
     // alert('calling Function');
@@ -267,13 +267,13 @@ else{
   }
 
   get_top_rated_courses_via_category(page,cat_id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/topratedcoursesviacat/cat/'+ cat_id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/topratedcoursesviacat/cat/'+ cat_id).map((response: Response) => response.json());
   }
   get_top_rated_courses_via_subcategory(page,subcat_id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/topratedcoursesviacat/subcat/'+ subcat_id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/topratedcoursesviacat/subcat/'+ subcat_id).map((response: Response) => response.json());
   }
   get_top_rated_courses_via_nestedsubcategory(page,subcat_id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/topratedcoursesviacat/nestsubcat/'+ subcat_id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/topratedcoursesviacat/nestsubcat/'+ subcat_id).map((response: Response) => response.json());
   }
   
   get_teacher_courses(page,teacher_id) {
@@ -300,13 +300,13 @@ else{
   }
 
   get_bid_courses_by_category(page,id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/BidList_Getviacat/cat/'+id+'').map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/BidList_Getviacat/cat/'+id+'').map((response: Response) => response.json());
   }
   get_bid_courses_by_subcategory(page,id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/BidList_Getviacat/subcat/'+ id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/BidList_Getviacat/subcat/'+ id).map((response: Response) => response.json());
   }
   get_bid_courses_by_nestedsubcat(page,id) {
-    return this._http2.get('http://192.168.30.132:8000/courses/BidList_Getviacat/nestsubcat/'+ id).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/BidList_Getviacat/nestsubcat/'+ id).map((response: Response) => response.json());
   }
   get_wishlist_courses(page) {
     return this._http2.get(Config.api + 'courses/wishlist/', {headers: this.headers.getHeaders()}).map((response: Response) => response.json());

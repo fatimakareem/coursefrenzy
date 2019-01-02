@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div id="sidebar" class="col-md-4 col-sm-4 single-course-sidebar rltv">
-                <div class="sidebar-wrapper right-col__content" *ngIf="route_instructor !=instructor_id">
+                <div class="sidebar-wrapper right-col__content">
                     <div class="post-media clearfix" style="position: relative;">
                         <div class="post-media clearfix" style="background: #ffffff; padding: 0; "> <video *ngIf="SingleCourse?.course_image"
                                 class="videoplayer" poster="{{StaticImageUrl}}{{SingleCourse?.course_image}}" preload="none">
@@ -95,13 +95,13 @@
 
 <!--  -->
 <div class="row">
-    <h2>bootstrap 4 vertical tabs</h2>
+    <!-- <h2>bootstrap 4 vertical tabs</h2> -->
     <ul class="nav nav-tabs col-md-3" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">Introduction</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">CURRICULUM</a>
+      <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Curriculum</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">Course Overview</a>
@@ -115,18 +115,34 @@
   <div class="tab-content col-md-9">
     <div class="tab-pane active" id="home" role="tabpanel">
             
+            <table class="table table-hover" *ngIf="demo_vedio"> <br>
+                <tbody>
+                    <tr>
+                        <td><i class="fa fa-play-circle"></i></td>
+                        <td><a (click)="SetVideoURL(demo_vedio.video_url)" >{{demo_vedio.video_url}}</a></td>
+                        <td>{{demo_vedio.video_minutes}}Min</td>
+                        <td *ngIf="route_instructor===instructor_id"><a><i
+                                    class="fa fa-trash-o fa-2x delete-icon"
+                                    (click)="deletdeVideo(i,j, video?.id)"
+                                    data-toggle="tooltip" title="Delete Video"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+
             
 
-       <img class="width-full" src="../../assets/img/placeholder (1).png">
+       <img class="width-full" src="../../assets/img/placeholder (1).png" *ngIf="!demo_vedio">
 
        <button mat-raised-button color="" style="float: right;margin-top: 10px;background: #f80000;color: #fff;"
-       *ngIf="route_instructor===instructor_id" (click)="openDialog4()">
+       *ngIf="route_instructor===instructor_id && !demo_vedio" (click)="openDialog4()">
        Add Video</button>
 
-                    <button type="button" class="close" aria-label="Close" (click)="onNoClick()" tabindex="-1">
+                    <button type="button" class="close" aria-label="Close" tabindex="-1">
                       <span aria-hidden="true">&times;</span>
-                    </button><a (click)="SetVideoURL(demo_vedio)">{{demo_vedio}}</a>    
+                    </button>
+                        
     </div>
+
     <div class="tab-pane" id="profile" role="tabpanel">
             <br><button *ngIf="route_instructor===instructor_id"
             class="btn btn-primary btn-lg" (click)="openDialog()">Create New Chapter</button>

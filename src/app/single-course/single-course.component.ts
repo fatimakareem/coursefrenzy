@@ -172,6 +172,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   total;
   minuts;my_vedio;
   videos;
+  demo_vedio;
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.CourseId = +params['query'] || 1;
@@ -179,6 +180,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       this.obj.get_Single_Course(this.CourseId).subscribe(response => {
 this.my_vedio=response.mycourses
         this.SingleCourse = response.data;
+        this.demo_vedio=response.demovideo
         this.rev = response.rating;
         if (response.hasOwnProperty("status")) {
           // this.AlreadyInWishlistError();
@@ -1233,10 +1235,10 @@ export class IntroVideoComponent {
             width: '512px',
             timer: 2500
           })
-        }
-        console.log(data[0]['json'].json());
+        }else{console.log(data[0]['json'].json());
         this.dialogRef.close(data[0]['json'].json());
-        IntroVideoComponent.videoSuccess();
+        IntroVideoComponent.videoSuccess();}
+        
       },
       error => {
         // console.log(error);

@@ -326,7 +326,7 @@ export class SingleCourseService {
       }, {headers : headers}).map((res: Response) => {
       if (res) {
         // console.log('1');
-        if (res.status === 201 || res.status === 200) {
+        if (res.status === 201 || res.status === 200 || res.status === 202) {
           const responce_data = res.json();
           // localStorage.setItem('user_id', responce_data.id);
           // this.users_id = localStorage.getItem('user_id');
