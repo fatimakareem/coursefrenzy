@@ -35,7 +35,7 @@ export class HeaderService {
     return this._http2.get( Config.api + 'courses/subcat/' + cat_id + '/').map((response: Response) => response.json());
   }
   search(query) {
-    return this._http2.put(Config.api + 'courses/search/',
+    return this._http2.post(Config.api + 'courses/searchKeyword/',
       {
         'query': query,
       }).map((res: Response) => {
