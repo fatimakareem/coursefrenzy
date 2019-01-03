@@ -55,7 +55,7 @@ const appRoutes: Routes = [
 
       { path: 'become_instructor', loadChildren: './become-instructor/become-instructor.module#BecomeInstructorModule'},
       { path: 'how-it-works', loadChildren: './how-it-works/how-it-works.module#HowItWorksModule'},
-
+      { path: 'results', loadChildren: './search-results/search-results.module#SearchresultsModule'},
 
       { path: 'cat_courses/:cat_id', loadChildren: './category-courses/category-courses.module#CategoryCoursesModule'},
 

@@ -180,7 +180,6 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       this.obj.get_Single_Course(this.CourseId).subscribe(response => {
 this.my_vedio=response.mycourses;
 
-this.duration=response['Total Hours'];
         this.SingleCourse = response.data;
         this.demo_vedio=response.demovideo;
         this.rev = response.rating;
@@ -225,6 +224,8 @@ this.duration=response['Total Hours'];
         this.Chaptersloaded = false;
       } else {
         this.AllChapters = response.data;
+        this.duration=response['Total Hours'];
+
         this.videos=response.vedios
         this.total=response['Total Chapter'];
         this.minuts=response['Total Minute'];
@@ -465,15 +466,19 @@ this.duration=response['Total Hours'];
   }
 
   SetVideoURL(video_url,SetVideoURL) {
-    if(SetVideoURL== false){
+   
+    if(this.my_vedio== false){
+      if(SetVideoURL==false){
+      
+      
       swal({
         type: 'error',
         title: 'Please Bought this course first.',
         showConfirmButton: false,
         width: '512px',
         timer: 2000
-      })
-    }else{
+      })}
+    }else if(SetVideoURL== true || this.my_vedio== true){
       const dialogRef = this.dialog.open(VideoShowDialogComponent, {
       width: '1366px',
       data: {

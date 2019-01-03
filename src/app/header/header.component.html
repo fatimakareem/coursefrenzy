@@ -2,7 +2,7 @@
     <div class="search-outer" [ngClass]="{'active': searchCourses==='1' || searchSlider==='1'}">
         <div class="container container-fluid">
             <div class="search-holder"> <input autofocus type="search" name=querysearch [(ngModel)]="query"
-                    #querysearch="ngModel" (keyup)=filter(query) placeholder="Search to Learn with a ROAR!" id="textsearch">
+                    #querysearch="ngModel" (keyup)=filter(query) (keyup.enter)=fund(query) placeholder="Search to Learn with a ROAR!" id="textsearch">
                 <i class="fa fa-close" id="iconClose" (click)="closeSearch()"></i> </div>
             <div class="search-results" *ngIf="Courses">
                 <div class="head" *ngIf="Courses.courses">
@@ -10,7 +10,7 @@
                     <p *ngIf="Courses.courses.length==1" class="results-found">{{Courses.courses.length}}result found.</p>
                     <p *ngIf="Courses.courses.length>1" class="results-found">{{Courses.courses.length}}results found.</p>
                 </div>
-                <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3 economy languages history" *ngFor="let item of Courses?.courses">
+                <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3 economy languages history" *ngFor="let item of Courses">
                     <div class="product-list__item width-100"> <a (click)="select(item.id); closeSearch();" routerLink="/courses/single/{{item.id}}">
                             <figure class="imghvr-zoom-out-down product-list__img"> <img *ngIf="item?.course_image" src="{{ImageUrl}}{{item?.course_image}}"
                                     alt="" class="img-responsive" onError="this.src='../../assets/img/default_thumbnail.png'">
@@ -29,28 +29,7 @@
                                     ... </a>
                                 <div *ngIf="item.name.length<40"> <br></div>
                             </a>
-                            <div class="row">
-                                <div class="col-md-9 col-sm-9 col-lg-9 col-xs-9">
-                                    <ul class="product-list__star-list">
-                                        <li class="star-icons-li"> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                            </a> </li>
-                                        <li class="star-icons-li"> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                            </a> </li>
-                                        <li class="star-icons-li"> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                            </a> </li>
-                                        <li class="star-icons-li"> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                            </a> </li>
-                                        <li class="star-icons-li"> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                            </a> </li>
-                                    </ul>
-                                </div>
-                                <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough" *ngIf="item.actual_price>0">
-                                    ${{item.actual_price}}</div>
-                            </div>
-                            <div class="row">
-                                <div *ngIf="item?.user_id?.first_name && item?.user_id?.last_name" class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{item?.user_id?.first_name}}{{item?.user_id?.last_name}}</div>
-                                <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 ">${{item.discounted_price}}</div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
