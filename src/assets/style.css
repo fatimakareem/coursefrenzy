@@ -5566,8 +5566,12 @@ small {
 
 .card .card-title {
   font-size: 22px;
-  line-height: 26px;
-  font-weight: 700
+  line-height: 31px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.social-line .btn-simple{
+  padding: 0;
 }
 
 .card:hover [data-header-animation=true] {

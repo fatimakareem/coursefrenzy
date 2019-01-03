@@ -68,7 +68,7 @@
                     <div class="header-holder"> <a [routerLink]="['/']" class="navbar-brand logo"><img src="../../assets/img/main-logo.png">
                         </a>
                         <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav float-r">
+                            <ul class="nav navbar-nav float-r hover-effect">
                                 <li> <a [routerLink]="['/courses']" routerLinkActive="active"><i class="fa fa-file-alt"></i>Courses</a>
                                 </li>
                                 <li><a [routerLink]="['/become_instructor']" routerLinkActive="active"><i class="fa fa-users"></i>Instructors</a></li>
@@ -199,9 +199,9 @@
                                 </ul>
                                 <div class="user-detail">
                                     <ul class="nav navbar-nav small">
-                                        <li [ngStyle]="{'display':Logedin==='1' ? 'none' : 'inline-block'}"> <a
+                                        <li style="border-right: 2px solid #555;" [ngStyle]="{'display':Logedin==='1' ? 'none' : 'inline-block'}"> <a
                                                 [routerLink]="['/signup']" routerLinkActive="active"><i class="fas fa-user-plus"></i>Sign
-                                                Up</a> </li>
+                                                up</a> </li>
                                         <li *ngIf="isAuthenticated()" class="dropdown hasmenu inner" [ngStyle]="{'display':Logedin==='1' ? 'inline-block' : 'none'}">
                                             <a href="" class="dropdown-toggle width-168" data-toggle="dropdown" role="button"
                                                 aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle"></i>
