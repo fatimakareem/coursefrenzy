@@ -193,7 +193,7 @@ export class CoursesService {
    headers.append('Content-Type', 'application/json');
    if (localStorage.getItem('Authorization')) {
      headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
-     return this._http2.get(Config.api + 'courses/recomended/',{headers: headers}).map((response: Response) => response.json());
+     return this._http2.get('http://192.168.30.187:8000/courses/recomended/',{headers: headers}).map((response: Response) => response.json());
 
    }
     else {
@@ -282,8 +282,21 @@ else{
   get_top_rated_courses_via_cat(page,cat_id) {
     return this._http2.get(Config.api + 'courses/topratedcoursesviacat/' + cat_id +'?page=' +page).map((response: Response) => response.json());
   }
+  
+  get_all() {
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    if (localStorage.getItem('Authorization')) {
+      return this._http2.get('http://192.168.30.187:8000/courses/test/',{headers: headers}).map((response: Response) => response.json());
+    }
+    else {
+
+      return this._http2.get(Config.api + 'courses/bids_get/').map((response: Response) => response.json());
 
 
+    }
+  }
   get_bid_courses(page) {
 
     const headers = new Headers();
