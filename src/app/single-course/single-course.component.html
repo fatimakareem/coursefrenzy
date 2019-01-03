@@ -35,7 +35,7 @@
       <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">Course Overview</a>
     </li>
     <li class="nav-item text-center margin-top-10">
-        <button *ngIf="route_instructor===instructor_id" class="btn btn-primary btn-lg" (click)="Publishcourse()">Submit For Review</button>
+        <button *ngIf="route_instructor===instructor_id" class="btn-file" (click)="Publishcourse()">Submit For Review</button>
     </li>
   </ul>
   
@@ -60,7 +60,7 @@
 
        <img class="width-full" src="../../assets/img/placeholder (1).png" *ngIf="!demo_vedio">
 
-       <button mat-raised-button color="" style="float: right;margin-top: 10px;background: #f80000;color: #fff;"
+       <button mat-raised-button color="" style="float: right;margin-top: 10px;background: #000000;color: #fff;border-radius: 25px"
        *ngIf="route_instructor===instructor_id && !demo_vedio" (click)="openDialog4()">
        Add Video</button>
 
@@ -71,12 +71,14 @@
     </div>
 
     <div class="tab-pane" id="profile" role="tabpanel">
-            <br><button *ngIf="route_instructor===instructor_id"
-            class="btn btn-primary btn-lg" (click)="openDialog()">Create New Chapter</button>
+        <div class="text-right">
+            <button *ngIf="route_instructor===instructor_id"
+            class="btn-file" (click)="openDialog()">Create New Chapter</button>
+        </div>
         <div *ngIf="!this.Chaptersloaded"> <img style="width:100%" src="../../assets/img/single-course-section/No-Chapter.gif">
         </div>
         <div *ngIf="this.Chaptersloaded">
-            <div style="float: right"> Total Chapters {{total}}</div>
+            <div style="float: right; margin-top: 10px;"> Total Chapters {{total}}</div>
             <div style="float: right"> {{duration}}</div>
             <div class="fancy-collapse-panel"> <br><span *ngIf="AllChapters.length>0">
                     <div *ngFor="let chapter of AllChapters; let i=index">
@@ -129,7 +131,7 @@
         </div>
     </div>
     <div class="tab-pane" id="messages" role="tabpanel">
-            <div class="card" *ngIf="route_instructor===instructor_id"> <button type="button" class="close" aria-label="Close" (click)="closePublishDialog()" tabindex="-1">
+            <div class="card margin-0" *ngIf="route_instructor===instructor_id"> <button type="button" class="close" aria-label="Close" (click)="closePublishDialog()" tabindex="-1">
                     <span aria-hidden="true">&times;</span> </button>
                 <form (ngSubmit)="!headline.hasError('required') && !headline.hasError('pattern') && onSubmit(f)" #f="ngForm"
                     method="post">
@@ -167,7 +169,7 @@
                             </mat-error>
                         </mat-form-field> -->
                     </div>
-                    <div class="footer text-right col-sm-12"> <button class="button btn-primary custom" type="submit" id="submit"
+                    <div class="footer text-right col-sm-12"> <button class="btn-file" type="submit" id="submit"
                             tabindex="2">Submit</button> </div>
                 </form>
             </div>
@@ -546,8 +548,6 @@
 
 
 <!--  -->
-<<<<<<< HEAD
-=======
 <div class="row">
     <!-- <h2>bootstrap 4 vertical tabs</h2> -->
     <ul class="nav nav-tabs col-md-3" id="myTab" role="tablist">
@@ -586,7 +586,7 @@
 
        <img class="width-full" src="../../assets/img/placeholder (1).png" *ngIf="!demo_vedio">
 
-       <button mat-raised-button color="" style="float: right;margin-top: 10px;background: #f80000;color: #fff;"
+       <button mat-raised-button color="" style="float: right;margin-top: 10px;background: #000000;color: #fff;border-radius: 25px"
        *ngIf="route_instructor===instructor_id && !demo_vedio" (click)="openDialog4()">
        Add Video</button>
 
@@ -597,8 +597,10 @@
     </div>
 
     <div class="tab-pane" id="profile" role="tabpanel">
-            <br><button *ngIf="route_instructor===instructor_id"
+        <div class="text-right">
+            <button *ngIf="route_instructor===instructor_id"
             class="btn btn-primary btn-lg" (click)="openDialog()">Create New Chapter</button>
+        </div>
         <div *ngIf="!this.Chaptersloaded"> <img style="width:100%" src="../../assets/img/single-course-section/No-Chapter.gif">
         </div>
         <div *ngIf="this.Chaptersloaded">
@@ -649,7 +651,7 @@
         </div>
     </div>
     <div class="tab-pane" id="messages" role="tabpanel">
-            <div class="card" *ngIf="route_instructor===instructor_id"> <button type="button" class="close" aria-label="Close" (click)="closePublishDialog()" tabindex="-1">
+            <div class="card margin-0" *ngIf="route_instructor===instructor_id"> <button type="button" class="close" aria-label="Close" (click)="closePublishDialog()" tabindex="-1">
                     <span aria-hidden="true">&times;</span> </button>
                 <form (ngSubmit)="!headline.hasError('required') && !headline.hasError('pattern') && onSubmit(f)" #f="ngForm"
                     method="post">
@@ -687,12 +689,13 @@
                             </mat-error>
                         </mat-form-field> -->
                     </div>
-                    <div class="footer text-right col-sm-12"> <button class="button btn-primary custom" type="submit" id="submit"
+                    <div class="footer text-right col-sm-12"> <button class="btn-file" type="submit" id="submit"
                             tabindex="2">Submit</button> </div>
                 </form>
             </div>
->>>>>>> 3d385493406fcee56cce6142d13cae3d0868c60a
-
+</div>
+</div>
+</div>
 <!--  -->
 
                 </div>

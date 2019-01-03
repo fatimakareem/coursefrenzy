@@ -12,7 +12,7 @@
                             <i class="fa fa-google" style="background: none !important;"></i> </a> </div>
                 </div>
                 <div class="card-content padding-bottom-0">
-                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Enter Username"
+                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="User Name"
                             tabindex=1 [formControl]="userFormControl" [(ngModel)]="model.firstname" required> <span
                             class="pointer" *ngIf="model.firstname" matSuffix mat-icon-button aria-label="Clear"
                             (click)="model.firstname=''">
@@ -24,7 +24,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="example-full-width mat-size"> <input [type]="hide ? 'password' : 'text'"
-                            matInput placeholder="Enter Your Password" tabindex=2 [formControl]="passwordFormControl"
+                            matInput placeholder="Your Password" tabindex=2 [formControl]="passwordFormControl"
                             [(ngModel)]="model.password" required>
                         <mat-icon class="pointer" data-toggle="tooltip" title="{{hide? 'Show' : 'Hide'}}Password"
                             matSuffix (click)="hide=!hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="footer text-center"> <button type="submit" class="button signup-btn" tabindex=3> Sign
                         in</button> <label class="font1 pull-left"> Don't have an account? <a class="font-size-20"
-                            [routerLink]="['/signup']"> Sign Up </a></label> </div>
+                            [routerLink]="['/signup']"> Sign up </a></label> </div>
             </div>
         </form>
     </div>

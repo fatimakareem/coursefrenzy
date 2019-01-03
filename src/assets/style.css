@@ -1030,17 +1030,17 @@ li.vimeo:hover {
 
 .cartmenu sup {
   padding: 0 0 0 1px;
-  width: 15px;
-  height: 15px;
-  line-height: 15px;
-  text-align: center;
-  position: absolute;
-  display: inline-block;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 30px;
-  top: 19px;
-  right: 10px
+    width: 15px;
+    height: 15px;
+    line-height: 11px;
+    text-align: center;
+    position: absolute;
+    display: inline-block;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    top: -4px;
+    right: 10px;
 }
 
 .dropdown {

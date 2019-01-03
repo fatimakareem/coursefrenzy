@@ -5641,9 +5641,11 @@ body {
 }
 
 #navbar .cartmenu:hover sup {
-    background: #c00!important
+    background: #fff!important
 }
-
+.navbar-nav li a:hover i{
+    color: #c00;
+}
 #navbar .cartmenu>a {
     cursor: pointer
 }

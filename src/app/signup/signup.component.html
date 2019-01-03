@@ -13,7 +13,7 @@
                             <i class="fa fa-google" style="background: none !important;"></i> </a> </div>
                 </div>
                 <div class="card-content">
-                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Enter Your User name"
+                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="User Name"
                             [formControl]="nameFormControl" [(ngModel)]="model.username" (focusout)="getusername()"
                             autocomplete="off" required> <span class="pointer" *ngIf="model.username" mat-icon-button
                             matSuffix aria-label="Clear" (click)="model.username=''">
@@ -26,7 +26,7 @@
                         <mat-error *ngIf="nameFormControl.hasError('maxlength')"> Maximum Length of <strong>Username
                                 can be 50 characters</strong> </mat-error>
                     </mat-form-field>
-                    <mat-form-field class="example-full-width mat-size"> <input matInput type="text" placeholder="Enter Your Email"
+                    <mat-form-field class="example-full-width mat-size"> <input matInput type="text" placeholder="Your Email"
                             [formControl]="emailFormControl" [(ngModel)]="model.email" (focusout)="getemail()"
                             autocomplete="off" required> <span class="pointer" *ngIf="model.email" tabindex=-11
                             mat-icon-button matSuffix aria-label="Clear" (click)="model.email=''">
@@ -40,7 +40,7 @@
                                 be 100 characters</strong> </mat-error>
                     </mat-form-field>
                     <mat-form-field class="example-full-width mat-size"> <input matInput [type]="hide ? 'password' : 'text'"
-                            #password placeholder="Enter Your Password" [formControl]="passwordFormControl" [(ngModel)]="model.Password"
+                            #password placeholder="Your Password" [formControl]="passwordFormControl" [(ngModel)]="model.Password"
                             required>
                         <mat-icon class="pointer" data-toggle="tooltip" title="{{hide? 'Show' : 'Hide'}}Password"
                             matSuffix (click)="hide=!hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
