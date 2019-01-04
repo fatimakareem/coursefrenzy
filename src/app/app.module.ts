@@ -8,10 +8,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {ModuleMapLoaderModule} from '@nguniversal/module-map-ngfactory-loader';
-
-
 import { RecaptchaModule } from 'ng-recaptcha';
-
 import {SignUpservice} from './signup/signup.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {

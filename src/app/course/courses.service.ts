@@ -193,7 +193,7 @@ export class CoursesService {
    headers.append('Content-Type', 'application/json');
    if (localStorage.getItem('Authorization')) {
      headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
-     return this._http2.get('http://192.168.30.187:8000/courses/recomended/',{headers: headers}).map((response: Response) => response.json());
+     return this._http2.get(Config.api + 'courses/recomended/',{headers: headers}).map((response: Response) => response.json());
 
    }
     else {
@@ -288,7 +288,7 @@ else{
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     if (localStorage.getItem('Authorization')) {
-      return this._http2.get('http://192.168.30.187:8000/courses/test/',{headers: headers}).map((response: Response) => response.json());
+      return this._http2.get(Config.api + 'courses/test/',{headers: headers}).map((response: Response) => response.json());
     }
     else {
 
