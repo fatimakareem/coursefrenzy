@@ -4722,11 +4722,11 @@ small {
 }
 
 .user-detail .navbar-nav>li>.dropdown-menu {
-  left: 0;
-  right: 0;
-  position: absolute;
-  width: auto;
-  min-width: 130px
+  left: -9px;
+    /* right: 0; */
+    position: absolute;
+    width: auto;
+    min-width: 141px;
 }
 
 .admin-cont {

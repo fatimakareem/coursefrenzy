@@ -46,7 +46,7 @@
                                 class="icon-bar"></span> </button> </div>
                     <div class="header-holder"> <a [routerLink]="['/']" class="navbar-brand logo"><img src="../../assets/img/main-logo.png">
                         </a>
-                        <div id="navbar" class="navbar-collapse collapse">
+                        <div id="navbar" class="navbar-collapse collapse pull-right">
                             <ul class="nav navbar-nav float-r hover-effect">
                                 <li> <a [routerLink]="['/courses']" routerLinkActive="active"><i class="fa fa-file-alt"></i>Courses</a>
                                 </li>
@@ -184,10 +184,13 @@
                                         <li *ngIf="isAuthenticated()" class="dropdown hasmenu inner" [ngStyle]="{'display':Logedin==='1' ? 'inline-block' : 'none'}">
                                             <a href="" class="dropdown-toggle width-168" data-toggle="dropdown" role="button"
                                                 aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle"></i>
-                                                <span id="log-name" class="width-auto">{{uname}}</span> <span class="fa fa-angle-down"></span>
+                                                <span id="log-name" class="width-auto">
+                                                    My CourseFrenzy
+                                                    <!-- {{uname}} -->
+                                                </span> <span class="fa fa-angle-down"></span>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a [routerLink]="['/profile']"><i class="fa fa-edit"></i>Edit
+                                                <li><a [routerLink]="['/profile']"><i class="fa fa-edit"></i>My
                                                         Profile</a></li>
                                                 <li [ngStyle]="{'display':userRole==='Admin' ? 'inline-block' : 'none'}"><a
                                                         [routerLink]="['/admin']"><i class="material-icons">perm_identity</i>Admin
@@ -197,9 +200,8 @@
                                                         Courses</a></li>
                                                 <li><a [routerLink]="['/events']"><i class="material-icons">local_activity</i>All
                                                         Events</a></li>
-                                                <li [ngStyle]="{'display':userRole==='Teacher' ? 'inline-block' : 'none'}"><a
-                                                        [routerLink]="['/winbidUser']"><i class="material-icons">announcement</i>Win&Lose
-                                                        Bids</a></li>
+                                                <li><a
+                                                        [routerLink]="['/winbidUser']"><i class="material-icons">announcement</i>Completed Bidding <br> Activity</a></li>
                                                 <li><a onclick="topFunction()" (click)="logFunction()"><i class="material-icons">error_outline</i>
                                                         logout</a></li>
                                             </ul>
