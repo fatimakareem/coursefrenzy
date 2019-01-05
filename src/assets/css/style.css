@@ -6501,8 +6501,8 @@ app-admin-panel:after {
 
 #log-name {
     -o-text-overflow: ellipsis;
-    width: 100px!important;
-    display: inline-block;
+    width: 100%!important;
+    /* display: inline-block; */
     vertical-align: middle
 }
 

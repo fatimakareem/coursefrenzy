@@ -87,6 +87,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   public firstname;
   public lastname;
   public rev: any;
+  totallectures;
   // public model: any = {};
   headline = new FormControl('', [
     Validators.required,
@@ -225,7 +226,7 @@ this.my_vedio=response.mycourses;
       } else {
         this.AllChapters = response.data;
         this.duration=response['Total Hours'];
-
+this.totallectures=response['Total Lectures'];
         this.videos=response.vedios
         this.total=response['Total Chapter'];
         this.minuts=response['Total Minute'];
@@ -464,7 +465,20 @@ this.my_vedio=response.mycourses;
       this.router.navigate(['login']);
     }
   }
+  insSetVideoURL(video_url,SetVideoURL) {
+   
+      const dialogRef = this.dialog.open(VideoShowDialogComponent, {
+      width: '1366px',
+      data: {
+        video_url: video_url,
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  
+    
 
+  }
   SetVideoURL(video_url,SetVideoURL) {
    
     if(this.my_vedio== false){
@@ -477,8 +491,17 @@ this.my_vedio=response.mycourses;
         showConfirmButton: false,
         width: '512px',
         timer: 2000
-      })}
-    }else if(SetVideoURL== true || this.my_vedio== true){
+      })}else{
+        const dialogRef = this.dialog.open(VideoShowDialogComponent, {
+          width: '1366px',
+          data: {
+            video_url: video_url,
+          }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+        });
+      }
+    }else if(this.my_vedio== true){
       const dialogRef = this.dialog.open(VideoShowDialogComponent, {
       width: '1366px',
       data: {
@@ -570,6 +593,7 @@ this.my_vedio=response.mycourses;
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
+        alert(chapter_id)
         this.obj.delete_chapter(chapter_id).subscribe(
           data => {
             this.AllChapters.splice(this.AllChapters.indexOf(this.AllChapters[index]), 1);

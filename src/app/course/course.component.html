@@ -119,16 +119,19 @@
                     <div class="clearfix"></div>
                     <app-top-rated-courses></app-top-rated-courses>
                     <div class="clearfix"></div>
-                    <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
+                    <!-- <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
                         <app-watched-courses></app-watched-courses>
-                    </div>
-                    <div class="clearfix"></div>
+                    </div> -->
+                    <!-- <div class="clearfix"></div> -->
                 </div>
                 <div class="clearfix"></div>
                 <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
                     <app-recently-viewed-courses></app-recently-viewed-courses>
                 </div>
-                <app-recommended-courses></app-recommended-courses>
+                <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
+                        <app-recommended-courses></app-recommended-courses>
+                </div>
+                
             </div>
         </div>
     </main>

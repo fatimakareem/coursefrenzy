@@ -183,7 +183,7 @@
                                                 up</a> </li>
                                         <li *ngIf="isAuthenticated()" class="dropdown hasmenu inner" [ngStyle]="{'display':Logedin==='1' ? 'inline-block' : 'none'}">
                                             <a href="" class="dropdown-toggle width-168" data-toggle="dropdown" role="button"
-                                                aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle"></i>
+                                                aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle margin-top-10"></i>
                                                 <span id="log-name" class="width-auto">
                                                     My CourseFrenzy
                                                     <!-- {{uname}} -->
@@ -192,6 +192,10 @@
                                             <ul class="dropdown-menu dropdown-menu-right">
                                                 <li><a [routerLink]="['/profile']"><i class="fa fa-edit"></i>My
                                                         Profile</a></li>
+                                                <li>
+                                                        <a routerLink="/profile/payout" routerLinkActive="active">
+                                                            <i class="fa fa-money" aria-hidden="true"></i>Payment Methods </a>
+                                                </li>
                                                 <li [ngStyle]="{'display':userRole==='Admin' ? 'inline-block' : 'none'}"><a
                                                         [routerLink]="['/admin']"><i class="material-icons">perm_identity</i>Admin
                                                         Panel</a></li>

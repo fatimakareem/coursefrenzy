@@ -287,15 +287,10 @@ else{
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    if (localStorage.getItem('Authorization')) {
+    // if (localStorage.getItem('Authorization')) {
       return this._http2.get(Config.api + 'courses/test/',{headers: headers}).map((response: Response) => response.json());
-    }
-    else {
-
-      return this._http2.get(Config.api + 'courses/bids_get/').map((response: Response) => response.json());
-
-
-    }
+    // }
+    
   }
   get_bid_courses(page) {
 

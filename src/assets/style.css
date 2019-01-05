@@ -120,9 +120,6 @@ a {
     padding: 23px 2px!important;
     font-size: 13px!important
   }
-  #log-name {
-    width: 100px
-  }
   .navbar-collapse {
     width: calc(100% - 145px)!important;
     width: -moz-calc(100% - 145px)!important;
@@ -4726,7 +4723,7 @@ small {
     /* right: 0; */
     position: absolute;
     width: auto;
-    min-width: 141px;
+    /* min-width: 141px; */
 }
 
 .admin-cont {
@@ -4949,7 +4946,7 @@ small {
     font-size: 18px!important
   }
   #log-name {
-    width: 100px
+    width: 100px;
   }
   .navbar-collapse {
     width: calc(100% - 225px)!important;
