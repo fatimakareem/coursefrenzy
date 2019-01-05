@@ -3430,7 +3430,15 @@ ol li::before {
 .single-course {
     padding: 20px 0
 }
-
+.totallectures-bar{
+    width: 57%;
+    float: right;
+    margin: 16px 0 -4px;
+}
+.fancy-collapse-panel{
+    float: left;
+    width: 100%;
+}
 .single-course .magnifier {
     border-radius: 5px
 }
@@ -8350,7 +8358,12 @@ figcaption p i {
 .margin-left-10 {
     margin-left: 10px
 }
-
+.margin-left-25 {
+    margin-left: 25px;
+}
+.margin-left-34 {
+    margin-left: 34px;
+}
 .list-user:before {
     content: '';
     position: absolute;
@@ -8456,7 +8469,7 @@ figcaption p i {
 
 .font-size-36,
 .trash-icon {
-    font-size: 36px
+    font-size: 36px;
 }
 
 .width-135px {
@@ -8970,5 +8983,25 @@ figcaption p i {
     font-size: 15px !important;
     font-weight: bold !important;
 }
-
+.video-box{
+    width: 75% !important;
+    height: auto;
+    margin: 0 auto !important;
+    display: block !important;
+}
+.table-video{
+    background: #f2f2f2;
+}
+.table-video .video-icon{
+    width: 50px;
+}
+.notification-dropdowns a{
+    display: block;
+    background: #29303B !important;
+    padding: 4px;
+    color: #fff;
+}
+.notification-dropdowns a strong{
+    margin: 0px !important;
+}
 /* .navbar-nav>li>a.active:after{position:absolute;height:5px;left:0;right:0;top:auto;bottom:0;background:#f80000} */

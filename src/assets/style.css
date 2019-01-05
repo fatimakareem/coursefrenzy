@@ -3005,7 +3005,7 @@ hr.invis1 {
   background: url(../assets/img/dots.gif) 0 6px repeat-x;
   font-size: 22px;
   padding: 0;
-  text-transform: uppercase;
+  text-transform: capitalize;
   margin: 0;
   line-height: 1;
   font-weight: 600;
@@ -3937,8 +3937,8 @@ hr.invis1 {
 .course-table .table>thead>tr>th {
   border-top: 1px solid #ddd;
   line-height: 1;
-  padding: 10px 20px;
-  vertical-align: baseline
+  padding: 10px 10px;
+  vertical-align: middle;
 }
 
 .button,
