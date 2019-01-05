@@ -169,7 +169,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
         this.isFollow = data;
       });
   }
-  
+  cheptermessage;
   total;
   minuts;my_vedio;
   videos;
@@ -223,8 +223,11 @@ this.my_vedio=response.mycourses;
         console.log('Chapters are going to set False');
         this.AllChapters = [];
         this.Chaptersloaded = false;
+        this.cheptermessage=response.message;
+        
       } else {
         this.AllChapters = response.data;
+       
         this.duration=response['Total Hours'];
 this.totallectures=response['Total Lectures'];
         this.videos=response.vedios
@@ -481,36 +484,37 @@ this.totallectures=response['Total Lectures'];
   }
   SetVideoURL(video_url,SetVideoURL) {
    
-    if(this.my_vedio== false){
-      if(SetVideoURL==false){
-      
-      
-      swal({
-        type: 'error',
-        title: 'Please Bought this course first.',
-        showConfirmButton: false,
-        width: '512px',
-        timer: 2000
-      })}else{
-        const dialogRef = this.dialog.open(VideoShowDialogComponent, {
-          width: '1366px',
-          data: {
-            video_url: video_url,
-          }
-        });
-        dialogRef.afterClosed().subscribe(result => {
-        });
-      }
-    }else if(this.my_vedio== true){
+    if(this.my_vedio== true){
       const dialogRef = this.dialog.open(VideoShowDialogComponent, {
-      width: '1366px',
-      data: {
-        video_url: video_url,
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
+        width: '1366px',
+        data: {
+          video_url: video_url,
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    //   
+    }else if(this.my_vedio== false){
+      if(SetVideoURL==false){
+        swal({
+          type: 'error',
+          title: 'Oops! <br> Please bought this course first!',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 2500
+        })
+            
+         }else if(SetVideoURL==true){
+            const dialogRef = this.dialog.open(VideoShowDialogComponent, {
+              width: '1366px',
+              data: {
+                video_url: video_url,
+              }
+            });
+            dialogRef.afterClosed().subscribe(result => {
+            });
+          }
+        }
     
 
   }

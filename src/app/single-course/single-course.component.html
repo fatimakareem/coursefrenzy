@@ -79,9 +79,9 @@
             <button *ngIf="route_instructor===instructor_id"
             class="btn-file" (click)="openDialog()">Create New Chapter</button>
         </div>
-        <div *ngIf="!this.Chaptersloaded"> <img style="width:100%" src="../../assets/img/single-course-section/No-Chapter.gif">
+        <div *ngIf="!this.Chaptersloaded || cheptermessage == 'No Chapters Posted in the Course' || total == 0"> <img style="width:100%" src="../../assets/img/single-course-section/No-Chapter.gif">
         </div>
-        <div *ngIf="total == 0 && route_instructor===instructor_id"> No Chapter Uploaded!</div>
+        <!-- <div *ngIf="total == 0 && route_instructor===instructor_id"> No Chapter Uploaded!</div> -->
         <div *ngIf="this.Chaptersloaded && total != 0 && route_instructor===instructor_id">
             <div style="float: right; margin-top: 10px;" > Total Chapters {{total}}</div>
             <div style="float: right; margin-top: 10px;" > Total Lectures {{totallectures}}</div>
