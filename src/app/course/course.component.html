@@ -64,9 +64,39 @@
                                                       
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                            <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="$ Starting Price"
-                                                    [(ngModel)]="model.startprice" (focusout)="selectrange1(model.startprice)">
-                                            </mat-form-field>
+                                                <div class="panel-title">
+                                                        <a>
+                                                          <h5 class="color-red"> Rating
+                                                          </h5>
+                                                        </a>
+                                                      </div>
+                                          
+                                                      <div class="checkbox">
+                                                        <label class="checkbox-font">
+                                                          <input type="checkbox" name="rate1" [(ngModel)]=rate1 value="4.0 - 5.0" (change)="checked1($event,i)">4.0 - 5.0
+                                                        </label>
+                                          
+                                                      </div>
+                                                      <!-- end ngRepeat: term in filters.terms -->
+                                                      <div class="checkbox">
+                                                        <label class="checkbox-font">
+                                                          <input type="checkbox" name="B" [(ngModel)]=B value="B" (change)="checked2($event,i)">3.0 - 4.0
+                                                        </label>
+                                          
+                                                      </div>
+                                                      <div class="checkbox">
+                                                        <label class="checkbox-font">
+                                                          <input type="checkbox" name="I" [(ngModel)]=I value="I" (change)="checked3($event,i)">Intermediate
+                                                        </label>
+                                          
+                                                      </div>
+                                                      <!-- end ngRepeat: term in filters.terms -->
+                                                      <div class="checkbox">
+                                                        <label class="checkbox-font">
+                                                          <input type="checkbox" name="A" [(ngModel)]=A value="A" (change)="checked4($event,i)">Advance
+                                                        </label>
+                                          
+                                                      </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                             <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="$ Ending Price"

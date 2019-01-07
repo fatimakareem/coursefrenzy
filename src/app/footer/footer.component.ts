@@ -31,6 +31,7 @@ export class FooterComponent implements OnInit {
     this.global.Categories$.subscribe(
       data => {
         this.Categories = data;
+        console.log(this.Categories)
       });
   }
   ngOnInit() {
