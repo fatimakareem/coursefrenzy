@@ -326,7 +326,7 @@ export class SingleCourseService {
       }, {headers : headers}).map((res: Response) => {
       if (res) {
         // console.log('1');
-        if (res.status === 201 || res.status === 200) {
+        if (res.status === 201 || res.status === 200 || res.status === 202) {
           const responce_data = res.json();
           // localStorage.setItem('user_id', responce_data.id);
           // this.users_id = localStorage.getItem('user_id');
@@ -413,7 +413,58 @@ export class SingleCourseService {
       }
     });
   }
+  upload_demovideo( video_url, video_minutes, video_size, id) {
+    // console.log('Chapter Name is ' + Name);
+    const headers = new Headers();
+    if (isPlatformBrowser(this.platformId)) {
+      headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
+    }
+    headers.append('Content-Type', 'application/json');
+    return this._http2.put(Config.api + 'courses/introvideo/'+id,
+      {
+        //  'video_title': video_title,
+        'video_url': video_url,
+        'video_minutes': video_minutes,
+        // 'video_isPrivate': video_isPrivate,
+        'video_size': video_size,
+        // 'chapter': chapter,
+      }, {headers : headers}).map((res: Response) => {
+      if (res) {
+        // console.log('1');
+        if (res.status === 201 || res.status === 200) {
+          const responce_data = res.json();
+          // localStorage.setItem('user_id', responce_data.id);
+          // this.users_id = localStorage.getItem('user_id');
+          return [{status: res.status, json: res}];
+        } else if (res.status === 5300) {
+          // this._nav.navigate(['/login']);
 
+          // localStorage.setItem('conformation', '1');
+          // console.log('ok submited 200');
+          return [{status: res.status, json: res}];
+        } else {
+          // console.log('ok');
+        }
+      }
+    }).catch((error: any) => {
+      // alert(error);
+      if (error.status === 404) {
+        // console.log('ok not submited submit 404');
+        // localStorage.setItem('error', '1');
+        return Observable.throw(new Error(error.status));
+      } else if (error.status === 400) {
+        //    this._nav.navigate(['/pages/accident']);
+        // console.log('ok not submited submit 400');
+        // localStorage.setItem('error', '1');
+        return Observable.throw(new Error(error.status));
+      } else {
+        //  this._nav.navigate(['/pages/accident']);
+        // console.log('ok not submited submit error');
+
+        return Observable.throw(new Error(error.status));
+      }
+    });
+  }
   delete_chapter(id) {
     return this._http2.delete( Config.api + 'courses/chapter_delete/'+id+'/', {headers : this.headers.getHeaders()}).map((response: Response) => response.json());
   }

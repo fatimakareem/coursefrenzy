@@ -35,7 +35,31 @@ export class HeaderService {
     return this._http2.get( Config.api + 'courses/subcat/' + cat_id + '/').map((response: Response) => response.json());
   }
   search(query) {
-    return this._http2.put(Config.api + 'courses/search/',
+    return this._http2.post(Config.api + 'courses/searchKeyword/',
+      {
+        'query': query,
+      }).map((res: Response) => {
+      if (res) {
+        if (res.status === 201 || res.status === 200) {
+          const responce_data = res.json();
+          return res.json();
+        } else if (res.status === 5300) {
+          return [{status: res.status, json: res}];
+        } else {
+        }
+      }
+    }).catch((error: any) => {
+      if (error.status === 404) {
+        return Observable.throw(new Error(error.status));
+      } else if (error.status === 400) {
+        return Observable.throw(new Error(error.status));
+      } else {
+        return Observable.throw(new Error(error.status));
+      }
+    });
+  }
+  searchresults(query) {
+    return this._http2.post(Config.api + 'courses/main_search_results/',
       {
         'query': query,
       }).map((res: Response) => {
@@ -83,9 +107,9 @@ export class HeaderService {
 
     const headers = new Headers();
 
-    if (isPlatformBrowser(this.platformId)) {
+    // if (isPlatformBrowser(this.platformId)) {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization').toString());
-    }
+    // }
     headers.append('Content-Type', 'application/json');
     return this._http2.get(  Config.api + 'courses/user_notifications/', {headers : headers}).map((response: Response) => response.json());
   }

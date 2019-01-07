@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
   AddChapterComponent, AddVideoComponent, EditChapterComponent, PublishCourseComponent,
-  SingleCourseComponent,
+  SingleCourseComponent,EditdemoComponent,
   IntroVideoComponent
 } from './single-course.component';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
@@ -16,20 +16,24 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material';
 // import {MatTabsModule} from '@angular/material/tabs';
-
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
 import {BiddingDialogModule} from "../bidding-dialog/bidding-dialog.module";
 import {AddCartDialogModule} from "../cart-dialog/add-cart-dialog.module";
 import { MatSelectModule } from '@angular/material';
-import {VgBufferingModule} from 'videogular2/buffering';
-import {VgCoreModule} from 'videogular2/core';
-import {VgOverlayPlayModule} from 'videogular2/overlay-play';
-import {VgControlsModule} from 'videogular2/controls';
+// import {VgBufferingModule} from 'videogular2/buffering';
+// import {VgCoreModule} from 'videogular2/core';
+// import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+// import {VgControlsModule} from 'videogular2/controls';
 import {LoaderModule} from "../loader/loader.module";
 import {TeachesByTeacherComponent} from "./teaches-by-teacher/teaches-by-teacher.component";
 import {VideoShowDialogComponent} from "./video-show-dialog/video-show-dialog.component";
 import {AddReviewDialogComponent} from "./add-review-dialog/add-review-dialog.component";
 // import {NgbModule, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {RatingModule} from "ng2-rating";
+
 
 const singleCourseRoutes: Routes = [
   { path: '', component: SingleCourseComponent }
@@ -38,6 +42,7 @@ const singleCourseRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    EditdemoComponent,
     SingleCourseComponent,
     AddChapterComponent,
     AddVideoComponent,
@@ -78,6 +83,7 @@ const singleCourseRoutes: Routes = [
   providers: [],
   exports: [],
   entryComponents: [
+    EditdemoComponent,
     AddChapterComponent,
     AddVideoComponent,
     PublishCourseComponent,

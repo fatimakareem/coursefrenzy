@@ -8,10 +8,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {ModuleMapLoaderModule} from '@nguniversal/module-map-ngfactory-loader';
-
-
 import { RecaptchaModule } from 'ng-recaptcha';
-
 import {SignUpservice} from './signup/signup.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {
@@ -134,10 +131,7 @@ import {ChatboxService} from "./chatbox/chatbox.service";
 import { WinbidDialogComponent } from './winbid-dialog/winbid-dialog.component';
 import {AddCourseDialogComponent} from './upload-courses/upload-courses.component';
 import { BuynowDialogComponent } from './buynow-dialog/buynow-dialog.component';
-import { NestedsubCatCoursesComponent } from './nestedsub-cat-courses/nestedsub-cat-courses.component';
-import { NestedsubcatTopRatedCoursesComponent } from './nestedsub-cat-courses/nestedsubcat-top-rated-courses/nestedsubcat-top-rated-courses.component';
-import { NestedsubcatTrendingNowCoursesComponent } from './nestedsub-cat-courses/nestedsubcat-trending-now-courses/nestedsubcat-trending-now-courses.component';
-import { NestedsubcatBidCourseComponent } from './nestedsub-cat-courses/nestedsubcat-bid-course/nestedsubcat-bid-course.component'
+
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -167,6 +161,7 @@ export function provideConfig() {
     ChatComponent,
     WinbidDialogComponent,
     BuynowDialogComponent,
+    // SearchResultsComponent,
     // NestedsubcatTopRatedCoursesComponent,
     // NestedsubcatTrendingNowCoursesComponent,
     // NestedsubcatBidCourseComponent,

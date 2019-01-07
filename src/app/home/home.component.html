@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-lg-12 bidSlider">
                         <ngx-slick class="product-list slick-bids " #slickModal="slick-modal" [config]="slideConfig">
-                            <li class="product-list__item item" ngxSlickItem *ngFor="let bid_data of BidCourses?.bids; let i=index">
+                            <li class="product-list__item item" ngxSlickItem *ngFor="let bid_data of data?.courseBid; let i=index">
                                 <a routerLink="/courses/single/{{bid_data?.course.course.id}}">
                                     <figure class="imghvr-zoom-out-down product-list__img"> <img *ngIf="bid_data?.course?.course.course_image"
                                             src="{{ImageUrl}}{{bid_data?.course?.course.course_image}}" alt="" class="img-responsive"
@@ -145,7 +145,7 @@
                 <div class="row">
                     <div class="col-lg-12 bidSlider">
                         <ngx-slick class="product-list slick-bids3" #slickModal="slick-modal" [config]="slideConfig">
-                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of trendingNowCourses?.courses; let i=index;">
+                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of data?.courseTrending; let i=index;">
                                 <a routerLink="/courses/single/{{data?.course?.id}}">
                                     <figure class="product-list__img">
                                         <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
@@ -220,7 +220,7 @@
                 <div class="row">
                     <div class="col-lg-12 bidSlider">
                         <ngx-slick class="product-list slick-bids1" #slickModal="slick-modal" [config]="slideConfig">
-                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of topRatedCourses?.courses; let i=index;">
+                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of data?.coursesTop; let i=index;">
                                 <a routerLink="/courses/single/{{data?.course?.id}}">
                                     <figure class="product-list__img">
                                         <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
@@ -297,7 +297,7 @@
                 <div class="row">
                     <div class="col-lg-12 bidSlider">
                         <ngx-slick class="product-list slick-bids " #slickModal="slick-modal" [config]="slideConfig">
-                            <li class="product-list__item item" ngxSlickItem *ngFor="let bid_data of BidCourses?.bids; let i=index">
+                            <li class="product-list__item item" ngxSlickItem *ngFor="let bid_data of data?.courseBid; let i=index">
                                 <a routerLink="/courses/single/{{bid_data?.course.course.id}}">
                                     <figure class="imghvr-zoom-out-down product-list__img"> <img *ngIf="bid_data?.course?.course.course_image"
                                             src="{{ImageUrl}}{{bid_data?.course?.course.course_image}}" alt="" class="img-responsive"
@@ -370,7 +370,7 @@
                 <div class="row">
                     <div class="col-lg-12 bidSlider">
                         <ngx-slick class="product-list slick-bids3" #slickModal="slick-modal" [config]="slideConfig">
-                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of trendingNowCourses?.courses; let i=index;">
+                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of data?.courseTrending; let i=index;">
                                 <a routerLink="/courses/single/{{data?.course?.id}}">
                                     <figure class="product-list__img">
                                         <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
@@ -445,7 +445,7 @@
                 <div class="row">
                     <div class="col-lg-12 bidSlider">
                         <ngx-slick class="product-list slick-bids1" #slickModal="slick-modal" [config]="slideConfig">
-                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of topRatedCourses?.courses; let i=index;">
+                            <li class="product-list__item item" ngxSlickItem *ngFor="let data of data?.coursesTop; let i=index;">
                                 <a routerLink="/courses/single/{{data?.course?.id}}">
                                     <figure class="product-list__img">
                                         <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
@@ -595,7 +595,7 @@
                     <div class="row" *ngIf="showrecent">
                         <div class="col-lg-12 bidSlider">
                             <ngx-slick class="product-list slick-bids2" #slickModal="slick-modal" [config]="slideConfig">
-                                <li class="product-list__item item" ngxSlickItem *ngFor="let data of Courses?.courses; let i=index;">
+                                <li class="product-list__item item" ngxSlickItem *ngFor="let data of courses?.courses; let i=index;">
                                     <a routerLink="/courses/single/{{data?.course?.id}}">
                                         <figure class="product-list__img">
                                             <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"

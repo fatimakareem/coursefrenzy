@@ -442,13 +442,19 @@ onClick() {
   filter(query) {
     if (this.query !== '') {
       this.obj.search(this.query).subscribe(response => {
-        this.Courses = response;
+        this.Courses = response['results'];
         // console.log(this.Courses);
         this.loaded = true;
       });
     }
   }
-
+  fund(event) {
+    console.log(this.query)
+    
+    let requiredUrl = 'results'
+    this._nav.navigate([requiredUrl], { queryParams: { keyword: this.query } });
+    this.closeSearch();
+  }
   select(item) {
     this.selected = item;
     this.searchCourses = '0';

@@ -1,1 +1,138 @@
-<app-loader></app-loader><div class="wrapp-content slider"> <main class=""> <div class="content-box padding-top-20 padding-bottom-10"> <div class="container-fluid container-wide homeslider-hide"> <div class="container-fluid container-wide homeslider-hide bidSlider" *ngIf="Categories"> <ngx-slick class="homeSlider" #slickModal="slick-modal" [config]="slideConfig"> <div class="item" ngxSlickItem *ngFor="let category of Categories"> <div class="image"> <a routerLink='/courses/{{category.id}}'> <img class="img" src="{{catImageUrl}}{{category?.icon_Web_Home}}" onError="this.src='../../assets/img/default_thumbnail.png'"> </a> </div><div class="slide-overlay"> <h4 class="card-title"> <a routerLink='/cat_courses/{{category.id}}' tabindex="0">{{category?.name}}</a> </h4> </div></div></ngx-slick> </div><div class="filter-holder"> <header> <span class="pull-right btn-filter" data-toggle="collapse" data-target="#filters"> <i class="fa fa-filter" aria-hidden="true"></i> <a routerLink="/FilterSearch"> <span>Filter Courses</span></a> </span> </header> </div><div *ngIf="loaded3"> <ul class="product-list"> <li class="product-list__item" *ngFor="let data of Cat_Courses?.courses; let i=index;"> <a routerLink="/courses/single/{{data?.course?.id}}"> <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image" src="{{StaticImageUrl}}{{data?.course?.course_image}}" alt="" class="img-responsive"> <figcaption> <p>Includes:</p><p><i class="fa fa-file-video-o"></i> 27.5 hours on-demand video</p><p><i class="fa fa-book"></i> 7 Articles</p><p><i class="fa fa-universal-access"></i> Full lifetime access</p><p><i class="fa fa-bolt"></i> Assignments</p><p><i class="fa fa-certificate"></i> Certificate of Completion</p></figcaption> </figure> </a> <div class="product-list__content"> <a class="product-list__category" routerLink="/courses/single/{{data?.course?.id}}">{{data?.course?.name.slice(0, 50)}}</a> <div class="row"> <div class="col-md-9 col-sm-9 col-lg-9 col-xs-9"> <ul class="product-list__star-list"> <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li></ul> </div><div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough"> ${{data?.course?.actual_price}}</div></div><div class="row"> <a routerLink="/user-profile/{{data?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name" class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{data?.course?.user_id.first_name}}{{data?.course?.user_id.last_name}}</a> <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{data?.course?.discounted_price}}</div></div></div><div class="product-list__item-info"> <a class="material-icons wishlist" title="Add to wishlist" (click)="onclick(i, data?.course?.id)">favorite_border</a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a> <a routerLink="/checkout" type="button" class="btn btn1 product-list__content">Buy Now</a> </div></li></ul> </div><div *ngIf="loaded5"> <ul class="product-list"> <li class="product-list__item" *ngFor="let data of SubCat_Courses?.courses; let i=index;"> <a routerLink="/courses/single/{{data?.course?.id}}"> <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image" src="{{StaticImageUrl}}{{data?.course?.course_image}}" alt="" class="img-responsive" onError="this.src='../../assets/img/default_thumbnail.png'"> <figcaption> <p>Includes:</p><p><i class="fa fa-file-video-o"></i> 27.5 hours on-demand video</p><p><i class="fa fa-book"></i> 7 Articles</p><p><i class="fa fa-universal-access"></i> Full lifetime access</p><p><i class="fa fa-bolt"></i> Assignments</p><p><i class="fa fa-certificate"></i> Certificate of Completion</p></figcaption> </figure> </a> <div class="product-list__content"> <a class="product-list__category" routerLink="/courses/single/{{data?.course?.id}}">{{data?.course?.name.slice(0, 50)}}<a *ngIf="data?.course?.name.length>60"> ... </a> <div *ngIf="data?.course?.name.length<40"><br></div></a> <div class="row"> <div class="col-md-9 col-sm-9 col-lg-9 col-xs-9"> <ul class="product-list__star-list"> <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li><li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li></ul> </div><div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough"> ${{data?.course?.actual_price}}</div></div><div class="row"> <a routerLink="/user-profile/{{data?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name" class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{data?.course?.user_id.first_name}}{{data?.course?.user_id.last_name}}</a> <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{data?.course?.discounted_price}}</div></div></div><div class="product-list__item-info"> <a class="material-icons wishlist" title="Add to wishlist" (click)="onclick(i, data?.course?.id)">favorite_border</a> <a class="wishlist material-icons" title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a> <a routerLink="/checkout" type="button" class="btn btn1 product-list__content">Buy Now</a> </div></li></ul> </div><div class="clearfix"></div><div class="row grid"> <app-courses-on-bid> </app-courses-on-bid> <div class="clearfix"></div><app-trending-now-courses></app-trending-now-courses> <div class="clearfix"></div><app-top-rated-courses></app-top-rated-courses> <div class="clearfix"></div><div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1"> <app-watched-courses></app-watched-courses> </div><div class="clearfix"></div></div><div class="clearfix"></div><div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1"> <app-recently-viewed-courses></app-recently-viewed-courses> </div><app-recommended-courses></app-recommended-courses> </div></div></main></div>
+<app-loader></app-loader>
+<div class="wrapp-content slider">
+    <main class="">
+        <div class="content-box padding-top-20 padding-bottom-10">
+            <div class="container-fluid container-wide homeslider-hide">
+                <div class="container-fluid container-wide homeslider-hide bidSlider" *ngIf="Categories">
+                    <ngx-slick class="homeSlider" #slickModal="slick-modal" [config]="slideConfig">
+                        <div class="item" ngxSlickItem *ngFor="let category of Categories">
+                            <div class="image"> <a routerLink='/courses/{{category.id}}'> <img class="img" src="{{catImageUrl}}{{category?.icon_Web_Home}}"
+                                        onError="this.src='../../assets/img/default_thumbnail.png'"> </a> </div>
+                            <div class="slide-overlay">
+                                <h4 class="card-title"> <a routerLink='/cat_courses/{{category.id}}' tabindex="0">{{category?.name}}</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </ngx-slick>
+                </div>
+                <div class="filter-holder">
+                    <header> <span class="pull-right btn-filter" data-toggle="collapse" data-target="#filters"> <i
+                                class="fa fa-filter" aria-hidden="true"></i> <a routerLink="/FilterSearch"> <span>Filter
+                                    Courses</span></a> </span> </header>
+                </div>
+                <div *ngIf="loaded3">
+                    <ul class="product-list">
+                        <li class="product-list__item" *ngFor="let data of Cat_Courses?.courses; let i=index;"> <a
+                                routerLink="/courses/single/{{data?.course?.id}}">
+                                <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
+                                        src="{{StaticImageUrl}}{{data?.course?.course_image}}" alt="" class="img-responsive">
+                                    <figcaption>
+                                        <p>Includes:</p>
+                                        <p><i class="fa fa-file-video-o"></i> 27.5 hours on-demand video</p>
+                                        <p><i class="fa fa-book"></i> 7 Articles</p>
+                                        <p><i class="fa fa-universal-access"></i> Full lifetime access</p>
+                                        <p><i class="fa fa-bolt"></i> Assignments</p>
+                                        <p><i class="fa fa-certificate"></i> Certificate of Completion</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                            <div class="product-list__content"> <a class="product-list__category" routerLink="/courses/single/{{data?.course?.id}}">{{data?.course?.name.slice(0,
+                                    50)}}</a>
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-9 col-lg-9 col-xs-9">
+                                        <ul class="product-list__star-list">
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                        </ul>
+                                    </div>
+                                    <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough">
+                                        ${{data?.course?.actual_price}}</div>
+                                </div>
+                                <div class="row"> <a routerLink="/user-profile/{{data?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name"
+                                        class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{data?.course?.user_id.first_name}}{{data?.course?.user_id.last_name}}</a>
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{data?.course?.discounted_price}}</div>
+                                </div>
+                            </div>
+                            <div class="product-list__item-info"> <a class="material-icons wishlist" title="Add to wishlist"
+                                    (click)="onclick(i, data?.course?.id)">favorite_border</a> <a class="wishlist material-icons"
+                                    title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a>
+                                <a routerLink="/checkout" type="button" class="btn btn1 product-list__content">Buy Now</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="loaded5">
+                    <ul class="product-list">
+                        <li class="product-list__item" *ngFor="let data of SubCat_Courses?.courses; let i=index;"> <a
+                                routerLink="/courses/single/{{data?.course?.id}}">
+                                <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
+                                        src="{{StaticImageUrl}}{{data?.course?.course_image}}" alt="" class="img-responsive"
+                                        onError="this.src='../../assets/img/default_thumbnail.png'">
+                                    <figcaption>
+                                        <p>Includes:</p>
+                                        <p><i class="fa fa-file-video-o"></i> 27.5 hours on-demand video</p>
+                                        <p><i class="fa fa-book"></i> 7 Articles</p>
+                                        <p><i class="fa fa-universal-access"></i> Full lifetime access</p>
+                                        <p><i class="fa fa-bolt"></i> Assignments</p>
+                                        <p><i class="fa fa-certificate"></i> Certificate of Completion</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                            <div class="product-list__content"> <a class="product-list__category" routerLink="/courses/single/{{data?.course?.id}}">{{data?.course?.name.slice(0,
+                                    50)}}<a *ngIf="data?.course?.name.length>60"> ... </a>
+                                    <div *ngIf="data?.course?.name.length<40"><br></div>
+                                </a>
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-9 col-lg-9 col-xs-9">
+                                        <ul class="product-list__star-list">
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
+                                        </ul>
+                                    </div>
+                                    <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough">
+                                        ${{data?.course?.actual_price}}</div>
+                                </div>
+                                <div class="row"> <a routerLink="/user-profile/{{data?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name"
+                                        class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{data?.course?.user_id.first_name}}{{data?.course?.user_id.last_name}}</a>
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{data?.course?.discounted_price}}</div>
+                                </div>
+                            </div>
+                            <div class="product-list__item-info"> <a class="material-icons wishlist" title="Add to wishlist"
+                                    (click)="onclick(i, data?.course?.id)">favorite_border</a> <a class="wishlist material-icons"
+                                    title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a>
+                                <a routerLink="/checkout" type="button" class="btn btn1 product-list__content">Buy Now</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row grid">
+                    <app-courses-on-bid> </app-courses-on-bid>
+                    <div class="clearfix"></div>
+                    <app-trending-now-courses></app-trending-now-courses>
+                    <div class="clearfix"></div>
+                    <app-top-rated-courses></app-top-rated-courses>
+                    <div class="clearfix"></div>
+                    <!-- <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
+                        <app-watched-courses></app-watched-courses>
+                    </div> -->
+                    <!-- <div class="clearfix"></div> -->
+                </div>
+                <div class="clearfix"></div>
+                <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
+                    <app-recently-viewed-courses></app-recently-viewed-courses>
+                </div>
+                <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
+                        <app-recommended-courses></app-recommended-courses>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+</div>
