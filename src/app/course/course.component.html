@@ -20,117 +20,167 @@
                                 class="fa fa-filter" aria-hidden="true"></i> <a routerLink="/FilterSearch"> <span>Filter
                                     Courses</span></a> </span> </header>
                 </div>
-                <div *ngIf="loaded3">
-                    <ul class="product-list">
-                        <li class="product-list__item" *ngFor="let data of Cat_Courses?.courses; let i=index;"> <a
-                                routerLink="/courses/single/{{data?.course?.id}}">
-                                <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
-                                        src="{{StaticImageUrl}}{{data?.course?.course_image}}" alt="" class="img-responsive">
-                                    <figcaption>
-                                        <p>Includes:</p>
-                                        <p><i class="fa fa-file-video-o"></i> 27.5 hours on-demand video</p>
-                                        <p><i class="fa fa-book"></i> 7 Articles</p>
-                                        <p><i class="fa fa-universal-access"></i> Full lifetime access</p>
-                                        <p><i class="fa fa-bolt"></i> Assignments</p>
-                                        <p><i class="fa fa-certificate"></i> Certificate of Completion</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                            <div class="product-list__content"> <a class="product-list__category" routerLink="/courses/single/{{data?.course?.id}}">{{data?.course?.name.slice(0,
-                                    50)}}</a>
-                                <div class="row">
-                                    <div class="col-md-9 col-sm-9 col-lg-9 col-xs-9">
-                                        <ul class="product-list__star-list">
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                        </ul>
-                                    </div>
-                                    <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough">
-                                        ${{data?.course?.actual_price}}</div>
-                                </div>
-                                <div class="row"> <a routerLink="/user-profile/{{data?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name"
-                                        class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{data?.course?.user_id.first_name}}{{data?.course?.user_id.last_name}}</a>
-                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{data?.course?.discounted_price}}</div>
-                                </div>
-                            </div>
-                            <div class="product-list__item-info"> <a class="material-icons wishlist" title="Add to wishlist"
-                                    (click)="onclick(i, data?.course?.id)">favorite_border</a> <a class="wishlist material-icons"
-                                    title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a>
-                                <a routerLink="/checkout" type="button" class="btn btn1 product-list__content">Buy Now</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div *ngIf="loaded5">
-                    <ul class="product-list">
-                        <li class="product-list__item" *ngFor="let data of SubCat_Courses?.courses; let i=index;"> <a
-                                routerLink="/courses/single/{{data?.course?.id}}">
-                                <figure class="imghvr-hinge-up product-list__img"> <img *ngIf="data?.course?.course_image"
-                                        src="{{StaticImageUrl}}{{data?.course?.course_image}}" alt="" class="img-responsive"
-                                        onError="this.src='../../assets/img/default_thumbnail.png'">
-                                    <figcaption>
-                                        <p>Includes:</p>
-                                        <p><i class="fa fa-file-video-o"></i> 27.5 hours on-demand video</p>
-                                        <p><i class="fa fa-book"></i> 7 Articles</p>
-                                        <p><i class="fa fa-universal-access"></i> Full lifetime access</p>
-                                        <p><i class="fa fa-bolt"></i> Assignments</p>
-                                        <p><i class="fa fa-certificate"></i> Certificate of Completion</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                            <div class="product-list__content"> <a class="product-list__category" routerLink="/courses/single/{{data?.course?.id}}">{{data?.course?.name.slice(0,
-                                    50)}}<a *ngIf="data?.course?.name.length>60"> ... </a>
-                                    <div *ngIf="data?.course?.name.length<40"><br></div>
-                                </a>
-                                <div class="row">
-                                    <div class="col-md-9 col-sm-9 col-lg-9 col-xs-9">
-                                        <ul class="product-list__star-list">
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                            <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i> </a> </li>
-                                        </ul>
-                                    </div>
-                                    <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-3 linethrough">
-                                        ${{data?.course?.actual_price}}</div>
-                                </div>
-                                <div class="row"> <a routerLink="/user-profile/{{data?.user_id?.id}}" *ngIf="data?.course?.user_id.first_name && data?.course?.user_id.last_name"
-                                        class="col-md-9 col-sm-9 col-lg-9 col-xs-9 product-list__category">{{data?.course?.user_id.first_name}}{{data?.course?.user_id.last_name}}</a>
-                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 hoverfont ">${{data?.course?.discounted_price}}</div>
-                                </div>
-                            </div>
-                            <div class="product-list__item-info"> <a class="material-icons wishlist" title="Add to wishlist"
-                                    (click)="onclick(i, data?.course?.id)">favorite_border</a> <a class="wishlist material-icons"
-                                    title="Add to Cart" (click)="openDialog2(i, data?.course?.id)">add_shopping_cart</a>
-                                <a routerLink="/checkout" type="button" class="btn btn1 product-list__content">Buy Now</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+               
                 <div class="clearfix"></div>
                 <div class="row grid">
-                    <app-courses-on-bid> </app-courses-on-bid>
+                        <div class="container">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                               
+                                                        <div class="panel-title">
+                                                          <a>
+                                                            <h5 class="color-red"> Level
+                                                            </h5>
+                                                          </a>
+                                                        </div>
+                                            
+                                                        <div class="checkbox">
+                                                          <label class="checkbox-font">
+                                                            <input type="checkbox" name="ALL" [(ngModel)]=ALL value="ALL" (change)="checked1($event,i)">All Level
+                                                          </label>
+                                            
+                                                        </div>
+                                                        <!-- end ngRepeat: term in filters.terms -->
+                                                        <div class="checkbox">
+                                                          <label class="checkbox-font">
+                                                            <input type="checkbox" name="B" [(ngModel)]=B value="B" (change)="checked2($event,i)">Biginners
+                                                          </label>
+                                            
+                                                        </div>
+                                                        <div class="checkbox">
+                                                          <label class="checkbox-font">
+                                                            <input type="checkbox" name="I" [(ngModel)]=I value="I" (change)="checked3($event,i)">Intermediate
+                                                          </label>
+                                            
+                                                        </div>
+                                                        <!-- end ngRepeat: term in filters.terms -->
+                                                        <div class="checkbox">
+                                                          <label class="checkbox-font">
+                                                            <input type="checkbox" name="A" [(ngModel)]=A value="A" (change)="checked4($event,i)">Advance
+                                                          </label>
+                                            
+                                                        </div>
+                                                      
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                            <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="$ Starting Price"
+                                                    [(ngModel)]="model.startprice" (focusout)="selectrange1(model.startprice)">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                            <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="$ Ending Price"
+                                                    [(ngModel)]="model.endprice" (focusout)="selectrange2(model.endprice)">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                            <mat-form-field class="example-full-width mat-size">
+                                                <mat-select placeholder="Select Category" [(ngModel)]="model.category" name="category"
+                                                    #category="ngModel">
+                                                    <mat-option *ngFor="let cat of Categories" [value]="cat.id" (click)="selected(cat.id)">{{cat.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                            <mat-form-field class="example-full-width mat-size">
+                                                <mat-select placeholder="Sub Category" [(ngModel)]="model.sub_category" name="sub_category"
+                                                    #sub_category="ngModel">
+                                                    <mat-option *ngFor=" let caty of SubCategories" value="{{caty.id}}" (click)="selectedSub(caty.id)">{{caty.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-box-01 padding-top-10">
+                                    <div class="container-fluid1">
+                                        <div class="row">
+                                            <div class="col-lg-12 text-center">
+                                                <h3 class="page-title-01 img-bg img-bg-5 color-white">Filter Courses</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-box-01 padding-bottom-10">
+                                    <div class="container-fluid1">
+                                        <div class="row">
+                                            <div class="col-lg-12 bidSlider">
+                                                <ul class="product-list slick-bids ">
+                                                    <li class="product-list__item" *ngFor="let bid_data of result; let i=index">
+                                                        <a routerLink="/courses/single/{{bid_data?.id}}">
+                                                            <figure class="imghvr-zoom-out-down product-list__img"> <img *ngIf="bid_data?.course_image"
+                                                                    src="{{ImageUrl}}{{bid_data?.course_image}}" alt="" class="img-responsive"
+                                                                    onError="this.src='../../assets/img/default_thumbnail.png'">
+                                                                <figcaption>
+                                                                    <p>Includes:</p>
+                                                                    <p><i class="fa fa-file-video-o"></i> &nbsp; 27.5 hours on-demand
+                                                                        video</p>
+                                                                    <p><i class="fa fa-book"></i> &nbsp; 7 Articles</p>
+                                                                    <p><i class="fa fa-universal-access"></i> &nbsp; Full lifetime
+                                                                        access</p>
+                                                                    <p><i class="fa fa-bolt"></i> &nbsp;&nbsp; Assignments</p>
+                                                                    <p><i class="fa fa-certificate"></i> &nbsp; Certificate of
+                                                                        Completion</p>
+                                                                </figcaption>
+                                                            </figure>
+                                                        </a>
+                                                        <div class="product-list__content"> <a class="product-list__category"
+                                                                routerLink="/courses/single/{{bid_data?.id}}">{{bid_data?.name.slice(0,
+                                                                50)}}<a *ngIf="bid_data?.name.length>60"> ... </a>
+                                                                <div *ngIf="bid_data?.name.length<40"> <br></div>
+                                                            </a>
+                                                            <div class="row">
+                                                                <div class="col-md-9 col-sm-7 col-lg-9 col-xs-7">
+                                                                    <ul class="product-list__star-list">
+                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            </a> </li>
+                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            </a> </li>
+                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            </a> </li>
+                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            </a> </li>
+                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            </a> </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class=" col-md-3 col-sm-5 col-lg-3 col-xs-5 linethrough" *ngIf="bid_data?.discounted_price>0">
+                                                                    ${{bid_data?.actual_price}}</div>
+                                                                <div class=" col-md-3 col-sm-5 col-lg-3 col-xs-5 linethrough" *ngIf="bid_data?.discounted_price<=0">
+                                                                    Free </div>
+                                                            </div>
+                                                            <div class="row"> <a routerLink="/user-profile/{{bid_data?.user_id?.id}}"
+                                                                    *ngIf="bid_data?.user_id.first_name && bid_data?.user_id.last_name"
+                                                                    class="col-md-9 col-sm-7 col-lg-9 col-xs-7 product-list__category">{{bid_data?.user_id.first_name}}{{bid_data?.user_id.last_name}}</a>
+                                                                <div *ngIf="bid_data?.discounted_price>0" class="col-md-3 col-sm-5 col-lg-3 col-xs-5 ">${{bid_data?.discounted_price}}</div>
+                                                                <div *ngIf="bid_data?.discounted_price<=0" class="col-md-3 col-sm-5 col-lg-3 col-xs-5 ">Free</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 text-center"> <a [routerLink]="['/courses']" class="btn-01">See more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    <!-- <app-courses-on-bid> </app-courses-on-bid>
                     <div class="clearfix"></div>
                     <app-trending-now-courses></app-trending-now-courses>
                     <div class="clearfix"></div>
                     <app-top-rated-courses></app-top-rated-courses>
-                    <div class="clearfix"></div>
-                    <!-- <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
-                        <app-watched-courses></app-watched-courses>
-                    </div> -->
-                    <!-- <div class="clearfix"></div> -->
+                    <div class="clearfix"></div> -->
                 </div>
-                <div class="clearfix"></div>
+                <!-- <div class="clearfix"></div>
                 <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
                     <app-recently-viewed-courses></app-recently-viewed-courses>
                 </div>
                 <div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1">
                         <app-recommended-courses></app-recommended-courses>
-                </div>
+                </div> -->
                 
             </div>
         </div>

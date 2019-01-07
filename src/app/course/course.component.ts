@@ -200,12 +200,20 @@ export class CourseComponent implements OnInit {
         this.Categories = data;
       });
   }
-
+  courses() {
+    this.obj.getcourses(1).subscribe(data => {
+      this.result = data.courses;
+      console.log(this.result);
+      // this.loaded = true;
+      // console.log(this.result['Results'].course[0]);
+    });
+  }
   pageno(page) {
     this.page = page;
   }
   public SlideConfig;
   ngOnInit() {
+    this. courses();
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
       this.loaded = true;

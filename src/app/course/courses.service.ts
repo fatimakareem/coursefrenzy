@@ -319,7 +319,9 @@ else{
   get_wishlist_courses(page) {
     return this._http2.get(Config.api + 'courses/wishlist/', {headers: this.headers.getHeaders()}).map((response: Response) => response.json());
   }
-
+  getcourses(page) {
+    return this._http2.get('http://192.168.30.187:8000/courses/latestcourses/'+'?page=' +page, {headers: this.headers.getHeaders()}).map((response: Response) => response.json());
+  }
   // All Filters APIs Calling
   filterd(coursename, range1, range2, category, subcat) {
     return this._http2.post( Config.api + 'courses/NewFilter/',
