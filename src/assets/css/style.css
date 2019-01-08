@@ -6489,7 +6489,7 @@ app-admin-panel {
 }
 
 .filter-holder {
-    padding: 0
+    padding: 10px 0;
 }
 
 .filter-holder .txt {
@@ -8951,11 +8951,33 @@ figcaption p i {
 .courseSpace h3 {
     margin: 7px 0 0!important
 }
-
+.about-module{
+    padding: 0;
+}
 .about-module h4 {
     margin: 0
 }
-
+.about-module-right{
+    text-align: right;
+}
+.about-module-right h2{
+    font-size: 18px;
+    font-weight: bold;
+}
+.about-module-right .rating-stars i{
+    color: #F4C150;
+}
+.radio-box{
+    background: #f2f2f2;
+    border-radius: 10px;
+    margin: 0px auto;
+}
+.radio-box .radio{
+    margin-top: 0px 0 3px;
+}
+.radio-box .radio input{
+    width: auto;
+}
 .mat-cell {
     font-weight: 400
 }
