@@ -21,6 +21,7 @@ import {TrendingNowCoursesModule} from "../courses-all/trending-now-courses/tren
 import {WatchedCoursesComponent} from "../watched-courses/watched-courses.component";
 import {WatchedCoursesModule} from "../watched-courses/watched-courses.module";
 import { SlickModule } from 'ngx-slick';
+import {RatingModule} from "ng2-rating";
 
 const coursesRoutes: Routes = [
   { path: '', component: CourseComponent },
@@ -35,7 +36,7 @@ const coursesRoutes: Routes = [
   ],
 
   imports: [
-    CommonModule,
+    CommonModule,RatingModule,
     BiddingDialogModule,
     AddCartDialogModule,
     MatDialogModule,
