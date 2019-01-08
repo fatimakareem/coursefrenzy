@@ -8972,16 +8972,28 @@ figcaption p i {
     border-radius: 10px;
     margin: 0px auto;
 }
+.radio-box h4{
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 -18px;
+    color: #000;
+}
 .radio-box .radio{
     margin-top: 0px 0 3px;
+    margin-left: 10px;
 }
 .radio-box .radio input{
     width: auto;
 }
+.found-lable{
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 94px;
+}
 .mat-cell {
     font-weight: 400
 }
-
 .mat-header-row,
 .mat-row {
     padding: 0 10px
