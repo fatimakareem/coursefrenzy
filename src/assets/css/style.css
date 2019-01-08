@@ -4919,8 +4919,9 @@ form:after {
 }
 
 .footer-box-02 {
-    border-top: 1px solid #32424d;
-    padding: 17px 0
+    /* border-top: 1px solid #32424d; */
+    padding: 22px 0;
+    background: #1d1d1d;
 }
 
 .footer-logo {
@@ -5002,7 +5003,8 @@ form:after {
 
 .copy-info {
     line-height: 21px;
-    margin: 0
+    margin: 0;
+    font-weight: 500;
 }
 
 .footer-info {
@@ -5011,8 +5013,9 @@ form:after {
 
 .footer-info a {
     line-height: 16px;
-    text-transform: uppercase;
-    opacity: .5
+    text-transform: capitalize;
+    /* opacity: .5; */
+    font-weight: 500;
 }
 
 .footer-info a:hover {
