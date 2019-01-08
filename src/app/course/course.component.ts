@@ -201,19 +201,118 @@ export class CourseComponent implements OnInit {
       });
   }
   courses() {
-    this.obj.getcourses(1).subscribe(data => {
-      this.result = data.courses;
-      console.log(this.result);
-      // this.loaded = true;
-      // console.log(this.result['Results'].course[0]);
-    });
+    if(this.level || this.price || this.rate){
+      this.obj.search(this.level,this.price,this.rate).subscribe(data => {
+        this.result = data.courses;
+        this.total=data.totalItems
+        console.log(this.result);
+        
+      });
+    
   }
+  }
+ 
   pageno(page) {
     this.page = page;
   }
+  total;
+ level="ALL";
+ price="ALL";
+ rate="ALL";
+  checked1(event, i) {
+    if (event.target.checked == true) {
+        console.log(event.target.checked)
+        this.level = "ALL";
+       this.courses()
+    }
+   
+}
+checked2(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.level = "B";
+     this.courses()
+  }
+ 
+}
+checked3(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.level = "I";
+     this.courses()
+  }
+ 
+}
+checked4(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.level = "A";
+     this.courses()
+  }
+ 
+}
+checked9(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.rate = "ALL";
+     this.courses()
+  }
+ 
+}
+checked8(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.rate = "1.0-2.0";
+     this.courses()
+  }
+ 
+}
+checked7(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.rate = "2.0-3.0";
+     this.courses()
+  }
+}
+checked6(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.rate = "3.0-4.0";
+     this.courses()
+  }
+}
+checked5(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.rate = "4.0-5.0";
+     this.courses()
+  }
+}
+checked10(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.price = "ALL";
+     this.courses()
+  }
+}
+checked11(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.price = "PAID";
+     this.courses()
+  }
+}
+checked12(event, i) {
+  if (event.target.checked == true) {
+      console.log(event.target.checked)
+      this.price = "FREE";
+     this.courses()
+  }
+}
+
   public SlideConfig;
   ngOnInit() {
-    this. courses();
+    this.courses();
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
       this.loaded = true;
