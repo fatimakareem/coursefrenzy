@@ -322,6 +322,33 @@ else{
   getcourses(page) {
     return this._http2.get('http://192.168.30.187:8000/courses/latestcourses/'+'?page=' +page, {headers: this.headers.getHeaders()}).map((response: Response) => response.json());
   }
+  search(level,price,rate) {
+    return this._http2.post('http://192.168.30.187:8000/courses/filterTest/',
+      {
+        "level":level,
+        "price":price,
+        "rate":rate
+      }).map((res: Response) => {
+      if (res) {
+        if (res.status === 201 || res.status === 200) {
+          return res.json();
+        } else if (res.status === 5300) {
+          return [{status: res.status, json: res}];
+        } else {
+        }
+      }
+    }).catch((error: any) => {
+      if (error.status === 404) {
+        return Observable.throw(new Error(error.status));
+      } else if (error.status === 400) {
+        return Observable.throw(new Error(error.status));
+      } else if (error.status === 202) {
+        return Observable.throw(new Error(error.status));
+      } else {
+        return Observable.throw(new Error(error.status));
+      }
+    });
+  }
   // All Filters APIs Calling
   filterd(coursename, range1, range2, category, subcat) {
     return this._http2.post( Config.api + 'courses/NewFilter/',

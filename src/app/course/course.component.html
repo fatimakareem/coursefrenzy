@@ -35,29 +35,29 @@
                                                           </a>
                                                         </div>
                                             
-                                                        <div class="checkbox">
+                                                        <div class="radio">
                                                           <label class="checkbox-font">
-                                                            <input type="checkbox" name="ALL" [(ngModel)]=ALL value="ALL" (change)="checked1($event,i)">All Level
+                                                            <input type="radio" name="level" checked=true (change)="checked1($event,i)">All Level
                                                           </label>
                                             
                                                         </div>
                                                         <!-- end ngRepeat: term in filters.terms -->
-                                                        <div class="checkbox">
+                                                        <div class="radio">
                                                           <label class="checkbox-font">
-                                                            <input type="checkbox" name="B" [(ngModel)]=B value="B" (change)="checked2($event,i)">Biginners
+                                                            <input type="radio" name="level" (change)="checked2($event,i)">Biginners
                                                           </label>
                                             
                                                         </div>
-                                                        <div class="checkbox">
+                                                        <div class="radio">
                                                           <label class="checkbox-font">
-                                                            <input type="checkbox" name="I" [(ngModel)]=I value="I" (change)="checked3($event,i)">Intermediate
+                                                            <input type="radio" name="level" (change)="checked3($event,i)">Intermediate
                                                           </label>
                                             
                                                         </div>
                                                         <!-- end ngRepeat: term in filters.terms -->
-                                                        <div class="checkbox">
+                                                        <div class="radio">
                                                           <label class="checkbox-font">
-                                                            <input type="checkbox" name="A" [(ngModel)]=A value="A" (change)="checked4($event,i)">Advance
+                                                            <input type="radio" name="level" (change)="checked4($event,i)">Advance
                                                           </label>
                                             
                                                         </div>
@@ -70,56 +70,70 @@
                                                           </h5>
                                                         </a>
                                                       </div>
-                                          
-                                                      <div class="checkbox">
+                                                      <div class="radio">
+                                                            <label class="checkbox-font">
+                                                              <input type="radio" name="rate" checked=true (change)="checked9($event,i)">All
+                                                            </label>
+                                              
+                                                          </div>
+                                                      <div class="radio">
                                                         <label class="checkbox-font">
-                                                          <input type="checkbox" name="rate1" [(ngModel)]=rate1 value="4.0 - 5.0" (change)="checked1($event,i)">4.0 - 5.0
+                                                          <input type="radio" name="rate" (change)="checked5($event,i)">4.0 & up 5.0
                                                         </label>
                                           
                                                       </div>
                                                       <!-- end ngRepeat: term in filters.terms -->
-                                                      <div class="checkbox">
+                                                      <div class="radio">
                                                         <label class="checkbox-font">
-                                                          <input type="checkbox" name="B" [(ngModel)]=B value="B" (change)="checked2($event,i)">3.0 - 4.0
+                                                          <input type="radio" name="rate" (change)="checked6($event,i)">3.0 & up 4.0
                                                         </label>
                                           
                                                       </div>
-                                                      <div class="checkbox">
+                                                      <div class="radio">
                                                         <label class="checkbox-font">
-                                                          <input type="checkbox" name="I" [(ngModel)]=I value="I" (change)="checked3($event,i)">Intermediate
+                                                          <input type="radio" name="rate" (change)="checked7($event,i)">2.0 & up 3.0
                                                         </label>
                                           
                                                       </div>
                                                       <!-- end ngRepeat: term in filters.terms -->
-                                                      <div class="checkbox">
+                                                      <div class="radio">
                                                         <label class="checkbox-font">
-                                                          <input type="checkbox" name="A" [(ngModel)]=A value="A" (change)="checked4($event,i)">Advance
+                                                          <input type="radio" name="rate" (change)="checked8($event,i)">1.0 & up 2.0
                                                         </label>
                                           
                                                       </div>
+                                                     
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                            <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="$ Ending Price"
-                                                    [(ngModel)]="model.endprice" (focusout)="selectrange2(model.endprice)">
-                                            </mat-form-field>
+                                                <div class="panel-title">
+                                                        <a>
+                                                          <h5 class="color-red"> Price
+                                                          </h5>
+                                                        </a>
+                                                      </div>
+                                                      <div class="radio">
+                                                            <label class="checkbox-font">
+                                                              <input type="radio" name="price" checked=true (change)="checked10($event,i)">All
+                                                            </label>
+                                              
+                                                          </div>
+                                                      <div class="radio">
+                                                        <label class="checkbox-font">
+                                                          <input type="radio" name="price" (change)="checked11($event,i)">Paid
+                                                        </label>
+                                          
+                                                      </div>
+                                                      <div class="radio">
+                                                            <label class="checkbox-font">
+                                                              <input type="radio" name="price" (change)="checked12($event,i)">Free
+                                                            </label>
+                                              
+                                                          </div>
+                                                          
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                            <mat-form-field class="example-full-width mat-size">
-                                                <mat-select placeholder="Select Category" [(ngModel)]="model.category" name="category"
-                                                    #category="ngModel">
-                                                    <mat-option *ngFor="let cat of Categories" [value]="cat.id" (click)="selected(cat.id)">{{cat.name}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                            <mat-form-field class="example-full-width mat-size">
-                                                <mat-select placeholder="Sub Category" [(ngModel)]="model.sub_category" name="sub_category"
-                                                    #sub_category="ngModel">
-                                                    <mat-option *ngFor=" let caty of SubCategories" value="{{caty.id}}" (click)="selectedSub(caty.id)">{{caty.name}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"> </div>
+                                       
+                                       
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -133,69 +147,79 @@
                                     </div>
                                 </div>
                                 <div class="content-box-01 padding-bottom-10">
-                                    <div class="container-fluid1">
-                                        <div class="row">
-                                            <div class="col-lg-12 bidSlider">
-                                                <ul class="product-list slick-bids ">
-                                                    <li class="product-list__item" *ngFor="let bid_data of result; let i=index">
-                                                        <a routerLink="/courses/single/{{bid_data?.id}}">
-                                                            <figure class="imghvr-zoom-out-down product-list__img"> <img *ngIf="bid_data?.course_image"
-                                                                    src="{{ImageUrl}}{{bid_data?.course_image}}" alt="" class="img-responsive"
-                                                                    onError="this.src='../../assets/img/default_thumbnail.png'">
-                                                                <figcaption>
-                                                                    <p>Includes:</p>
-                                                                    <p><i class="fa fa-file-video-o"></i> &nbsp; 27.5 hours on-demand
-                                                                        video</p>
-                                                                    <p><i class="fa fa-book"></i> &nbsp; 7 Articles</p>
-                                                                    <p><i class="fa fa-universal-access"></i> &nbsp; Full lifetime
-                                                                        access</p>
-                                                                    <p><i class="fa fa-bolt"></i> &nbsp;&nbsp; Assignments</p>
-                                                                    <p><i class="fa fa-certificate"></i> &nbsp; Certificate of
-                                                                        Completion</p>
-                                                                </figcaption>
-                                                            </figure>
-                                                        </a>
-                                                        <div class="product-list__content"> <a class="product-list__category"
-                                                                routerLink="/courses/single/{{bid_data?.id}}">{{bid_data?.name.slice(0,
-                                                                50)}}<a *ngIf="bid_data?.name.length>60"> ... </a>
-                                                                <div *ngIf="bid_data?.name.length<40"> <br></div>
-                                                            </a>
-                                                            <div class="row">
-                                                                <div class="col-md-9 col-sm-7 col-lg-9 col-xs-7">
-                                                                    <ul class="product-list__star-list">
-                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                                                            </a> </li>
-                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                                                            </a> </li>
-                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                                                            </a> </li>
-                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                                                            </a> </li>
-                                                                        <li> <a href=""> <i class="fa fa-star" aria-hidden="true"></i>
-                                                                            </a> </li>
-                                                                    </ul>
+                                        <div class="container">
+                                                <div class="padding-top-10 padding-bottom-10" *ngIf="total==0"> You did
+                                                    not post any course </div>
+                                                <div class="padding-top-10 padding-bottom-10" *ngFor="let list of result; let i=index;">
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-sm-12">
+                                                            <div class="popular-courses">
+                                                                <div class="post-media entry">
+                                                                    <div class="ribbon-wrapper-green">
+                                                                        <div class="ribbon-green">Featured</div>
+                                                                    </div>
+                                                                    <div class="img-holder"> <a routerLink="/courses/single/{{list?.id}}">
+                                                                            <img *ngIf="list?.course_image" src="{{StaticImageUrl}}{{list?.course_image}}"
+                                                                                alt="" class="img-responsive imgheight"> </a> </div>
                                                                 </div>
-                                                                <div class=" col-md-3 col-sm-5 col-lg-3 col-xs-5 linethrough" *ngIf="bid_data?.discounted_price>0">
-                                                                    ${{bid_data?.actual_price}}</div>
-                                                                <div class=" col-md-3 col-sm-5 col-lg-3 col-xs-5 linethrough" *ngIf="bid_data?.discounted_price<=0">
-                                                                    Free </div>
-                                                            </div>
-                                                            <div class="row"> <a routerLink="/user-profile/{{bid_data?.user_id?.id}}"
-                                                                    *ngIf="bid_data?.user_id.first_name && bid_data?.user_id.last_name"
-                                                                    class="col-md-9 col-sm-7 col-lg-9 col-xs-7 product-list__category">{{bid_data?.user_id.first_name}}{{bid_data?.user_id.last_name}}</a>
-                                                                <div *ngIf="bid_data?.discounted_price>0" class="col-md-3 col-sm-5 col-lg-3 col-xs-5 ">${{bid_data?.discounted_price}}</div>
-                                                                <div *ngIf="bid_data?.discounted_price<=0" class="col-md-3 col-sm-5 col-lg-3 col-xs-5 ">Free</div>
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
+                                                        <div class="col-md-9 col-sm-12">
+                                                            <div class="about-module">
+                                                                <div class="width-full float-left">
+                                                                    <div class="float-left"> <span *ngIf="list?.skill==='B'" class="label label-success">IDEAL
+                                                                            FOR BEGINNERS</span> <span *ngIf="list?.skill==='I'" class="label label-success">IDEAL
+                                                                            FOR MEDIOCRES</span> <span *ngIf="list?.skill==='A'" class="label label-success">IDEAL
+                                                                            FOR EXPERTS</span> <span *ngIf="list?.status===true" class="label label-success">Approved
+                                                                        </span> <span *ngIf="list?.status===false" class="label label-danger">Rejected
+                                                                        </span> <span *ngIf="list?.status===null" class="label label-warning">Pending</span>
+                                                                    </div>
+                                                                  
+                                                                </div>
+                                                                <div class="width-full float-left"> <a routerLink="/courses/single/{{list?.id}}">
+                                                                        <h3>{{list?.name}}</h3>
+                                                                    </a> </div>
+                                                                <p class="width-full float-left">{{list?.overview}}</p>
+                                                                <div class="large-post-meta float-left width-full"> <span class="avatar"><a
+                                                                            routerLink="/user-profile/{{list?.user_id?.id}}"><img src="../../assets/upload/avatar_01.png"
+                                                                                class="img-circle">{{list?.user_id?.username}}</a></span>
+                                                                    <small>&#124;</small> <span><a><i class="fa fa-clock-o"></i> 5 hours</a></span>
+                                                                    <span><a><i class="fa fa-clock-o"></i>{{list?.postDate | date}}</a></span>
+                                                                    <small class="hidden-xs">&#124;</small> <span class="hidden-xs"><a><i class="fa fa-dollar"></i>{{list?.actual_price}}</a></span>
+                                                                    <small class="hidden-xs">&#124;</small> <span class="hidden-xs"><a
+                                                                            [routerLink]="['/courses/single']"><i class="fa fa-users"></i> 75
+                                                                            Lectures</a></span> <span *ngIf="list?.skill==='A'" class="hidden-xs"><a><i
+                                                                                class="fa fa-users"></i> Advanced Level</a></span> <span *ngIf="list?.skill==='B'"
+                                                                        class="hidden-xs"><a><i class="fa fa-users"></i> Begineer Level</a></span>
+                                                                    <span *ngIf="list?.skill==='I'" class="hidden-xs"><a><i class="fa fa-users"></i>
+                                                                            Intermediate Level</a></span> <span class="hidden-xs"><a><i class="fa fa-users"></i>
+                                                                            English</a></span> </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="invis1">
+                                                </div>
+                                                <!-- <nav class="text-center">
+                                                    <ul class=" pagination pagination-lg">
+                                                        <li class="page-item" [ngClass]="{disabled:pager.currentPage===1}"> <a class="page-link"
+                                                                onclick="topFunction()" (click)="setPage(1)" aria-label="Previous"> First </a>
+                                                        </li>
+                                                        <li class="page-item" [ngClass]="{disabled:pager.currentPage===1}"> <a class="page-link"
+                                                                onclick="topFunction()" (click)="setPage(pager.currentPage - 1)" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
+                                                            </a> </li>
+                                                        <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage===page}"
+                                                            onclick="topFunction()" (click)="setPage(page)"><a class="page-link">{{page}}</a></li>
+                                                        <li class="page-item" [ngClass]="{disabled:pager.currentPage===pager.totalPages}"> <a
+                                                                class="page-link" onclick="topFunction()" (click)="setPage(pager.currentPage + 1)"
+                                                                aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span>
+                                                            </a> </li>
+                                                        <li class="page-item" [ngClass]="{disabled:pager.currentPage===pager.totalPages}"> <a
+                                                                class="page-link" onclick="topFunction()" (click)="setPage(pager.totalPages)"
+                                                                aria-label="Next"> Last </a> </li>
+                                                    </ul>
+                                                </nav> -->
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 text-center"> <a [routerLink]="['/courses']" class="btn-01">See more</a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                     <!-- <app-courses-on-bid> </app-courses-on-bid>
                     <div class="clearfix"></div>
@@ -216,3 +240,21 @@
         </div>
     </main>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
