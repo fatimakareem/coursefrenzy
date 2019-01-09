@@ -6,6 +6,7 @@
                     <h2>{{SingleCourse?.name}}</h2>
                     <p>The Complete{{SingleCourse?.name}}Course for 2016/2017! <br>Gain the knowledge hackers use to
                         compromise systems and use it to protect your own! </p>
+                            
                 </div>
             </div>
         </div>
@@ -197,6 +198,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 <section class="banner-upper" data-diff="100" *ngIf="route_instructor!=instructor_id">
     <div class="container ">
         <div class="row">
@@ -205,6 +210,37 @@
                     <h2>{{SingleCourse?.name}}</h2>
                     <p>The Complete{{SingleCourse?.name}}Course for 2016/2017! <br>Gain the knowledge hackers use to
                         compromise systems and use it to protect your own! </p>
+
+
+                        <div class="">
+                            <div class="clp-lead__element-item">
+                                <div class="clp-component-render">
+                                    <span class="badge badge-accented yellow" data-purpose="badge">
+                                        Bestseller
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="single-rating-box">
+                                    <div class="rating-box">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i> 
+                                    </div>
+                                    1.0 & up 2.0
+                                </label>
+                            <div class="text-style">
+                                    164,860 students enrolled
+                                    <span class="" data-purpose="instructor-name-top">
+                                        Created by       
+                                        <a href="/learn-ethical-hacking-from-scratch/#instructor-1" target="_self" class="instructor-links__link" rel=" noopener noreferrer">
+                                            Zaid Sabih</a>,
+                                        <a href="/learn-ethical-hacking-from-scratch/#instructor-2" target="_self" class="instructor-links__link" rel=" noopener noreferrer">
+                                            z Security</a>  
+                                    </span>  
+                            </div> 
+                        </div>
                 </div>
             </div>
             <div id="sidebar" class="col-md-4 col-sm-4 single-course-sidebar rltv">
@@ -230,9 +266,12 @@
                     </div>
                     <div class="custom-widget course-pricing clearfix">
                         <div class="customwidget text-left w40">
-                            <h3 class=" text-center linethrough">${{SingleCourse?.actual_price}}.00</h3>
-                            <h3 class="widget-title text-center">${{SingleCourse?.discounted_price}}.00</h3>
-                            <h4 class="text-center">30-Day Money-Back Guarantee</h4>
+                            <div class="price-box">
+                                <h3 class="new-price">${{SingleCourse?.discounted_price}}.00</h3>
+                                <h3 class="old-price">${{SingleCourse?.actual_price}}.00</h3><br>
+                                
+                            </div>
+                            <h4 class="price-deial">30-Day Money-Back Guarantee</h4>
                             <div class="sidebar-btn" *ngIf="my_vedio==false"> <button *ngIf="route_instructor<1"
                                     routerLink="/checkout" (click)="noPromo()" style="margin: 0" class="button"> Buy
                                     Now </button>
@@ -242,12 +281,12 @@
                             <div class="sidebar-btn single-course-wishlist " *ngIf="my_vedio==false"> <a class="material-icons wishlist"
                                     title="Add to wishlist" (click)="onclick(SingleCourse.id)">favorite_border</a> <a
                                     class="wishlist material-icons" title="Add to Cart" (click)="openDialogAddToCart(SingleCourse?.id)">add_shopping_cart</a>
-                            </div><br *ngIf="my_vedio==false" />
-                            <h3><strong>Includes:</strong></h3>
-                            <p class="dt-fix"><i class="fa fa-file-video-o"></i> &nbsp;{{minuts}}hours on-demand video</p>
-                            <p class="dt-fix"><i class="fa fa-universal-access"></i> &nbsp; Full lifetime access</p>
-                            <p class="dt-fix"><i class="fa fa-bolt"></i> &nbsp;&nbsp; Assignments</p>
-                            <p class="dt-fix"><i class="fa fa-certificate"></i> &nbsp; Certificate of Completion</p>
+                            </div>
+                            <span class="inclide">Includes:</span>
+                            <p class="dt-fix"><i class="fa fa-file-video-o"></i> {{minuts}}hours on-demand video</p>
+                            <p class="dt-fix"><i class="fa fa-universal-access"></i>  Full lifetime access</p>
+                            <p class="dt-fix"><i class="fa fa-bolt"></i> Assignments</p>
+                            <p class="dt-fix"><i class="fa fa-certificate"></i> Certificate of Completion</p>
                             <hr>
                             <div class="course-meta clearfix">
                                 <p class="course-category">Category: <a href="course-list.html">{{course_category}}</a></p>

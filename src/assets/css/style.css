@@ -5723,7 +5723,7 @@ body {
 .banner-upper {
     font-size: 30px;
     line-height: 36px;
-    padding: 35px 0;
+    padding: 60px 0;
     color: #fff;
     background: linear-gradient(#29303B, #29303B, #29303B)
 }
@@ -5739,19 +5739,79 @@ body {
     font-weight: 600;
     font-size: 36px;
     color: #fff;
-    line-height: 41px
+    line-height: 41px;
+    font-family: inherit !important;
 }
 
 .banner-upper p {
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 21px;
+    color: #fff;
+    margin: 0;
+}
+.clp-lead__element-item{
+    display: inline-block;
+}
+.badge.badge-accented.yellow {
+    background: #F4C150;
+    color: #29303B;
+}
+.badge.badge-accented {
+    border-radius: 3px;
+    font-size: 9px;
+    padding: 1px 8px 1px 8px;
+    background: #14171C;
+    border: none;
+    color: #FFF;
+    min-width: inherit;
+    display: inline-block;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    top: -3px;
+    z-index: 2;
+    vertical-align: baseline;
+}
+.single-rating-box{
+    font-size: 15px;
+    font-weight: normal;
+}
+.text-style{
+    font-size: 15px;
+    font-weight: normal;
+}
+.text-style a{
+    color: #fff;
+}
+.price-box{
+    display: flex;
+    margin: 10px 0 0;
+}
+.price-box .new-price{
+    color: #505763 !important;
+    font-weight: bold;
+    font-size: 36px;
+}
+.price-box .old-price{
+    color: #A1A7B3 !important;
+    font-size: 18px;
+    text-decoration: line-through;
+}
+.price-deial{
+    color: #c00 !important;
+    margin-top: -20px !important;
+    font-weight: 600 !important;
+}
+.inclide{
     font-size: 20px;
-    color: #fff
+    font-weight: bold;
+    color: #505763 !important;
+    margin-bottom: -10px;
+    display: block;
 }
 
-.banner-upper .img {
-    width: 350px;
-    text-align: center
-}
 
 .banner-upper .img>img {
     width: 140px;
@@ -8968,23 +9028,35 @@ figcaption p i {
     color: #F4C150;
 }
 .radio-box{
-    background: #f2f2f2;
+    background: #f7f8fa;
     border-radius: 10px;
     margin: 0px auto;
 }
 .radio-box h4{
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     margin: 0 0 -18px;
-    color: #000;
+    color: #505763;
 }
 .radio-box .radio{
     margin-top: 0px 0 3px;
     margin-left: 10px;
 }
+.radio-box .radio label{
+    font-size: 13px;
+    color: #505763;
+}
 .radio-box .radio input{
     width: auto;
 }
+.rating-box{
+    display: inline-block;
+}
+.rating-box i{
+    color: #f4c150;
+}
+
+
 .found-lable{
     margin: 0;
     font-size: 18px;
