@@ -12,7 +12,7 @@ import {AuthGuard} from "../auth-guard/auth-guard.service";
 // import {RecaptchaModule} from "ng-recaptcha";
 import {LoaderModule} from "../loader/loader.module";
 // import { BlackgeeksRecaptchaModule } from 'recaptcha-blackgeeks';
-import { RecapchaComponent } from '../recapcha/recapcha.component';
+import { RecapchaModule } from '../recapcha/recapcha.module';
 
 const signupRoutes: Routes = [
   { path: '', component: SignUpComponent }
@@ -20,11 +20,11 @@ const signupRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    SignUpComponent,RecapchaComponent
+    SignUpComponent,
   ],
 
   imports: [
-    FormsModule,
+    FormsModule,RecapchaModule,
     ReactiveFormsModule,
     CommonModule,
     MatIconModule,MatCardModule,
@@ -44,7 +44,9 @@ const signupRoutes: Routes = [
     },
     AuthGuard
   ],
-  exports: []
+  exports: [],entryComponents: [
+    
+  ],
 
 })
 

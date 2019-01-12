@@ -15,7 +15,7 @@ import {MatCheckboxModule} from '@angular/material';
 // import {RecaptchaModule} from "ng-recaptcha";
 import {LoaderModule} from "../loader/loader.module";
 // import { BlackgeeksRecaptchaModule } from 'recaptcha-blackgeeks';
-import { RecapchaComponent } from '../recapcha/recapcha.component';
+import { RecapchaModule } from '../recapcha/recapcha.module';
 
 const loginRoutes: Routes = [
   { path: '', component: LoginComponent }
@@ -24,14 +24,14 @@ const loginRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    LoginComponent,RecapchaComponent,
+    LoginComponent,
     ResetPasswordComponent
   ],
 
 
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule,RecapchaModule,
     ReactiveFormsModule,
     MatIconModule,MatCardModule,
     MatInputModule,
@@ -53,7 +53,7 @@ const loginRoutes: Routes = [
   ],
   exports: [],
   entryComponents: [
-    ResetPasswordComponent,
+    ResetPasswordComponent
   ],
 
 })
