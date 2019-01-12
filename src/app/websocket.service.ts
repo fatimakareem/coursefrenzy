@@ -7,7 +7,12 @@ import {Headers, Http, Response} from '@angular/http';
 import 'rxjs/add/operator/catch';
 import {Config} from "./Config";
 import { isPlatformBrowser } from '@angular/common';
+// import * as Rx from 'rxjs/Rx';
+// import { Injectable } from '@angular/core';
+import * as io from 'socket.io-client';
+// import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs/Rx';
+import { environment } from '../environments/environment';
 @Injectable()
 export class WebsocketService {
   // private inputStream: QueueingSubject<any>;
@@ -19,7 +24,7 @@ export class WebsocketService {
   // private apiUrl: string | any;
   // // public url = Config.api;
   // // objGlobalvariables = new Globalvariables();;
-  constructor(private http: Http, private socketFactory: WebSocketService, @Inject(PLATFORM_ID) private platformId: Object) {}
+  // constructor(private http: Http, private socketFactory: WebSocketService, @Inject(PLATFORM_ID) private platformId: Object) {}
 //     if (isPlatformBrowser(this.platformId)) {
 //       this.authentication = localStorage.getItem('ApiUrlLocal');
 //       this.apiUrl = localStorage.getItem('ApiUrlLocal');
@@ -117,34 +122,68 @@ export class WebsocketService {
 //         Deleted: false
 //       }), {headers: headers}).map((data: Response) => data.json());
 //   }
+/////////////////
+// private subject: Rx.Subject<MessageEvent>;
 
-private subject: Rx.Subject<MessageEvent>;
+//   public connect(url): Rx.Subject<MessageEvent> {
+//     if (!this.subject) {
+//       this.subject = this.create(url);
+//       console.log("Successfully connected: " + url);
+//     } 
+//     return this.subject;
+//   }
 
-  public connect(url): Rx.Subject<MessageEvent> {
-    if (!this.subject) {
-      this.subject = this.create(url);
-      console.log("Successfully connected: " + url);
-    } 
-    return this.subject;
-  }
+//   private create(url): Rx.Subject<MessageEvent> {
+//     let ws = new WebSocket(url);
 
-  private create(url): Rx.Subject<MessageEvent> {
-    let ws = new WebSocket(url);
+//     let observable = Rx.Observable.create(
+// 	(obs: Rx.Observer<MessageEvent>) => {
+// 		ws.onmessage = obs.next.bind(obs);
+// 		ws.onerror = obs.error.bind(obs);
+// 		ws.onclose = obs.complete.bind(obs);
+// 		return ws.close.bind(ws);
+// 	})
+// let observer = {
+// 		next: (data: Object) => {
+// 			if (ws.readyState === WebSocket.OPEN) {
+// 				ws.send(JSON.stringify(data));
+// 			}
+// 		}
+// 	}
+// 	return Rx.Subject.create(observer, observable);
+//   }
+// }
+private socket;
 
-    let observable = Rx.Observable.create(
-	(obs: Rx.Observer<MessageEvent>) => {
-		ws.onmessage = obs.next.bind(obs);
-		ws.onerror = obs.error.bind(obs);
-		ws.onclose = obs.complete.bind(obs);
-		return ws.close.bind(ws);
-	})
-let observer = {
-		next: (data: Object) => {
-			if (ws.readyState === WebSocket.OPEN) {
-				ws.send(JSON.stringify(data));
-			}
-		}
-	}
-	return Rx.Subject.create(observer, observable);
-  }
-}
+  constructor() { }
+
+  connect(): Rx.Subject<MessageEvent> {
+    // If you aren't familiar with environment variables then
+    // you can hard code `environment.ws_url` as `http://localhost:5000`
+    this.socket = io(environment.ws_url);
+
+    // We define our observable which will observe any incoming messages
+    // from our socket.io server.
+    let observable = new Observable(observer => {
+        this.socket.on('message', (data) => {
+          console.log("Received message from Websocket Server")
+          observer.next(data);
+        })
+        return () => {
+          this.socket.disconnect();
+        }
+    });
+    
+    // We define our Observer which will listen to messages
+    // from our other components and send messages back to our
+    // socket server whenever the `next()` method is called.
+    let observer = {
+        next: (data: Object) => {
+            this.socket.emit('message', JSON.stringify(data));
+        },
+    };
+
+    // we return our Rx.Subject which is a combination
+    // of both an observer and observable.
+    return Rx.Subject.create(observer, observable);
+  }}
