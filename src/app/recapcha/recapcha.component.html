@@ -5,8 +5,8 @@
           <mat-icon>cached</mat-icon>
         </button>
     </div>
-    <mat-form-field class="text-center" floatLabel="always">
+    <!-- <mat-form-field class="recapcha-input" floatLabel="always"> -->
         <!-- <mat-label></mat-label> -->
-        <input matInput [(ngModel)]="capchaText" autocomplete="off" maxlength="5" (ngModelChange)="checkChange()" placeholder="Enter above text">
-    </mat-form-field>
+        <input class="recapcha-input" matInput [(ngModel)]="capchaText" autocomplete="off" maxlength="5" (Change)="checkChange()" placeholder="Enter above text">
+    <!-- </mat-form-field> -->
 </mat-card>

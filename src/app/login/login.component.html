@@ -36,8 +36,8 @@
                         Password? </a>
                     <mat-checkbox [(checked)]="model">Stay signed in</mat-checkbox>
                 </div>
-                <div class="form-group text-center margin-0 col-md-6" [ngClass]="{'has-error': f.submitted}">
-                        <app-recapcha></app-recapcha>
+                <div class="form-group margin-0 col-md-12" [ngClass]="{'has-error': f.submitted}">
+                        <app-recapcha class="pull-right recapcha"></app-recapcha>
                     <!-- <blackgeeks-recaptcha (resolved)="resolved($event)"></blackgeeks-recaptcha> -->
                 </div>
                 <div class="footer text-center"> <button type="submit" class="button signup-btn" tabindex=3> Sign in</button>

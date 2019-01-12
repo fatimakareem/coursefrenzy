@@ -58,7 +58,7 @@ export class ChatboxComponent implements OnInit {
       this.Messages = response.messages;
       console.log(this.Messages);
       this.chat_user_load = true;
-      this.obj.messages.next(this.Messages);
+      // this.obj.messages.next(this.Messages);
     });
     });
 
