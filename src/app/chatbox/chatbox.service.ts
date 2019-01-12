@@ -1,51 +1,39 @@
 import 'rxjs/add/operator/map';
-import {Inject, PLATFORM_ID} from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Http , Response} from '@angular/http';
-// import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { Config} from '../Config';
 import {HeadersService} from '../headers.service';
-// import { Subject } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Rx';
 import { WebsocketService } from '../websocket.service';
-import { Injectable } from '@angular/core';
-// import { WebsocketService } from './websocket.service';
-import { Observable, Subject } from 'rxjs/Rx';
-// const CHAT_URL = 'ws://' + '192.168.30.132:7000/'+'websocket.connect/1/5/147';
-// const CHAT = 'ws://' + '192.168.30.132:7000/'+'websocket.disconnect/1/5';
 
-// export interface Message {
-// 	author: string,
-// 	message: string
-// }
+const CHAT_URL = 'ws://' + '192.168.30.132:8000/'+'websocket.connect/1/5/147';
+
+export interface Message {
+	author: string,
+	message: string
+}
 @Injectable()
 
 export class ChatboxService {
-  // public messages: Subject<Message>;
+  public messages: Subject<Message>;
   // public messages: Subject<Message>;
 
   
 	
 	
-  constructor(private http: Http, private _http2: Http, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object,private headers: HeadersService,wsService: WebsocketService) {
-    // 	this.messages = <Subject<Message>>wsService
-    // .connect(CHAT_URL)
-    // .map((response: MessageEvent): Message => {
-    //   let data = JSON.parse(response.data);
-    //   return {
-    //     author: data.author,
-    //     message: data.message
-    //   }
-    // });
-    // this.messages = <Subject<Message>>wsService
-    // .connect(CHAT)
-    // .map((response: MessageEvent): Message => {
-    //   let data = JSON.parse(response.data);
-    //   return {
-    //     author: data.author,
-    //     message: data.message
-    //   }
-    // });
+  constructor(private http: Http, private _http2: Http, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object,private headers: HeadersService,wsService: WebsocketService) {	this.messages = <Subject<Message>>wsService
+    .connect(CHAT_URL)
+    .map((response: MessageEvent): Message => {
+      let data = JSON.parse(response.data);
+      return {
+        author: data.author,
+        message: data.message
+      }
+    });
+   
   }
   searchTeacher(query) {
     return this._http2.post(Config.api + 'webchat/searchuser/',

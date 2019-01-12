@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // ws_url:'ws://' + '192.168.30.132:7000/'+'websocket.connect/1/5/147'
 };
