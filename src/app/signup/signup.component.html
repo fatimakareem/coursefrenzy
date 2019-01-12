@@ -55,8 +55,8 @@
                                 can be 30 characters</strong> </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="form-group text-right margin-r-20" [ngClass]="{'has-error': f.submitted}">
-                        <app-recapcha></app-recapcha>
+                <div class="form-group col-lg-12" [ngClass]="{'has-error': f.submitted}">
+                        <app-recapcha class="pull-right margin-top-20"></app-recapcha>
                     <!-- <blackgeeks-recaptcha class="" (resolved)="resolved($event)"></blackgeeks-recaptcha> -->
                 </div>
                 <div class="footer text-center"> <button type="submit" class="button signup-btn"> Sign up</button>
