@@ -173,7 +173,7 @@
                                     <div class="container-fluid1">
                                         <div class="row">
                                             <div class="col-lg-12 text-center">
-                                                <h3 class="page-title-01 color-black margin-0">Filter Courses</h3>
+                                                <h3 class="page-title-01 color-black margin-0">Filtered Courses</h3>
                                             </div>
                                             <div class="col-lg-12 text-right">
                                                     <h4 class="found-lable">We Found {{total}} Courses</h4>
@@ -192,8 +192,8 @@
                                                                     <div class="ribbon-wrapper-green">
                                                                         <div class="ribbon-green">Featured</div>
                                                                     </div>
-                                                                    <div class="img-holder"> <a routerLink="/courses/single/{{list?.id}}">
-                                                                            <img *ngIf="list?.course_image" src="{{StaticImageUrl}}{{list?.course_image}}"
+                                                                    <div class="img-holder"> <a routerLink="/courses/single/{{list?.course?.id}}">
+                                                                            <img *ngIf="list?.course_image" src="{{StaticImageUrl}}{{list?.course?.course_image}}"
                                                                                 alt="" class="img-responsive imgheight"> </a> </div>
                                                                 </div>
                                                             </div>
@@ -201,40 +201,39 @@
                                                         <div class="col-md-9 col-sm-12">
                                                             <div class="about-module col-lg-9">
                                                                 <div class="width-full float-left">
-                                                                    <div class="float-left"> <span *ngIf="list?.skill==='B'" class="label label-success">IDEAL
-                                                                            FOR BEGINNERS</span> <span *ngIf="list?.skill==='I'" class="label label-success">IDEAL
-                                                                            FOR MEDIOCRES</span> <span *ngIf="list?.skill==='A'" class="label label-success">IDEAL
-                                                                            FOR EXPERTS</span> <span *ngIf="list?.status===true" class="label label-success">Approved
-                                                                        </span> <span *ngIf="list?.status===false" class="label label-danger">Rejected
-                                                                        </span> <span *ngIf="list?.status===null" class="label label-warning">Pending</span>
+                                                                    <div class="float-left"> <span *ngIf="list?.course?.skill==='B'" class="label label-success">IDEAL
+                                                                            FOR BEGINNERS</span> <span *ngIf="list?.course?.skill==='I'" class="label label-success">IDEAL
+                                                                            FOR MEDIOCRES</span> <span *ngIf="list?.course?.skill==='A'" class="label label-success">IDEAL
+                                                                            FOR EXPERTS</span> <span *ngIf="list?.course?.status===true" class="label label-success">Approved
+                                                                        </span> <span *ngIf="list?.course?.status===false" class="label label-danger">Rejected
+                                                                        </span> <span *ngIf="list?.course?.status===null" class="label label-warning">Pending</span>
                                                                     </div>
                                                                   
                                                                 </div>
-                                                                <div class="width-full float-left"> <a routerLink="/courses/single/{{list?.id}}">
-                                                                        <h3>{{list?.name}}</h3>
+                                                                <div class="width-full float-left"> <a routerLink="/courses/single/{{list?.course?.id}}">
+                                                                        <h3>{{list?.course?.name}}</h3>
                                                                     </a> </div>
-                                                                <p class="width-full float-left">{{list?.overview}}</p>
+                                                                <p class="width-full float-left">{{list?.course?.overview}}</p>
                                                                 <div class="large-post-meta float-left width-full"> <span class="avatar"><a
-                                                                            routerLink="/user-profile/{{list?.user_id?.id}}"><img src="../../assets/upload/avatar_01.png"
-                                                                                class="img-circle">{{list?.user_id?.username}}</a></span>
-                                                                    <small>&#124;</small> <span><a><i class="fa fa-clock-o"></i> 5 hours</a></span>
-                                                                    <span><a><i class="fa fa-clock-o"></i>{{list?.postDate | date}}</a></span>
-                                                                    <small class="hidden-xs">&#124;</small> <span class="hidden-xs"><a><i class="fa fa-dollar"></i>{{list?.actual_price}}</a></span>
+                                                                            routerLink="/user-profile/{{list?.course?.user_id?.id}}"><img src="../../assets/upload/avatar_01.png"
+                                                                                class="img-circle">{{list?.course?.user_id?.username}}</a></span>
+                                                                    <small>&#124;</small> <span><a><i class="fa fa-clock-o"></i> {{list?.course?.video_duration}}</a></span>
+                                                                    <span><a><i class="fa fa-clock-o"></i>{{list?.course?.postDate | date}}</a></span>
+                                                                    <small class="hidden-xs">&#124;</small> <span class="hidden-xs"><a><i class="fa fa-dollar"></i>{{list?.course?.actual_price}}</a></span>
                                                                     <small class="hidden-xs">&#124;</small> <span class="hidden-xs"><a
-                                                                            [routerLink]="['/courses/single']"><i class="fa fa-users"></i> 75
-                                                                            Lectures</a></span> <span *ngIf="list?.skill==='A'" class="hidden-xs"><a><i
-                                                                                class="fa fa-users"></i> Advanced Level</a></span> <span *ngIf="list?.skill==='B'"
+                                                                            [routerLink]="['/courses/single']"><i class="fa fa-users"></i> {{list?.course?.lectures}}</a></span> <span *ngIf="list?.course?.skill==='A'" class="hidden-xs"><a><i
+                                                                                class="fa fa-users"></i> Advanced Level</a></span> <span *ngIf="list?.course?.skill==='B'"
                                                                         class="hidden-xs"><a><i class="fa fa-users"></i> Begineer Level</a></span>
-                                                                    <span *ngIf="list?.skill==='I'" class="hidden-xs"><a><i class="fa fa-users"></i>
+                                                                    <span *ngIf="list?.course?.skill==='I'" class="hidden-xs"><a><i class="fa fa-users"></i>
                                                                             Intermediate Level</a></span> <span class="hidden-xs"><a><i class="fa fa-users"></i>
                                                                             English</a></span> </div>
                                                             </div>
 
                                                             <div class="col-lg-3 about-module-right">
-                                                                <h2>${{list?.actual_price}}</h2>
+                                                                <h2>${{list?.course?.actual_price}}</h2>
                                                                 <div class="rating-stars">
-                                                                        <rating ngModel="{{list?.rating}}" [readonly]="true" titles="{{list?.rating}}"></rating>
-                                                                        <span>{{list?.rating}}</span>
+                                                                        <rating ngModel="{{list?.course?.rating}}" [readonly]="true" titles="{{list?.course?.rating}}"></rating>
+                                                                        <span>{{list?.course?.rating}}</span>
                                                                 </div>
                                                                 <span class="ml5">(3,185 ratings)</span>
                                                             </div>

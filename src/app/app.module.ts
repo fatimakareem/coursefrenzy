@@ -8,7 +8,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {ModuleMapLoaderModule} from '@nguniversal/module-map-ngfactory-loader';
-import { RecaptchaModule } from 'ng-recaptcha';
+// import { RecaptchaModule } from 'ng-recaptcha';
 import {SignUpservice} from './signup/signup.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {
@@ -55,7 +55,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 // import { Uploader } from 'angular2-http-file-upload';
 import {AddCartDialogModule} from "./cart-dialog/add-cart-dialog.module";
 import { PaymentmethodsService } from './paymentmethods/paymentmethods.service';
-
+// import { RecapchaComponent } from './recapcha/recapcha.component';
+import { RecapchaService } from './recapcha/recapcha.service';
 import {UserProfileComponent} from './layouts/user-profile/user-profile.component';
 import {AuthGuard} from './auth-guard/auth-guard.service';
 import {LoginService} from './login/login.service';
@@ -213,7 +214,7 @@ export function provideConfig() {
     MatSelectModule,
     ImageCropperModule,
     NguiDatetimePickerModule,
-    RecaptchaModule.forRoot(),
+    // RecaptchaModule.forRoot(),
 // Videoplayer
     VgCoreModule,
     VgControlsModule,
@@ -234,7 +235,7 @@ export function provideConfig() {
       useFactory: provideConfig
     },
     AppRoutingProvider,
-    SignUpservice,PaymentmethodsService,
+    SignUpservice,PaymentmethodsService,RecapchaService,
     SimpleGlobal,
     AuthGuard,
     LoginService,

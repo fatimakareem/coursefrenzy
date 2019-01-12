@@ -15,8 +15,9 @@ import { Config } from '../Config';
 import { JwtHelper } from 'angular2-jwt';
 import { CoursesService } from '../course/courses.service';
 import { CourseCheckoutService } from '../course-checkout/course-checkout.service';
-import { RecaptchaComponent } from 'recaptcha-blackgeeks';
+import { RecapchaComponent } from '../recapcha/recapcha.component';
 import { ViewChild } from '@angular/core';
+import { RecapchaService } from '../recapcha/recapcha.service';
 
 const EMAIL_REGEX = '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$';
 
@@ -27,7 +28,7 @@ const EMAIL_REGEX = '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 })
 
 export class LoginComponent implements OnInit {
-  @ViewChild(RecaptchaComponent) captcha: RecaptchaComponent;
+  @ViewChild(RecapchaComponent) captcha: RecapchaComponent;
   islogin: boolean;
   returnUrl: string;
   hide = true;
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
   constructor(private obj: LoginService, public dialog: MatDialog, private vcr: ViewContainerRef,
     private route: ActivatedRoute, private global: GlobalService, private course: CoursesService, private obj2: CourseCheckoutService,
     @Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService, private _http: HttpClient,
-    private _nav: Router) {
+    private _nav: Router,public recapcha: RecapchaService) {
     // this.global.caseNumber$.subscribe(
     //   data => {
     //     this.searchCaseNumber = data;
@@ -143,7 +144,7 @@ export class LoginComponent implements OnInit {
     this.firstnameLower = this.model.firstname;
     this.firstnameLower = this.firstnameLower.toLowerCase();
     // this.model.firstname = (this.model.firstname).toLowerCase();
-    if (this.captcha.getResponse() == true) {
+    if (this.recapcha.check()) {
       this.obj.login_authenticate(this.firstnameLower).subscribe(
         data => {
           this.obj.loged_in(this.firstnameLower, this.model.password, this.returnUrl).subscribe(
@@ -230,14 +231,15 @@ export class LoginComponent implements OnInit {
     //
     // }
     else {
-      this.captcha.reset();
-      swal({
-        type: 'error',
-        title: 'Please confirm you are not a robot!',
-        showConfirmButton: false,
-        width: '512px',
-        timer: 2000
-      });
+      this.captcha.resetImg();
+           
+            swal({
+              type: 'error',
+              title: 'Please confirm you are not a robot!',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 2000
+            });
 
     }
   }

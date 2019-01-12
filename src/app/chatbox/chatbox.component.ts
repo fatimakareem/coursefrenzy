@@ -52,7 +52,14 @@ export class ChatboxComponent implements OnInit {
 
       console.log(this.room_Number);
 
-      this.websocket.connect(this.room_Number);
+      // this.websocket.connect(this.room_Number);
+      alert(this.room_Number)
+    this.obj.get_messages(this.room_Number).subscribe(response => {
+      this.Messages = response.messages;
+      console.log(this.Messages);
+      this.chat_user_load = true;
+      this.obj.messages.next(this.Messages);
+    });
     });
 
     this.chat_user_load = true;
@@ -61,11 +68,6 @@ export class ChatboxComponent implements OnInit {
     this.chat_username = username;
     this.chat_profilephoto = profilephoto;
 
-    this.obj.get_messages(1).subscribe(response => {
-      this.Messages = response.messages;
-      console.log(this.Messages);
-      this.chat_user_load = true;
-    });
 
   }
 

@@ -6,11 +6,34 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { Config} from '../Config';
 import {HeadersService} from '../headers.service';
+import { Subject } from 'rxjs/Rx';
+import { WebsocketService } from '../websocket.service';
 
+const CHAT_URL = 'ws://' + '192.168.30.132:7000/'+'websocket.connect/1/5/147';
+
+export interface Message {
+	author: string,
+	message: string
+}
 @Injectable()
 
 export class ChatboxService {
-  constructor(private http: Http, private _http2: Http, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object,private headers: HeadersService) {
+  public messages: Subject<Message>;
+  // public messages: Subject<Message>;
+
+  
+	
+	
+  constructor(private http: Http, private _http2: Http, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object,private headers: HeadersService,wsService: WebsocketService) {	this.messages = <Subject<Message>>wsService
+    .connect(CHAT_URL)
+    .map((response: MessageEvent): Message => {
+      let data = JSON.parse(response.data);
+      return {
+        author: data.author,
+        message: data.message
+      }
+    });
+   
   }
   searchTeacher(query) {
     return this._http2.post(Config.api + 'webchat/searchuser/',

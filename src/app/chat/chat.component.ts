@@ -57,7 +57,7 @@ export class ChatComponent implements OnInit {
   }
 
   click(f){
-    this.socket.send(this.model.messagez);
+    // this.socket.send(this.model.messagez);
     // this.model.messagez = '';
   }
 

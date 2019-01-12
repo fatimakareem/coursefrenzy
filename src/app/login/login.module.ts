@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {LoginComponent} from "./login.component";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
-import {MatIconModule} from '@angular/material';
+import {MatIconModule,MatCardModule} from '@angular/material';
 import {MatInputModule} from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import {ResetPasswordComponent} from './login.component';
@@ -12,9 +12,10 @@ import {provideConfig} from "../app.module";
 import {AuthGuard} from "../auth-guard/auth-guard.service";
 import {HttpClientModule} from "@angular/common/http";
 import {MatCheckboxModule} from '@angular/material';
-import {RecaptchaModule} from "ng-recaptcha";
+// import {RecaptchaModule} from "ng-recaptcha";
 import {LoaderModule} from "../loader/loader.module";
-import { BlackgeeksRecaptchaModule } from 'recaptcha-blackgeeks';
+// import { BlackgeeksRecaptchaModule } from 'recaptcha-blackgeeks';
+import { RecapchaComponent } from '../recapcha/recapcha.component';
 
 const loginRoutes: Routes = [
   { path: '', component: LoginComponent }
@@ -23,7 +24,7 @@ const loginRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    LoginComponent,
+    LoginComponent,RecapchaComponent,
     ResetPasswordComponent
   ],
 
@@ -32,15 +33,15 @@ const loginRoutes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule,
+    MatIconModule,MatCardModule,
     MatInputModule,
     MatDialogModule,
     HttpClientModule,
     MatCheckboxModule,
-    RecaptchaModule.forRoot(),
+    // RecaptchaModule.forRoot(),
     RouterModule.forChild(loginRoutes),
     LoaderModule,
-    BlackgeeksRecaptchaModule
+    // BlackgeeksRecaptchaModule
   ],
 
   providers: [

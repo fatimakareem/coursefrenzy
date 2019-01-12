@@ -1,0 +1,12 @@
+<mat-card class="card">
+    <div class="main">
+        <img [src]="imgName">
+        <button type="button" (click)="resetImg()" mat-icon-button>
+          <mat-icon>cached</mat-icon>
+        </button>
+    </div>
+    <mat-form-field class="text-center" floatLabel="always">
+        <!-- <mat-label></mat-label> -->
+        <input matInput [(ngModel)]="capchaText" autocomplete="off" maxlength="5" (ngModelChange)="checkChange()" placeholder="Enter above text">
+    </mat-form-field>
+</mat-card>

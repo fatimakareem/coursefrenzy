@@ -8,7 +8,9 @@ import {AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser} fro
 // import {AuthService, FacebookLoginProvider,  GoogleLoginProvider, LinkedinLoginProvider} from 'ng4-social-login';
 // import { SocialUser } from 'ng4-social-login';
 import {Router} from '@angular/router';
-import { RecaptchaComponent } from 'recaptcha-blackgeeks';
+import { RecapchaComponent } from '../recapcha/recapcha.component';
+import { RecapchaService } from '../recapcha/recapcha.service';
+
 import { ViewChild } from '@angular/core';
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +19,7 @@ import { ViewChild } from '@angular/core';
   providers: [SignUpservice]
 })
 export class SignUpComponent implements OnInit {
-  @ViewChild(RecaptchaComponent) captcha: RecaptchaComponent;
+  @ViewChild(RecapchaComponent) captcha: RecapchaComponent;
   email_regex = '^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$';
   password_regex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
   private user: SocialUser;
@@ -62,7 +64,7 @@ export class SignUpComponent implements OnInit {
   }
   // Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8')
 
-  constructor(private obj: SignUpservice , private authService: AuthService, private router: Router) {
+  constructor(private obj: SignUpservice , private authService: AuthService, private router: Router,public recapcha: RecapchaService) {
   }
 
   ngOnInit() {
@@ -87,7 +89,7 @@ export class SignUpComponent implements OnInit {
   onSubmit(f: NgForm) {
     //  console.log((this.model.username, this.model.email, this.model.Password));
     // alert(this.usernamestatus);
-    if(this.captcha.getResponse() == true) {
+    if(this.recapcha.check()) {
 
       if (this.usernamestatus === false) {
         this.usernameError();
@@ -106,14 +108,15 @@ export class SignUpComponent implements OnInit {
       }
     }
     else{
-      this.captcha.reset();
-      swal({
-        type: 'error',
-        title: 'Please confirm you are not a robot!',
-        showConfirmButton: false,
-        width: '512px',
-        timer: 2000
-      });
+      this.captcha.resetImg();
+           
+            swal({
+              type: 'error',
+              title: 'Please confirm you are not a robot!',
+              showConfirmButton: false,
+              width: '512px',
+              timer: 2000
+            });
 
     }
 
