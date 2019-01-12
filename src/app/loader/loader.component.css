@@ -21,7 +21,7 @@
   background-repeat: no-repeat;
   background-position: 22px 30px;
   background-size: 96px 97px;
-  animation: spinner 3s infinite alternate ease-in-out, delay 4s ease-in-out 1;
+  animation: spinner 3s infinite alternate ease-in-out, delay 6s ease-in-out 1;
   text-align: center
 }
 
