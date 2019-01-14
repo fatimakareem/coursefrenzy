@@ -24,6 +24,7 @@ export class RecapchaComponent implements OnInit {
   }
 
   checkChange() {
+    // alert(this.capchaText)
     this.recapchaService.changeData(this.capchaText)
     console.log(this.capchaText)
   }
