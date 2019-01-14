@@ -232,7 +232,9 @@ export class LoginComponent implements OnInit {
     // }
     else {
       this.captcha.resetImg();
-           
+            // this.captcha.reset();
+            // this.isequal = false;
+            
             swal({
               type: 'error',
               title: 'Please confirm you are not a robot!',
