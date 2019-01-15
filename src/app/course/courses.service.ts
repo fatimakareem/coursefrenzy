@@ -320,10 +320,10 @@ else{
     return this._http2.get(Config.api + 'courses/wishlist/', {headers: this.headers.getHeaders()}).map((response: Response) => response.json());
   }
   getcourses(page) {
-    return this._http2.get('http://192.168.30.187:7000/courses/latestcourses/'+'?page=' +page, {headers: this.headers.getHeaders()}).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'courses/latestcourses/'+'?page=' +page, {headers: this.headers.getHeaders()}).map((response: Response) => response.json());
   }
   search(level,price,rate) {
-    return this._http2.post('http://192.168.30.187:7000/courses/filterTest/',
+    return this._http2.post(Config.api + 'courses/filterTest/',
       {
         "level":level,
         "price":price,

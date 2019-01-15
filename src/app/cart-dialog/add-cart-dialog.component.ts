@@ -64,6 +64,7 @@ export class AddCartDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.noPromo();
   }
 
   verifyPromoCode(promo_code) {
