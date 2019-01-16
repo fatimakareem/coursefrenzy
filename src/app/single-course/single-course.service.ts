@@ -162,12 +162,12 @@ export class SingleCourseService {
       }, {headers : headers}).map((res: Response) => {
       if (res) {
         // console.log('1');
-        if (res.status === 200 || res.status === 202 ) {
+        if (res.status === 202 || res.status === 201 ) {
           const responce_data = res.json();
-          if(res.status === 202){
+          if(res.status === 201){
             swal({
               type: 'error',
-              title: 'You Already Reviewed this Course.',
+              title: 'Course is Already Submit for review.',
               showConfirmButton: false,
               width: '512px',
               timer: 2000,

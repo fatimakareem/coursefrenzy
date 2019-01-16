@@ -690,17 +690,31 @@ this.totallectures=response['Total Lectures'];
     }
   }
 
-  Publishcourse(): void {
+  Publishcourse(){
+    this.route.params.subscribe(params => {
+      this.CourseId = +params['query'] || 1;
     if (this.Logedin == '1') {
-      const dialogRef = this.dialog.open(PublishCourseComponent, {
-        width: '500px',
-        data: { CourseId: this.CourseId }
-      });
+      this.obj.req_for_publish(this.CourseId).subscribe(
+        data => {
+          //      console.log(data);
+         
+          PublishCourseComponent.publishSuccess();
+        },
+        error => {
+          // console.log(error);
+          PublishCourseComponent.publishError();
+        }
+      );
+      // const dialogRef = this.dialog.open(PublishCourseComponent, {
+      //   width: '500px',
+      //   data: { CourseId: this.CourseId }
+      // });
     }
     else {
       SingleCourseComponent.Authenticat();
       this.router.navigate(['login']);
     }
+  })
   }
 
 

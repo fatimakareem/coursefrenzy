@@ -161,8 +161,13 @@ public postedCoursesList:any;
         }
       });
   }
-
+  UserRole:any;
   ngOnInit() {
+    // this._home.get_role().subscribe(response => {
+    //   this.UserRole = response.Role;
+    //     alert(response.Role)
+    //     // alert('Geting DAta From Shared Service' + this.UserRole);
+    //   });
     this.course.get_bid_courses(this.page).subscribe(response => {
       this.BidCourses = response;
     });
