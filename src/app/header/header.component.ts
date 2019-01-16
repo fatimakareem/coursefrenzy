@@ -492,7 +492,7 @@ onClick() {
       width: '512px',
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, remove it!'
+      confirmButtonText: 'Confirm'
     }).then((result) => {
       if (result.value) {
         this.course.removeFromWishlist(course_id).subscribe(
