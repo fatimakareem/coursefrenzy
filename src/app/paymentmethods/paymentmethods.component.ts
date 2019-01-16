@@ -61,7 +61,7 @@ export class PaymentmethodsComponent implements OnInit {
     ]),
     expirydate: new FormControl('', [
       Validators.required,
-      Validators.pattern('(0[1-9]|10|11|12)/20[0-9]{2}$')
+      Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$')
     ]),
     cardnickname: new FormControl('', [
       Validators.minLength(3),
@@ -104,7 +104,7 @@ export class PaymentmethodsComponent implements OnInit {
     // this.edit_ccv3 = false;
   }
   chek(val){
-    this.expirydate=val.toString().slice(3,7);
+    this.expirydate=val.toString().slice(3,5);
     console.log(this.expirydate,'jj')
   }
   public masks=function(rawValue) {
@@ -112,12 +112,12 @@ export class PaymentmethodsComponent implements OnInit {
     // add logic to generate your mask array  
     if (rawValue && rawValue.length > 0) {
         if (rawValue[0] == '0' || rawValue[5] == '1') {
-            return [/[01]/, /[1-9]/, '/', /[2-9]/, /[0-9]/, /[0-9]/, /[0123456789]/];
+            return [/[01]/, /[1-9]/, '/',  /[0-9]/, /[0123456789]/];
         } else {
-            return [/[01]/, /[0-2]/, '/',  /[2-9]/, /[0-9]/, /[0-9]/, /[0123456789]/];
+            return [/[01]/, /[0-2]/, '/',  /[0-9]/, /[0123456789]/];
         }
     }
-    return [/[01]/, /[0-9]/, '/',  /[2-9]/, /[0-9]/, /[0-9]/, /[0123456789]/];
+    return [/[01]/, /[0-9]/, '/',   /[0-9]/, /[0123456789]/];
     
 }
   ngOnInit() {
@@ -275,7 +275,7 @@ export class PaymentmethodsComponent implements OnInit {
         this.form.controls.cardnickname.valid && this.form.controls.expirydate.valid) {
         // this.date = moment(this.date).format('YYYY-MM') + '-01';
         this.date = this.form.value['expirydate'];
-        this.serv.addCard(this.form.value['cardnumber4'].split('-').join(''), this.form.value['ccv4'], this.date, this.form.value['cardnickname'], this.cardtype, this.form.value['check']).subscribe(Data => {
+        this.serv.addCard(this.form.value['cardnumber4'].split('-').join(''), this.form.value['ccv4'], this.date.split('/').join(''), this.form.value['cardnickname'], this.cardtype, this.form.value['check']).subscribe(Data => {
 
           console.log('Date Exp', this.date);
           swal({
@@ -347,7 +347,7 @@ export class PaymentmethodsComponent implements OnInit {
         this.date = this.form.value['expirydate'];
         // this.date = moment(this.date).format('YYYY-MM') + '-01';
 
-        this.serv.addCard(this.form.value['cardnumber'].split('-').join(''), this.form.value['ccv'], this.date, this.form.value['cardnickname'], this.cardtype, this.form.value['check']).subscribe(Data => {
+        this.serv.addCard(this.form.value['cardnumber'].split('-').join(''), this.form.value['ccv'], this.date.split('/').join(''), this.form.value['cardnickname'], this.cardtype, this.form.value['check']).subscribe(Data => {
 
           console.log('Date Exp', this.date);
           swal({

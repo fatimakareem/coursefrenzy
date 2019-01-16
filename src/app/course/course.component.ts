@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, AfterContentInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, AfterContentInit, PLATFORM_ID } from '@angular/core';
 import { CoursesService } from './courses.service';
 import { Config } from '../Config';
 import { FormControl, NgForm, Validators } from '@angular/forms';
@@ -219,7 +219,7 @@ export class CourseComponent implements OnInit {
  level="ALL";
  price="ALL";
  rate="ALL";
-  checked1(event, i) {
+  checked1(event) {
     if (event.target.checked == true) {
         console.log(event.target.checked)
         this.level = "ALL";
@@ -227,7 +227,7 @@ export class CourseComponent implements OnInit {
     }
    
 }
-checked2(event, i) {
+checked2(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.level = "B";
@@ -235,7 +235,7 @@ checked2(event, i) {
   }
  
 }
-checked3(event, i) {
+checked3(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.level = "I";
@@ -243,7 +243,7 @@ checked3(event, i) {
   }
  
 }
-checked4(event, i) {
+checked4(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.level = "A";
@@ -251,7 +251,7 @@ checked4(event, i) {
   }
  
 }
-checked9(event, i) {
+checked9(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "ALL";
@@ -259,7 +259,7 @@ checked9(event, i) {
   }
  
 }
-checked8(event, i) {
+checked8(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "1.0-2.0";
@@ -267,42 +267,42 @@ checked8(event, i) {
   }
  
 }
-checked7(event, i) {
+checked7(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "2.0-3.0";
      this.courses()
   }
 }
-checked6(event, i) {
+checked6(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "3.0-4.0";
      this.courses()
   }
 }
-checked5(event, i) {
+checked5(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "4.0-5.0";
      this.courses()
   }
 }
-checked10(event, i) {
+checked10(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.price = "ALL";
      this.courses()
   }
 }
-checked11(event, i) {
+checked11(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.price = "PAID";
      this.courses()
   }
 }
-checked12(event, i) {
+checked12(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.price = "FREE";

@@ -11,7 +11,7 @@ declare const $: any;
 export class SubCategoriesComponent implements OnInit {
 
   public sub_categories: any=[];
-  public catImageUrl = Config.staticStorageImages;
+  public catImageUrl = 'https://storage.coursefrenzy.com/images/';
   public loaded_subcategory: boolean  = false;
   public category: any; 
   constructor(private global: GlobalService,private obj2: HeaderService,) { }
