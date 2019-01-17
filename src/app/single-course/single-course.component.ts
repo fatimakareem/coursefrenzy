@@ -200,6 +200,7 @@ this.my_vedio=response.mycourses;
         this.ProfileImage = this.ProfileImage.profilePhoto;
         console.log(this.ProfileImage);
         this.instructor_id = this.SingleCourse.user_id.id;
+      
         this.rev = this.SingleCourse.rating;
         this.firstname = this.SingleCourse.user_id.first_name;
         this.lastname = this.SingleCourse.user_id.last_name;
