@@ -15,11 +15,11 @@
                         </div>
                     </ngx-slick>
                 </div>
-                <div class="filter-holder">
+                <!-- <div class="filter-holder">
                     <header> <span class="pull-right btn-filter" data-toggle="collapse" data-target="#filters"> <i
                                 class="fa fa-filter" aria-hidden="true"></i> <a routerLink="/FilterSearch"> <span>Filter
                                     Courses</span></a> </span> </header>
-                </div>
+                </div> -->
                 <div class="clearfix"></div>
                 <div class="row grid">
                     <div class="container">
@@ -103,7 +103,7 @@
                                                     <div class="ribbon-green">Featured</div>
                                                 </div>
                                                 <div class="img-holder"> <a routerLink="/courses/single/{{list?.course?.id}}">
-                                                        <img *ngIf="list?.course_image" src="{{StaticImageUrl}}{{list?.course?.course_image}}"
+                                                        <img *ngIf="list?.course?.course_image" src="{{StaticImageUrl}}{{list?.course?.course_image}}"
                                                             alt="" class="img-responsive imgheight"> </a> </div>
                                             </div>
                                         </div>
@@ -127,12 +127,12 @@
                                             <div class="large-post-meta float-left width-full"> <span class="avatar"><a
                                                         routerLink="/user-profile/{{list?.course?.user_id?.id}}"><img
                                                             src="../../assets/upload/avatar_01.png" class="img-circle">{{list?.course?.user_id?.username}}</a></span>
-                                                <small>&#124;</small> <span><a><i class="fa fa-clock-o"></i>{{list?.course?.video_duration}}</a></span>
+                                                <small>&#124;</small> <span><a><i class="fa fa-clock-o"></i>{{list?.course?.video_duration}} Duration</a></span>
                                                 <span><a><i class="fa fa-clock-o"></i>{{list?.course?.postDate | date}}</a></span>
                                                 <small class="hidden-xs">&#124;</small> <span class="hidden-xs"><a><i
                                                             class="fa fa-dollar"></i>{{list?.course?.actual_price}}</a></span>
                                                 <small class="hidden-xs">&#124;</small> <span class="hidden-xs"><a
-                                                        [routerLink]="['/courses/single']"><i class="fa fa-users"></i>{{list?.course?.lectures}}</a></span>
+                                                        [routerLink]="['/courses/single']"><i class="fa fa-users"></i>{{list?.course?.lectures}} lectures</a></span>
                                                 <span *ngIf="list?.course?.skill==='A'" class="hidden-xs"><a><i class="fa fa-users"></i>
                                                         Advanced Level</a></span> <span *ngIf="list?.course?.skill==='B'"
                                                     class="hidden-xs"><a><i class="fa fa-users"></i> Begineer Level</a></span>
@@ -149,7 +149,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- <nav class="text-center"> <ul class=" pagination pagination-lg"> <li class="page-item" [ngClass]="{disabled:pager.currentPage===1}"> <a class="page-link" onclick="topFunction()" (click)="setPage(1)" aria-label="Previous"> First </a> </li><li class="page-item" [ngClass]="{disabled:pager.currentPage===1}"> <a class="page-link" onclick="topFunction()" (click)="setPage(pager.currentPage - 1)" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a> </li><li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage===page}" onclick="topFunction()" (click)="setPage(page)"><a class="page-link">{{page}}</a></li><li class="page-item" [ngClass]="{disabled:pager.currentPage===pager.totalPages}"> <a class="page-link" onclick="topFunction()" (click)="setPage(pager.currentPage + 1)" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a> </li><li class="page-item" [ngClass]="{disabled:pager.currentPage===pager.totalPages}"> <a class="page-link" onclick="topFunction()" (click)="setPage(pager.totalPages)" aria-label="Next"> Last </a> </li></ul> </nav> -->
+                            </div>
+                            <nav class="text-center"> <ul class=" pagination pagination-lg"> <li class="page-item" [ngClass]="{disabled:pager.currentPage===1}"> <a class="page-link" onclick="topFunction()" (click)="courses(1)" aria-label="Previous"> First </a> </li><li class="page-item" [ngClass]="{disabled:pager.currentPage===1}"> <a class="page-link" onclick="topFunction()" (click)="courses(pager.currentPage - 1)" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a> </li><li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage===page}" onclick="topFunction()" (click)="courses(page)"><a class="page-link">{{page}}</a></li><li class="page-item" [ngClass]="{disabled:pager.currentPage===pager.totalPages}"> <a class="page-link" onclick="topFunction()" (click)="courses(pager.currentPage + 1)" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a> </li><li class="page-item" [ngClass]="{disabled:pager.currentPage===pager.totalPages}"> <a class="page-link" onclick="topFunction()" (click)="courses(pager.totalPages)" aria-label="Next"> Last </a> </li></ul> </nav>
                         </div>
                     </div><!-- <app-courses-on-bid> </app-courses-on-bid> <div class="clearfix"></div><app-trending-now-courses></app-trending-now-courses> <div class="clearfix"></div><app-top-rated-courses></app-top-rated-courses> <div class="clearfix"></div>-->
                 </div><!-- <div class="clearfix"></div><div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1"> <app-recently-viewed-courses></app-recently-viewed-courses> </div><div class="row" *ngIf="Logedin==='1' && cat_Id<1 && subcat_Id<1"> <app-recommended-courses></app-recommended-courses> </div>-->

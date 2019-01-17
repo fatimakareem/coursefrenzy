@@ -322,8 +322,8 @@ else{
   getcourses(page) {
     return this._http2.get(Config.api + 'courses/latestcourses/'+'?page=' +page, {headers: this.headers.getHeaders()}).map((response: Response) => response.json());
   }
-  search(level,price,rate) {
-    return this._http2.post(Config.api + 'courses/filterTest/',
+  search(level,price,rate,page) {
+    return this._http2.post(Config.api + 'courses/filterTest/'+'?page=' +page,
       {
         "level":level,
         "price":price,

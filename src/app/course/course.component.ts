@@ -15,6 +15,7 @@ import swal from 'sweetalert2';
 import { HeaderService } from '../header/header.service';
 import { SimpleGlobal } from 'ng2-simple-global';
 import { AddCartDialogComponent } from '../cart-dialog/add-cart-dialog.component';
+import { PagerService } from '../paginator.service';
 
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
@@ -132,10 +133,11 @@ export class CourseComponent implements OnInit {
     return this.options.filter(option =>
       option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
-
+  pager: any = {};
   // public carouselOne: NgxCarousel;
 
   constructor(
+    private pagerService: PagerService,
     private obj: CoursesService,
     private homeObj: HomeService,
     private route: ActivatedRoute,
@@ -200,13 +202,16 @@ export class CourseComponent implements OnInit {
         this.Categories = data;
       });
   }
-  courses() {
+  courses(page: number) {
     if(this.level || this.price || this.rate){
-      this.obj.search(this.level,this.price,this.rate).subscribe(data => {
+      if (page < 1 || page > this.pager.totalPages) {
+        return;
+      }
+      this.obj.search(this.level,this.price,this.rate,page).subscribe(data => {
         this.result = data.courses;
         this.total=data.totalItems
         console.log(this.result);
-        
+        this.pager = this.pagerService.getPager(this.total, page, 10);
       });
     
   }
@@ -223,7 +228,7 @@ export class CourseComponent implements OnInit {
     if (event.target.checked == true) {
         console.log(event.target.checked)
         this.level = "ALL";
-       this.courses()
+       this.courses(1)
     }
    
 }
@@ -231,7 +236,7 @@ checked2(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.level = "B";
-     this.courses()
+     this.courses(1)
   }
  
 }
@@ -239,7 +244,7 @@ checked3(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.level = "I";
-     this.courses()
+     this.courses(1)
   }
  
 }
@@ -247,7 +252,7 @@ checked4(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.level = "A";
-     this.courses()
+     this.courses(1)
   }
  
 }
@@ -255,7 +260,7 @@ checked9(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "ALL";
-     this.courses()
+     this.courses(1)
   }
  
 }
@@ -263,7 +268,7 @@ checked8(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "1.0-2.0";
-     this.courses()
+     this.courses(1)
   }
  
 }
@@ -271,48 +276,48 @@ checked7(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "2.0-3.0";
-     this.courses()
+     this.courses(1)
   }
 }
 checked6(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "3.0-4.0";
-     this.courses()
+     this.courses(1)
   }
 }
 checked5(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.rate = "4.0-5.0";
-     this.courses()
+     this.courses(1)
   }
 }
 checked10(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.price = "ALL";
-     this.courses()
+     this.courses(1)
   }
 }
 checked11(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.price = "PAID";
-     this.courses()
+     this.courses(1)
   }
 }
 checked12(event) {
   if (event.target.checked == true) {
       console.log(event.target.checked)
       this.price = "FREE";
-     this.courses()
+     this.courses(1)
   }
 }
 
   public SlideConfig;
   ngOnInit() {
-    this.courses();
+    this.courses(1);
     this.obj2.get_categories().subscribe(response => {
       this.Categories = response;
       this.loaded = true;
