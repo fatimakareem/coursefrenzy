@@ -86,15 +86,15 @@
                                     <h3 class="page-title-01 color-black margin-0">Filtered Courses</h3>
                                 </div>
                                 <div class="col-lg-12 text-right">
-                                    <h4 class="found-lable">We Found{{total}}Courses</h4>
+                                    <h4 class="found-lable">We Found {{total}} Courses</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="content-box-01 padding-bottom-10">
                         <div class="container">
-                            <div class="padding-top-10 padding-bottom-10" *ngIf="total==0"> No Courses Found </div>
-                            <div class="padding-top-10 padding-bottom-10" *ngFor="let list of result; let i=index;">
+                            <div class="courses-div" *ngIf="total==0"> No Courses Found </div>
+                            <div class="courses-div" *ngFor="let list of result; let i=index;">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
                                         <div class="popular-courses">
