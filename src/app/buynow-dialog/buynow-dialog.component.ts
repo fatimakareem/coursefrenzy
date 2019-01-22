@@ -19,20 +19,23 @@ export class BuynowDialogComponent implements OnInit {
 
   ExpiryDateForm = new FormControl('', [
     Validators.required,
-    Validators.pattern('(0[1-9]|10|11|12)/20[0-9]{2}$'),
+    Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$'),
   ]);
 
   CardNumberForm = new FormControl('', [
     Validators.required,
     
   ]);
-
+  CardtypeForm = new FormControl('', [
+    Validators.required,
+    
+  ]);
   CardCodeForm = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(4)
   ]);
-  TotalAmountForm = new FormControl('', [
+  Holdername = new FormControl('', [
     Validators.required
   ]);
   ngOnInit() {
@@ -40,8 +43,17 @@ export class BuynowDialogComponent implements OnInit {
   }
   res;
   status;
+  // cardtype;
+  // holdername
   public model: any = {};
   var_get_status;var_get_id;
+  card_opeation=[
+    {value: 'Visa', viewValue: 'Visa Card'},
+    {value: 'Mastercard', viewValue: 'Master Card'},
+    {value: 'American Express', viewValue: 'American Express'},
+    {value: 'Discover', viewValue: 'Discover'}
+    
+    ];
   show_Card_info()
 {
 return this.obj_payment_service.showCards().subscribe(Response =>{
@@ -55,10 +67,14 @@ return this.obj_payment_service.showCards().subscribe(Response =>{
             this.model.cardcod = this.status.ccv;
             this.var_get_status=this.status.default;
             this.var_get_id=this.status.id;
+            this.model.cardtype=this.status.card_type;
+            this.model.holdername=this.status.nickname;
           }  else {
             this.model.cardNumber  = '';
             this.model.expirationdate= '';
             this.model.cardcod = '';
+            this.model.cardtype='';
+            this.model.holdername='';
             // this.var_get_status=this.status.default;
             // this.var_get_id=this.status.id;
           }  
@@ -111,15 +127,10 @@ setcard(name,status,var_get_card_id) {
     })
 }
   onSubmit(f: NgForm) {
-    // if(this.var_get_status == false ){
-    // this.model.amount = this.total; cardNumber, expirationdate, cardcod,id,bid_id,status
-    this.obj.coursepayment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod,this.var_get_id,this.data.course_id,this.var_get_status).subscribe();
+   
+    this.obj.coursepayment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod,this.var_get_id,this.data.course_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
     console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod,this.var_get_id,this.data.course_id,this.var_get_status);
-  // }else if(this.var_get_status == true){
-  //   this.obj.winbidpayment1(this.var_get_id,this.data.course_id,this.var_get_status).subscribe();
-  //   console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod,this.var_get_id,this.data.course_id,this.var_get_status);
-
-  // }
+  
 }
   onNoClick(): void {
     this.dialogRef.close();

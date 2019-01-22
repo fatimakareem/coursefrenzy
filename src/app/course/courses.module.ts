@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule, CurrencyPipe} from "@angular/common";
 import {CourseComponent} from "./course.component";
 import {MatDialogModule} from '@angular/material';
-import {BiddingDialogModule} from '../bidding-dialog/bidding-dialog.module';
+// import {BiddingDialogModule} from '../bidding-dialog/bidding-dialog.module';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import { MatSelectModule } from '@angular/material';
@@ -37,7 +37,7 @@ const coursesRoutes: Routes = [
 
   imports: [
     CommonModule,RatingModule,
-    BiddingDialogModule,
+    // BiddingDialogModule,
     AddCartDialogModule,
     MatDialogModule,
     FormsModule,
@@ -45,17 +45,18 @@ const coursesRoutes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    RecommendedCoursesModule,
+    // RecommendedCoursesModule,
     MatAutocompleteModule,
-    RecentlyViewedCoursesModule,
-    WatchedCoursesModule,
+    // RecentlyViewedCoursesModule,
+    // WatchedCoursesModule,
     MatButtonModule,
     // CoursesOnBidModule,
     RouterModule.forChild(coursesRoutes),
-    CoursesOnBidModule,
+    // CoursesOnBidModule,
     LoaderModule,
-    TrendingNowCoursesModule,
-    TopRatedCoursesModule,SlickModule.forRoot()
+    // TrendingNowCoursesModule,
+    // TopRatedCoursesModule,
+    SlickModule.forRoot()
   ],
 
   providers: [CurrencyPipe],

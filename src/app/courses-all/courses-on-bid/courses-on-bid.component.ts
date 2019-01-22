@@ -7,6 +7,8 @@ import {GlobalService} from '../../global.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 // import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {PagerService} from "../../paginator.service";
+import { BuynowDialogComponent } from '../../buynow-dialog/buynow-dialog.component';
 
 
 declare const $: any;
@@ -18,6 +20,8 @@ declare const $: any;
 })
 export class CoursesOnBidComponent implements OnInit {
   public BidCourses: any;
+  pager: any = {};
+
   public openHeart  = 'fa fa-heart-o';
   public fillHeart  = 'fa fa-heart';
   public loaded: boolean;
@@ -33,7 +37,7 @@ export class CoursesOnBidComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private dialog: MatDialog,
-              @Inject(PLATFORM_ID) private platformId: Object,
+              @Inject(PLATFORM_ID) private platformId: Object,private pagerService: PagerService,
               private nav: Router,
               // config: NgbRatingConfig
   ) {
@@ -53,52 +57,66 @@ export class CoursesOnBidComponent implements OnInit {
         }
       });
   }
-
-  ngOnInit() {
-
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
     this.obj.get_bid_courses(this.page).subscribe(response => {
       this.BidCourses = response;
- console.log(this.BidCourses);
-      // console.log(this.BidCourses);
-
+      // console.log(this.topRatedCourses['courses']);
+      this.pager = this.pagerService.getPager(this.BidCourses['totalItems'], page,20);
       this.loaded = true;
-
-    this.slideConfig = {
-          infinite: false,
-          speed: 900,
-          autoplay: true,
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          prevArrow: '<button class="leftRs">&lt;</button>',
-          nextArrow: '<button class="rightRs">&lt;</button>',
-          responsive: [
-            {
-              breakpoint: 1025,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true
-              }
-            },
-            {
-              breakpoint: 769,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-    ]};
-
     });
+  }
+  ngOnInit() {
+this.setPage(1);
+   
   } 
-
+  buyNowClick(index, course_id): void {
+    if(this.Logedin === '1'){
+    this.obj.buyNowcheck(index, course_id,this.Logedin).subscribe(
+      data => {
+        // alert(data.message)
+       if(this.Logedin === '1' && data.message=="Course is already in your My Courses"){
+        swal({
+          type: 'error',
+          title: 'You Already Bought this course',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 1500
+        });
+       }
+    else if (this.Logedin === '1' && data.message != "Course is already in your My Courses") {
+      const dialogRef = this.dialog.open(BuynowDialogComponent, {
+        width: '500px',
+        data: { course_id: course_id,
+          // CourseDetail: this.Courses
+        }
+      });
+    } else {
+     
+        swal({
+          type: 'error',
+          title: 'Authentication Required <br> Please Login or Signup first',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 1500
+        });
+      
+      this.nav.navigate(['login']);
+    }})}
+    else{
+      swal({
+        type: 'error',
+        title: 'Authentication Required <br> Please Login or Signup first',
+        showConfirmButton: false,
+        width: '512px',
+        timer: 1500
+      });
+    
+    this.nav.navigate(['login']);
+    }
+  }
 
    onclick(index, course_id) {
     if (this.Logedin === '1') {

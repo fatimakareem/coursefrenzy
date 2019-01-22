@@ -42,12 +42,47 @@
                             <label style=" padding-left: 240px;text-decoration: underline;color:blue;font-size:18px" class="load-more" (click)="getData()" *ngIf="Messages">
                                     load more
                                 </label>
-                        <li class="msg-day"><small>Wednesday</small></li>
+
+                                <ng-container *ngFor="let mess of Messages.messages" >
+                                        <li *ngIf="logedin_user==mess.Sender" class="msg-left-sub">
+                                           
+                                            <div class="msg-desc" >
+                                                <img src="../../assets/img/chatbox/man03.png" style="height:30px ; width:25px;">  <b>{{mess.Sender}}</b>  <br>
+                                               {{mess.MessageText}}
+                                            </div>
+                                           <a style="font-size:12px">{{mess.CreatedAt | slice:0:10}}</a>
+                                           
+                                      
+                                            <!-- <div class="msg-desc">
+                                             
+                                              {{mass.message}}
+                                             
+                                            </div>
+                                            {{mass.created_at | slice:0:10}}
+                                            
+                                            <small></small> -->
+                                        </li> 
+                                        <!-- {{message.sender}} -->
+                                        <li *ngIf="logedin_user!= mess.Sender" >
+                                            <div class="msg-left-sub" style="float:right">
+                                       
+                                                <div class="msg-desc">
+                                                    <img src="../../assets/img/chatbox/man03.png" style="height: 30px;width:25px">  <b>{{mess.Sender}}</b>  <br>
+                                                    {{mess.MessageText}}
+                                                </div>
+                                                <a style="font-size:12px">{{mess.CreatedAt | slice:0:10}}</a>
+                                              </div>
+                                        </li> 
+                                     </ng-container>
+
+
+
+                        <!-- <li class="msg-day"><small>Wednesday</small></li>
                         <li *ngFor="let message of Messages" [ngClass]="(message.Sender===logedin_user)?'msg-right':'msg-left'">
                             <div class="msg-left-sub"> <img src="../../assets/img/chatbox/man03.png">
                                 <div class="msg-desc">{{message.MessageText}}</div><small>05:25 am</small>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="right-section-bottom">

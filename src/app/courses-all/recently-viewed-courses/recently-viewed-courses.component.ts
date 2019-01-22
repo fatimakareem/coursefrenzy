@@ -9,6 +9,8 @@ import {MatDialog} from "@angular/material";
 import {CoursesService} from "../../course/courses.service";
 import {RecommendedCoursesComponent} from "../recommended-courses/recommended-courses.component";
 import {BuyNowService} from "../../BuyNow.service";
+import {PagerService} from "../../paginator.service";
+
 // import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 declare const $: any;
@@ -19,6 +21,7 @@ declare const $: any;
   styleUrls: ['../../popular-courses/popular-courses.component.css']
 })
 export class RecentlyViewedCoursesComponent implements OnInit {
+  pager: any = {};
 
   public Courses: any=[];
   public ImageUrl = Config.ImageUrl;
@@ -28,7 +31,7 @@ export class RecentlyViewedCoursesComponent implements OnInit {
   private enrolled: any;
   public slideConfig;
 
-  constructor(private global: GlobalService, private nav: Router,
+  constructor(private global: GlobalService, private nav: Router,private pagerService: PagerService,
               public dialog: MatDialog, private obj: CoursesService,private buyNowService: BuyNowService) {
 
     // config.max = 5;
@@ -55,57 +58,26 @@ export class RecentlyViewedCoursesComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-
-    this.obj.get_recent_cources(1).subscribe(response => {
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.obj.get_recent_cources(page).subscribe(response => {
       if(response.hasOwnProperty("status")){
         this.Courses = [];
         this.showrecent = false;
         this.global.setShowRecent(false);
       }else {
         this.Courses = response;
+        this.pager = this.pagerService.getPager(this.Courses['totalItems'], page,20);
         this.showrecent = true;
         this.global.setShowRecent(true);
-        //
-        // alert(this.Courses);
-        // alert('Recent Courses Come and Length is' + this.Courses.length)
       }
-      // if(response.length===)
-      // console.log(this.Courses['courses']);
-      this.slideConfig = {
-        infinite: false,
-        speed: 900,
-        autoplay: true,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        prevArrow: '<button class="leftRs">&lt;</button>',
-        nextArrow: '<button class="rightRs">&lt;</button>',
-        responsive: [
-          {
-            breakpoint: 1025,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 4,
-              infinite: true
-            }
-          },
-          {
-            breakpoint: 769,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]};
-
     });
+   
+  }
+  ngOnInit() {
+this.setPage(1);
   }
   buyNowClick(index, course_id): void {
     this.buyNowService.buyNow(index, course_id,this.Logedin)

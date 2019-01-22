@@ -43,7 +43,7 @@
                                                 </a></td>
                                         </tr>
                                     </tbody>
-                                </table> <img src="../../assets/img/placeholder (1).png" *ngIf="!demo_vedio && route_instructor===instructor_id">
+                                </table> <img src="../../assets/img/single-course-section/intro.gif" *ngIf="!demo_vedio && route_instructor===instructor_id">
                                 <button mat-raised-button color="" style="float: right;margin-top: 10px;background: #000000;color: #fff;border-radius: 25px"
                                     *ngIf="route_instructor===instructor_id && !demo_vedio" (click)="openDialog4()">
                                     Add Video</button> <button type="button" class="close" aria-label="Close" tabindex="-1">
@@ -67,7 +67,7 @@
                                                         <div class="panel-heading" role="tab" id="heading{{chapter.chapters.id}}">
                                                             <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse"
                                                                     href="#collapse{{chapter.chapters.id}}">{{chapter.chapters.chapter_name}}<div
-                                                                        *ngIf="videos.length===0"> No video is uploaded
+                                                                        *ngIf="chapter.vedios===[]"> No video is uploaded
                                                                         yet</div>
                                                                     <div *ngIf="chapter">{{chapter.chapters.Lectures}}lectures
                                                                     </div>

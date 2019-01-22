@@ -4,14 +4,15 @@ import {CommonModule} from "@angular/common";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {MatIconModule} from '@angular/material';
 import {CoursesOnBidComponent} from './courses-on-bid.component'
-import {BiddingDialogModule} from "../../bidding-dialog/bidding-dialog.module";
+// import {BiddingDialogModule} from "../../bidding-dialog/bidding-dialog.module";
 import {LoaderModule} from "../../loader/loader.module";
 // import {NgbModule, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {RatingModule} from "ng2-rating";
 import { SlickModule } from 'ngx-slick';
+import {BiddingDialogComponent} from '../../bidding-dialog/bidding-dialog.component';
 
 const bidCoursesRoutes: Routes = [
-  // { path: '', component: CoursesOnBidComponent }
+  { path: '', component: CoursesOnBidComponent }
 ];
 
 
@@ -26,7 +27,7 @@ const bidCoursesRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    BiddingDialogModule,
+    // BiddingDialogModule,
     RouterModule.forChild(bidCoursesRoutes),
     LoaderModule,
     RatingModule,
@@ -36,8 +37,10 @@ const bidCoursesRoutes: Routes = [
   ],
 
   providers: [],
-  exports: [CoursesOnBidComponent]
-
+  exports: [CoursesOnBidComponent],
+  entryComponents: [
+    // BiddingDialogComponent
+  ]
 })
 
 export class CoursesOnBidModule {

@@ -8,6 +8,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from "@angular/material";
 import {CoursesService} from "../../course/courses.service";
 import {BuyNowService} from "../../BuyNow.service";
+import {PagerService} from "../../paginator.service";
+
 // import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 declare const $: any;
 
@@ -17,6 +19,7 @@ declare const $: any;
   styleUrls: ['../../popular-courses/popular-courses.component.css']
 })
 export class TrendingNowCoursesComponent implements OnInit {
+  pager: any = {};
 
   public trendingNowCourses: any=[];
   public ImageUrl = Config.ImageUrl;
@@ -26,7 +29,7 @@ export class TrendingNowCoursesComponent implements OnInit {
   private enrolled: any;
   public slideConfig;
   constructor(private glb_ser: SimpleGlobal, private global: GlobalService, private nav: Router,
-              public dialog: MatDialog, private obj: CoursesService, private buyNowService: BuyNowService) {
+              public dialog: MatDialog, private obj: CoursesService, private buyNowService: BuyNowService, private pagerService: PagerService) {
     // config.max = 5;
     // config.readonly = true;
 
@@ -44,49 +47,20 @@ export class TrendingNowCoursesComponent implements OnInit {
         }
       });
   }
-
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.obj.trending_now(page).subscribe(response => {
+      this.trendingNowCourses = response;
+      // console.log(this.topRatedCourses['courses']);
+      this.pager = this.pagerService.getPager(this.trendingNowCourses['totalItems'], page,20);
+      this.loaded = true;
+    });
+  }
   ngOnInit() {
 
-    this.obj.get_courses(1).subscribe(response => {
-      this.trendingNowCourses = response;
-      // console.log("all courses");
-      // console.log(this.trendingNowCourses);
-      // console.log("only courses");
-      // console.log(this.trendingNowCourses['courses']);
-      this.loaded = true;
-      this.slideConfig = {
-        infinite: false,
-        speed: 900,
-        autoplay: true,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        prevArrow: '<button class="leftRs">&lt;</button>',
-        nextArrow: '<button class="rightRs">&lt;</button>',
-        responsive: [
-          {
-            breakpoint: 1025,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 4,
-              infinite: true
-            }
-          },
-          {
-            breakpoint: 769,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]};
-    });
+   this.setPage(1);
 
   }
   buyNowClick(index, course_id): void {

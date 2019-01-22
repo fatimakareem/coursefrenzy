@@ -33,10 +33,10 @@ export class PaymentmethodsComponent implements OnInit {
   var_box_check: boolean = false;
   destroy_value;
   card_opeation = [
-    { value: 'Visa', viewValue: 'Visa' },
-    { value: 'Master', viewValue: 'Master' },
-    { value: 'Divcover', viewValue: 'Divcover' },
-    { value: 'American Express', viewValue: 'American Express' }
+  {value: 'Visa', viewValue: 'Visa Card'},
+    {value: 'Mastercard', viewValue: 'Master Card'},
+    {value: 'American Express', viewValue: 'American Express'},
+    {value: 'Discover', viewValue: 'Discover'}
   ];
   form = new FormGroup({
     cardnumber: new FormControl('', [
@@ -91,7 +91,7 @@ export class PaymentmethodsComponent implements OnInit {
   edit_cardnumber;
   edit_cardnumber2;
   edit_ccv3;
-  public cardmask;
+  public cardmask =[/[0-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   expirydate;
   constructor(private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private sg: SimpleGlobal, private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     this.cardnumber = true;

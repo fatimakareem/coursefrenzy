@@ -9,7 +9,7 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {ModuleMapLoaderModule} from '@nguniversal/module-map-ngfactory-loader';
 // import { RecaptchaModule } from 'ng-recaptcha';
-
+import {BiddingDialogComponent} from "./bidding-dialog/bidding-dialog.component";
 import {SignUpservice} from './signup/signup.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {
@@ -162,6 +162,7 @@ export function provideConfig() {
     SingleCategoryComponent,
     ChatComponent,
     WinbidDialogComponent,
+    BiddingDialogComponent,
     BuynowDialogComponent,
     // SearchResultsComponent,
     // NestedsubcatTopRatedCoursesComponent,
@@ -227,7 +228,7 @@ export function provideConfig() {
     MatToolbarModule
   ],
   entryComponents: [
-    ChatComponent,WinbidDialogComponent,BuynowDialogComponent
+    ChatComponent,WinbidDialogComponent,BuynowDialogComponent,BiddingDialogComponent
   ],
  
   providers: [

@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material";
 import {CoursesService} from "../../course/courses.service";
 import {BuyNowService} from "../../BuyNow.service";
 // import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {PagerService} from "../../paginator.service";
 
 declare const $: any;
 
@@ -27,9 +28,10 @@ export class RecommendedCoursesComponent implements OnInit {
   public loaded: boolean=false;
   public page = 1 ;
   public slideConfig;
+  pager: any = {};
 
   constructor(private glb_ser: SimpleGlobal, private global: GlobalService, private nav: Router,
-              public dialog: MatDialog, private obj: CoursesService, private buyNowService: BuyNowService) {
+              public dialog: MatDialog, private obj: CoursesService, private buyNowService: BuyNowService,private pagerService: PagerService) {
     // config.max = 5;
     // config.readonly = true;
 
@@ -47,60 +49,20 @@ export class RecommendedCoursesComponent implements OnInit {
         }
       });
   }
-
-  ngOnInit() {
-    // if (this.glb_ser['Courses']) {
-    //   this.Courses = this.glb_ser['Courses'];
-    // } else {
-    //   this.global.get_cources(this.global.CurrentPage).subscribe(
-    //     data => {
-    //       this.Courses = data;
-    //       this.glb_ser['Courses'] = this.Courses;
-    //     });
-    // }
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
     this.obj.get_recommendcourse(this.page).subscribe(
       data => {
         this.Courses = data;
-        // this.glb_ser['Courses'] = this.Courses;
-        this.loaded = true;
-
-        this.slideConfig = {
-          infinite: false,
-          speed: 900,
-          autoplay: true,
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          prevArrow: '<button class="leftRs">&lt;</button>',
-          nextArrow: '<button class="rightRs">&lt;</button>',
-          responsive: [
-            {
-              breakpoint: 1025,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true
-              }
-            },
-            {
-              breakpoint: 769,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]};
-
-      });
-
-
-
+      // console.log(this.topRatedCourses['courses']);
+      this.pager = this.pagerService.getPager(this.Courses['totalItems'], page,20);
+      this.loaded = true;
+    });
+  }
+  ngOnInit() {
+   this.setPage(1);
   }
   buyNowClick(index, course_id): void {
     this.buyNowService.buyNow(index, course_id,this.Logedin)

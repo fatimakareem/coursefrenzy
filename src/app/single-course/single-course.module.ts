@@ -20,7 +20,7 @@ import {VgCoreModule} from 'videogular2/core';
 import {VgControlsModule} from 'videogular2/controls';
 import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
-import {BiddingDialogModule} from "../bidding-dialog/bidding-dialog.module";
+// import {BiddingDialogModule} from "../bidding-dialog/bidding-dialog.module";
 import {AddCartDialogModule} from "../cart-dialog/add-cart-dialog.module";
 import { MatSelectModule } from '@angular/material';
 // import {VgBufferingModule} from 'videogular2/buffering';
@@ -66,7 +66,7 @@ const singleCourseRoutes: Routes = [
     MatIconModule,
     MatCardModule,
     MatStepperModule,
-    BiddingDialogModule,
+    // BiddingDialogModule,
     AddCartDialogModule,
     MatSelectModule,
     VgBufferingModule,
