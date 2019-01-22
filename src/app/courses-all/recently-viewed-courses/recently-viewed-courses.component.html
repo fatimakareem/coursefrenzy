@@ -17,9 +17,9 @@
         <div class="container container-wide">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="courseSpace" *ngFor="let list of Courses?.courses; let i=index;">
+                    <div class="courses-div" *ngFor="let list of Courses?.courses; let i=index;">
                         <div class="row wow fadeIn">
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-3 col-sm-12">
                                 <div class="popular-courses"><a routerLink="/courses/single/{{list?.course?.id}}"></a>
                                     <div class="post-media entry">
                                         <div class="ribbon-wrapper-green">
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-sm-12">
+                            <div class="col-md-9 col-sm-12">
                                 <div class="about-module"> <span *ngIf="list?.course?.skill==='B'" class="label label-success">IDEAL
                                         FOR BEGINNERS</span> <span *ngIf="list?.course?.skill==='I'" class="label label-success">IDEAL
                                         FOR MEDIOCRES</span> <span *ngIf="list?.course?.skill==='A'" class="label label-success">IDEAL

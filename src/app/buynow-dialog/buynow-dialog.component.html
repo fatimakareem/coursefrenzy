@@ -5,6 +5,7 @@
             <div class="panel-info contact_form">
                 <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
                 <div class="panel-body">
+                    <div class="col-lg-6">
                         <mat-form-field class="example-full-width mat-size"> 
                                 <!-- <label for="card-holder" style="font-size:16px;">Card Type</label> -->
                                 <mat-select placeholder="Type Card" [(ngModel)]="model.cardtype"  [formControl]="CardtypeForm">
@@ -15,32 +16,45 @@
                                         Card Holder Name cannot be empty
                                     </div>
                                 </div> -->
-                            </mat-form-field>
-                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Credit Card Number"
-                            minlength="14" maxlength="16" [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
-                            required>
-                        <mat-error *ngIf="CardNumberForm.hasError('pattern')"> Please enter a valid card number. Only
-                            Numerics are Allowed. </mat-error>
-                        <mat-error *ngIf="CardNumberForm.hasError('required')"> Card number is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Expiry Date"
-                            [formControl]="ExpiryDateForm" [(ngModel)]="model.expirationdate" required>
-                        <mat-error *ngIf="ExpiryDateForm.hasError('required')"> Expiry Date is <strong>required</strong>
-                        </mat-error>
-                        <mat-error *ngIf="ExpiryDateForm.hasError('pattern')"> Expiry Date should in <strong>mm/yy</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="CardCode"
-                            [formControl]="CardCodeForm" [(ngModel)]="model.cardcod" required>
-                        <mat-error *ngIf="CardCodeForm.hasError('minlength')"> Maximum Length of <strong>CardCode can
-                                be 3 characters</strong> </mat-error>
-                        <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum Length of <strong>CardCode can
-                                be 4 characters</strong> </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Card Holder"
-                            [formControl]="Holdername" [(ngModel)]="model.holdername" required >
-                    </mat-form-field>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6">
+                        <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Credit Card Number"
+                                minlength="14" maxlength="16" [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
+                                required>
+                            <mat-error *ngIf="CardNumberForm.hasError('pattern')"> Please enter a valid card number. Only
+                                Numerics are Allowed. </mat-error>
+                            <mat-error *ngIf="CardNumberForm.hasError('required')"> Card number is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div class="col-lg-6">
+                        <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Expiry Date"
+                                [formControl]="ExpiryDateForm" [(ngModel)]="model.expirationdate" required>
+                            <mat-error *ngIf="ExpiryDateForm.hasError('required')"> Expiry Date is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="ExpiryDateForm.hasError('pattern')"> Expiry Date should in <strong>mm/yy</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div class="col-lg-6">
+                        <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="CardCode"
+                                [formControl]="CardCodeForm" [(ngModel)]="model.cardcod" required>
+                            <mat-error *ngIf="CardCodeForm.hasError('minlength')"> Maximum Length of <strong>CardCode can
+                                    be 3 characters</strong> </mat-error>
+                            <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum Length of <strong>CardCode can
+                                    be 4 characters</strong> </mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div class="col-lg-6">
+                        <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Card Holder"
+                                [formControl]="Holdername" [(ngModel)]="model.holdername" required >
+                        </mat-form-field>
+                        </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12"> <button type="submit" class="btn-file pull-right" (click)="onSubmit(f)">Place
+                                        Order</button> 
+                                    </div>
+                            
                 </div>
                 <!-- <div class="col-md-6">
                     <div class="payment-methods">
@@ -56,10 +70,7 @@
                     <div class="clearfix"></div>
                 </div> -->
                 <hr>
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12"> <button type="submit" class="btn btn-primary" (click)="onSubmit(f)">Place
-                            Order</button> </div>
-                </div>
+                
                 <div class="table-responsive col-lg-12">
                     <table class="table payment-table">
                         <thead>
