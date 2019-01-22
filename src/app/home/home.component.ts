@@ -296,7 +296,7 @@ this.obj2.get_categories().subscribe(response => {
             // this.loaded = true;
         
             this.slideConfig = {
-              infinite: false,
+              infinite: true,
               speed: 900,
               autoplay: true,
               slidesToShow: 5,
@@ -345,7 +345,7 @@ this.obj2.get_categories().subscribe(response => {
             // if(response.length===)
             // console.log(this.Courses['courses']);
             this.slideConfig = {
-              infinite: false,
+              infinite: true,
               speed: 900,
               autoplay: true,
               slidesToShow: 5,

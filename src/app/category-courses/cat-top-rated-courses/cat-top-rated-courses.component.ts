@@ -45,7 +45,7 @@ export class CatTopRatedCoursesComponent implements OnInit {
 
 
       this.slideConfig = {
-        infinite: false,
+        infinite: true,
         speed: 900,
         autoplay: true,
         slidesToShow: 5,
