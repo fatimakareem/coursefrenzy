@@ -15,6 +15,7 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 })
 export class AccountComponent implements OnInit {
   email;
+  hide=true;
   password;
   newpassword1;
   newpassword2;

@@ -226,7 +226,7 @@ export class UploadCoursesComponent implements OnInit,OnDestroy {
     }
   }
   openDialog3(index, course_id): void {
-    alert(course_id);
+    // alert(course_id);
    
     if (this.Logedin === '1') {
       const dialogRef = this.dialog.open(WinbidDialogComponent, {

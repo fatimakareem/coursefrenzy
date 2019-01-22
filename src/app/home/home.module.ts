@@ -15,7 +15,7 @@ import {UpperHomeModule} from '../upper-home/upper-home.module';
 // import {TopRatedCoursesModule} from "../courses-all/top-rated-courses/top-rated-courses.module";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {MatIconModule} from '@angular/material';
-import {BiddingDialogModule} from "../bidding-dialog/bidding-dialog.module";
+// import {BiddingDialogModule} from "../bidding-dialog/bidding-dialog.module";
 import {RatingModule} from "ng2-rating";
 
 // import {HomeSliderComponent} from "./home-slider.component";
@@ -54,7 +54,7 @@ const homeRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    BiddingDialogModule,
+    // BiddingDialogModule,
   ],
   providers: [],
   exports: [HomeSliderEidtDialogComponent],

@@ -478,6 +478,7 @@ if (isPlatformBrowser(this.platformId)) {
   //   this.buyNowService.buyNow(index, course_id,this.Logedin)
   // }
   buyNowClick(index, course_id): void {
+    if(this.Logedin === '1'){
     this.obj_CoursesService.buyNowcheck(index, course_id,this.Logedin).subscribe(
       data => {
         // alert(data.message)
@@ -508,7 +509,18 @@ if (isPlatformBrowser(this.platformId)) {
         });
       
       this.nav.navigate(['login']);
-    }})
+    }})}
+    else{
+      swal({
+        type: 'error',
+        title: 'Authentication Required <br> Please Login or Signup first',
+        showConfirmButton: false,
+        width: '512px',
+        timer: 1500
+      });
+    
+    this.nav.navigate(['login']);
+    }
   }
 
   openDialog3(index, course_id): void {
@@ -534,6 +546,11 @@ if (isPlatformBrowser(this.platformId)) {
   }
   goToTopRatedCourses() {
     this.nav.navigate(['courses/top-rated']);
+  }
+  bidcourse(){
+    alert('hello')
+    this.nav.navigate(['/bid-courses']);
+
   }
   enrollCourse(index, course_id): void {
     if (this.Logedin === '1') {

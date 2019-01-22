@@ -56,7 +56,7 @@ export class BusinessComponent implements OnInit {
           // console.log(response);
           if (this.topRatedCoursesviaCategories===[]){
             this.showCourses = false;
-            alert('Show Courses are going to set false');
+            // alert('Show Courses are going to set false');
           }else{
             this.topRatedCoursesviaCategories = response;
             // console.log(this.topRatedCoursesviaCategories['courses']);

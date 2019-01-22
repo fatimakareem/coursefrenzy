@@ -4,7 +4,7 @@ import {CommonModule} from "@angular/common";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import { MatDialogModule } from '@angular/material';
-import {BiddingDialogModule} from '../../bidding-dialog/bidding-dialog.module';
+// import {BiddingDialogModule} from '../../bidding-dialog/bidding-dialog.module';
 import {TrendingNowCoursesComponent} from "./trending-now-courses.component";
 import {AddCartDialogModule} from "../../cart-dialog/add-cart-dialog.module";
 import {LoaderModule} from "../../loader/loader.module";
@@ -12,7 +12,7 @@ import {LoaderModule} from "../../loader/loader.module";
 import {RatingModule} from "ng2-rating";
 import {SlickModule} from 'ngx-slick';
 
-const recentlyViewedCoursesRoutes: Routes = [ ];
+const recentlyViewedCoursesRoutes: Routes = [  { path: '', component: TrendingNowCoursesComponent }];
 
 
 @NgModule({
@@ -26,7 +26,7 @@ const recentlyViewedCoursesRoutes: Routes = [ ];
     ReactiveFormsModule,
     MatInputModule,
     MatDialogModule,
-    BiddingDialogModule,
+    // BiddingDialogModule,
     AddCartDialogModule,
     RouterModule.forChild(recentlyViewedCoursesRoutes),
     LoaderModule,

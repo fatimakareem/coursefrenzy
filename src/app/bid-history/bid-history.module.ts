@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {BidHistoryComponent} from "./bid-history.component";
 import {MatDialogModule} from '@angular/material';
-import {BiddingDialogModule} from '../bidding-dialog/bidding-dialog.module';
+// import {BiddingDialogModule} from '../bidding-dialog/bidding-dialog.module';
 import {LoaderModule} from "../loader/loader.module";
 import { CountdownModule } from "ng2-countdown-timer";
 // import {MomentTimezoneModule} from 'angular-moment-timezone';
@@ -23,7 +23,7 @@ const bidHistoryRoutes: Routes = [
   imports: [
     CommonModule,
     MatDialogModule,
-    BiddingDialogModule,
+    // BiddingDialogModule,
     RouterModule.forChild(bidHistoryRoutes),
     LoaderModule,
     CountdownModule,

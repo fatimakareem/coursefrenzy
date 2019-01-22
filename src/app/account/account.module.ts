@@ -4,7 +4,7 @@ import {CommonModule} from "@angular/common";
 import { AccountComponent } from "./account.component";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {MatInputModule} from '@angular/material';
-import {MatCardModule} from '@angular/material';
+import {MatCardModule,MatIconModule} from '@angular/material';
 import {LoaderModule} from "../loader/loader.module";
 
 const accountRoutes: Routes = [
@@ -18,7 +18,7 @@ const accountRoutes: Routes = [
   ],
 
   imports: [
-    CommonModule,
+    CommonModule,MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,

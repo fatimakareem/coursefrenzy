@@ -36,7 +36,10 @@ const appRoutes: Routes = [
       { path: 'model', loadChildren: './model/model.module#ModelModule' },
 
         { path: 'user-profile/:query', loadChildren: './profile/profile.module#ProfileModule' },
-
+        { path: 'bid-courses', loadChildren: './courses-all/courses-on-bid/courses-on-bid.module#CoursesOnBidModule' },
+        { path: 'trending-now-courses', loadChildren: './courses-all/trending-now-courses/trending-now-courses.module#TrendingNowCoursesModule' },
+        { path: 'recently-viewed-courses', loadChildren: './courses-all/recently-viewed-courses/recently-viewed-courses.module#RecentlyViewedCoursesModule' },
+        { path: 'recommended-courses', loadChildren: './courses-all/recommended-courses/recommended-courses.module#RecommendedCoursesModule' },
       { path: 'courses/top-rated', loadChildren: './courses/top-rated-courses-all/top-rated-courses-all.module#TopRatedCoursesAllModule' },
       { path: 'courses', loadChildren: './course/courses.module#CoursesModule' },
       { path: 'wishlist', loadChildren: './wishlist-courses/wishlist-courses.module#WishlistCoursesModule', canActivate: [AuthGuard] },

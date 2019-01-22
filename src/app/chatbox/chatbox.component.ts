@@ -32,7 +32,7 @@ export class ChatboxComponent implements OnInit {
 
   ngOnInit() {
     this.obj.getTeacher().subscribe(response => {
-      this.Teachers = response;
+      this.Teachers = response.instructors;
       console.log(this.Teachers);
       this.loaded = true;
     });
@@ -42,7 +42,7 @@ export class ChatboxComponent implements OnInit {
   filter_teachers(query) {
     if (query !== '') {
       this.obj.searchTeacher(query).subscribe(response => {
-        this.Teachers = response;
+        this.Teachers = response.instructors;
         console.log(this.Teachers);
         this.loaded = true;
       });
@@ -54,7 +54,7 @@ export class ChatboxComponent implements OnInit {
       scrollTop: $('#chat-scroll').get(0).scrollHeight}, 0);    
     // $('#Div').prop("scrollHeight")
     this.obj.get_messages(this.room_Number,this.counter).subscribe(response => {
-      this.Messages = response.messages;
+      this.Messages = response;
       this.item=response['Total Result'];
       console.log(this.Messages);
       this.chat_user_load = true;
@@ -63,7 +63,7 @@ export class ChatboxComponent implements OnInit {
   }
   mess(){
     this.obj.get_messages(this.room_Number,this.counter).subscribe(response => {
-      this.Messages = response.messages;
+      this.Messages = response;
       this.item=response['Total Result'];
       console.log(this.Messages);
       this.chat_user_load = true;
@@ -73,10 +73,10 @@ export class ChatboxComponent implements OnInit {
   }
   selected_teacher(user_id,username,profilephoto){
 
-    this.logedin_user = localStorage.getItem('id');
+    this.logedin_user = localStorage.getItem('username');
     // Get Room Number
 
-    this.obj.getRoom(user_id,this.logedin_user).subscribe(response => {
+    this.obj.getRoom(username,this.logedin_user).subscribe(response => {
       this.room_Number = response.room;
       // this.Messages = response.messages;
       
@@ -87,7 +87,7 @@ export class ChatboxComponent implements OnInit {
       // this.websocket.connect(this.room_Number);
       // alert(this.room_Number)
     this.obj.get_messages(this.room_Number,this.counter).subscribe(response => {
-      this.Messages = response.messages;
+      this.Messages = response;
       this.item=response['Total Result'];
       console.log(this.Messages);
       this.chat_user_load = true;

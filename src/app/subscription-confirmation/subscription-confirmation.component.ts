@@ -22,7 +22,7 @@ export class SubscriptionConfirmationComponent implements OnInit {
       .params
       .subscribe(params => {
         this.email = params.link || '';
-        alert(this.email);
+        // alert(this.email);
 
         
         this._service.conform_subscribe(this.email).subscribe(

@@ -193,12 +193,12 @@ export class CoursesService {
    headers.append('Content-Type', 'application/json');
    if (localStorage.getItem('Authorization')) {
      headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
-     return this._http2.get(Config.api + 'courses/recomended/',{headers: headers}).map((response: Response) => response.json());
+     return this._http2.get(Config.api + 'courses/recomended/?page=' + page,{headers: headers}).map((response: Response) => response.json());
 
    }
     else {
 
-     return this._http2.get(Config.api + 'courses/recomended/').map((response: Response) => response.json());
+     return this._http2.get(Config.api + 'courses/recomended/?page=' + page).map((response: Response) => response.json());
      }
      // localStorage.getItem('loged_in');
      // console.log('dasda',localStorage.getItem('loged_in'));
@@ -248,7 +248,20 @@ else{
 
     }
   }
+trending_now(page){
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  if (localStorage.getItem('Authorization')) {
+    headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
+    return this._http2.get(Config.api + 'courses/trending_now/?page=' + page, {headers: headers}).map((response: Response) => response.json());
+  }
+else {
 
+    return this._http2.get(Config.api + 'courses/trending_now/?page=' + page).map((response: Response) => response.json());
+
+
+  }
+}
 
   get_top_rated_courses(page) {
     const headers = new Headers();
@@ -297,11 +310,11 @@ else{
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     if (localStorage.getItem('Authorization')) {
-      return this._http2.get(Config.api + 'courses/bids_get/',{headers: headers}).map((response: Response) => response.json());
+      return this._http2.get(Config.api + 'courses/bids_get/?page=' + page,{headers: headers}).map((response: Response) => response.json());
     }
     else {
 
-      return this._http2.get(Config.api + 'courses/bids_get/').map((response: Response) => response.json());
+      return this._http2.get(Config.api + 'courses/bids_get/?page=' + page).map((response: Response) => response.json());
 
 
     }

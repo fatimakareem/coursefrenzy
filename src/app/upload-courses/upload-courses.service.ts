@@ -414,7 +414,7 @@ export class UploadCoursesService {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization').toString());
     }
     headers.append('Content-Type', 'application/json');
-    return this._http2.get(  Config.api + 'courses/mypostedcourses'+'/', {headers : headers}).map((response: Response) => response.json());
+    return this._http2.get(Config.api +'courses/mypostedcourses'+'/', {headers : headers}).map((response: Response) => response.json());
   }
   delete_my_posted_course(id) {
     const headers = new Headers();
@@ -433,7 +433,7 @@ export class UploadCoursesService {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization').toString());
     }
     headers.append('Content-Type', 'application/json');
-    return this._http2.put(Config.api + 'courses/searchmycourses/',
+    return this._http2.post(Config.api + 'courses/mypostedcourses/',
       {
         'query': query,
       }, {headers : headers}).map((res: Response) => {

@@ -265,7 +265,8 @@ export class HeaderService {
   }
 
 
-  coursepayment(cardNumber, expirationdate, cardcod,id,course_id,status) {
+  coursepayment(cardNumber, expirationdate, cardcod,id,course_id,status,type,holder) {
+   
     //  console.log('Chapter Name is ' + amount);
       const headers = new Headers();
       if (isPlatformBrowser(this.platformId)) {
@@ -322,6 +323,8 @@ export class HeaderService {
             'ccv': cardcod,
              'exp': expirationdate,
             'creditno': cardNumber,
+            'card_type':type,
+            'card_holder':holder
             // 'amount': amount
           }, {headers: headers}).map((res: Response) => {
           if (res) {
