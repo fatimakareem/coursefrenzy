@@ -129,7 +129,14 @@
                                         <ul id="notifications" class="dropdown-menu dropdown-menu-right notifications chat">
                                             <li class="left clearfix" *ngFor="let item of notify?.notifications"> <span
                                                     class="fa fa-times time notification-close"></span>
-                                                <div class="clearfix margin-0">
+                                                <div class="clearfix margin-0" *ngIf="item.read==false">
+                                                    <div class="notification-dropdowns"> <a href="{{item.verb}}">
+                                                            <strong class="primary-font font-weight-bold">{{item.nf_type}}</strong></a>
+                                                    </div><a href="{{item.verb}}">
+                                                        <p>{{item.description}}</p>
+                                                    </a>
+                                                </div>
+                                                <div class="clearfix margin-0 left clearfix un-read" *ngIf="item.read==true">
                                                     <div class="notification-dropdowns"> <a href="{{item.verb}}">
                                                             <strong class="primary-font font-weight-bold">{{item.nf_type}}</strong></a>
                                                     </div><a href="{{item.verb}}">
@@ -137,7 +144,7 @@
                                                     </a>
                                                 </div>
                                             </li>
-                                            <li class="left clearfix un-read" *ngFor="let item of notify?.notifications">
+                                            <!-- <li class="left clearfix un-read" *ngFor="let item of notify?.notifications">
                                                 <span class="fa fa-times time notification-close"></span>
                                                 <div class="clearfix margin-0">
                                                     <div class="notification-dropdowns"> <a href="{{item.verb}}">
@@ -146,7 +153,7 @@
                                                         <p>{{item.description}}</p>
                                                     </a>
                                                 </div>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </li>
                                     <li class="dropdown cartmenu searchmenu hasmenu" [ngStyle]="{'display':Logedin==='1' ? 'none' : 'inline-block'}">
