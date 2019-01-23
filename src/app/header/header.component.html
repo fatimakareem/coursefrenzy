@@ -70,7 +70,7 @@
                                                     <a class="display-inline-b width-full" (mouseenter)=" nested(caty.id)"
                                                         routerLink='/courses/subcat_courses/{{caty.id}}'>
                                                         <div id="sub" class="pull-left col-xs-8">{{caty.name}}</div><i
-                                                            class="fa fa-angle-right pull-right col-xs-2 margin-r-10"></i>
+                                                            class="fa fa-angle-right pull-right col-xs-2 margin-r-10" *ngIf="nestedSubCategories !='' && caty.name !='Other' "></i>
                                                     </a>
                                                     <ul *ngIf="nestedSubCategories !='' && caty.name !='Other' " class="dropdown-menu show-left"
                                                         role="menu">
@@ -92,11 +92,11 @@
                                 <ul class="nav navbar-nav search-icons">
                                     <li class="cartmenu" [ngStyle]="{'display':Logedin==='1' ? 'inline-block' : 'none'}">
                                         <a [routerLink]="['/checkout']" class="dropdown-toggle pointer" data-toggle="tooltip"
-                                            title="Courses in cart"> <i class="fas fa-shopping-cart"></i><sup *ngIf="GlobalCartCourses">{{GlobalCartCourses.length}}</sup>
+                                            title="Courses in cart"> <i class="fas fa-shopping-cart"></i><sup *ngIf="GlobalCartCourses.courses">{{totalcarts}}</sup>
                                         </a>
                                         <div class="chat dropdown-menu dropdown-menu-right">
-                                            <ul *ngIf="!emptyCart && GlobalCartCourses.length > 0" class="chat notifications shopping-cart box-shadow-no">
-                                                <li *ngFor="let data of GlobalCartCourses; let i=index;"> <i class="fa fa-close"
+                                            <ul *ngIf="!emptyCart && totalcarts > 0" class="chat notifications shopping-cart box-shadow-no">
+                                                <li *ngFor="let data of GlobalCartCourses.courses; let i=index;"> <i class="fa fa-close"
                                                         data-toggle="tooltip" title="Remove from Cart" (click)="removeFromCart(i, data.course.id)">
                                                     </i> <a routerLink="" class="img"> <img *ngIf="data.course.course_image"
                                                             src="{{ImageUrl}}{{data.course.course_image}}" alt="" class="img-responsive imgheight"
@@ -109,11 +109,11 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                            <div class="submenu-btn-holder"> <a *ngIf="!emptyCart && GlobalCartCourses.length > 0"
+                                            <div class="submenu-btn-holder"> <a *ngIf="!emptyCart && totalcarts > 0"
                                                     class="text-center width-100" routerLink="/checkout" class="btn btn-lg text-right">Go
                                                     to Cart</a> </div>
                                         </div>
-                                        <ul *ngIf="GlobalCartCourses.length===0" class="dropdown-menu dropdown-menu-right chat notifications shopping-cart overflow-h">
+                                        <ul *ngIf="totalcarts===0" class="dropdown-menu dropdown-menu-right chat notifications shopping-cart overflow-h">
                                             <li class="text-center border-b-no"> <i class="fas fa-shopping-cart"></i>
                                                 <p class="margin-b-7">No items in Cart</p><button routerLink="/courses"
                                                     type="button" class="btn btn-primary btn-sm add-items-btn">Add
@@ -212,7 +212,7 @@
                                                 <li><a [routerLink]="['/events']"><i class="material-icons">local_activity</i>All
                                                         Events</a></li>
                                                 <li><a [routerLink]="['/winbidUser']"><i class="material-icons">announcement</i>Completed
-                                                        Bidding Activity</a></li>
+                                                        Bidding...</a></li>
                                                 <li><a onclick="topFunction()" (click)="logFunction()"><i class="material-icons">error_outline</i>
                                                         logout</a></li>
                                             </ul>

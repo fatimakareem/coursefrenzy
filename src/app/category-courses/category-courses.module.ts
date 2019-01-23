@@ -30,9 +30,9 @@ const categoryCoursesRoutes: Routes = [
   imports: [
     CommonModule,SlickModule,RatingModule,FormsModule,ReactiveFormsModule,
     RouterModule.forChild(categoryCoursesRoutes),
-    CoursesOnBidModule,
-    TrendingNowCoursesModule,
-    TopRatedCoursesModule
+    // CoursesOnBidModule,
+    // TrendingNowCoursesModule,
+    // TopRatedCoursesModule
   ],
   providers: [],
   exports: [SlickModule,RatingModule],

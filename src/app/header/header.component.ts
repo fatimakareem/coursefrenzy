@@ -162,6 +162,7 @@ public postedCoursesList:any;
       });
   }
   UserRole:any;
+  totalcarts;
   ngOnInit() {
     // this._home.get_role().subscribe(response => {
     //   this.UserRole = response.Role;
@@ -229,10 +230,12 @@ public postedCoursesList:any;
         if(response.hasOwnProperty("status")) {
           this.emptyCart = response.status;
           this.GlobalCartCourses = [];
+
           // alert('Checkout Courses are Empty')
         }
         else {
           this.GlobalCartCourses = response;
+          this.totalcarts=response.totalItems
           this.global2.getGolbalCartCourses(this.GlobalCartCourses);
           this.emptyCart = false;
         }

@@ -69,14 +69,16 @@ export class CourseCheckoutComponent implements OnInit {
       });
 
   }
+  totalcarts;
   ngOnInit() {
-    // this.obj2.get_checkout_courses().subscribe(response => {
-    //   this.GlobalCartCourses = response;
-    //   console.log('Checkout'+this.GlobalCartCourses);
-    //   this.global.getGolbalCartCourses(this.GlobalCartCourses);
-    //
-    //   this.loaded = true;
-    // });
+    this.obj2.get_checkout_courses().subscribe(response => {
+      this.GlobalCartCourses = response;
+      this.totalcarts=response.totalItems;
+      console.log('Checkout'+this.GlobalCartCourses);
+      this.global.getGolbalCartCourses(this.GlobalCartCourses);
+    
+      this.loaded = true;
+    });
     this.show_Card_info();
     if(this.GlobalCartCourses.length > 0) {
       this.emptyCart = false;

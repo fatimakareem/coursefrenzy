@@ -31,9 +31,9 @@ const nestedsubcategoryCoursesRoutes: Routes = [
   imports: [
     CommonModule,SlickModule,RatingModule,FormsModule, ReactiveFormsModule,
     RouterModule.forChild(nestedsubcategoryCoursesRoutes),
-    CoursesOnBidModule,
-    TrendingNowCoursesModule,
-    TopRatedCoursesModule
+    // CoursesOnBidModule,
+    // TrendingNowCoursesModule,
+    // TopRatedCoursesModule
   ],
 
   providers: [],

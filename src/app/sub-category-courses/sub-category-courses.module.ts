@@ -31,9 +31,9 @@ const subcategoryCoursesRoutes: Routes = [
   imports: [
     CommonModule,SlickModule,RatingModule,FormsModule, ReactiveFormsModule,
     RouterModule.forChild(subcategoryCoursesRoutes),
-    CoursesOnBidModule,
-    TrendingNowCoursesModule,
-    TopRatedCoursesModule
+    // CoursesOnBidModule,
+    // TrendingNowCoursesModule,
+    // TopRatedCoursesModule
   ],
 
   providers: [],

@@ -26,15 +26,6 @@ export class ChatboxService {
 	
 	
   constructor(private http: Http, private _http2: Http, private _nav: Router, @Inject(PLATFORM_ID) private platformId: Object,private headers: HeadersService,wsService: WebsocketService) {	
-    // this.messages = <Subject<Message>>wsService
-    // .connect(CHAT_URL)
-    // .map((response: MessageEvent): Message => {
-    //   let data = JSON.parse(response.data);
-    //   return {
-    //     author: data.author,
-    //     message: data.message
-    //   }
-    // });
    
   }
   searchTeacher(query) {
@@ -42,7 +33,7 @@ export class ChatboxService {
     if (localStorage.getItem('Authorization'))
     {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
-    return this._http2.post('http://192.168.29.132:4000/webchat/searchuser/',
+    return this._http2.post(Config.api + 'webchat/searchuser/',
       {
         'query': query,
       },{headers: headers}).map((res: Response) => {
@@ -69,7 +60,7 @@ export class ChatboxService {
     if (localStorage.getItem('Authorization'))
     {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
-    return this._http2.get('http://192.168.29.132:4000/webchat/All_Teacher_for_chat/',{headers: headers}
+    return this._http2.get(Config.api +'webchat/All_Teacher_for_chat/',{headers: headers}
      ).map((res: Response) => {
       if (res) {
         if (res.status === 201 || res.status === 200 || res.status === 202) {
@@ -90,7 +81,7 @@ export class ChatboxService {
     });}
   }
   get_messages(roomId,page) {
-    return this._http2.get('http://192.168.29.132:4000/webchat/messages/' + roomId +'/'+page,{headers: this.headers.getHeaders()}).map((response: Response) => response.json());
+    return this._http2.get(Config.api + 'webchat/messages/' + roomId +'/'+page,{headers: this.headers.getHeaders()}).map((response: Response) => response.json());
   }
   post_messages(roomId,Testing) {
     // alert('user1'+Testing);
@@ -99,7 +90,7 @@ export class ChatboxService {
     if (localStorage.getItem('Authorization'))
     {
       headers.append('Authorization', 'JWT ' + localStorage.getItem('Authorization'));
-    return this._http2.post('http://192.168.29.132:4000/webchat/messages/' + roomId +'/'+10,
+    return this._http2.post(Config.api +'webchat/messages/' + roomId +'/'+10,
       {
         'MessageText': Testing
       },{headers: headers}).map((res: Response) => {
@@ -125,7 +116,7 @@ export class ChatboxService {
   getRoom(user1,user2) {
     // alert('user1'+user1);
     // alert('user2'+user2);
-    return this._http2.post('http://192.168.29.132:4000/webchat/allrooms/',
+    return this._http2.post(Config.api +'webchat/allrooms/',
       {
         // 'user1': user1,
         'user2': user1,

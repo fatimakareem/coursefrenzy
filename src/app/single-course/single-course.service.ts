@@ -376,6 +376,7 @@ export class SingleCourseService {
         'video_isPrivate': video_isPrivate,
         'video_size': video_size,
         'chapter': chapter,
+        'allow_to_view':false
       }, {headers : headers}).map((res: Response) => {
       if (res) {
         // console.log('1');

@@ -485,6 +485,22 @@ this.totallectures=response['Total Lectures'];
   }
   SetVideoURL(video_url,SetVideoURL) {
    
+    
+      const dialogRef = this.dialog.open(VideoShowDialogComponent, {
+        width: '1366px',
+        data: {
+          video_url: video_url,
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    //   
+    
+    
+
+  }
+  SetVideoURL1(video_url,SetVideoURL) {
+   
     if(this.my_vedio== true){
       const dialogRef = this.dialog.open(VideoShowDialogComponent, {
         width: '1366px',
