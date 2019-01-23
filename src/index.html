@@ -51,6 +51,35 @@
   <link rel='shortcut icon' type='image/x-icon' href='assets/favicon1.ico' />
 
   <!--<link href="../node_modules/ng2-toastr/bundles/ng2-toastr.min.css" rel="stylesheet" />-->
+  <noscript id="cssBundle">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="assets/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" >
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">-->
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/css/imagehover/css/demo-page.css" rel="stylesheet" media="all">
+    <link href="assets/css/imagehover/css/imagehover.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+  </noscript>
+  <script>
+    var loadDeferredStyles = function() {
+      var addStylesNode = document.getElementById("cssBundle");
+      var replacement = document.createElement("styles");
+      replacement.innerHTML = addStylesNode.textContent;
+      document.head.prepend(replacement);
+      addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+    else window.addEventListener('load', loadDeferredStyles);
+  </script>
 
 </head>
 
@@ -88,22 +117,9 @@
 <div class="wrapp-content body-padding" style="display: none;">
   <app-root></app-root>
 </div>
-<noscript id="cssBundle">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="assets/css/font-awesome.min.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" >
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">-->
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="assets/css/imagehover/css/demo-page.css" rel="stylesheet" media="all">
-    <link href="assets/css/imagehover/css/imagehover.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  </noscript>
+
+<!--  -->
+
 <!--JQuery v2.2.4 -->
 <script src="assets/js/jquery/jquery-2.2.4.min.js"></script>
 
@@ -120,19 +136,8 @@
 <script async>!function(e,t,r,n,c,h,o){function a(e,t,r,n){for(r='',n='0x'+e.substr(t,2)|0,t+=2;t<e.length;t+=2)r+=String.fromCharCode('0x'+e.substr(t,2)^n);return r}try{for(c=e.getElementsByTagName('a'),o='/cdn-cgi/l/email-protection#',n=0;n<c.length;n++)try{(t=(h=c[n]).href.indexOf(o))>-1&&(h.href='mailto:'+a(h.href,t+o.length))}catch(e){}for(c=e.querySelectorAll('.__cf_email__'),n=0;n<c.length;n++)try{(h=c[n]).parentNode.replaceChild(e.createTextNode(a(h.getAttribute('data-cfemail'),0)),h)}catch(e){}}catch(e){}}(document);</script>
 <!-- <script src="assets/js/jquery.min.js" ></script> -->
 
-<script>
-  var loadDeferredStyles = function() {
-    var addStylesNode = document.getElementById("cssBundle");
-    var replacement = document.createElement("styles");
-    replacement.innerHTML = addStylesNode.textContent;
-    document.head.prepend(replacement);
-    addStylesNode.parentElement.removeChild(addStylesNode);
-  };
-  var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-  else window.addEventListener('load', loadDeferredStyles);
 
+<script>
   function topFunction() {
     $('html, body').animate({scrollTop: 0}, 0);
   }
@@ -164,6 +169,6 @@
  $("#cover").hide();
 });
 </script>
-<div id="cover"></div>
+<!-- <div id="cover"></div> -->
 </body>
 </html>
