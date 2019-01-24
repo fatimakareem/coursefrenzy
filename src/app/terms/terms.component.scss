@@ -1,16 +1,25 @@
 .terms-wrapper{
-  box-shadow: 0px 1px 1px 1px #888;padding: 30px 20px;
+  box-shadow: 0px 1px 1px 1px #888;
+  padding: 30px 20px;
+  border-radius: 10px;
+  margin: 10px auto;
   h1{
-    color: #cc0000;
-    font-weight: 500;
+    color: #000000;
+    font-weight: 600;
     font-size: 30px;
+    margin: 0;
   }
   h2{
     font-size: 24px;
     color: #cc0000;
+    margin: 0;
+    font-weight: bold;
+    text-transform: capitalize;
   }
   h3{
-    font-weight: 300;
+    font-weight: 400;
+    margin: 0;
+    font-size: 22px;
   }
   h4{
     font-size: 16px;
