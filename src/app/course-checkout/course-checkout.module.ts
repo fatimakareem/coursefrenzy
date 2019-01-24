@@ -8,6 +8,8 @@ import {LoaderModule} from "../loader/loader.module";
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { PaymentmethodsService } from '../paymentmethods/paymentmethods.service';
+import { TextMaskModule } from 'angular2-text-mask';
+
 const checkoutRoutes: Routes = [
   { path: '', component: CourseCheckoutComponent }
 ];
@@ -20,7 +22,7 @@ const checkoutRoutes: Routes = [
   ],
 
   imports: [
-    CommonModule,
+    CommonModule,TextMaskModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
