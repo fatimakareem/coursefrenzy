@@ -41,7 +41,7 @@ export class CourseCheckoutService {
   }
 
 
-  add_payment(cardNumber, expirationdate, cardcod, amount,id,status) {
+  add_payment(cardNumber, expirationdate, cardcod, amount,id,status,cardtype,holdername) {
    console.log('Chapter Name is ' + amount);
     const headers = new Headers();
     if (isPlatformBrowser(this.platformId)) {
@@ -96,7 +96,9 @@ export class CourseCheckoutService {
           'ccv': cardcod,
            'exp': expirationdate,
           'creditno': cardNumber,
-          'amount': amount
+          // 'amount': amount
+          "card_type":cardtype,
+"card_holder":holdername
         }, {headers: headers}).map((res: Response) => {
         if (res) {
           // console.log('1');

@@ -6,8 +6,8 @@
                 <div class="col-lg-6 col-md-12 for-center">
                     <div *ngIf="GlobalCartCourses" class="panel panel-info">
                         <div class="panel-heading"> Review Order </div>
-                        <div class="panel-body checkout-box" *ngFor="let list of GlobalCartCourses.courses; let i=index;"> <i
-                                class="fas fa-times"></i>
+                        <div class="panel-body checkout-box" *ngFor="let list of GlobalCartCourses.courses; let i=index;"> <a><i class="fa fa-trash-o font-size-36 wishlist"
+                            (click)="removeFromCart(i, list.course.id)" data-toggle="tooltip" title="Remove from Cart"></i></a>
                             <div class="">
                                 <div class="col-sm-3 col-xs-4"> <a> <img *ngIf="list.course.course_image" src="{{ImageUrl}}{{list.course.course_image}}"
                                             alt="" class="img-responsive" onError="this.src='../../assets/img/default_thumbnail.png'">
@@ -23,8 +23,7 @@
                                 </div>
                                 <div *ngIf="list.promocode !==null" class="col-sm-3 col-xs-3">
                                     <h6 class="display-inline-b">${{list.promocode.actual}}</h6>
-                                    <h6 class="display-inline-b"> Promo Code added </h6> <a><i class="fa fa-trash-o font-size-36 wishlist"
-                                            (click)="removeFromCart(i, list.course.id)" data-toggle="tooltip" title="Remove from Cart"></i></a>
+                                    <h6 class="display-inline-b"> Promo Code added </h6> 
                                 </div>
                             </div>
                         </div>
@@ -48,6 +47,13 @@
                             <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure
                                 Payment</div>
                             <div class="panel-body sh-signup-form-fix">
+                                    <mat-form-field class="example-full-width mat-size"> 
+                                            <!-- <label for="card-holder" style="font-size:16px;">Card Type</label> -->
+                                            <mat-select placeholder="Type Card" [(ngModel)]="model.cardtype"  [formControl]="CardtypeForm">
+                                                    <mat-option  *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</mat-option>
+                                                  </mat-select>
+                                            
+                                    </mat-form-field>
                                 <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Credit Card Number"
                                         minlength="14" maxlength="16" [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
                                         required>
@@ -70,9 +76,13 @@
                                     <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum Length of <strong>CardCode
                                             can be 4 characters</strong> </mat-error>
                                 </mat-form-field>
-                                <mat-form-field class="example-full-width mat-size" *ngIf="totalflag"> <input matInput
+                                <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Card Holder"
+                                    [formControl]="Holdername" [(ngModel)]="model.holdername" required >
+                            </mat-form-field>
+
+                                <!-- <mat-form-field class="example-full-width mat-size" *ngIf="totalflag"> <input matInput
                                         placeholder="Total Amount" [formControl]="TotalAmountForm" value="{{total}}"
-                                        [(ngModel)]="model.amount" required readonly> </mat-form-field>
+                                        [(ngModel)]="model.amount" required readonly> </mat-form-field> -->
                             </div>
                             <div class="col-md-6">
                                 <div class="payment-methods">

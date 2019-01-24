@@ -25,6 +25,13 @@ export class CourseCheckoutComponent implements OnInit {
   var_get_status;
   var_get_id;
   CCV: FormGroup;
+  card_opeation=[
+    {value: 'Visa', viewValue: 'Visa Card'},
+    {value: 'Mastercard', viewValue: 'Master Card'},
+    {value: 'American Express', viewValue: 'American Express'},
+    {value: 'Discover', viewValue: 'Discover'}
+    
+    ];
   CardNumber = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$';
   ExpiryDate= '([0-9]{2}[/]?){2}';
 
@@ -43,9 +50,16 @@ export class CourseCheckoutComponent implements OnInit {
     Validators.minLength(3),
     Validators.maxLength(4)
   ]);
-  TotalAmountForm = new FormControl('', [
+  Holdername = new FormControl('', [
     Validators.required
   ]);
+  CardtypeForm = new FormControl('', [
+    Validators.required,
+    
+  ]);
+  // TotalAmountForm = new FormControl('', [
+  //   Validators.required
+  // ]);
   endRequest ;
   // import("c:/Users/Brain Plow/Documents/GitHub/coursefrenzy/node_modules/rxjs/Subscription").Subscription;
 
@@ -57,6 +71,7 @@ export class CourseCheckoutComponent implements OnInit {
           this.GlobalCartCourses = [];
         }else{
           this.GlobalCartCourses = data;
+          this.totalcarts=data.totalItems;
           this.seeTotal();
         }
 
@@ -70,15 +85,34 @@ export class CourseCheckoutComponent implements OnInit {
 
   }
   totalcarts;
-  ngOnInit() {
-    this.obj2.get_checkout_courses().subscribe(response => {
-      this.GlobalCartCourses = response;
-      this.totalcarts=response.totalItems;
-      console.log('Checkout'+this.GlobalCartCourses);
-      this.global.getGolbalCartCourses(this.GlobalCartCourses);
+  getcart(){
     
-      this.loaded = true;
-    });
+      // alert('calling Checkout Courses');
+      this.obj2.get_checkout_courses().subscribe(response => {
+        if(response.hasOwnProperty("status")) {
+          this.emptyCart = response.status;
+          this.GlobalCartCourses = [];
+
+          // alert('Checkout Courses are Empty')
+        }
+        else {
+          this.GlobalCartCourses = response;
+          this.totalcarts=response.totalItems
+          this.global.getGolbalCartCourses(this.GlobalCartCourses);
+          this.emptyCart = false;
+        }
+      });
+    
+  }
+  ngOnInit() {
+    // this.obj2.get_checkout_courses().subscribe(response => {
+    //   this.GlobalCartCourses = response;
+    //   this.totalcarts=response.totalItems;
+    //   console.log('Checkout'+this.GlobalCartCourses);
+    //   this.global.getGolbalCartCourses(this.GlobalCartCourses);
+    
+    //   this.loaded = true;
+    // });
     this.show_Card_info();
     if(this.GlobalCartCourses.length > 0) {
       this.emptyCart = false;
@@ -88,7 +122,7 @@ export class CourseCheckoutComponent implements OnInit {
 
   seeTotal(){
       this.total = 0;
-      for(let list of this.GlobalCartCourses) {
+      for(let list of this.GlobalCartCourses.courses) {
         console.log(list.course.actual_price);
         if(list.promocode === null) {
         this.total = this.total + list.course.actual_price;
@@ -103,7 +137,7 @@ export class CourseCheckoutComponent implements OnInit {
   }
   onSubmit(f: NgForm) {
     this.model.amount = this.total;
-    this.obj2.add_payment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status).subscribe();
+    this.obj2.add_payment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
     console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status);
   }
   removeFromCart(index, course_id) {
@@ -122,9 +156,7 @@ export class CourseCheckoutComponent implements OnInit {
         this.obj2.removeFromCart(course_id).subscribe(
           data => {
             console.log(data);
-            console.log('index' + index);
-            this.GlobalCartCourses.splice(this.GlobalCartCourses.indexOf(this.GlobalCartCourses[index]),1);
-            console.log(this.GlobalCartCourses);
+            this.getcart();
             this.seeTotal();
             CourseCheckoutComponent.removeFromCartSuccess();
           },
@@ -165,17 +197,40 @@ show_Card_info()
 return this.obj_payment_service.showCards().subscribe(Response =>{
     this.res=Response;
     for(let i of this.res)
-    { if (i.default) {
-            this.status = i;
-          }   
-    }
-    if (this.status) {
-          this.model.cardNumber  = this.status.cardNumber;
-          this.model.expirationdate= this.status.expiryDate;
-          this.model.cardcod = this.status.ccv;
-          this.var_get_status=this.status.default;
-          this.var_get_id=this.status.id;
-        }
+    { if (i.default == true) {
+      this.status = i;
+      this.model.cardNumber  = this.status.cardNumber;
+      this.model.expirationdate= this.status.expiryDate;
+      this.model.cardcod = this.status.ccv;
+      this.var_get_status=this.status.default;
+      this.var_get_id=this.status.id;
+      this.model.cardtype=this.status.card_type;
+      this.model.holdername=this.status.nickname;
+    }  else if(i.default == true) {
+      this.model.cardNumber  = '';
+      this.model.expirationdate= '';
+      this.model.cardcod = '';
+      this.model.cardtype='';
+      this.model.holdername='';
+      // this.var_get_status=this.status.default;
+      // this.var_get_id=this.status.id;
+    }  
+}
+    // { if (i.default) {
+    //         this.status = i;
+    //       }   
+    // }
+    // if (this.status.default==true) {
+    //       this.model.cardNumber  = this.status.cardNumber;
+    //       this.model.expirationdate= this.status.expiryDate;
+    //       this.model.cardcod = this.status.ccv;
+    //       this.var_get_status=this.status.default;
+    //       this.var_get_id=this.status.id;
+    //     }else{
+    //       this.model.cardNumber ='';
+    //       this.model.expirationdate='';
+    //       this.model.cardcod ='';
+    //     }
   })
 }
 updefault;

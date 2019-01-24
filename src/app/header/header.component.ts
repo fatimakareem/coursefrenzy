@@ -128,6 +128,7 @@ public postedCoursesList:any;
           // alert('Global list is going to be set empty');
         }else {
           this.GlobalCartCourses = data;
+          this.totalcarts=data.totalItems;
         }
       });
 
@@ -223,7 +224,11 @@ public postedCoursesList:any;
 
       });
     }
+this.getcart();
+   
 
+  }
+  getcart(){
     if (this.Logedin === '1') {
       // alert('calling Checkout Courses');
       this.obj2.get_checkout_courses().subscribe(response => {
@@ -241,7 +246,6 @@ public postedCoursesList:any;
         }
       });
     }
-
   }
   nested(id){
     this.obj.get_nestedcategories(id).subscribe(response => {
@@ -559,9 +563,7 @@ onClick() {
         this.courseCheckout.removeFromCart(course_id).subscribe(
           data => {
             console.log(data);
-            console.log('index' + index);
-            this.GlobalCartCourses.splice(this.GlobalCartCourses.indexOf(this.GlobalCartCourses[index]),1);
-            console.log(this.GlobalCartCourses);
+            this.getcart();
             HeaderComponent.removeFromCartSuccess();
           },
           error => {
