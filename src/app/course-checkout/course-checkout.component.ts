@@ -57,6 +57,10 @@ export class CourseCheckoutComponent implements OnInit {
     Validators.required,
     
   ]);
+  Carddefault = new FormControl('', [
+   
+    
+  ]);
   // TotalAmountForm = new FormControl('', [
   //   Validators.required
   // ]);
@@ -113,11 +117,13 @@ export class CourseCheckoutComponent implements OnInit {
     
     //   this.loaded = true;
     // });
-    this.show_Card_info();
+    // this.show_Card_info();
     if(this.GlobalCartCourses.length > 0) {
       this.emptyCart = false;
     }
-
+    return this.obj_payment_service.showCards().subscribe(Response =>{
+          this.res=Response;
+    })
   }
 
   seeTotal(){
@@ -135,11 +141,7 @@ export class CourseCheckoutComponent implements OnInit {
       }
       this.totalflag = !this.totalflag;
   }
-  onSubmit(f: NgForm) {
-    this.model.amount = this.total;
-    this.obj2.add_payment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
-    console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status);
-  }
+ 
   removeFromCart(index, course_id) {
     console.log(index);
     console.log(course_id);
@@ -192,30 +194,30 @@ export class CourseCheckoutComponent implements OnInit {
   }
   status;
   res;
-show_Card_info()
-{
-return this.obj_payment_service.showCards().subscribe(Response =>{
-    this.res=Response;
-    for(let i of this.res)
-    { if (i.default == true) {
-      this.status = i;
-      this.model.cardNumber  = this.status.cardNumber;
-      this.model.expirationdate= this.status.expiryDate;
-      this.model.cardcod = this.status.ccv;
-      this.var_get_status=this.status.default;
-      this.var_get_id=this.status.id;
-      this.model.cardtype=this.status.card_type;
-      this.model.holdername=this.status.nickname;
-    }  else if(i.default == true) {
-      this.model.cardNumber  = '';
-      this.model.expirationdate= '';
-      this.model.cardcod = '';
-      this.model.cardtype='';
-      this.model.holdername='';
-      // this.var_get_status=this.status.default;
-      // this.var_get_id=this.status.id;
-    }  
-}
+// show_Card_info()
+// {
+// return this.obj_payment_service.showCards().subscribe(Response =>{
+//     this.res=Response;
+//     for(let i of this.res)
+//     { if (i.default == true) {
+//       this.status = i;
+//       this.model.cardNumber  = this.status.cardNumber;
+//       this.model.expirationdate= this.status.expiryDate;
+//       this.model.cardcod = this.status.ccv;
+//       this.var_get_status=this.status.default;
+//       this.var_get_id=this.status.id;
+//       this.model.cardtype=this.status.card_type;
+//       this.model.holdername=this.status.nickname;
+//     }  else if(i.default == true) {
+//       this.model.cardNumber  = '';
+//       this.model.expirationdate= '';
+//       this.model.cardcod = '';
+//       this.model.cardtype='';
+//       this.model.holdername='';
+//       // this.var_get_status=this.status.default;
+//       // this.var_get_id=this.status.id;
+//     }  
+// }
     // { if (i.default) {
     //         this.status = i;
     //       }   
@@ -231,49 +233,69 @@ return this.obj_payment_service.showCards().subscribe(Response =>{
     //       this.model.expirationdate='';
     //       this.model.cardcod ='';
     //     }
-  })
-}
+//   })
+// }
 updefault;
-  setcard(name,status,var_get_card_id) {
-    if (status == false) {
-      this.updefault = true;
-    }
-    else if(status == true)
-     {
-      this.updefault = false;
-    }
-    this.endRequest = this.obj_payment_service.updateCard(name,this.updefault,var_get_card_id).subscribe(Data => {
-      swal({
-        type: 'success',
-        title: 'Credit Card Details Are Updated!',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      this.show_Card_info();
-    },
-      error => {
-        if (error.status == 400) {
-          swal({
-            type: 'error',
-            title: 'Credit Card Details Are Not Correct!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }
-        else if (error.status == 500) {
-          swal(
-            'Sorry',
-            'Server Is Under Maintenance!',
-            'error'
-          )
-        }
-        else {
-          swal(
-            'Sorry',
-            'Some Thing Went Worrng!',
-            'error'
-          )
-        }
-      })
+hide:boolean=true;
+set_default:boolean=false;
+Add_new(){
+  alert(this.set_default)
+if(this.set_default==true){
+  this.hide=true;
+}else if(this.set_default==false){
+this.hide=false;
+}
+}
+onSubmit(f: NgForm) {
+  if(this.set_default==false){
+    this.obj2.add_payment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
+    console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status);
+  }else{
+    this.obj2.add_payment(this.model.defaultcard, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
+    console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status);
   }
+ 
+}
+  // setcard(name,status,var_get_card_id) {
+  //   if (status == false) {
+  //     this.updefault = true;
+  //   }
+  //   else if(status == true)
+  //    {
+  //     this.updefault = false;
+  //   }
+  //   this.endRequest = this.obj_payment_service.updateCard(name,this.updefault,var_get_card_id).subscribe(Data => {
+  //     swal({
+  //       type: 'success',
+  //       title: 'Credit Card Details Are Updated!',
+  //       showConfirmButton: false,
+  //       timer: 1500
+  //     })
+  //     this.show_Card_info();
+  //   },
+  //     error => {
+  //       if (error.status == 400) {
+  //         swal({
+  //           type: 'error',
+  //           title: 'Credit Card Details Are Not Correct!',
+  //           showConfirmButton: false,
+  //           timer: 1500
+  //         })
+  //       }
+  //       else if (error.status == 500) {
+  //         swal(
+  //           'Sorry',
+  //           'Server Is Under Maintenance!',
+  //           'error'
+  //         )
+  //       }
+  //       else {
+  //         swal(
+  //           'Sorry',
+  //           'Some Thing Went Worrng!',
+  //           'error'
+  //         )
+  //       }
+  //     })
+  // }
 }
