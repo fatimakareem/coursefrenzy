@@ -5,7 +5,7 @@
             <div class="cart-body text-center">
                 <div class="col-lg-6 col-md-12 for-center">
                     <div *ngIf="GlobalCartCourses" class="panel panel-info">
-                        <div class="panel-heading"> Review Order </div>
+                        <div class="panel-heading"> Place Order </div>
                         <div class="panel-body checkout-box" *ngFor="let list of GlobalCartCourses.courses; let i=index;"> <a><i class="fa fa-trash-o font-size-36 wishlist"
                             (click)="removeFromCart(i, list.course.id)" data-toggle="tooltip" title="Remove from Cart"></i></a>
                             <div class="">
@@ -29,18 +29,7 @@
                         </div>
                         <h6 *ngIf="totalflag" class="checkout-toal">Total Amount:{{total | currency:'USD'}}</h6>
                     </div>
-                    <div class="">
-                        <div class="checkout-select">
-                            <Label>Select list</Label>
-                            <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
-                                    <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
-                            </mat-select>
-                        </div>
-                        <div class="text-left">
-                            <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
-                            <Label>Select list</Label>
-                        </div>
-                    </div>
+                   
                 </div>
                 <div class="text-center no-items-holder" *ngIf="totalcarts===0">
                     <ul style="list-style-type:none">
@@ -52,14 +41,31 @@
                 </div>
             </div>
             
+            <div class="row checkout-select-box col-lg-6 col-md-12">
+                    <div class="col-lg-6 checkout-select">
+                        <Label>Saved Cards</Label>
+                        <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
+                                <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="col-lg-6 text-left">
+                        <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
+                        <Label>Add New Card</Label>
+                    </div>
             <div *ngIf="hide==false" class="cart-body">
+
+                    <div class="credit-card-box">
+                        <div class="flip"><div class="front"><div class="chip"></div><div class="logo"><svg xmlns:xlink="http://www.w3.org/1999/xlink" height="47.834px" id="visa" style="enable-background:new 0 0 47.834 47.834;" version="1.1" viewBox="0 0 47.834 47.834" width="47.834px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><g _ngcontent-c5=""><g _ngcontent-c5=""></g></g></svg></div><div class="card-holder" style="top: 29px;left: 221px;"><label _ngcontent-c5="">Cardholder</label><div _ngcontent-c5=""></div></div><div class="card-holder"><label _ngcontent-c5="">Card Number</label><div _ngcontent-c5="">123_-____-____-____</div></div><div class="card-expiration-date"><label _ngcontent-c5="">Expiry Date</label><div _ngcontent-c5=""></div></div></div><div class="back"><div class="strip"></div><div class="logo"><svg xmlns:xlink="http://www.w3.org/1999/xlink" height="47.834px" id="visa" style="enable-background:new 0 0 47.834 47.834;" version="1.1" viewBox="0 0 47.834 47.834" width="47.834px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><g _ngcontent-c5=""><g _ngcontent-c5=""></g></g></svg></div><div class="card-expiration-date"><label _ngcontent-c5="">Expiry Date</label><div _ngcontent-c5=""></div></div><div class="ccv"><label _ngcontent-c5="">CCV</label><div _ngcontent-c5="">She</div></div></div></div>
+                    </div>
+
+
                 <form (ngSubmit)="!ExpiryDateForm.hasError('required') && !ExpiryDateForm.hasError('pattern') && CardCodeForm.hasError('minlength')&& !CardCodeForm.hasError('maxlength')&& !CardNumberForm.hasError('required') && !CardNumberForm.hasError('pattern') && onSubmit(f)"
                     #f="ngForm" id="videoform" class="form-horizontal row" name="videoform" method="post">
-                    <div class="col-lg-6 center-div col-md-12">
-                        <div *ngIf="totalcarts>0" class="panel panel-info contact_form">
-                            <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure
-                                Payment</div>
-                            <div class="panel-body sh-signup-form-fix">
+                    <div class="col-lg-12 center-div col-md-12">
+                        <div *ngIf="totalcarts>0" class="contact_form">
+                            <!-- <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure
+                                Payment</div> -->
+                            <div class="panel-body margin-top-145 sh-signup-form-fix">
                                     <mat-form-field class="example-full-width mat-size"> 
                                             <!-- <label for="card-holder" style="font-size:16px;">Card Type</label> -->
                                             <mat-select placeholder="Type Card" [(ngModel)]="model.cardtype"  [formControl]="CardtypeForm" (change)="ShowButton(CardtypeForm.value)">
@@ -100,7 +106,7 @@
                                         placeholder="Total Amount" [formControl]="TotalAmountForm" value="{{total}}"
                                         [(ngModel)]="model.amount" required readonly> </mat-form-field> -->
                             </div>
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div class="payment-methods">
                                     <ul class="list-inline text-left">
                                         <li><a><img src="../../assets/upload/payment_01.png" alt=""></a></li>
@@ -112,45 +118,46 @@
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12"> <button type="submit" class="btn-file"
-                                        (click)="onSubmit(f)">Place Order</button> </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="table-responsive margin-top-20">
-                            <table class="table payment-table">
-                                <thead>
-                                    <tr>
-                                        <th>Nick name</th>
-                                        <th>Card Number</th>
-                                        <th>Expiry Date</th>
-                                        <th>Set as Defalt</th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngFor="let card of res">
-                                    <tr>
-                                        <td>{{card.nickname}}</td>
-                                        <td>{{card.cardNumber}}</td>
-                                        <td>{{card.expiryDate}}</td>
-                                        <td>
-                                            <div *ngIf="card.default==true">
-                                                <mat-slide-toggle [checked]="true" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
-                                                    class="py-toggle"></mat-slide-toggle>
-                                            </div>
-                                            <div *ngIf="card.default !=true">
-                                                <mat-slide-toggle [checked]="false" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
-                                                    class="py-toggle"></mat-slide-toggle>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        
                     </div>
                 </form>
             </div>
+            <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12"> <button type="submit" class="btn-file"
+                            (click)="onSubmit(f)">Place Order</button> </div>
+                </div>
+            </div>
+            <div class="col-lg-6 for-center able-responsive margin-top-20 table-responsive margin-top-20">
+                    <table class="table payment-table">
+                        <thead>
+                            <tr>
+                                <th>Nick name</th>
+                                <th>Card Number</th>
+                                <th>Expiry Date</th>
+                                <th>Set as Defalt</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let card of res">
+                            <tr>
+                                <td>{{card.nickname}}</td>
+                                <td>{{card.cardNumber}}</td>
+                                <td>{{card.expiryDate}}</td>
+                                <td>
+                                    <div *ngIf="card.default==true">
+                                        <mat-slide-toggle [checked]="true" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
+                                            class="py-toggle"></mat-slide-toggle>
+                                    </div>
+                                    <div *ngIf="card.default !=true">
+                                        <mat-slide-toggle [checked]="false" name="atm_details" (click)="setcard(card.nickname,card.default,card.id)"
+                                            class="py-toggle"></mat-slide-toggle>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </div>
