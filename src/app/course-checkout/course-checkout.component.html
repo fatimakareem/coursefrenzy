@@ -29,6 +29,16 @@
                         </div>
                         <h6 *ngIf="totalflag" class="checkout-toal">Total Amount:{{total | currency:'USD'}}</h6>
                     </div>
+                    <div class="checkout-select">
+                        <Label>Select list</Label>
+                        <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
+                                <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="text-left">
+                        <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
+                        <Label>Select list</Label>
+                    </div>
                 </div>
                 <div class="text-center no-items-holder" *ngIf="totalcarts===0">
                     <ul style="list-style-type:none">
@@ -39,10 +49,7 @@
                     </ul>
                 </div>
             </div>
-            <mat-select [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
-                    <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
-                  </mat-select>
-            <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
+            
             <div *ngIf="hide==false" class="cart-body">
                 <form (ngSubmit)="!ExpiryDateForm.hasError('required') && !ExpiryDateForm.hasError('pattern') && CardCodeForm.hasError('minlength')&& !CardCodeForm.hasError('maxlength')&& !CardNumberForm.hasError('required') && !CardNumberForm.hasError('pattern') && onSubmit(f)"
                     #f="ngForm" id="videoform" class="form-horizontal row" name="videoform" method="post">
