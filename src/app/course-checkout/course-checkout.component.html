@@ -3,7 +3,7 @@
     <div class="content-box-01 padding-top-33">
         <div class="container">
             <div class="cart-body text-center">
-                <div class="col-lg-6 col-md-12 for-center">
+                <div class="col-lg-8 col-md-12 for-center">
                     <div *ngIf="GlobalCartCourses" class="panel panel-info">
                         <div class="panel-heading"> Place Order </div>
                         <div class="panel-body checkout-box" *ngFor="let list of GlobalCartCourses.courses; let i=index;"> <a><i class="fa fa-trash-o font-size-36 wishlist"
@@ -41,16 +41,20 @@
                 </div>
             </div>
             
-            <div class="row checkout-select-box col-lg-6 col-md-12">
-                    <div class="col-lg-6 checkout-select">
+            <div class="row checkout-select-box col-lg-8 col-md-12">
+                    <div class="col-lg-6">
                         <Label>Saved Cards</Label>
-                        <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
-                                <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
-                        </mat-select>
                     </div>
                     <div class="col-lg-6 text-left">
                         <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
                         <Label>Add New Card</Label>
+                    </div>
+                    <div class="col-lg-12">
+                        <mat-form-field class="width-50per">
+                            <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
+                                    <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
             <div *ngIf="hide==false" class="cart-body">
 
@@ -60,20 +64,20 @@
 
 
                 <form (ngSubmit)="!ExpiryDateForm.hasError('required') && !ExpiryDateForm.hasError('pattern') && CardCodeForm.hasError('minlength')&& !CardCodeForm.hasError('maxlength')&& !CardNumberForm.hasError('required') && !CardNumberForm.hasError('pattern') && onSubmit(f)"
-                    #f="ngForm" id="videoform" class="form-horizontal row" name="videoform" method="post">
+                    #f="ngForm" id="videoform" class="form-horizontal row sh-signup-form-fix" name="videoform" method="post">
                     <div class="col-lg-12 center-div col-md-12">
                         <div *ngIf="totalcarts>0" class="contact_form">
                             <!-- <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure
                                 Payment</div> -->
-                            <div class="panel-body margin-top-145 sh-signup-form-fix">
-                                    <mat-form-field class="example-full-width mat-size"> 
+                            <div class="panel-body margin-top-145 padding-bottom-">
+                                    <mat-form-field class="col-lg-6 mat-size"> 
                                             <!-- <label for="card-holder" style="font-size:16px;">Card Type</label> -->
                                             <mat-select placeholder="Type Card" [(ngModel)]="model.cardtype"  [formControl]="CardtypeForm" (change)="ShowButton(CardtypeForm.value)">
                                                     <mat-option  *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</mat-option>
                                                   </mat-select>
                                             
                                     </mat-form-field>
-                                <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Credit Card Number"
+                                <mat-form-field class="col-lg-6 mat-size"> <input matInput placeholder="Credit Card Number"
                                     [textMask]="{mask: cardmask}" [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
                                         required>
                                     <mat-error *ngIf="CardNumberForm.hasError('pattern')"> Please enter a valid card
@@ -81,7 +85,7 @@
                                     <mat-error *ngIf="CardNumberForm.hasError('required')"> Card number is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
-                                <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Expiry Date"
+                                <mat-form-field class="col-lg-6 mat-size"> <input matInput placeholder="Expiry Date"
                                         [formControl]="ExpiryDateForm" [(ngModel)]="model.expirationdate" [textMask]="{mask: mask}" #exp (change)="chek(exp.value)" required>
                                     <mat-error *ngIf="ExpiryDateForm.hasError('required')"> Expiry Date is <strong>required</strong>
                                     </mat-error>
@@ -91,14 +95,14 @@
                                                 Invalid Expiry Date
                                               </span> 
                                 </mat-form-field>
-                                <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="CardCode"
+                                <mat-form-field class="col-lg-6 mat-size"> <input matInput placeholder="CardCode"
                                         [formControl]="CardCodeForm" [(ngModel)]="model.cardcod" required [textMask]="{mask: ccvmask}">
                                     <mat-error *ngIf="CardCodeForm.hasError('minlength')"> Maximum Length of <strong>CardCode
                                             can be 3 characters</strong> </mat-error>
                                     <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum Length of <strong>CardCode
                                             can be 4 characters</strong> </mat-error>
                                 </mat-form-field>
-                                <mat-form-field class="example-full-width mat-size"> <input matInput placeholder="Card Holder"
+                                <mat-form-field class="col-lg-6 mat-size"> <input matInput placeholder="Card Holder"
                                     [formControl]="Holdername" [(ngModel)]="model.holdername" required >
                             </mat-form-field>
 
@@ -124,12 +128,11 @@
                     </div>
                 </form>
             </div>
-            <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12"> <button type="submit" class="btn-file"
+                    <div class="col-md-8 col-sm-8 col-xs-12"> <button type="submit" class="btn-file"
                             (click)="onSubmit(f)">Place Order</button> </div>
-                </div>
+                
             </div>
-            <div class="col-lg-6 for-center able-responsive margin-top-20 table-responsive margin-top-20">
+            <!-- <div class="col-lg-8 for-center able-responsive margin-top-20 table-responsive margin-top-20">
                     <table class="table payment-table">
                         <thead>
                             <tr>
@@ -157,7 +160,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> -->
         </div>
     </div>
 </div>

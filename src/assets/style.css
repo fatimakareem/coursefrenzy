@@ -93,7 +93,8 @@ a {
         padding: 100px 20px 45px
     }
     .search-holder input[type=search] {
-        font-size: 42px
+        font-size: 36px;
+        font-weight: 600;
     }
     /* .navbar-nav>li>a {
         font-size: 18px!important
@@ -888,7 +889,7 @@ li.vimeo:hover {
 
 .navbar-default .navbar-nav>.open>a:focus,
 .navbar-default .navbar-nav>.open>a:hover {
-    background-color: #c00!important
+    background-color: #fff!important
 }
 
 .dropdown-menu li:focus,
@@ -5561,7 +5562,7 @@ small {
 }
 
 .card .card-content {
-    padding: 15px 20px
+    padding: 25px 20px 0;
 }
 
 .card .card-title {
