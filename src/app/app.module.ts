@@ -63,7 +63,6 @@ import {AuthGuard} from './auth-guard/auth-guard.service';
 import {LoginService} from './login/login.service';
 import {LogoutComponent} from './logout/logout.component';
 import {LogoutService} from './logout/logout.service';
-import {UploadVideosComponent} from './upload-videos/upload-videos.component';
 import {UploadCoursesService} from './upload-courses/upload-courses.service';
 import {CoursesService} from './course/courses.service';
 import {ChangePasswordService} from './change-password/change-password.service';
@@ -157,7 +156,6 @@ export function provideConfig() {
     UserProfileComponent,
     AdminLayoutComponent,
     LogoutComponent,
-    UploadVideosComponent,
     ChangePasswordComponent,
     SingleCategoryComponent,
     ChatComponent,

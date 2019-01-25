@@ -1469,7 +1469,8 @@ export class IntroVideoComponent {
   private ifImageUpload(data) {
     this.obj.upload_introvideo( data.video_url, data.video_minutes, data.video_size,this.course.id).subscribe(
       data => {
-        if(data.message=="Video Already Exists."){
+        var mess=data['message']
+        if(mess=="Video Already Exists."){
           swal({
             type: 'error',
             title: 'Oops! <br> Video Already Exists.',

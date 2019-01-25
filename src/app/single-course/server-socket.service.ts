@@ -16,10 +16,10 @@ export class ServerSocket {
     // Using share() causes a single websocket to be created when the first
     // observer subscribes. This socket is shared with subsequent observers
     // and closed when the observer count falls to zero.
-    return this.outputStream = this.socketFactory.connect(
-      'ws://' + this.objGlobalvariables + roomno + '/' + username + '/' + '1?username=' + username,
-      this.inputStream = new QueueingSubject<any>()
-    ).share();
+    // return this.outputStream = this.socketFactory.connect(
+    //   'ws://' + this.objGlobalvariables + roomno + '/' + username + '/' + '1?username=' + username,
+    //   this.inputStream = new QueueingSubject<any>()
+    // ).share();
   }
   public send(message: any): void {
     // console.log('sending : ' + message);
