@@ -34,21 +34,19 @@ export class CourseCheckoutComponent implements OnInit {
     ];
   CardNumber = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$';
   ExpiryDate= '([0-9]{2}[/]?){2}';
-
+  
   ExpiryDateForm = new FormControl('', [
     Validators.required,
-    Validators.pattern('(0[1-9]|10|11|12)/20[0-9]{2}$'),
+    Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$'),
   ]);
 
   CardNumberForm = new FormControl('', [
     Validators.required,
-    Validators.pattern(this.CardNumber),
   ]);
 
   CardCodeForm = new FormControl('', [
     Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(4)
+  
   ]);
   Holdername = new FormControl('', [
     Validators.required
@@ -64,11 +62,33 @@ export class CourseCheckoutComponent implements OnInit {
   // TotalAmountForm = new FormControl('', [
   //   Validators.required
   // ]);
+  expirydate;
+  chek(val){
+    // this.expirydate=val.toString().slice(3,7);
+    this.expirydate=val.toString().slice(3,5);
+    console.log(this.expirydate,'jj')
+  }
+  public mask=function(rawValue) {
+   
+    // add logic to generate your mask array  
+    if (rawValue && rawValue.length > 0) {
+        if (rawValue[0] == '0' || rawValue[5] == '1') {
+            return [/[01]/, /[1-9]/, '/',  /[0-9]/, /[0123456789]/];
+        } else {
+            return [/[01]/, /[0-2]/, '/',  /[0-9]/, /[0123456789]/];
+        }
+    }
+    return [/[01]/, /[0-9]/, '/',  /[0-9]/, /[0123456789]/];
+    
+}
   endRequest ;
+  public ccvmask =[/[0-9]/, /\d/, /\d/];
+  public cardmask =[/[0-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
   // import("c:/Users/Brain Plow/Documents/GitHub/coursefrenzy/node_modules/rxjs/Subscription").Subscription;
 
   constructor(private obj: UploadCoursesService,private obj_payment_service:PaymentmethodsService, private obj2: CourseCheckoutService, private global: GlobalService, private formBuilder: FormBuilder ) {
-
+   
     this.global.GlobalCartCourses$.subscribe(
       data => {
         if(data.length===0){
@@ -89,6 +109,25 @@ export class CourseCheckoutComponent implements OnInit {
 
   }
   totalcarts;
+  ShowButton(var_type_atm) {
+    // this.cardtype = var_type_atm;
+    if (var_type_atm == "American Express") {
+     this.cardmask = [/[3]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]
+     this.ccvmask=[/[0-9]/, /\d/, /\d/,/\d/]
+    }
+    else if (var_type_atm == "Visa") {
+     this.cardmask=[/[4]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+     this.ccvmask=[/[0-9]/, /\d/, /\d/]
+    }
+    else if (var_type_atm == "Mastercard") {
+      this.cardmask=[/[5]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+      this.ccvmask=[/[0-9]/, /\d/, /\d/]
+     } else{
+      this.cardmask=[/[6]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+      this.ccvmask=[/[0-9]/, /\d/, /\d/]
+     }
+  }
+ 
   getcart(){
     
       // alert('calling Checkout Courses');
@@ -194,47 +233,7 @@ export class CourseCheckoutComponent implements OnInit {
   }
   status;
   res;
-// show_Card_info()
-// {
-// return this.obj_payment_service.showCards().subscribe(Response =>{
-//     this.res=Response;
-//     for(let i of this.res)
-//     { if (i.default == true) {
-//       this.status = i;
-//       this.model.cardNumber  = this.status.cardNumber;
-//       this.model.expirationdate= this.status.expiryDate;
-//       this.model.cardcod = this.status.ccv;
-//       this.var_get_status=this.status.default;
-//       this.var_get_id=this.status.id;
-//       this.model.cardtype=this.status.card_type;
-//       this.model.holdername=this.status.nickname;
-//     }  else if(i.default == true) {
-//       this.model.cardNumber  = '';
-//       this.model.expirationdate= '';
-//       this.model.cardcod = '';
-//       this.model.cardtype='';
-//       this.model.holdername='';
-//       // this.var_get_status=this.status.default;
-//       // this.var_get_id=this.status.id;
-//     }  
-// }
-    // { if (i.default) {
-    //         this.status = i;
-    //       }   
-    // }
-    // if (this.status.default==true) {
-    //       this.model.cardNumber  = this.status.cardNumber;
-    //       this.model.expirationdate= this.status.expiryDate;
-    //       this.model.cardcod = this.status.ccv;
-    //       this.var_get_status=this.status.default;
-    //       this.var_get_id=this.status.id;
-    //     }else{
-    //       this.model.cardNumber ='';
-    //       this.model.expirationdate='';
-    //       this.model.cardcod ='';
-    //     }
-//   })
-// }
+
 updefault;
 hide:boolean=true;
 set_default:boolean=false;
@@ -244,58 +243,19 @@ if(this.set_default==true){
   this.hide=true;
 }else if(this.set_default==false){
 this.hide=false;
+
 }
 }
 onSubmit(f: NgForm) {
-  if(this.set_default==false){
-    this.obj2.add_payment(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
+  if(this.model.cardNumber){
+    this.obj2.add_payment(this.model.cardNumber.split('-').join(''), this.model.expirationdate.split('/').join(''), this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
     console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status);
-  }else{
-    this.obj2.add_payment(this.model.defaultcard, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
+  }else if(this.model.defaultcard){
+    this.obj2.add_payment(this.model.defaultcard.split('-').join(''), this.model.expirationdate.split('/').join(''), this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
     console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status);
   }
  
 }
-  // setcard(name,status,var_get_card_id) {
-  //   if (status == false) {
-  //     this.updefault = true;
-  //   }
-  //   else if(status == true)
-  //    {
-  //     this.updefault = false;
-  //   }
-  //   this.endRequest = this.obj_payment_service.updateCard(name,this.updefault,var_get_card_id).subscribe(Data => {
-  //     swal({
-  //       type: 'success',
-  //       title: 'Credit Card Details Are Updated!',
-  //       showConfirmButton: false,
-  //       timer: 1500
-  //     })
-  //     this.show_Card_info();
-  //   },
-  //     error => {
-  //       if (error.status == 400) {
-  //         swal({
-  //           type: 'error',
-  //           title: 'Credit Card Details Are Not Correct!',
-  //           showConfirmButton: false,
-  //           timer: 1500
-  //         })
-  //       }
-  //       else if (error.status == 500) {
-  //         swal(
-  //           'Sorry',
-  //           'Server Is Under Maintenance!',
-  //           'error'
-  //         )
-  //       }
-  //       else {
-  //         swal(
-  //           'Sorry',
-  //           'Some Thing Went Worrng!',
-  //           'error'
-  //         )
-  //       }
-  //     })
-  // }
+
+
 }
