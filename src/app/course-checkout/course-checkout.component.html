@@ -29,15 +29,17 @@
                         </div>
                         <h6 *ngIf="totalflag" class="checkout-toal">Total Amount:{{total | currency:'USD'}}</h6>
                     </div>
-                    <div class="checkout-select">
-                        <Label>Select list</Label>
-                        <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
-                                <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
-                        </mat-select>
-                    </div>
-                    <div class="text-left">
-                        <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
-                        <Label>Select list</Label>
+                    <div class="">
+                        <div class="checkout-select">
+                            <Label>Select list</Label>
+                            <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
+                                    <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
+                            </mat-select>
+                        </div>
+                        <div class="text-left">
+                            <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
+                            <Label>Select list</Label>
+                        </div>
                     </div>
                 </div>
                 <div class="text-center no-items-holder" *ngIf="totalcarts===0">
