@@ -246,7 +246,7 @@ this.hide=false;
 
 }
 }
-onSubmit(f: NgForm) {
+onSubmit() {
   if(this.model.cardNumber){
     this.obj2.add_payment(this.model.cardNumber.split('-').join(''), this.model.expirationdate.split('/').join(''), this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status,this.model.cardtype,this.model.holdername).subscribe();
     console.log(this.model.cardNumber, this.model.expirationdate, this.model.cardcod, this.model.amount,this.var_get_id,this.var_get_status);

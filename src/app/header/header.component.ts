@@ -24,7 +24,7 @@ declare const $: any;
   styleUrls: ['./header.component.css', '../chat/chat.component.css', '../course/course.component.css']
 })
 export class HeaderComponent implements OnInit {
-public nestedSubCategories:any;
+// public nestedSubCategories:any;
 public postedCoursesList:any;
   public Categories: any;
   loaded = false;
@@ -247,11 +247,7 @@ this.getcart();
       });
     }
   }
-  nested(id){
-    this.obj.get_nestedcategories(id).subscribe(response => {
-      this.nestedSubCategories = response;
-    });
-  }
+ 
   openDialog(): void {
     if (localStorage.getItem("loged_in")) {
       this.nav.navigate(['/mycourses']);
