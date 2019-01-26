@@ -87,7 +87,19 @@ a {
         margin: 0
     }
 } */
-
+.navbar-collapse{
+    float:left;
+    /* width:calc(100% - 210px)!important;
+    width:-webkit-calc(100% - 210px)!important; */
+    width: auto;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+    cursor: pointer;
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+    border: none !important;
+}
 @media (max-width:1400px) {
     .search-outer {
         padding: 100px 20px 45px
@@ -122,9 +134,10 @@ a {
         font-size: 13px!important
     } */
     .navbar-collapse {
-        width: calc(100% - 145px)!important;
+        /* width: calc(100% - 145px)!important;
         width: -moz-calc(100% - 145px)!important;
-        width: -webkit-calc(100% - 145px)!important
+        width: -webkit-calc(100% - 145px)!important; */
+        width: auto;
     }
     .material-icons {
         font-size: 20px!important
@@ -178,7 +191,8 @@ a {
     .user-detail {
         right: 0;
         left: auto;
-        width: auto
+        width: auto;
+        position: absolute;
     }
     .user-detail>ul {
         width: 100%
@@ -231,7 +245,7 @@ a {
     }
 }
 
-@media (max-width:1200px) {
+@media (max-width:1280px) {
     .header-absolute .container-fluid {
         padding: 0 20px
     }
@@ -240,8 +254,15 @@ a {
         right: 0;
         border: 0
     }
-    .nav>li>a {
-        padding: 1em .7em
+    .logo {
+        width: 165px !important;
+    }
+    .navbar-nav>li>a{
+        font-size: 16px;
+        padding: 0 5px!important;
+    }
+    .navbar-right li a, .user-detail li a{
+        font-size: 16px !important;
     }
 }
 
@@ -316,10 +337,10 @@ a {
     }
     .logo {
         position: absolute;
-        left: 50%;
+        left: 0;
         width: 150px;
         margin: 10px 0 0 -75px!important;
-        top: -4px
+        top: 4px;
     }
     .navbar-toggle {
         z-index: 10
@@ -654,7 +675,8 @@ li.vimeo:hover {
     text-align: left;
     z-index: 100;
     padding: 0;
-    background-color: #3c3d41
+    /* background-color: #3c3d41; */
+    background: #fff;
 }
 
 .header-absolute,
@@ -798,11 +820,6 @@ li.vimeo:hover {
     font-weight: 300
 }
 
-.about-module h3,
-.navbar-nav>li>a,
-.notfound h2 {
-    text-transform: uppercase
-}
 
 .navbar-brand small {
     display: block;
@@ -824,8 +841,7 @@ li.vimeo:hover {
 }
 
 .navbar-nav>li>a {
-    font-size: 13px;
-    color: #fff!important;
+    color: #222;
     padding: 14px 18px 12px;
     font-weight: 700;
     line-height: 30px;
@@ -876,12 +892,6 @@ li.vimeo:hover {
     margin-bottom: 0
 }
 
-.navbar-default .navbar-nav>.active>a,
-.navbar-default .navbar-nav>.active>a:focus,
-.navbar-default .navbar-nav>.active>a:hover,
-.navbar-nav>li:hover {
-    background-color: #47484c
-}
 
 .navbar-default .navbar-nav>.open>a {
     color: #fff
@@ -4673,8 +4683,9 @@ small {
 
 .navbar-right li a,
 .user-detail li a {
-    font-size: 16px!important;
+    font-size: 18px;
     padding: 10px;
+    font-weight: bold;
     margin: 0
 }
 
@@ -4810,13 +4821,6 @@ small {
     input:-webkit-input-placeholder {
         font-size: 18px!important
     }
-    .logo {
-        width: 150px;
-        position: absolute;
-        left: 50%;
-        margin: 10px 0 0 -75px!important;
-        top: -4px
-    }
     .navbar-toggle {
         z-index: 10
     }
@@ -4877,12 +4881,6 @@ small {
     }
     .nav>li>a {
         padding: 5px 20px
-    }
-    .navbar-default .navbar-nav>.active>a,
-    .navbar-default .navbar-nav>.active>a:focus,
-    .navbar-default .navbar-nav>.active>a:hover,
-    .navbar-nav>li:hover {
-        background-color: transparent!important
     }
     .content .entry-title {
         font-size: 21px;
@@ -4951,9 +4949,10 @@ small {
         width: 100px
     }
     .navbar-collapse {
-        width: calc(100% - 225px)!important;
+        /* width: calc(100% - 225px)!important;
         width: -moz-calc(100% - 225px)!important;
-        width: -webkit-calc(100% - 225px)!important
+        width: -webkit-calc(100% - 225px)!important; */
+        width: auto;
     }
     .logo {
         margin: 17px 10px 0 0!important;
@@ -5017,9 +5016,16 @@ small {
         right: 0
     }
     .user-detail {
-        right: 20px;
-        left: auto;
+        right: 0px;
+        top: 0px;
+        position: absolute;
         width: auto
+    }
+    .hover-effect {
+        padding: 2px 0!important;
+    }
+    .navbar-nav>li>a {
+        font-size: 18px;
     }
     .user-detail>ul {
         width: 100%
@@ -5063,7 +5069,7 @@ small {
         padding: 5px 0
     }
     .user-detail>ul>li>a {
-        padding: 5px 2px!important
+        padding: 0px 8px!important
     }
     #notifications,
     .darkheader .cartmenu .chat {
@@ -5132,8 +5138,9 @@ small {
         visibility: visible;
         opacity: 1;
         top: 100%;
-        min-width: 280px;
-        padding: 5px 0
+        min-width: 220px;
+        padding: 5px 0;
+        left: -80px;
     }
     .navbar-nav .has-submenu ul {
         -webkit-transition: visibility .35s ease-in-out, opacity .35s ease-in-out, top .35s ease-in-out, bottom .35s ease-in-out, left .35s ease-in-out, right .35s ease-in-out;
@@ -5236,6 +5243,7 @@ small {
 }
 
 @media (max-width:992px) {
+    
     #sidebar,
     .header-absolute .container-fluid,
     .post-desc {

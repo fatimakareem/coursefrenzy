@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <header class="header darkheader">
+    <header class="header">
         <div class="container-fluid">
             <nav class="navbar navbar-default">
                 <div class="container-f">
@@ -122,7 +122,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown cartmenu searchmenu hasmenu"> <a (click)="openSearch()" class="dropdown-toggle"><i
+                                    <li class="dropdown"> <a (click)="openSearch()" class="dropdown-toggle"><i
                                                 class="fas fa-search"></i></a> </li>
                                     <li class="cartmenu" [ngStyle]="{'display':Logedin==='1' ? 'inline-block' : 'none'}">
                                         <a data-toggle="dropdown"> <i class="fas fa-bell color-custom"></i> <sup *ngIf="notify">{{notify.unread}}</sup>
@@ -147,14 +147,14 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown cartmenu searchmenu hasmenu" [ngStyle]="{'display':Logedin==='1' ? 'none' : 'inline-block'}">
+                                    <li class="dropdown" [ngStyle]="{'display':Logedin==='1' ? 'none' : 'inline-block'}">
                                         <a href="https://play.google.com/store/apps/details?id=com.brainplow.brainplow.coursefrenzy&hl=en"
                                             target="_blank" class="dropdown-toggle pointer" data-toggle="tooltip" title="CourseFrenzy Android Application"><i
                                                 class="fa fa-android"></i></a> </li>
-                                    <li class="dropdown cartmenu searchmenu hasmenu" [ngStyle]="{'display':Logedin==='1' ? 'none' : 'inline-block'}">
+                                    <li class="dropdown" [ngStyle]="{'display':Logedin==='1' ? 'none' : 'inline-block'}">
                                         <a class="dropdown-toggle pointer" data-toggle="tooltip" title="CourseFrenzy IOS Application"><i
                                                 class="fa fa-apple"></i></a> </li>
-                                    <li class="dropdown cartmenu searchmenu hasmenu" [ngStyle]="{'display':Logedin==='1' ? 'inline-block' : 'none'}">
+                                    <li class="dropdown" [ngStyle]="{'display':Logedin==='1' ? 'inline-block' : 'none'}">
                                         <a [routerLink]="['/wishlist']" class="dropdown-toggle pointer" data-toggle="tooltip"
                                             title="Courses in wishlist"> <i class="fas fa-heart color-custom font-18"></i>
                                             <sup *ngIf="wishlistCourses">{{wishlistCourses.length}}</sup> </a>
