@@ -48,6 +48,7 @@
                     <div class="col-lg-6 text-left">
                         <mat-slide-toggle [checked]="true" [(ngModel)]="set_default" (click)="Add_new()" class="py-toggle"></mat-slide-toggle>
                         <Label>Add New Card</Label>
+<<<<<<< HEAD
                     </div> -->
                     
                     <div class="">
@@ -71,6 +72,36 @@
                                         <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
                                                 <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
                                         </mat-select>
+=======
+                    </div>
+                    <div class="col-lg-12" *ngIf="hide==true">
+                        <mat-form-field class="width-50per">
+                            <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard" [formControl]="Carddefault">
+                                    <mat-option  *ngFor="let card of res" [value]="card.cardNumber">{{card.nickname}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+            <div *ngIf="hide==false" class="cart-body">
+
+                    <div class="credit-card-box">
+                        <div class="flip"><div class="front"><div class="chip"></div><div class="logo"><svg xmlns:xlink="http://www.w3.org/1999/xlink" height="47.834px" id="visa" style="enable-background:new 0 0 47.834 47.834;" version="1.1" viewBox="0 0 47.834 47.834" width="47.834px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><g _ngcontent-c5=""><g _ngcontent-c5=""></g></g></svg></div><div class="card-holder" style="top: 29px;left: 221px;"><label _ngcontent-c5="">Cardholder</label><div _ngcontent-c5=""></div></div><div class="card-holder"><label _ngcontent-c5="">Card Number</label><div _ngcontent-c5="">123_-____-____-____</div></div><div class="card-expiration-date"><label _ngcontent-c5="">Expiry Date</label><div _ngcontent-c5=""></div></div></div><div class="back"><div class="strip"></div><div class="logo"><svg xmlns:xlink="http://www.w3.org/1999/xlink" height="47.834px" id="visa" style="enable-background:new 0 0 47.834 47.834;" version="1.1" viewBox="0 0 47.834 47.834" width="47.834px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><g _ngcontent-c5=""><g _ngcontent-c5=""></g></g></svg></div><div class="card-expiration-date"><label _ngcontent-c5="">Expiry Date</label><div _ngcontent-c5=""></div></div><div class="ccv"><label _ngcontent-c5="">CCV</label><div _ngcontent-c5="">She</div></div></div></div>
+                    </div>
+
+
+                <form (ngSubmit)="!ExpiryDateForm.hasError('required') && !ExpiryDateForm.hasError('pattern') && CardCodeForm.hasError('minlength')&& !CardCodeForm.hasError('maxlength')&& !CardNumberForm.hasError('required') && !CardNumberForm.hasError('pattern') && onSubmit(f)"
+                    #f="ngForm" id="videoform" class="form-horizontal row sh-signup-form-fix" name="videoform" method="post">
+                    <div class="col-lg-12 center-div col-md-12">
+                        <div *ngIf="totalcarts>0" class="contact_form">
+                            <!-- <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure
+                                Payment</div> -->
+                            <div class="panel-body margin-top-145 padding-bottom-">
+                                    <mat-form-field class="col-lg-6 mat-size"> 
+                                            <!-- <label for="card-holder" style="font-size:16px;">Card Type</label> -->
+                                            <mat-select placeholder="Type Card" [(ngModel)]="model.cardtype"  [formControl]="CardtypeForm" (change)="ShowButton(CardtypeForm.value)">
+                                                    <mat-option  *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</mat-option>
+                                                  </mat-select>
+                                            
+>>>>>>> 603d1b4a28212097eb67c8627620a41d1c102cb5
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -153,9 +184,19 @@
                           </div>
                           <!--Business pack yearly end-->
                         </div>
+<<<<<<< HEAD
                       </div>
                     <div class="col-md-12 col-sm-12"> <button type="submit" class="btn-file  pull-right"
                             (click)="onSubmit(f)">Place Order</button> </div>
+=======
+                        
+                    </div>
+                </form>
+            </div>
+                    <div class="col-md-8 col-sm-8 col-xs-12"> <button type="submit" class="btn-file"
+                            (click)="onSubmit()">Place Order</button> </div>
+                
+>>>>>>> 603d1b4a28212097eb67c8627620a41d1c102cb5
             </div>
             <!-- <div class="col-lg-8 for-center able-responsive margin-top-20 table-responsive margin-top-20">
                     <table class="table payment-table">
