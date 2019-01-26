@@ -164,7 +164,7 @@ export class CourseCheckoutComponent implements OnInit {
           this.res=Response;
     })
   }
-
+  
   seeTotal(){
       this.total = 0;
       for(let list of this.GlobalCartCourses.courses) {
