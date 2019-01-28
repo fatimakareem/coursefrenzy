@@ -76,25 +76,35 @@ export class HomeComponent implements OnInit, OnDestroy {
                   nextArrow: '<button class="rightRs">&lt;</button>',
                   responsive: [
                     {
-                      breakpoint: 1024,
+                      breakpoint: 1025,
                       settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 4,
                         slidesToScroll: 3,
                         infinite: true
                       }
                     },
                     {
-                      breakpoint: 600,
+                      breakpoint: 769,
+                      settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true
+                      }
+                    },
+                    {
+                      breakpoint: 605,
                       settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 2
+                        slidesToScroll: 1,
+                        infinite: true
                       }
                     },
                     {
                       breakpoint: 480,
                       settings: {
                         slidesToShow: 1,
-                        slidesToScroll: 1
+                        slidesToScroll: 1,
+                        infinite: true
                       }
                     }
       
@@ -120,25 +130,35 @@ this.obj2.get_categories().subscribe(response => {
               nextArrow: '<button class="rightRs">&lt;</button>',
               responsive: [
                 {
-                  breakpoint: 1024,
+                  breakpoint: 1025,
                   settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 4,
                     slidesToScroll: 3,
                     infinite: true
                   }
                 },
                 {
-                  breakpoint: 600,
+                  breakpoint: 769,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true
+                  }
+                },
+                {
+                  breakpoint: 605,
                   settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 1,
+                    infinite: true
                   }
                 },
                 {
                   breakpoint: 480,
                   settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    infinite: true
                   }
                 }
   
@@ -320,6 +340,14 @@ this.obj2.get_categories().subscribe(response => {
                   }
                 },
                 {
+                  breakpoint: 605,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true
+                  }
+                },
+                {
                   breakpoint: 480,
                   settings: {
                     slidesToShow: 1,
@@ -366,6 +394,14 @@ this.obj2.get_categories().subscribe(response => {
                   settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1
+                  }
+                },
+                {
+                  breakpoint: 605,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true
                   }
                 },
                 {
