@@ -1,9 +1,9 @@
 <app-loader></app-loader>
 <div class="wrapp-content slider">
     <main class="">
-        <div class="content-box padding-top-20 padding-bottom-10">
-            <div class="container-fluid container-wide homeslider-hide">
-                <div class="container-fluid container-wide homeslider-hide bidSlider" *ngIf="Categories">
+        <div class="container padding-bottom-10">
+            <div class="container-fluid homeslider-hide">
+                <div class="homeslider-hide bidSlider" *ngIf="Categories">
                     <ngx-slick class="homeSlider" #slickModal="slick-modal" [config]="slideConfig">
                         <div class="item" ngxSlickItem *ngFor="let category of Categories">
                             <div class="image"> <a routerLink='/courses/{{category.id}}'> <img class="img" src="{{catImageUrl}}{{category?.icon_Web_Home}}"
@@ -21,10 +21,9 @@
                                     Courses</span></a> </span> </header>
                 </div> -->
                 <div class="clearfix"></div>
-                <div class="row grid">
-                    <div class="container">
+                <div class="">
                         <div class="row radio-box">
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <h4 class=""> Level </h4>
                                 <div class="radio"> <label class="checkbox-font"> <input type="radio" name="level"
                                             checked=true (change)="checked1($event)">All Level </label> </div>
@@ -35,7 +34,7 @@
                                 <div class="radio"> <label class="checkbox-font"> <input type="radio" name="level"
                                             (change)="checked4($event)">Advance </label> </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <h4 class=""> Rating </h4>
                                 <div class="radio"> <label class="checkbox-font"> <input type="radio" name="rate"
                                             checked=true (change)="checked9($event)">
@@ -68,7 +67,7 @@
                                         </div>1.0 & up 2.0
                                     </label> </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <h4 class=""> Price </h4>
                                 <div class="radio"> <label class="checkbox-font"> <input type="radio" name="price"
                                             checked=true (change)="checked10($event)">All </label> </div>
@@ -78,9 +77,8 @@
                                             (change)="checked12($event)">Free </label> </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="content-box-01 padding-top-10">
-                        <div class="container-fluid1">
+                    <div class="padding-top-10">
+                        
                             <div class="row">
                                 <div class="col-lg-12 text-center">
                                     <h3 class="page-title-01 color-black margin-0">Filtered Courses</h3>
@@ -89,14 +87,14 @@
                                     <h4 class="found-lable">We Found {{total}} Courses</h4>
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
-                    <div class="content-box-01 padding-bottom-10">
-                        <div class="container">
+                    <div class="padding-bottom-10">
+                        <div class="">
                             <div class="courses-div" *ngIf="total==0"> No Courses Found </div>
                             <div class="courses-div" *ngFor="let list of result; let i=index;">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-12">
+                                    <div class="col-md-3 col-sm-4 col-xs-12">
                                         <div class="popular-courses">
                                             <div class="post-media entry">
                                                 <div class="ribbon-wrapper-green">
@@ -108,8 +106,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        <div class="about-module col-lg-9">
+                                    <div class="col-md-9 col-sm-8 col-xs-12">
+                                        <div class="about-module col-md-9 col-sm-9 col-xs-12">
                                             <div class="width-full float-left">
                                                 <div class="float-left"> <span *ngIf="list?.course?.skill==='B'" class="label label-success">IDEAL
                                                         FOR BEGINNERS</span> <span *ngIf="list?.course?.skill==='I'"
@@ -140,7 +138,7 @@
                                                         Intermediate Level</a></span> <span class="hidden-xs"><a><i
                                                             class="fa fa-users"></i> English</a></span> </div>
                                         </div>
-                                        <div class="col-lg-3 about-module-right">
+                                        <div class="col-md-3 col-sm-3 col-xs-12 about-module-right">
                                             <h2>${{list?.course?.actual_price}}</h2>
                                             <div class="rating-stars">
                                                 <rating ngModel="{{list?.course?.rating}}" [readonly]="true" titles="{{list?.course?.rating}}"></rating>

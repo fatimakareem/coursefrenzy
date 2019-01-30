@@ -118,14 +118,16 @@ export class CourseComponent implements OnInit {
         breakpoint: 769,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          infinite: true
         }
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          infinite: true
         }
       }
 ]};
